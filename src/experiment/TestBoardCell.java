@@ -29,7 +29,7 @@ public class TestBoardCell {
     }
 
     // This method is used to set if the cell is part of a room
-    public void setRoom(boolean isRoom) {
+    public void setIsRoom(boolean isRoom) {
         this.isRoom = isRoom;
     }
     
@@ -47,4 +47,5 @@ public class TestBoardCell {
     public boolean getOccupied() {
         return isOccupied;
     }
+
 }
