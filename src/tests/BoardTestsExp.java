@@ -16,9 +16,6 @@ public class BoardTestsExp {
 		board = new TestBoard();
 	}
 	
-	/*
-	 * Test for adjacencies will start here. 
-	 */
 	@Test
 	public void testAdjacency() {
 		TestBoardCell cell = board.getCell(0,0);
