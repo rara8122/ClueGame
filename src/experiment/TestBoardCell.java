@@ -1,3 +1,9 @@
+/*
+ * Class: This class represents a cell in the grid. It has very basic code that will be updated appropriately. It contains getters and setters for critical components of the cell.  
+ * Authors: Melanie Perez, Rachel Davy
+ * Date: 10/5/2023
+ * Sources: none
+ */
 package experiment;
 import java.util.Set;
 import java.util.HashSet;

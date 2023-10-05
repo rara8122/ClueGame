@@ -1,3 +1,9 @@
+/*
+ * Class: This class is a Junit test class which comprises of methods to test the creation of adjacency lists for a 4x4 board, and methods to test target creation on a 4x4 board. These tests fail since the other classes contain minimum code.
+ * Authors: Melanie Perez, Rachel Davy
+ * Date: 10/5/2023
+ * Sources: lecture slides 
+ */
 package tests;
 import static org.junit.Assert.assertTrue;
 
