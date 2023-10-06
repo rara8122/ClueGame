@@ -19,6 +19,8 @@ public class TestBoard {
 //constructor for testBoard class 	
 	public TestBoard() {
 		grid = new TestBoardCell[ROWS][COLS];
+		targets = new HashSet<>();
+		visited = new HashSet<>();
 		for(int i = 0; i < ROWS; i++) {
 			for(int j = 0; j < COLS; j++){
 				grid[i][j] = new TestBoardCell(i, j);
@@ -44,24 +46,32 @@ public class TestBoard {
 	}
 	
 	//method to calculate targets
-	public void calcTargets(TestBoardCell startCell, int pathlength) {
+	public void calcTargets(TestBoardCell startCell, int pathLength) {
+		visited.clear();
+		targets.clear();
+		visited.add(startCell);
+		findAllTargets(startCell, pathLength);
+	}
+	
+	public void findAllTargets(TestBoardCell thisCell, int numSteps) {
+		if (numSteps == 0) {
+            targets.add(thisCell);
+            return;
+        } else {
+			Set<TestBoardCell> adjacencyList = thisCell.getAdjList();
+			for (TestBoardCell adjacentCell : adjacencyList) {
+				if (!(visited.contains(adjacentCell))) {
+		            // Add the adjacent cell to the visited list
+		            visited.add(adjacentCell);
 		
-		 if (pathlength == 0) {
-	            targets.add(startCell);
-	            return;
-	        }
-		 for (TestBoardCell adjacentCell : startCell.getAdjList()) {
-	            if (!visited.contains(adjacentCell)) {
-	                // Add the adjacent cell to the visited list
-	                visited.add(adjacentCell);
-
-	                // Recursively call findAllTargets with the adjacent cell and reduced pathLength
-	                calcTargets(adjacentCell, pathlength - 1, visited, targets);
-
-	                // Remove the adjacent cell from the visited list
-	                visited.remove(adjacentCell);
+		            // Recursively call findAllTargets with the adjacent cell and reduced pathLength
+		            findAllTargets(adjacentCell, numSteps - 1);
+		
+		            // Remove the adjacent cell from the visited list
+		            visited.remove(adjacentCell);
 	            } 
-		 }
+			}
+		}
 	}
 	
 	//method to get cell from the board
@@ -70,7 +80,7 @@ public class TestBoard {
 	}
 	//method to get the targets created by calcTargets()
 	public Set<TestBoardCell> getTargets(){
-		return new HashSet<>();
+		return targets;
 	}
 
 }
