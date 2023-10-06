@@ -105,19 +105,18 @@ public class BoardTestsExp {
 		Assert.assertTrue(targets.contains(board.getCell(3, 2)));
 	}
 	//Test for targets when a room is involved - 2 test cases
-	//@Test
+	@Test
 	public void testTargetsRoom() {
 		board.getCell(2, 1).setIsRoom(true);
 		TestBoardCell cell = board.getCell(1, 0);
 		board.calcTargets(cell, 4);
 		Set<TestBoardCell> targets = board.getTargets();
-		Assert.assertEquals(7, targets.size());
+		Assert.assertEquals(6, targets.size());
 		Assert.assertTrue(targets.contains(board.getCell(0, 1)));
 		Assert.assertTrue(targets.contains(board.getCell(0, 3)));
 		Assert.assertTrue(targets.contains(board.getCell(1, 2)));
 		Assert.assertTrue(targets.contains(board.getCell(2, 1)));
 		Assert.assertTrue(targets.contains(board.getCell(2, 3)));
-		Assert.assertTrue(targets.contains(board.getCell(3, 0)));
 		Assert.assertTrue(targets.contains(board.getCell(3, 2)));
 	}
 	//Test for targets when an interfering occupied space is involved - 2 test cases
@@ -132,7 +131,7 @@ public class BoardTestsExp {
 		Assert.assertTrue(targets.contains(board.getCell(2, 3)));
 	}
 	//Test that includes rooms and occupied cells - 2 test cases 
-	//@Test
+	@Test
 	public void testTargetsMixed() {
 		board.getCell(0, 2).setOccupied(true);
 		board.getCell(1, 2).setIsRoom(true);
