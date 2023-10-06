@@ -121,7 +121,7 @@ public class BoardTestsExp {
 		Assert.assertTrue(targets.contains(board.getCell(3, 2)));
 	}
 	//Test for targets when an interfering occupied space is involved - 2 test cases
-	//@Test
+	@Test
 	public void testTargetsOccupied() {
 		board.getCell(0, 2).setOccupied(true);
 		TestBoardCell cell = board.getCell(0, 3);

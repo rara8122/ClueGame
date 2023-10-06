@@ -63,15 +63,23 @@ public class TestBoard {
 				if (!(visited.contains(adjacentCell))) {
 		            // Add the adjacent cell to the visited list
 		            visited.add(adjacentCell);
-		
 		            // Recursively call findAllTargets with the adjacent cell and reduced pathLength
-		            findAllTargets(adjacentCell, numSteps - 1);
-		
+		            findAllTargets(adjacentCell, numSteps - 1);	
 		            // Remove the adjacent cell from the visited list
 		            visited.remove(adjacentCell);
 	            } 
 			}
-		}
+		}	
+			Set<TestBoardCell> adjacencyList = thisCell.getAdjList();
+			for (TestBoardCell adjacentCell : adjacencyList) {
+             if (!visited.contains(adjacentCell) && !adjacentCell.getOccupied()) {
+                 visited.add(adjacentCell);
+                 findAllTargets(adjacentCell, numSteps - 1);
+                 visited.remove(adjacentCell);
+             }
+		 }
+	
+		
 	}
 	
 	//method to get cell from the board
