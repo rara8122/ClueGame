@@ -1,7 +1,8 @@
 /*
- * Class: This class represents a cell in the grid. It has very basic code that will be updated appropriately. It contains getters and setters for critical components of the cell.  
+ * Class: This class represents a cell in the grid. It contains getters and setters for critical components of the cell. There were no updates added to this class. 
  * Authors: Melanie Perez, Rachel Davy
- * Date: 10/5/2023
+ * Date: 10/6/2023
+ * Collaborators: none
  * Sources: none
  */
 package experiment;
