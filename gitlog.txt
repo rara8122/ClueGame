@@ -1,3 +1,47 @@
+commit 68707e14b3957bdaab738279a3405918bc67950a
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Fri Oct 6 16:53:49 2023 -0600
+
+    added comments
+
+commit 66014b74ff8d58ede21f468ed58240fc8a139895
+Author: Rachel <rara8122@csm-wl-dhcp-203-151.mines.edu>
+Date:   Fri Oct 6 16:28:54 2023 -0600
+
+    got all tests passing
+
+commit 8340a9b97965418d3f55f14e4191452f01d82bfd
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Fri Oct 6 16:08:05 2023 -0600
+
+    started occupied test
+
+commit 0ea35b5c3a8298ddd64acc002c5630b63c4dc287
+Author: Rachel <rara8122@csm-wl-dhcp-203-151.mines.edu>
+Date:   Fri Oct 6 15:49:33 2023 -0600
+
+    got calcTargets working on an empty graph
+
+commit e46dee0ddcefd8e2969343db3ef93aed52773614
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Fri Oct 6 15:37:19 2023 -0600
+
+    started calctargets
+
+commit 1850972024b4b9e83dc242220b8263f39ed21cf2
+Author: Rachel <rara8122@csm-wl-dhcp-203-151.mines.edu>
+Date:   Fri Oct 6 15:10:03 2023 -0600
+
+    added default constructor for TestBoard
+    
+*************below this line is for the past assignment***********************************
+
+commit 33a509b9c7e0d304ae96179e2de2c14315ed02c0
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 5 16:14:25 2023 -0600
+
+    added git log
+
 commit 94f542c012ebb08626f7a53fb5d947aefdc08cb7
 Author: MancMelP <melanie.mancera23@gmail.com>
 Date:   Thu Oct 5 16:11:55 2023 -0600
