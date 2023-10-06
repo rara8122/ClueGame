@@ -12,9 +12,34 @@ import java.util.Set;
 public class TestBoard {
 	private TestBoardCell[][] grid;
 	private Set<TestBoardCell> targets;
+	private Set<TestBoardCell> visited;
+	final static int COLS = 4;
+	final static int ROWS = 4;
 	
 //constructor for testBoard class 	
 	public TestBoard() {
+		grid = new TestBoardCell[ROWS][COLS];
+		for(int i = 0; i < ROWS; i++) {
+			for(int j = 0; j < COLS; j++){
+				grid[i][j] = new TestBoardCell(i, j);
+			}
+		}
+		for(int i = 0; i < ROWS; i++) {
+			for(int j = 0; j < COLS; j++){
+				if(i > 0) {
+					grid[i][j].addAdjacency(grid[i - 1][j]);
+				}
+				if(j > 0) {
+					grid[i][j].addAdjacency(grid[i][j - 1]);
+				}
+				if(i < (ROWS - 1)) {
+					grid[i][j].addAdjacency(grid[i + 1][j]);
+				}
+				if(j < (COLS - 1)) {
+					grid[i][j].addAdjacency(grid[i][j + 1]);
+				}
+			}
+		}
 	}
 	
 	//method to calculate targets
@@ -24,7 +49,7 @@ public class TestBoard {
 	
 	//method to get cell from the board
 	public TestBoardCell getCell(int row, int column) {
-		return new TestBoardCell(row, column);
+		return grid[row][column];
 	}
 	//method to get the targets created by calcTargets()
 	public Set<TestBoardCell> getTargets(){
