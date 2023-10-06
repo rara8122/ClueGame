@@ -40,11 +40,28 @@ public class TestBoard {
 				}
 			}
 		}
+		
 	}
 	
 	//method to calculate targets
 	public void calcTargets(TestBoardCell startCell, int pathlength) {
 		
+		 if (pathlength == 0) {
+	            targets.add(startCell);
+	            return;
+	        }
+		 for (TestBoardCell adjacentCell : startCell.getAdjList()) {
+	            if (!visited.contains(adjacentCell)) {
+	                // Add the adjacent cell to the visited list
+	                visited.add(adjacentCell);
+
+	                // Recursively call findAllTargets with the adjacent cell and reduced pathLength
+	                calcTargets(adjacentCell, pathlength - 1, visited, targets);
+
+	                // Remove the adjacent cell from the visited list
+	                visited.remove(adjacentCell);
+	            } 
+		 }
 	}
 	
 	//method to get cell from the board

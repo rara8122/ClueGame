@@ -15,6 +15,8 @@ public class TestBoardCell {
     private boolean isOccupied;
     private Set<TestBoardCell> adjacencyList;
     
+
+    
     //Constructor for class
     public TestBoardCell(int row, int column) {
     	this.row = row;
@@ -22,7 +24,8 @@ public class TestBoardCell {
     	this.isRoom = false;
     	this.isOccupied = false;
     	this.adjacencyList = new HashSet<>();
-    }
+
+    } 
    
     //This method adds a cell to the adjacency list 
     public void addAdjacency(TestBoardCell cell) {
