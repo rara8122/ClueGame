@@ -1,0 +1,14 @@
+
+// Rooms and room cards
+Room, Atlantica, A
+Room,  Arendelle, E
+Room, Corona, R
+Room, France, B
+Room, DunBroch, M
+Room, China, F
+Room, New Orleans, T
+Room, Agraban, J
+Room, Jamestown, P
+// other spaces on board
+Space, Unused, X
+Space, Walkway, W
