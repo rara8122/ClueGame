@@ -1,3 +1,81 @@
+commit 313db7e953f70eac4ca2e3b631f679b3b07da57c
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Sun Oct 8 17:43:06 2023 -0600
+
+    added Test.txt and altered readme.txt
+
+commit 064bb838d8543b792b68934f54d5d7af0bdbf514
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Sun Oct 8 17:36:17 2023 -0600
+
+    added comments to classes and methods
+
+commit a834760fc8a5dc5aa12cea82530f8b166a614c18
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Sun Oct 8 17:07:18 2023 -0600
+
+    Saved changes (oops)
+
+commit 53b40c98fd52d0b09807b7b6b82e09e09633dfb6
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Sun Oct 8 17:01:25 2023 -0600
+
+    Finished FileInitTests.java
+
+commit d217dd958232eaa813e32c7997fca1caeda6e95c
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Sun Oct 8 16:29:45 2023 -0600
+
+    added both custom tests classes exceptions tests and worked on file init tests class
+
+commit 3a036dd6b27c592c7b3ddc5be2ba5aeeb7d8fe64
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Sun Oct 8 15:50:50 2023 -0600
+
+    got all provided tests to fail
+
+commit cbd98ef1f505f7ca1a79f696e592d9d5d9667488
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Sun Oct 8 15:40:38 2023 -0600
+
+    added files again
+
+commit 266d333b205e823804b511d4e261e00efa05cd7b
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Sun Oct 8 15:36:35 2023 -0600
+
+    added our cluelayout and cluesetup
+
+commit 4b9d479137eae59ed5c1746ad3f1f4dc3adddc8c
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Sun Oct 8 15:33:24 2023 -0600
+
+    modified class and started wokring on fileinittest306
+
+commit 249ea091a501ecb259d17880a25155f50b15c4da
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Sun Oct 8 15:09:53 2023 -0600
+
+    added UML diagram variables and methods
+
+commit 97a29fd02d996dcf91ef4d0163df63bd65c406e0
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Fri Oct 6 17:07:19 2023 -0600
+
+    added starter code for C14A-2
+
+commit 640480b5815caf78de6e9f7a9cfbcb8649f37e51
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Fri Oct 6 17:06:28 2023 -0600
+
+    added starter files
+
+commit 96a8a07bd34311b516cb3fc2b3bd229c95e97b5d
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Fri Oct 6 17:01:30 2023 -0600
+
+    updated git log and readme
+
 commit 68707e14b3957bdaab738279a3405918bc67950a
 Author: MancMelP <melanie.mancera23@gmail.com>
 Date:   Fri Oct 6 16:53:49 2023 -0600
@@ -33,8 +111,6 @@ Author: Rachel <rara8122@csm-wl-dhcp-203-151.mines.edu>
 Date:   Fri Oct 6 15:10:03 2023 -0600
 
     added default constructor for TestBoard
-    
-*************below this line is for the past assignment***********************************
 
 commit 33a509b9c7e0d304ae96179e2de2c14315ed02c0
 Author: Rachel <rara8122@MacBook-Pro-3.local>
