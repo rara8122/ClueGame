@@ -38,5 +38,10 @@ public class BoardCell {
 	public char getSecretPassage() {
 		return 0;
 	}
+
+
+	public char getInitial() {
+		return 0;
+	}
 	
 }
