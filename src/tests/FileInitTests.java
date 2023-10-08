@@ -60,17 +60,25 @@ public class FileInitTests {
 			BoardCell cell = board.getCell(11, 21);
 			assertTrue(cell.isDoorway());
 			assertEquals(DoorDirection.LEFT, cell.getDoorDirection());
+			
 			cell = board.getCell(5, 18);
 			assertTrue(cell.isDoorway());
 			assertEquals(DoorDirection.UP, cell.getDoorDirection());
+			
 			cell = board.getCell(10, 1);
 			assertTrue(cell.isDoorway());
 			assertEquals(DoorDirection.RIGHT, cell.getDoorDirection());
+			
 			cell = board.getCell(14, 16);
 			assertTrue(cell.isDoorway());
 			assertEquals(DoorDirection.DOWN, cell.getDoorDirection());
+			
 			// Test that walkways are not doors
 			cell = board.getCell(10, 10);
+			assertFalse(cell.isDoorway());	
+			
+			// Test that label cells are not doors
+			cell = board.getCell(16, 25);
 			assertFalse(cell.isDoorway());
 		}
 		

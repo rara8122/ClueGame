@@ -1,0 +1,8 @@
+When I was making FileInitTests.java I picked cells based both on what I thought would cause errors and what I thought would be a good subset of the different types of cells
+	For testInitial, which tests the initial stored at a cell, I wanted to test one at every corner, one at each side (top, bottom, left, and right), and two in the middle that have multiple attributes - one is both a room and a label and one that is both a walkway and a doorway. 
+
+	For testRoom, I did one of every type of room cell (as the example did) along with two room cells - one towards the edge and one towards the middle. I also made sure every test is testing a different room so a good subset of the 9 rooms is tested. 
+
+	testRoomLabels tests every label, mostly due to the fact that I wanted all 9 to work and testing them all did not take too much extra time to do
+
+	FourDoorDirections was the least thought out. For this one, I just picked a door for every direction (and added a door pointing left because we did not have one initially) and pick a random walkway to ensure it is not a door. We also decided to make sure a label space also is not a door, as it has 2 things to check and thus a higher chance of errors. 
