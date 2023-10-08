@@ -1,9 +1,12 @@
+/*
+*Class: This program tests that, when loading config files, exceptions are thrown appropriately. This is essential to have this because the game code will need to have exceptions thrown when loading config files.  
+*Authors: given 
+*Date: 10/08/2023
+*Collaborators: none
+*Sources: none
+*/
 package tests;
 
-/*
- * This program tests that, when loading config files, exceptions 
- * are thrown appropriately.
- */
 
 import java.io.FileNotFoundException;
 

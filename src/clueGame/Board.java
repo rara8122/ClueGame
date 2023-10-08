@@ -1,3 +1,10 @@
+/*
+*Class: This is the board class which contains our board. This is essentially the same as TestBoard class, except it was modified for our game code and test files. It implements a singleton pattern. 
+*Authors: Melanie Perez, Rachel Davy
+*Date: 10/08/2023
+*Collaborators: none
+*Sources: none
+*/
 package clueGame;
 import java.util.Map;
 
@@ -25,35 +32,36 @@ public class Board {
      */
     public void initialize(){
     }
+    //loads setup config
     public void loadSetupConfig(){
     }
+    //loads layout config
     public void loadLayoutConfig(){}
     
-    
+    //method to set the grid boardcell
 	public void setGrid(BoardCell[][] grid) {
 		this.grid = grid;
 	}
 
-
+	//getter for getRooomMap
 	public Map<Character, Room> getRoomMap() {
 		return roomMap;
 	}
-	
+	//getter for getCell
 	public BoardCell getCell(int i, int j) {
 		return new BoardCell();
 	}
-	
+	//setter for ConfigFiles
 	public void setConfigFiles(String string, String string2) {
 	}
-	
+	//getter for numRows
 	public int getNumRows() {
 		return 0;
 	}
-	
+	//getter for numColums
 	public int getNumColumns() {
 		return 0;
 	}
-	
 	public Room getRoom(char c) {
 		return new Room();//new Room();
 	}

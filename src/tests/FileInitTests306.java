@@ -1,3 +1,11 @@
+/*
+*Class: This test class tests the initialization of the board for the 306 files. It checks that aspects of the board such as room labels, board dimension, doorways, rooms,walkways , secret passages, and more were initialized correctly. These tests fail, but there are no errors.  
+*Authors: Melanie Perez,Rachel Davy
+*Date: 10/08/2023
+*Collaborators: none
+*Sources: none
+*/
+
 package tests;
 
 /*
