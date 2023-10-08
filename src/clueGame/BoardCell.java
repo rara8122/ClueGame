@@ -16,14 +16,27 @@ public class BoardCell {
 
 
 	public boolean isDoorway() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 
 	public Object getDoorDirection() {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	public boolean isLabel() {
+		return false;
+	}
+
+
+	public boolean isRoomCenter() {
+		return false;
+	}
+
+
+	public char getSecretPassage() {
+		return 0;
 	}
 	
 }

@@ -38,14 +38,27 @@ public class Board {
 	public Map<Character, Room> getRoomMap() {
 		return roomMap;
 	}
-
-	public Object getRoom(char c) {
-		// TODO Auto-generated method stub
-		return null;
-
-}
+	
 	public BoardCell getCell(int i, int j) {
-		// TODO Auto-generated method stub
-		return null;
+		return new BoardCell();
+	}
+	
+	public void setConfigFiles(String string, String string2) {
+	}
+	
+	public int getNumRows() {
+		return 0;
+	}
+	
+	public int getNumColumns() {
+		return 0;
+	}
+	
+	public Room getRoom(char c) {
+		return new Room();//new Room();
+	}
+	
+	public Room getRoom(BoardCell cell) {
+		return new Room();
 	}
 }
