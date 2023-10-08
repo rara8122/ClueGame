@@ -7,10 +7,17 @@ public class BoardCell {
 	private int column;
 	private char initial;
 	private DoorDirection doorDirection;
-	private Boolean roomLabel;
-	private Boolean roomCenter;
+	private boolean roomLabel;
+	private boolean roomCenter;
 	private char secretPassage;
 	private Set<BoardCell> adjList;
 	
 	public void addAdj(BoardCell adj) {}
+
+
+	public boolean isDoorway() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 }

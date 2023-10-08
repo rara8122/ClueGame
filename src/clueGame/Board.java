@@ -28,4 +28,24 @@ public class Board {
     public void loadSetupConfig(){
     }
     public void loadLayoutConfig(){}
+    
+    
+	public void setGrid(BoardCell[][] grid) {
+		this.grid = grid;
+	}
+
+
+	public Map<Character, Room> getRoomMap() {
+		return roomMap;
+	}
+
+	public Object getRoom(char c) {
+		// TODO Auto-generated method stub
+		return null;
+
+}
+	public BoardCell getCell(int i, int j) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
