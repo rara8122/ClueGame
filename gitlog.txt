@@ -74,6 +74,8 @@ commit 96a8a07bd34311b516cb3fc2b3bd229c95e97b5d
 Author: MancMelP <melanie.mancera23@gmail.com>
 Date:   Fri Oct 6 17:01:30 2023 -0600
 
+********************* Past Assignments *******************************
+
     updated git log and readme
 
 commit 68707e14b3957bdaab738279a3405918bc67950a

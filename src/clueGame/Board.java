@@ -6,7 +6,11 @@
 *Sources: none
 */
 package clueGame;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Board {
 	private BoardCell[][] grid;
@@ -31,6 +35,46 @@ public class Board {
      * initialize the board (since we are using singleton pattern)
      */
     public void initialize(){
+    	roomMap = new HashMap <Character, Room> ();
+    	FileReader layoutFile;
+		try {
+			layoutFile = new FileReader("data/" + layoutConfigFile);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return;
+		}
+		Scanner layoutScanner = new Scanner(layoutFile);
+		FileReader setupFile;
+		try {
+			setupFile = new FileReader("data/" + setupConfigFile);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return;
+		}
+		Scanner setupScanner = new Scanner(setupFile);
+		String info;
+		String roomName;
+		Character roomChar;
+		info = setupScanner.nextLine();
+		Room newRoom;
+		while(true) {
+			info = setupScanner.next();
+			if (!info.equals("Room,")) {
+				break;
+			}
+			roomName = setupScanner.next();
+			roomName = roomName.replace(",", "");
+			roomName.trim();
+			info = setupScanner.nextLine();
+			info = info.trim();
+			if(info.length() == 1) {
+				roomChar = info.charAt(0);
+			} else {
+				roomChar = ' ';
+			}
+			newRoom = new Room(roomName);
+			roomMap.put(roomChar, newRoom);
+		}
     }
     //loads setup config
     public void loadSetupConfig(){
@@ -52,7 +96,9 @@ public class Board {
 		return new BoardCell();
 	}
 	//setter for ConfigFiles
-	public void setConfigFiles(String string, String string2) {
+	public void setConfigFiles(String layoutFile, String setupFile) {
+		layoutConfigFile = layoutFile;
+		setupConfigFile = setupFile;
 	}
 	//getter for numRows
 	public int getNumRows() {
@@ -63,10 +109,10 @@ public class Board {
 		return 0;
 	}
 	public Room getRoom(char c) {
-		return new Room();//new Room();
+		return roomMap.get(c);//new Room();
 	}
 	
 	public Room getRoom(BoardCell cell) {
-		return new Room();
+		return new Room(" ");
 	}
 }
