@@ -55,27 +55,31 @@ public class Board {
 		String info;
 		String roomName;
 		Character roomChar;
-		info = setupScanner.nextLine();
 		Room newRoom;
-		while(true) {
-			info = setupScanner.next();
-			if (!info.equals("Room,")) {
-				break;
-			}
-			roomName = setupScanner.next();
-			roomName = roomName.replace(",", "");
-			info = setupScanner.next();
-			info = info.trim();
-			while(info.length() != 1) {
-				roomName = roomName + " " + info;
+		String comparer = "Room,";
+		for (int i = 0; i < 2; i++) {
+			info = setupScanner.nextLine();
+			while(setupScanner.hasNextLine()) {
+				info = setupScanner.next();
+				if (!info.equals(comparer)) {
+					break;
+				}
+				roomName = setupScanner.next();
 				roomName = roomName.replace(",", "");
 				info = setupScanner.next();
 				info = info.trim();
+				while(info.length() != 1) {
+					roomName = roomName + " " + info;
+					roomName = roomName.replace(",", "");
+					info = setupScanner.next();
+					info = info.trim();
+				}
+				roomChar = info.charAt(0);
+				info = setupScanner.nextLine();
+				newRoom = new Room(roomName);
+				roomMap.put(roomChar, newRoom);
 			}
-			roomChar = info.charAt(0);
-			info = setupScanner.nextLine();
-			newRoom = new Room(roomName);
-			roomMap.put(roomChar, newRoom);
+			comparer = "Space,";
 		}
     }
     //loads setup config
