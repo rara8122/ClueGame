@@ -38,7 +38,7 @@ public class Board {
     	//Read in files/initialize roomMap
     	roomMap = new HashMap <Character, Room> ();
     	loadSetupConfig();
-    	loadLayoutConig();
+    	loadLayoutConfig();
     }
     //loads setup config
     public void loadSetupConfig(){
@@ -99,6 +99,54 @@ public class Board {
 		if(NUM_COLUMNS == 0) {
 			NUM_COLUMNS = cells.length;
 		}
+		
+		String[][] strings;
+		grid = new BoardCell[numRows][numColumns];
+		for (int i = 0; i < numRows; i++) {
+			for (int j = 0; i < numColumns; i++) {
+				grid[i][j] = new BoardCell(i, j, strings[i][j].charAt(0));
+			}
+		}
+		String currentString;
+		BoardCell currentCell;
+		for (int i = 0; i < numRows; i++) {
+			for (int j = 0; i < numColumns; i++) {
+				currentString = strings[i][j];
+				currentCell = grid[i][j];
+				if(currentString.length() == 2) {
+					if(currentString.charAt(0) == 'W') {
+						if(currentString.charAt(1) == 'v') {
+							currentCell.setDoorDirection(DoorDirection.DOWN);
+						}
+						if(currentString.charAt(1) == '^') {
+							currentCell.setDoorDirection(DoorDirection.UP);
+						}
+						if(currentString.charAt(1) == '<') {
+							currentCell.setDoorDirection(DoorDirection.LEFT);
+						}
+						if(currentString.charAt(1) == '>') {
+							currentCell.setDoorDirection(DoorDirection.RIGHT);
+						}
+					} else { 
+							if(currentString.charAt(1) == '#') {
+								roomMap.get(currentString.charAt(0)).setLabelCell(currentCell);
+								currentCell.setRoomLabel(true);
+							}else if(currentString.charAt(1) == '*') {
+								roomMap.get(currentString.charAt(0)).setCenterCell(currentCell);
+								currentCell.setRoomLabel(true)
+							} else {
+								currentCell.setSecretPassage(currentString.charAt(1));
+							}
+					}
+				}
+				if(currentString.charAt(0) == 'W') {
+					grid[i - 1][j].addAdj(currentCell);
+					grid[i + 1][j].addAdj(currentCell);
+					grid[i][j - 1].addAdj(currentCell);
+					grid[i][j + 1].addAdj(currentCell);
+				}
+			}
+		}
     }
     
     //method to set the grid boardcell
@@ -112,7 +160,7 @@ public class Board {
 	}
 	//getter for getCell
 	public BoardCell getCell(int i, int j) {
-		return new BoardCell();
+		return grid[i][j];
 	}
 	//setter for ConfigFiles
 	public void setConfigFiles(String layoutFile, String setupFile) {
@@ -121,17 +169,17 @@ public class Board {
 	}
 	//getter for numRows
 	public int getNumRows() {
-		return 0;
+		return numRows;
 	}
 	//getter for numColums
 	public int getNumColumns() {
-		return 0;
+		return numColumns;
 	}
 	public Room getRoom(char c) {
-		return roomMap.get(c);//new Room();
+		return roomMap.get(c);
 	}
 	
 	public Room getRoom(BoardCell cell) {
-		return new Room(" ");
+		return roomMap.get(cell.getInitial());
 	}
 }
