@@ -35,6 +35,7 @@ public class Board {
      * initialize the board (since we are using singleton pattern)
      */
     public void initialize(){
+    	//Read in files/initialize roomMap
     	roomMap = new HashMap <Character, Room> ();
     	FileReader layoutFile;
 		try {
@@ -52,6 +53,7 @@ public class Board {
 			return;
 		}
 		Scanner setupScanner = new Scanner(setupFile);
+		//read and process the setup file (.txt)
 		String info;
 		String roomName;
 		Character roomChar;
