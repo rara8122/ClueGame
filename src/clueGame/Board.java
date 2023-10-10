@@ -37,15 +37,12 @@ public class Board {
     public void initialize(){
     	//Read in files/initialize roomMap
     	roomMap = new HashMap <Character, Room> ();
-    	FileReader layoutFile;
-		try {
-			layoutFile = new FileReader("data/" + layoutConfigFile);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			return;
-		}
-		Scanner layoutScanner = new Scanner(layoutFile);
-		FileReader setupFile;
+    	loadSetupConfig();
+    	loadLayoutConig();
+    }
+    //loads setup config
+    public void loadSetupConfig(){
+    	FileReader setupFile;
 		try {
 			setupFile = new FileReader("data/" + setupConfigFile);
 		} catch (FileNotFoundException e) {
@@ -83,29 +80,24 @@ public class Board {
 			}
 			comparer = "Space,";
 		}
-		
-    }
-    //loads setup config
-    public void loadSetupConfig(){
     }
     //loads layout config
-    public void loadLayoutConfig(String layoutFile ){
-    	int row = 0;
-    	Scanner layoutScanner = new Scanner(layoutFile);
-    	try {
-			try {
-				while (Scanner.hasNextLine()) {
-				String line = Scanner.nextLine();
-				String[] cells = line.split(","); }
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			if(NUM_COLUMNS == 0) {
-				NUM_COLUMNS = cells.length;
-			}
-				
-		} catch (Exception e) {
+    public void loadLayoutConfig(){
+    	FileReader layoutFile;
+		try {
+			layoutFile = new FileReader("data/" + layoutConfigFile);
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			return;
+		}
+		Scanner layoutScanner = new Scanner(layoutFile);
+    	int row = 0;
+		while (layoutScanner.hasNextLine()) {
+			String line = layoutScanner.nextLine();
+			String[] cells = line.split(","); 
+		}
+		if(NUM_COLUMNS == 0) {
+			NUM_COLUMNS = cells.length;
 		}
     }
     
