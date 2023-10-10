@@ -83,12 +83,31 @@ public class Board {
 			}
 			comparer = "Space,";
 		}
+		
     }
     //loads setup config
     public void loadSetupConfig(){
     }
     //loads layout config
-    public void loadLayoutConfig(){}
+    public void loadLayoutConfig(String layoutFile ){
+    	int row = 0;
+    	Scanner layoutScanner = new Scanner(layoutFile);
+    	try {
+			try {
+				while (Scanner.hasNextLine()) {
+				String line = Scanner.nextLine();
+				String[] cells = line.split(","); }
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			if(NUM_COLUMNS == 0) {
+				NUM_COLUMNS = cells.length;
+			}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
     
     //method to set the grid boardcell
 	public void setGrid(BoardCell[][] grid) {
