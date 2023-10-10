@@ -64,14 +64,16 @@ public class Board {
 			}
 			roomName = setupScanner.next();
 			roomName = roomName.replace(",", "");
-			roomName.trim();
-			info = setupScanner.nextLine();
+			info = setupScanner.next();
 			info = info.trim();
-			if(info.length() == 1) {
-				roomChar = info.charAt(0);
-			} else {
-				roomChar = ' ';
+			while(info.length() != 1) {
+				roomName = roomName + " " + info;
+				roomName = roomName.replace(",", "");
+				info = setupScanner.next();
+				info = info.trim();
 			}
+			roomChar = info.charAt(0);
+			info = setupScanner.nextLine();
 			newRoom = new Room(roomName);
 			roomMap.put(roomChar, newRoom);
 		}
