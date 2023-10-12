@@ -68,6 +68,7 @@ public class Board {
 						break;
 					} else {
 						//THROW BadConfigFormatException
+						throw new BadConfigFormatException("The setup file is improperly formatted.");
 					}
 				}
 				roomName = setupScanner.next();
@@ -108,7 +109,8 @@ public class Board {
 		for (int l = 1; l < numRows; l++) {
 			strings[l] = lines[l].split(",");
 			if(strings[l].length != numColumns) {
-				//THROW BadConfigFormatException
+				//THROW BadConfigForma
+				throw new BadConfigFormatException("The layout file has improper formatting.");
 			}
 		}
 		grid = new BoardCell[numRows][numColumns];
@@ -123,6 +125,7 @@ public class Board {
 				correspondingRoom = roomMap.get(currentString.charAt(0));
 				if (correspondingRoom == null) {
 					//THROW BadConfigFormatException
+					throw new BadConfigFormatException("Bad room: the layout file referes to a room that is not in the setup. ");
 				}
 				if(currentString.length() == 2) {
 					if(currentString.charAt(0) == 'W') {

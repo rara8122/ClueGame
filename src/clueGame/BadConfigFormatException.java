@@ -8,4 +8,15 @@
 package clueGame;
 
 public class BadConfigFormatException extends Exception {
+	
+	//default constructor with a default message 
+	public BadConfigFormatException() {
+		super("Invalid configuration format detected.");
+	}
+	
+	//constructor with a specific message
+	public BadConfigFormatException(String message) {
+		super(message);
+	}
+		
 }
