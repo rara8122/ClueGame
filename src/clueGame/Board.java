@@ -36,7 +36,6 @@ public class Board {
      */
     public void initialize(){
     	//Read in files/initialize roomMap
-    	roomMap = new HashMap <Character, Room> ();
     	try {
 			loadSetupConfig();
 			loadLayoutConfig();
@@ -50,6 +49,7 @@ public class Board {
     }
     //loads setup config
     public void loadSetupConfig () throws BadConfigFormatException, FileNotFoundException {
+    	roomMap = new HashMap <Character, Room> ();
     	FileReader setupFile;
 		setupFile = new FileReader("data/" + setupConfigFile);
 		Scanner setupScanner = new Scanner(setupFile);
