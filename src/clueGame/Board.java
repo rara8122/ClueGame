@@ -114,11 +114,16 @@ public class Board {
 		grid = new BoardCell[numRows][numColumns];
 		String currentString;
 		BoardCell currentCell;
+		Room correspondingRoom;
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numColumns; j++) {
 				grid[i][j] = new BoardCell(i, j, strings[i][j].charAt(0));
 				currentString = strings[i][j];
 				currentCell = grid[i][j];
+				correspondingRoom = roomMap.get(currentString.charAt(0));
+				if (correspondingRoom == null) {
+					//THROW BadConfigFormatException
+				}
 				if(currentString.length() == 2) {
 					if(currentString.charAt(0) == 'W') {
 						if(currentString.charAt(1) == 'v') {
