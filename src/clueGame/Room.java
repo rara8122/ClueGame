@@ -11,11 +11,11 @@ public class Room {
 	private String name;
 	private BoardCell centerCell;
 	private BoardCell labelCell;
-	
+	//constructor 
 	public Room(String newName) {
 		this.name = newName;
 	}
-	
+	//all setters here
 	public void setCenterCell(BoardCell centerCell) {
 		this.centerCell = centerCell;
 	}
@@ -23,7 +23,7 @@ public class Room {
 	public void setLabelCell(BoardCell labelCell) {
 		this.labelCell = labelCell;
 	}
-	
+	//all getters here
 	public String getName() {
 		return name;
 	}

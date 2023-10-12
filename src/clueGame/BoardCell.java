@@ -33,6 +33,26 @@ public class BoardCell {
 		adjList.add(adj);
 	}
 	
+	// Method to get the direction of the door (should return an enum, not Object)
+	public Object getDoorDirection() {
+		return doorDirection;
+	}
+
+	// Method to check if this cell is a label
+	public boolean isLabel() {
+		return roomLabel;
+	}
+
+	// Method to check if this cell is a room center
+	public boolean isRoomCenter() {
+		return roomCenter;
+	}
+	// Method to check if this cell is a doorway
+	public boolean isDoorway() {
+		return (doorDirection != doorDirection.NONE);
+	}
+	
+	//all setters here
 	public void setDoorDirection(DoorDirection newDoorDirection) {
 		doorDirection = newDoorDirection;
 	}
@@ -49,42 +69,12 @@ public class BoardCell {
 		secretPassage = newSecretPassage;
 	}
 
-	// Method to check if this cell is a doorway
-	public boolean isDoorway() {
-		return (doorDirection != doorDirection.NONE);
-	}
-
-	// Method to get the direction of the door (should return an enum, not Object)
-	public Object getDoorDirection() {
-		return doorDirection;
-	}
-
-	// Method to check if this cell is a label
-	public boolean isLabel() {
-		return roomLabel;
-	}
-
-	// Method to check if this cell is a room center
-	public boolean isRoomCenter() {
-		return roomCenter;
-	}
-
-	// Method to get the secret passage character for this cell
+	//all getters here
 	public char getSecretPassage() {
 		return secretPassage;
 	}
-
-	// Method to get the initial character for this cell
 	public char getInitial() {
 		return initial;
 	}
 	
 }
-
-
-
-
-
-
-
-
