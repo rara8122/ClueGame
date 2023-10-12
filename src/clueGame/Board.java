@@ -81,9 +81,11 @@ public class Board {
 					info = info.trim();
 				}
 				roomChar = info.charAt(0);
-				info = setupScanner.nextLine();
 				newRoom = new Room(roomName);
 				roomMap.put(roomChar, newRoom);
+				if (setupScanner.hasNextLine()) {
+					info = setupScanner.nextLine();
+				}
 			}
 			comparer = "Space,";
 		}
@@ -97,8 +99,11 @@ public class Board {
     	int row = 0;
     	String file = layoutScanner.nextLine();
     	String[] lines;
+    	String line;
 		while (layoutScanner.hasNextLine()) {
-			file = file + " " + layoutScanner.nextLine();
+			line = layoutScanner.nextLine();
+			line = line.replace(" ", "");
+			file = file + " " + line;
 		}
 		lines = file.split(" "); 
 		numRows = lines.length;

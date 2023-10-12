@@ -57,7 +57,7 @@ public class FileInitTests {
 		
 		@Test
 		public void FourDoorDirections() {
-			BoardCell cell = board.getCell(11, 21);
+			BoardCell cell = board.getCell(11, 20);
 			assertTrue(cell.isDoorway());
 			assertEquals(DoorDirection.LEFT, cell.getDoorDirection());
 			
@@ -184,7 +184,7 @@ public class FileInitTests {
 			assertTrue( cell.getSecretPassage() == 'A' );
 			
 			// test a walkway
-			cell = board.getCell(0, 0);
+			cell = board.getCell(1, 0);
 			room = board.getRoom( cell ) ;
 			// Note for our purposes, walkways and closets are rooms
 			assertTrue( room != null );
