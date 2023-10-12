@@ -1,0 +1,309 @@
+diff --git a/src/clueGame/Board.java b/src/clueGame/Board.java
+index 7decd74..e852f0f 100644
+--- a/src/clueGame/Board.java
++++ b/src/clueGame/Board.java
+@@ -1,10 +1,10 @@
+ /*
+-*Class: This is the board class which contains our board. This is essentially the same as TestBoard class, except it was modified for our game code and test files. It implements a singleton pattern. 
+-*Authors: Melanie Perez, Rachel Davy
+-*Date: 10/08/2023
+-*Collaborators: none
+-*Sources: none
+-*/
++ *Class: This is the board class which contains our board. This is essentially the same as TestBoard class, except it was modified for our game code and test files. It implements a singleton pattern. 
++ *Authors: Melanie Perez, Rachel Davy
++ *Date: 10/08/2023
++ *Collaborators: none
++ *Sources: none
++ */
+ package clueGame;
+ import java.io.FileNotFoundException;
+ import java.io.FileReader;
+@@ -19,24 +19,24 @@ public class Board {
+ 	private String layoutConfigFile;
+ 	private String setupConfigFile;
+ 	private Map<Character, Room> roomMap;
+-    /*
+-    * variable and methods used for singleton pattern
+-    */
+-    private static Board theInstance = new Board();
+-    // constructor is private to ensure only one can be created
+-    private Board() {
+-           super() ;
+-    }
+-    // this method returns the only Board
+-    public static Board getInstance() {
+-           return theInstance;
+-    }
+-    /*
+-     * initialize the board (since we are using singleton pattern)
+-     */
+-    public void initialize(){
+-    	//Read in files/initialize roomMap
+-    	try {
++	/*
++	 * variable and methods used for singleton pattern
++	 */
++	private static Board theInstance = new Board();
++	// constructor is private to ensure only one can be created
++	private Board() {
++		super() ;
++	}
++	// this method returns the only Board
++	public static Board getInstance() {
++		return theInstance;
++	}
++	/*
++	 * initialize the board (since we are using singleton pattern)
++	 */
++	public void initialize(){
++		//Read in files/initialize roomMap
++		try {
+ 			loadSetupConfig();
+ 			loadLayoutConfig();
+ 		} catch (BadConfigFormatException e) {
+@@ -46,11 +46,11 @@ public class Board {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		}
+-    }
+-    //loads setup config
+-    public void loadSetupConfig () throws BadConfigFormatException, FileNotFoundException {
+-    	roomMap = new HashMap <Character, Room> ();
+-    	FileReader setupFile;
++	}
++	//loads setup config
++	public void loadSetupConfig () throws BadConfigFormatException, FileNotFoundException {
++		roomMap = new HashMap <Character, Room> ();
++		FileReader setupFile;
+ 		setupFile = new FileReader("data/" + setupConfigFile);
+ 		Scanner setupScanner = new Scanner(setupFile);
+ 		//read and process the setup file (.txt)
+@@ -67,7 +67,6 @@ public class Board {
+ 					if (info.equals("//")) {
+ 						break;
+ 					} else {
+-						//THROW BadConfigFormatException
+ 						throw new BadConfigFormatException("The setup file is improperly formatted.");
+ 					}
+ 				}
+@@ -90,17 +89,16 @@ public class Board {
+ 			}
+ 			comparer = "Space,";
+ 		}
+-    }
+-    //loads layout config
+-    
+-    public void loadLayoutConfig () throws BadConfigFormatException, FileNotFoundException {
+-    	FileReader layoutFile;
++	}
++	//loads layout config
++	public void loadLayoutConfig () throws BadConfigFormatException, FileNotFoundException {
++		FileReader layoutFile;
+ 		layoutFile = new FileReader("data/" + layoutConfigFile);
+ 		Scanner layoutScanner = new Scanner(layoutFile);
+-    	int row = 0;
+-    	String file = layoutScanner.nextLine();
+-    	String[] lines;
+-    	String line;
++		int row = 0;
++		String file = layoutScanner.nextLine();
++		String[] lines;
++		String line;
+ 		while (layoutScanner.hasNextLine()) {
+ 			line = layoutScanner.nextLine();
+ 			line = line.replace(" ", "");
+@@ -129,7 +127,6 @@ public class Board {
+ 				currentCell = grid[i][j];
+ 				correspondingRoom = roomMap.get(currentString.charAt(0));
+ 				if (correspondingRoom == null) {
+-					//THROW BadConfigFormatException
+ 					throw new BadConfigFormatException("Bad room: the layout file referes to a room that is not in the setup. ");
+ 				}
+ 				if(currentString.length() == 2) {
+@@ -147,51 +144,47 @@ public class Board {
+ 							currentCell.setDoorDirection(DoorDirection.RIGHT);
+ 						}
+ 					} else { 
+-							if(currentString.charAt(1) == '#') {
+-								roomMap.get(currentString.charAt(0)).setLabelCell(currentCell);
+-								currentCell.setRoomLabel(true);
+-							}else if(currentString.charAt(1) == '*') {
+-								roomMap.get(currentString.charAt(0)).setCenterCell(currentCell);
+-								currentCell.setRoomCenter(true);
+-							} else {
+-								currentCell.setSecretPassage(currentString.charAt(1));
+-							}
++						if(currentString.charAt(1) == '#') {
++							roomMap.get(currentString.charAt(0)).setLabelCell(currentCell);
++							currentCell.setRoomLabel(true);
++						}else if(currentString.charAt(1) == '*') {
++							roomMap.get(currentString.charAt(0)).setCenterCell(currentCell);
++							currentCell.setRoomCenter(true);
++						} else {
++							currentCell.setSecretPassage(currentString.charAt(1));
++						}
+ 					}
+ 				}
+ 			}
+ 		}
+-    }
+-
+-    //method to set the grid boardcell
++	}
++	
++//all setters here 
+ 	public void setGrid(BoardCell[][] grid) {
+ 		this.grid = grid;
+ 	}
+-
+-	//getter for getRooomMap
++	public void setConfigFiles(String layoutFile, String setupFile) {
++		layoutConfigFile = layoutFile;
++		setupConfigFile = setupFile;
++	}
++//all getters below
+ 	public Map<Character, Room> getRoomMap() {
+ 		return roomMap;
+ 	}
+-	//getter for getCell
+ 	public BoardCell getCell(int i, int j) {
+ 		return grid[i][j];
+ 	}
+-	//setter for ConfigFiles
+-	public void setConfigFiles(String layoutFile, String setupFile) {
+-		layoutConfigFile = layoutFile;
+-		setupConfigFile = setupFile;
+-	}
+-	//getter for numRows
+ 	public int getNumRows() {
+ 		return numRows;
+ 	}
+-	//getter for numColums
+ 	public int getNumColumns() {
+ 		return numColumns;
+ 	}
++	
+ 	public Room getRoom(char c) {
+ 		return roomMap.get(c);
+ 	}
+-	
++
+ 	public Room getRoom(BoardCell cell) {
+ 		return roomMap.get(cell.getInitial());
+ 	}
+diff --git a/src/clueGame/BoardCell.java b/src/clueGame/BoardCell.java
+index b9b47d4..d33ca86 100644
+--- a/src/clueGame/BoardCell.java
++++ b/src/clueGame/BoardCell.java
+@@ -33,6 +33,26 @@ public class BoardCell {
+ 		adjList.add(adj);
+ 	}
+ 	
++	// Method to get the direction of the door (should return an enum, not Object)
++	public Object getDoorDirection() {
++		return doorDirection;
++	}
++
++	// Method to check if this cell is a label
++	public boolean isLabel() {
++		return roomLabel;
++	}
++
++	// Method to check if this cell is a room center
++	public boolean isRoomCenter() {
++		return roomCenter;
++	}
++	// Method to check if this cell is a doorway
++	public boolean isDoorway() {
++		return (doorDirection != doorDirection.NONE);
++	}
++	
++	//all setters here
+ 	public void setDoorDirection(DoorDirection newDoorDirection) {
+ 		doorDirection = newDoorDirection;
+ 	}
+@@ -49,42 +69,12 @@ public class BoardCell {
+ 		secretPassage = newSecretPassage;
+ 	}
+ 
+-	// Method to check if this cell is a doorway
+-	public boolean isDoorway() {
+-		return (doorDirection != doorDirection.NONE);
+-	}
+-
+-	// Method to get the direction of the door (should return an enum, not Object)
+-	public Object getDoorDirection() {
+-		return doorDirection;
+-	}
+-
+-	// Method to check if this cell is a label
+-	public boolean isLabel() {
+-		return roomLabel;
+-	}
+-
+-	// Method to check if this cell is a room center
+-	public boolean isRoomCenter() {
+-		return roomCenter;
+-	}
+-
+-	// Method to get the secret passage character for this cell
++	//all getters here
+ 	public char getSecretPassage() {
+ 		return secretPassage;
+ 	}
+-
+-	// Method to get the initial character for this cell
+ 	public char getInitial() {
+ 		return initial;
+ 	}
+ 	
+-}
+-
+-
+-
+-
+-
+-
+-
+-
++}
+\ No newline at end of file
+diff --git a/src/clueGame/DoorDirection.java b/src/clueGame/DoorDirection.java
+index c02d244..a183823 100644
+--- a/src/clueGame/DoorDirection.java
++++ b/src/clueGame/DoorDirection.java
+@@ -9,4 +9,4 @@ package clueGame;
+ 
+ public enum DoorDirection {
+ 	UP, DOWN, LEFT, RIGHT, NONE;
+-}
++}
+\ No newline at end of file
+diff --git a/src/clueGame/Room.java b/src/clueGame/Room.java
+index e210707..ad8cc33 100644
+--- a/src/clueGame/Room.java
++++ b/src/clueGame/Room.java
+@@ -11,11 +11,11 @@ public class Room {
+ 	private String name;
+ 	private BoardCell centerCell;
+ 	private BoardCell labelCell;
+-	
++	//constructor 
+ 	public Room(String newName) {
+ 		this.name = newName;
+ 	}
+-	
++	//all setters here
+ 	public void setCenterCell(BoardCell centerCell) {
+ 		this.centerCell = centerCell;
+ 	}
+@@ -23,7 +23,7 @@ public class Room {
+ 	public void setLabelCell(BoardCell labelCell) {
+ 		this.labelCell = labelCell;
+ 	}
+-	
++	//all getters here
+ 	public String getName() {
+ 		return name;
+ 	}
