@@ -37,11 +37,16 @@ public class Board {
     public void initialize(){
     	//Read in files/initialize roomMap
     	roomMap = new HashMap <Character, Room> ();
-    	loadSetupConfig();
-    	loadLayoutConfig();
+    	try {
+			loadSetupConfig();
+			loadLayoutConfig();
+		} catch (BadConfigFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     //loads setup config
-    public void loadSetupConfig(){
+    public void loadSetupConfig () throws BadConfigFormatException {
     	FileReader setupFile;
 		try {
 			setupFile = new FileReader("data/" + setupConfigFile);
@@ -61,7 +66,11 @@ public class Board {
 			while(setupScanner.hasNextLine()) {
 				info = setupScanner.next();
 				if (!info.equals(comparer)) {
-					break;
+					if (info.equals("//")) {
+						break;
+					} else {
+						//THROW BadConfigFormatException
+					}
 				}
 				roomName = setupScanner.next();
 				roomName = roomName.replace(",", "");
@@ -83,7 +92,7 @@ public class Board {
     }
     //loads layout config
     
-    public void loadLayoutConfig(){
+    public void loadLayoutConfig () throws BadConfigFormatException {
     	FileReader layoutFile;
 		try {
 			layoutFile = new FileReader("data/" + layoutConfigFile);
@@ -93,25 +102,28 @@ public class Board {
 		}
 		Scanner layoutScanner = new Scanner(layoutFile);
     	int row = 0;
+    	String file = layoutScanner.nextLine();
+    	String[] lines;
 		while (layoutScanner.hasNextLine()) {
-			String line = layoutScanner.nextLine();
-			String[] cells = line.split(","); 
+			file = file + " " + layoutScanner.nextLine();
 		}
-		if(numColumns == 0) {
-			numColumns = cells.length;
-		}
-		
-		String[][] strings;
-		grid = new BoardCell[numRows][numColumns];
-		for (int i = 0; i < numRows; i++) {
-			for (int j = 0; i < numColumns; i++) {
-				grid[i][j] = new BoardCell(i, j, strings[i][j].charAt(0));
+		lines = file.split(" "); 
+		numRows = lines.length;
+		String[][] strings = new String[numRows][];
+		strings[0] = lines[0].split(",");
+		numColumns = strings[0].length;
+		for (int l = 1; l < numRows; l++) {
+			strings[l] = lines[l].split(",");
+			if(strings[l].length != numColumns) {
+				//THROW BadConfigFormatException
 			}
 		}
+		grid = new BoardCell[numRows][numColumns];
 		String currentString;
 		BoardCell currentCell;
 		for (int i = 0; i < numRows; i++) {
-			for (int j = 0; i < numColumns; i++) {
+			for (int j = 0; j < numColumns; j++) {
+				grid[i][j] = new BoardCell(i, j, strings[i][j].charAt(0));
 				currentString = strings[i][j];
 				currentCell = grid[i][j];
 				if(currentString.length() == 2) {
@@ -134,99 +146,15 @@ public class Board {
 								currentCell.setRoomLabel(true);
 							}else if(currentString.charAt(1) == '*') {
 								roomMap.get(currentString.charAt(0)).setCenterCell(currentCell);
-								currentCell.setRoomLabel(true);
+								currentCell.setRoomCenter(true);
 							} else {
 								currentCell.setSecretPassage(currentString.charAt(1));
 							}
 					}
 				}
-				if(currentString.charAt(0) == 'W') {
-					grid[i - 1][j].addAdj(currentCell);
-					grid[i + 1][j].addAdj(currentCell);
-					grid[i][j - 1].addAdj(currentCell);
-					grid[i][j + 1].addAdj(currentCell);
-				}
 			}
 		}
     }
-    
-    /*
-    public void loadLayoutConfig() {
-        FileReader layoutFile;
-        try {
-            layoutFile = new FileReader("data/" + layoutConfigFile);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return;
-        }
-        Scanner layoutScanner = new Scanner(layoutFile);
-        int row = 0;
-
-        // Initialize strings and cells arrays
-        String[][] strings = new String[numRows][numColumns];
-        String[] cells = null;
-
-        while (layoutScanner.hasNextLine()) {
-            String line = layoutScanner.nextLine();
-            cells = line.split(",");
-            strings[row] = cells;
-            row++;
-        }
-
-        if (numColumns == 0) {
-            numColumns = cells.length;
-        }
-
-        grid = new BoardCell[numRows][numColumns];
-
-        for (int i = 0; i < numRows; i++) {
-            for (int j = 0; j < numColumns; j++) {
-                grid[i][j] = new BoardCell(i, j, strings[i][j].charAt(0));
-            }
-        }
-
-        String currentString;
-        BoardCell currentCell;
-
-        for (int i = 0; i < numRows; i++) {
-            for (int j = 0; j < numColumns; j++) {
-                currentString = strings[i][j];
-                currentCell = grid[i][j];
-
-                if (currentString.length() == 2) {
-                    if (currentString.charAt(0) == 'W') {
-                        if (currentString.charAt(1) == 'v') {
-                            currentCell.setDoorDirection(DoorDirection.DOWN);
-                        } else if (currentString.charAt(1) == '^') {
-                            currentCell.setDoorDirection(DoorDirection.UP);
-                        } else if (currentString.charAt(1) == '<') {
-                            currentCell.setDoorDirection(DoorDirection.LEFT);
-                        } else if (currentString.charAt(1) == '>') {
-                            currentCell.setDoorDirection(DoorDirection.RIGHT);
-                        }
-                    } else {
-                        if (currentString.charAt(1) == '#') {
-                            roomMap.get(currentString.charAt(0)).setLabelCell(currentCell);
-                            currentCell.setRoomLabel(true);
-                        } else if (currentString.charAt(1) == '*') {
-                            roomMap.get(currentString.charAt(0)).setCenterCell(currentCell);
-                            currentCell.setRoomLabel(true);
-                        } else {
-                            currentCell.setSecretPassage(currentString.charAt(1));
-                        }
-                    }
-                }
-                if (currentString.charAt(0) == 'W') {
-                    // Make sure you check boundaries to avoid IndexOutOfBoundsException
-                    if (i - 1 >= 0) grid[i - 1][j].addAdj(currentCell);
-                    if (i + 1 < numRows) grid[i + 1][j].addAdj(currentCell);
-                    if (j - 1 >= 0) grid[i][j - 1].addAdj(currentCell);
-                    if (j + 1 < numColumns) grid[i][j + 1].addAdj(currentCell);
-                }
-            }
-        }
-    }
-    */
 
     //method to set the grid boardcell
 	public void setGrid(BoardCell[][] grid) {
