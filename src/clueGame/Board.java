@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Board {
 	private BoardCell[][] grid;
@@ -187,5 +188,17 @@ public class Board {
 
 	public Room getRoom(BoardCell cell) {
 		return roomMap.get(cell.getInitial());
+	}
+	public Set<BoardCell> getAdjList(int i, int j) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public void calcTargets(BoardCell cell, int i) {
+		// TODO Auto-generated method stub
+		
+	}
+	public Set<BoardCell> getTargets() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

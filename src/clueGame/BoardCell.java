@@ -19,6 +19,7 @@ public class BoardCell {
 	private char secretPassage;
 	private Set<BoardCell> adjList;
 	
+
 	public BoardCell(int newRow, int newColumn, char newInitial) {
 		row = newRow;
 		column = newColumn;
@@ -53,6 +54,10 @@ public class BoardCell {
 	}
 	
 	//all setters here
+	public void setOccupied(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
 	public void setDoorDirection(DoorDirection newDoorDirection) {
 		doorDirection = newDoorDirection;
 	}
