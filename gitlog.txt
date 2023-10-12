@@ -1,3 +1,112 @@
+commit 180e4e8e530acd4362c02d8190a9601a4810ba18
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 16:20:03 2023 -0600
+
+    made gitrefactor.txt
+
+commit 7dd7fd7f644e87a4ecc62b501546133c409c0817
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 12 16:11:58 2023 -0600
+
+    refactored and made the code a little cleaner
+
+commit 8caee14fe90452a72642dbc3a0b67188adebe22f
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 15:36:39 2023 -0600
+
+    ExceptionTests306.java now passes all tests
+
+commit 48b8d7c9b4bf40d48de6a181729f010cd69b6f90
+Merge: 4c1e4ad f6e2027
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 15:28:58 2023 -0600
+
+    Merge branch 'main' of https://github.com/rara8122/ClueGame into main
+
+commit 4c1e4ad6922350af049986efb9404cb8e8e4df1a
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 15:27:00 2023 -0600
+
+    FileInitTests.java now passes
+
+commit f6e2027fa1cd4013b04c6575b5f22bce06ca0dee
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 12 15:23:09 2023 -0600
+
+    worked on badconfigformatexception and added to board class
+
+commit 715c81ad68d38d7c0f8d2c50997153595038ac77
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 15:03:05 2023 -0600
+
+    throws if it tries to make a nonexistant room
+
+commit 78f4ff2dcd8521a241fd620fe898588ea12a7a03
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 14:58:17 2023 -0600
+
+    added throws BadConfigFormatException to loadSetupConfig and loadLayoutConfig
+
+commit 340f57188071ad9c25783051e4e885b76232df5d
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 14:55:22 2023 -0600
+
+    FileInitTests306.java now passes
+
+commit db294cbb7890eb4aae4c9e37cb0c9bf880f7d339
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 12 14:31:29 2023 -0600
+
+    played around with the code in board class
+
+commit 44155d2353fe0e239cce6ce2452c3c3dd1793fbf
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Tue Oct 10 16:50:55 2023 -0600
+
+    got the second half of loadLayoutConfig working
+
+commit ae0e11a1cc49fda7da2239a45fc6ffb0c5581e43
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Tue Oct 10 16:05:19 2023 -0600
+
+    fixed bugs and finalized loadSetupConfig
+
+commit 50fea56050dce531759f1315a50a3cbb44a7467d
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Tue Oct 10 15:59:21 2023 -0600
+
+    started load layout config
+
+commit 8095aa0e2bdbe591e56fe3de5f07fa74b54860c2
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Tue Oct 10 15:38:56 2023 -0600
+
+    added comments
+
+commit 16478547ca3d8940fa736a655589f29952279961
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Tue Oct 10 15:11:06 2023 -0600
+
+    got testRoomLabels to pass
+
+commit 04dbbee0e5fe452369ecc8cbcaf373c936af51e8
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Tue Oct 10 15:04:44 2023 -0600
+
+    successfully read and processed top half of ClueSetup306.txt
+
+commit 1a2c7f45b606ced70d084e4061e56747c11d0428
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Tue Oct 10 14:59:38 2023 -0600
+
+    started initialize
+********************************* Past Assignments *******************************
+commit d87b07beade4efefc9aa599584b8ed10a58bce6b
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Sun Oct 8 17:43:32 2023 -0600
+
+    added gitlog
+
 commit 313db7e953f70eac4ca2e3b631f679b3b07da57c
 Author: Rachel <rara8122@MacBook-Pro-3.local>
 Date:   Sun Oct 8 17:43:06 2023 -0600
@@ -73,8 +182,6 @@ Date:   Fri Oct 6 17:06:28 2023 -0600
 commit 96a8a07bd34311b516cb3fc2b3bd229c95e97b5d
 Author: MancMelP <melanie.mancera23@gmail.com>
 Date:   Fri Oct 6 17:01:30 2023 -0600
-
-********************* Past Assignments *******************************
 
     updated git log and readme
 
