@@ -43,17 +43,15 @@ public class Board {
 		} catch (BadConfigFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
     }
     //loads setup config
-    public void loadSetupConfig () throws BadConfigFormatException {
+    public void loadSetupConfig () throws BadConfigFormatException, FileNotFoundException {
     	FileReader setupFile;
-		try {
-			setupFile = new FileReader("data/" + setupConfigFile);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			return;
-		}
+		setupFile = new FileReader("data/" + setupConfigFile);
 		Scanner setupScanner = new Scanner(setupFile);
 		//read and process the setup file (.txt)
 		String info;
@@ -92,14 +90,9 @@ public class Board {
     }
     //loads layout config
     
-    public void loadLayoutConfig () throws BadConfigFormatException {
+    public void loadLayoutConfig () throws BadConfigFormatException, FileNotFoundException {
     	FileReader layoutFile;
-		try {
-			layoutFile = new FileReader("data/" + layoutConfigFile);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			return;
-		}
+		layoutFile = new FileReader("data/" + layoutConfigFile);
 		Scanner layoutScanner = new Scanner(layoutFile);
     	int row = 0;
     	String file = layoutScanner.nextLine();
