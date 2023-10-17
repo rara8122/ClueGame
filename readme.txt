@@ -1,5 +1,5 @@
 C15A-2
-Clue Init 1 (Clue Pair)
+Clue Board 1 (Clue Pair)
 
 Author: Rachel Davy - Section C
 Author: Melanie Perez - Section C
