@@ -1,3 +1,103 @@
+commit 371fa26e0fefb4db6322558abb548fbbe2c4895a
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Mon Oct 16 20:23:54 2023 -0600
+
+    modified comments and read me
+
+commit 02b2e74ab4fd4a6a58f1cdc252868130abf8cc65
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Mon Oct 16 20:20:21 2023 -0600
+
+    finished testTargetsOccupied
+
+commit 8fc58a38f216948c9e65e549ced925c6ccda25b3
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Mon Oct 16 20:13:53 2023 -0600
+
+    testTargetsOccupied 1 of 3
+
+commit 2ccfce7415f8168bd4c2ceffe47150a54ca74156
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Mon Oct 16 19:50:47 2023 -0600
+
+    finished writing testTargetsInWalkway1/2
+
+commit 3b63ea119da93a4111f092fc9fb2a52600bea8af
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Mon Oct 16 19:12:01 2023 -0600
+
+    BoardAdjTargetTest306.java no longer errors
+
+commit dcdca09d7b5676dba080f5473aca649ec57bb3aa
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Mon Oct 16 18:13:11 2023 -0600
+
+    added class header comments and worked on getting rid of errors in the tests
+
+commit b3ed39ba16dffab4b7504882df14808f44ad6b59
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Mon Oct 16 16:12:36 2023 -0600
+
+    got all but 2 targets working
+
+commit 8b7370cb749536912139b12bfb19093a39ac1fba
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Mon Oct 16 12:54:26 2023 -0600
+
+    planned places for testing targets
+
+commit c5866f20ef1e0c4164eab3bcfcae55c6e1201871
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Mon Oct 16 11:41:34 2023 -0600
+
+    added xlsx files
+
+commit efd0954789f3685b5574ef64f63eff324147c10b
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Sun Oct 15 15:24:12 2023 -0600
+
+    made tests for adjacencys
+
+commit be18093f76288f029ca729fad4cacafa6720b797
+Merge: a5f6f2d 382209e
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Fri Oct 13 12:02:39 2023 -0600
+
+    trying to fix merging conflict
+
+commit 382209ea031a1b764ea7faa756b0e8938a79b44d
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 17:10:46 2023 -0600
+
+    saved
+
+commit a5f6f2d227a7f00fb153e7047040f04de04958c3
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 12 17:10:43 2023 -0600
+
+    worked on 306 tests to fail
+
+commit 5ecea95adf9c09158a3587261a816d6834d7ea00
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 17:10:00 2023 -0600
+
+    started BoardAdjTargetTest.java
+
+commit 2eda59d4479a1ba4dea7966579040ee92f70d8a1
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 12 16:49:20 2023 -0600
+
+    added color coded clue layout
+
+commit 14ce56deb93164de2f94b4f6aaf58753fb5d3b5c
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 16:30:03 2023 -0600
+
+    added BoardAdjTargetTest306.java
+    
+    
+*************above this line is for 15a-2*************************************
+
 commit 180e4e8e530acd4362c02d8190a9601a4810ba18
 Author: Rachel <rara8122@MacBook-Pro-3.local>
 Date:   Thu Oct 12 16:20:03 2023 -0600
