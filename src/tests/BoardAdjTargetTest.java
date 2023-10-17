@@ -57,6 +57,10 @@ public class BoardAdjTargetTest {
 		assertTrue(testList.contains(board.getCell(15, 8)));
 		assertTrue(testList.contains(board.getCell(14, 16)));
 		assertTrue(testList.contains(board.getCell(4, 25)));
+		
+		//Test Dunbroch (not center)
+		testList = board.getAdjList(10, 15);
+		assertEquals(0, testList.size());
 	}
 
 	
@@ -82,6 +86,7 @@ public class BoardAdjTargetTest {
 		assertEquals(2, testList.size());
 		assertTrue(testList.contains(board.getCell(18, 3)));
 		assertTrue(testList.contains(board.getCell(19, 2)));
+		
 	}
 	
 	// Test a variety of walkway scenarios
@@ -89,12 +94,12 @@ public class BoardAdjTargetTest {
 	@Test
 	public void testAdjacencyWalkways()
 	{
-		// Test on bottom edge of board, just one walkway piece
+		// Test near (not adj to) door & test left edge
 		Set<BoardCell> testList = board.getAdjList(18, 0);
 		assertEquals(1, testList.size());
 		assertTrue(testList.contains(board.getCell(17, 0)));
 		
-		// Test near a door but not adjacent
+		// Test adj to door
 		testList = board.getAdjList(5, 17);
 		assertEquals(3, testList.size());
 		assertTrue(testList.contains(board.getCell(5, 18)));
@@ -109,11 +114,34 @@ public class BoardAdjTargetTest {
 		assertTrue(testList.contains(board.getCell(8, 6)));
 		assertTrue(testList.contains(board.getCell(6, 6)));
 
-		// Test next to closet
+		// Test next to unused
 		testList = board.getAdjList(1,28);
 		assertEquals(2, testList.size());
 		assertTrue(testList.contains(board.getCell(1, 27)));
 		assertTrue(testList.contains(board.getCell(2, 28)));
+		
+		//test closet
+		testList = board.getAdjList(10, 10);
+		assertEquals(0, testList.size());
+		
+		//test bottom edge
+		testList = board.getAdjList(19, 10);
+		assertEquals(3, testList.size());
+		assertTrue(testList.contains(board.getCell(18, 10)));
+		assertTrue(testList.contains(board.getCell(19, 9)));
+		assertTrue(testList.contains(board.getCell(19, 11)));
+		
+		//test top edge
+		testList = board.getAdjList(0, 21);
+		assertEquals(1, testList.size());
+		assertTrue(testList.contains(board.getCell(1, 21)));
+		
+		//test right edge
+		testList = board.getAdjList(5, 29);
+		assertEquals(3, testList.size());
+		assertTrue(testList.contains(board.getCell(5, 28)));
+		assertTrue(testList.contains(board.getCell(6, 29)));
+		assertTrue(testList.contains(board.getCell(4, 29)));
 	
 	}
 	
@@ -146,6 +174,16 @@ public class BoardAdjTargetTest {
 		assertTrue(targets.contains(board.getCell(12, 16)));
 		assertTrue(targets.contains(board.getCell(14, 16)));
 		assertTrue(targets.contains(board.getCell(14, 18)));
+	}
+	
+	@Test
+	public void testTargetsAtlantica() {
+		// test a roll of 1
+		board.calcTargets(board.getCell(4, 25), 1);
+		Set<BoardCell> targets= board.getTargets();
+		assertEquals(2, targets.size());
+		assertTrue(targets.contains(board.getCell(16, 13)));
+		assertTrue(targets.contains(board.getCell(6, 25)));
 	}
 	
 	@Test
