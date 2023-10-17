@@ -18,9 +18,8 @@ public class BoardCell {
 	private boolean roomCenter;
 	private char secretPassage;
 	private Set<BoardCell> adjList;
-	private Set<BoardCell> testList;
-	
 
+	
 	public BoardCell(int newRow, int newColumn, char newInitial) {
 		row = newRow;
 		column = newColumn;
@@ -81,6 +80,10 @@ public class BoardCell {
 	}
 	public char getInitial() {
 		return initial;
+	}
+
+	public Set<BoardCell> getAdjList() {
+		return adjList;
 	}
 	
 }

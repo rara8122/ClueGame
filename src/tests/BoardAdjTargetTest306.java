@@ -1,9 +1,16 @@
+/*
+ * Class: This class comprises of tests that test adjacency lists for cells in various rooms, test various scenarios involving walkways, tests target calculations, and more. The purpose of this class is to implement TDD in our clue game by writing tests before writing code. Once we are ready to write the code, it should pass these tests.  
+ * Author: Melanie Perez, Rachel Davy
+ * Date: 10/14/2023
+ * Sources: none
+ */
 package tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -16,6 +23,7 @@ public class BoardAdjTargetTest306 {
 	// We make the Board static because we can load it one time and 
 	// then do all the tests. 
 	private static Board board;
+
 	
 	@BeforeAll
 	public static void setUp() {
