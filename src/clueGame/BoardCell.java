@@ -29,33 +29,9 @@ public class BoardCell {
 		roomCenter = false;
 		adjList = new HashSet<>();
 	}
-	// Method to add an adjacent cell to the adjacency list	
-	public void addAdj(BoardCell adj) {
-		adjList.add(adj);
-	}
-	
-	// Method to get the direction of the door (should return an enum, not Object)
-	public Object getDoorDirection() {
-		return doorDirection;
-	}
-
-	// Method to check if this cell is a label
-	public boolean isLabel() {
-		return roomLabel;
-	}
-
-	// Method to check if this cell is a room center
-	public boolean isRoomCenter() {
-		return roomCenter;
-	}
-	// Method to check if this cell is a doorway
-	public boolean isDoorway() {
-		return (doorDirection != doorDirection.NONE);
-	}
 	
 	//all setters here
 	public void setOccupied(boolean b) {
-		// TODO Auto-generated method stub
 		
 	}
 	public void setDoorDirection(DoorDirection newDoorDirection) {
@@ -73,13 +49,38 @@ public class BoardCell {
 	public void setSecretPassage(char newSecretPassage) {
 		secretPassage = newSecretPassage;
 	}
-
-	//all getters here
-	public char getSecretPassage() {
-		return secretPassage;
+	
+	// Method to add an adjacent cell to the adjacency list	
+	public void addAdj(BoardCell adj) {
+		adjList.add(adj);
 	}
+	
+	// Method to check if this cell is a doorway
+	public boolean isDoorway() {
+		return (doorDirection != doorDirection.NONE);
+	}
+		
+	// Method to check if this cell is a label
+	public boolean isLabel() {
+		return roomLabel;
+	}
+
+	// Method to check if this cell is a room center
+	public boolean isRoomCenter() {
+		return roomCenter;
+	}
+		
+	//all getters here
 	public char getInitial() {
 		return initial;
+	}
+	
+	public Object getDoorDirection() {
+		return doorDirection;
+	}
+	
+	public char getSecretPassage() {
+		return secretPassage;
 	}
 
 	public Set<BoardCell> getAdjList() {

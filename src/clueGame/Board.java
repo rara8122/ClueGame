@@ -9,9 +9,12 @@ package clueGame;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+
+import experiment.TestBoardCell;
 
 public class Board {
 	private BoardCell[][] grid;
@@ -20,6 +23,8 @@ public class Board {
 	private String layoutConfigFile;
 	private String setupConfigFile;
 	private Map<Character, Room> roomMap;
+	private Set<BoardCell> targets;
+	private Set<BoardCell> visited;
 	/*
 	 * variable and methods used for singleton pattern
 	 */
@@ -37,14 +42,14 @@ public class Board {
 	 */
 	public void initialize(){
 		//Read in files/initialize roomMap
+		targets = new HashSet<>();
+		visited = new HashSet<>();
 		try {
 			loadSetupConfig();
 			loadLayoutConfig();
 		} catch (BadConfigFormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -164,6 +169,7 @@ public class Board {
 	public void setGrid(BoardCell[][] grid) {
 		this.grid = grid;
 	}
+	
 	public void setConfigFiles(String layoutFile, String setupFile) {
 		layoutConfigFile = layoutFile;
 		setupConfigFile = setupFile;
@@ -172,12 +178,15 @@ public class Board {
 	public Map<Character, Room> getRoomMap() {
 		return roomMap;
 	}
+	
 	public BoardCell getCell(int i, int j) {
 		return grid[i][j];
 	}
+	
 	public int getNumRows() {
 		return numRows;
 	}
+	
 	public int getNumColumns() {
 		return numColumns;
 	}
@@ -189,16 +198,16 @@ public class Board {
 	public Room getRoom(BoardCell cell) {
 		return roomMap.get(cell.getInitial());
 	}
+	
 	public Set<BoardCell> getAdjList(int i, int j) {
-		// TODO Auto-generated method stub
-		return null;
+		return grid[i][j].getAdjList();
 	}
+	
 	public void calcTargets(BoardCell cell, int i) {
-		// TODO Auto-generated method stub
 		
 	}
+	
 	public Set<BoardCell> getTargets() {
-		// TODO Auto-generated method stub
-		return null;
+		return targets;
 	}
 }
