@@ -32,6 +32,32 @@ public class BoardCell {
 		secretPassage = ' ';
 	}
 	
+	// Method to add an adjacent cell to the adjacency list	
+	public void addAdj(BoardCell adj) {
+		adjList.add(adj);
+	}
+	
+	// Method to check if this cell is a doorway
+	public boolean isDoorway() {
+		return (doorDirection != doorDirection.NONE);
+	}
+	//method to check if this cell is a walkway 
+	public boolean isWalkway() {
+		return initial == 'W';
+	}
+		
+	// Method to check if this cell is a label
+	public boolean isLabel() {
+		return roomLabel;
+	}
+
+	// Method to check if this cell is a room center
+	public boolean isRoomCenter() {
+		return roomCenter;
+	}
+	public boolean isOccupied() {
+		return occupied;
+	}	
 	//all setters here
 	public void setOccupied(boolean b) {
 		occupied = b;
@@ -51,31 +77,6 @@ public class BoardCell {
 	public void setSecretPassage(char newSecretPassage) {
 		secretPassage = newSecretPassage;
 	}
-	
-	// Method to add an adjacent cell to the adjacency list	
-	public void addAdj(BoardCell adj) {
-		adjList.add(adj);
-	}
-	
-	// Method to check if this cell is a doorway
-	public boolean isDoorway() {
-		return (doorDirection != doorDirection.NONE);
-	}
-	
-	public boolean isWalkway() {
-		return initial == 'W';
-	}
-		
-	// Method to check if this cell is a label
-	public boolean isLabel() {
-		return roomLabel;
-	}
-
-	// Method to check if this cell is a room center
-	public boolean isRoomCenter() {
-		return roomCenter;
-	}
-		
 	//all getters here
 	public char getInitial() {
 		return initial;
@@ -93,8 +94,6 @@ public class BoardCell {
 		return adjList;
 	}
 
-	public boolean isOccupied() {
-		return occupied;
-	}
+
 	
 }
