@@ -44,6 +44,7 @@ public class Board {
 		//Read in files/initialize roomMap
 		targets = new HashSet<>();
 		visited = new HashSet<>();
+		
 		try {
 			loadSetupConfig();
 			loadLayoutConfig();
@@ -204,8 +205,28 @@ public class Board {
 	}
 	
 	public void calcTargets(BoardCell cell, int i) {
-		
+		visited.clear(); 
+		targets.clear();
+		findTargets(cell, i);
+				
 	}
+	
+	public void findTargets(BoardCell currentCell, int steps) {
+		  visited.add(currentCell);
+
+		    Set<BoardCell> adjacentCells = currentCell.getAdjList();
+		    for (BoardCell cell : adjacentCells) {
+		        if (!visited.contains(cell)) {
+		            if (steps == 1 || cell.isDoorway()) {
+		                targets.add(cell);
+		            } else {
+		                findTargets(cell, steps - 1);
+		            }
+		        }
+		    }
+
+		    visited.remove(currentCell);
+		}
 	
 	public Set<BoardCell> getTargets() {
 		return targets;
