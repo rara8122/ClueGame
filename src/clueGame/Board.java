@@ -166,6 +166,55 @@ public class Board {
 		}
 	}
 	
+	public void calcAdjacencies() {
+		BoardCell currentCell;
+		for (int i = 0; i < numRows; i++) {
+			for (int j = 0; j < numColumns; j++) {
+				currentCell = grid[i][j];
+				if(currentCell.isWalkway()) {
+					if(grid[i][j - 1].isWalkway()) {
+						grid[i][j - 1].addAdj(currentCell);
+						currentCell.addAdj(grid[i][j - 1]);
+					}
+					if(grid[i][j + 1].isWalkway()) {
+						grid[i][j + 1].addAdj(currentCell);
+						currentCell.addAdj(grid[i][j + 1]);
+					}
+					if(grid[i + 1][j].isWalkway()) {
+						grid[i + 1][j].addAdj(currentCell);
+						currentCell.addAdj(grid[i + 1][j]);
+					}
+					if(grid[i - 1][j].isWalkway()) {
+						grid[i - 1][j].addAdj(currentCell);
+						currentCell.addAdj(grid[i - 1][j]);
+					}
+				}
+				if(currentCell.isDoorway()) {
+					if(currentCell.getDoorDirection() == DoorDirection.DOWN) {
+						currentCell.addAdj((roomMap.get(grid[i + 1][j].getInitial())).getCenterCell());
+						((roomMap.get(grid[i + 1][j].getInitial())).getCenterCell()).addAdj(currentCell);;
+					}
+					if(currentCell.getDoorDirection() == DoorDirection.UP) {
+						currentCell.addAdj((roomMap.get(grid[i - 1][j].getInitial())).getCenterCell());
+						((roomMap.get(grid[i - 1][j].getInitial())).getCenterCell()).addAdj(currentCell);;
+					}
+					if(currentCell.getDoorDirection() == DoorDirection.LEFT) {
+						currentCell.addAdj((roomMap.get(grid[i][j - 1].getInitial())).getCenterCell());
+						((roomMap.get(grid[i][j - 1].getInitial())).getCenterCell()).addAdj(currentCell);;
+					}
+					if(currentCell.getDoorDirection() == DoorDirection.RIGHT) {
+						currentCell.addAdj(roomMap.get(grid[i][j + 1].getInitial()).getCenterCell());
+						((roomMap.get(grid[i][j + 1].getInitial())).getCenterCell()).addAdj(currentCell);;
+					}
+				}
+				
+				if(currentCell.getSecretPassage() != ' ') {
+					(roomMap.get(currentCell.getInitial()).getCenterCell()).addAdj((roomMap.get(currentCell.getSecretPassage())).getCenterCell());
+					(roomMap.get(currentCell.getSecretPassage()).getCenterCell()).addAdj((roomMap.get(currentCell.getInitial())).getCenterCell());
+				}
+			}
+		}
+	}
 //all setters here 
 	public void setGrid(BoardCell[][] grid) {
 		this.grid = grid;
@@ -217,7 +266,7 @@ public class Board {
 		    Set<BoardCell> adjacentCells = currentCell.getAdjList();
 		    for (BoardCell cell : adjacentCells) {
 		        if (!visited.contains(cell)) {
-		            if (steps == 1 || cell.isDoorway()) {
+		            if (steps == 1 || cell.isRoomCenter()) {
 		                targets.add(cell);
 		            } else {
 		                findTargets(cell, steps - 1);

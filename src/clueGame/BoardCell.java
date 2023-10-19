@@ -28,6 +28,7 @@ public class BoardCell {
 		roomLabel = false;
 		roomCenter = false;
 		adjList = new HashSet<>();
+		secretPassage = ' ';
 	}
 	
 	//all setters here
@@ -58,6 +59,10 @@ public class BoardCell {
 	// Method to check if this cell is a doorway
 	public boolean isDoorway() {
 		return (doorDirection != doorDirection.NONE);
+	}
+	
+	public boolean isWalkway() {
+		return initial == 'W';
 	}
 		
 	// Method to check if this cell is a label
