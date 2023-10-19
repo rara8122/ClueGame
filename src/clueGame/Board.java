@@ -269,15 +269,20 @@ public class Board {
 				
 	}
 	
-	public void findTargets(BoardCell currentCell, int steps) {
+	
+ public void findTargets(BoardCell currentCell, int steps) {
+	 
 		  visited.add(currentCell);
 
 		    Set<BoardCell> adjacentCells = currentCell.getAdjList();
 		    for (BoardCell cell : adjacentCells) {
 		        if (!visited.contains(cell)) {
 		            if (steps == 1 || cell.isRoomCenter()) {
-		                targets.add(cell);
-		            } else {
+		            	if(!cell.isOccupied()) {
+		            	targets.add(cell);	
+		            	} 
+		                
+		            } else if (cell.isWalkway() || cell.isDoorway()){
 		                findTargets(cell, steps - 1);
 		            }
 		        }

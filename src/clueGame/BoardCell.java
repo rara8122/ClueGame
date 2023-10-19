@@ -91,5 +91,10 @@ public class BoardCell {
 	public Set<BoardCell> getAdjList() {
 		return adjList;
 	}
+
+	public boolean isOccupied() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }
