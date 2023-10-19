@@ -278,9 +278,6 @@ public class Board {
 		    for (BoardCell cell : adjacentCells) {
 		        if (!(visited.contains(cell) || (cell.isOccupied() && !(cell.isRoomCenter())))) {
 		            if (steps == 1 || cell.isRoomCenter()) {
-		            	if(cell == grid[8][28]) {
-		            		targets.add(cell);
-		            	}
 		            	targets.add(cell);	
 		            } else if (cell.isWalkway() || cell.isDoorway()){
 		                findTargets(cell, steps - 1);
