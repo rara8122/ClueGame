@@ -1,3 +1,90 @@
+commit 95cd02cc9de9331c68febb1d0bd28ebafdc8d9ab
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Wed Oct 18 21:07:27 2023 -0600
+
+    updated readme.txt
+
+commit 68e2cd019c05fea039dde5c5cfb7603429796a5d
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Wed Oct 18 21:05:54 2023 -0600
+
+    refactored and commented
+
+commit 2810f56e891d3034b34e743d154e6dc44191c1dd
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Wed Oct 18 20:39:22 2023 -0600
+
+    removed tester code
+
+commit 0ee4138dca6835df731cb4cd0b612afda2ea2f55
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Wed Oct 18 20:38:14 2023 -0600
+
+    fixed testTargetsOccupied
+
+commit 722c4ae0083793fee32f9d564c56dd793e69efa9
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Wed Oct 18 20:09:44 2023 -0600
+
+    BoardAdjTargetTest306.java is now working properly
+
+commit daad364e5b9477a320aad1fc0a36f495dfc6f36b
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Wed Oct 18 20:02:44 2023 -0600
+
+    find targets isccoupied tests
+
+commit ad2e16a2feb25f62a63556ccb2cc6a3f369712a8
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Wed Oct 18 20:01:16 2023 -0600
+
+    fixed incorrect tests
+
+commit d918b206011f3eb82d2e437ce4f68e811a82da5e
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Wed Oct 18 19:44:10 2023 -0600
+
+    calcAdjacencies now fully functional
+
+commit 46d1e9025e8b8f09da964e4d6a948b7b78ea05a7
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Wed Oct 18 19:40:08 2023 -0600
+
+    started calcAdjacencies
+
+commit a794fb215f96730e72ed8d81eb35ecef6dbfbcc7
+Merge: 7990d46 a510fb5
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Wed Oct 18 19:12:15 2023 -0600
+
+    Merge remote-tracking branch 'origin/changes' into main
+    
+    Fixing an issue in partner's computer
+
+commit a510fb565f1325b7e02e0bd804fa005c509b585c
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Wed Oct 18 18:30:07 2023 -0600
+
+    modified calc targets method and findtargets
+
+commit 7990d46329749ad0f8967d37b8b5ce6c1cb6baa8
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Mon Oct 16 20:42:42 2023 -0600
+
+    finished the BoardAdjTargetTest.java
+
+commit bff0619ff6b04a0bac3d3b0907aacead24b99965
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Mon Oct 16 20:42:11 2023 -0600
+
+    made sure the clue fits the requirements
+
+commit 2c15d30f33dc6b873cb947b34941f5e6f2cc2224
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Mon Oct 16 20:28:54 2023 -0600
+
+    updated git log and read me
+
 commit 371fa26e0fefb4db6322558abb548fbbe2c4895a
 Author: MancMelP <melanie.mancera23@gmail.com>
 Date:   Mon Oct 16 20:23:54 2023 -0600
@@ -94,9 +181,24 @@ Author: Rachel <rara8122@MacBook-Pro-3.local>
 Date:   Thu Oct 12 16:30:03 2023 -0600
 
     added BoardAdjTargetTest306.java
-    
-    
-*************above this line is for 15a-2*************************************
+
+commit 22c8374f9c665fccb9a034d210b9226d001d0515
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 12 16:25:25 2023 -0600
+
+    fixed read me and adjusted header comments
+
+commit 9a0bc904c272801719b971734a998fc8c76b4f3f
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 16:21:51 2023 -0600
+
+    fixed readme
+
+commit 5f6f08e96be7366ac036fbe0d4cdbc95b941556e
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 16:21:06 2023 -0600
+
+    git log updated
 
 commit 180e4e8e530acd4362c02d8190a9601a4810ba18
 Author: Rachel <rara8122@MacBook-Pro-3.local>
@@ -200,7 +302,7 @@ Author: Rachel <rara8122@MacBook-Pro-3.local>
 Date:   Tue Oct 10 14:59:38 2023 -0600
 
     started initialize
-********************************* Past Assignments *******************************
+
 commit d87b07beade4efefc9aa599584b8ed10a58bce6b
 Author: Rachel <rara8122@MacBook-Pro-3.local>
 Date:   Sun Oct 8 17:43:32 2023 -0600
