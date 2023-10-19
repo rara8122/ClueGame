@@ -18,6 +18,7 @@ public class BoardCell {
 	private boolean roomCenter;
 	private char secretPassage;
 	private Set<BoardCell> adjList;
+	private boolean occupied;
 
 	
 	public BoardCell(int newRow, int newColumn, char newInitial) {
@@ -33,7 +34,7 @@ public class BoardCell {
 	
 	//all setters here
 	public void setOccupied(boolean b) {
-		
+		occupied = b;
 	}
 	public void setDoorDirection(DoorDirection newDoorDirection) {
 		doorDirection = newDoorDirection;
@@ -93,8 +94,7 @@ public class BoardCell {
 	}
 
 	public boolean isOccupied() {
-		// TODO Auto-generated method stub
-		return false;
+		return occupied;
 	}
 	
 }

@@ -276,12 +276,9 @@ public class Board {
 
 		    Set<BoardCell> adjacentCells = currentCell.getAdjList();
 		    for (BoardCell cell : adjacentCells) {
-		        if (!visited.contains(cell)) {
+		        if (!(visited.contains(cell) || (cell.isOccupied() && !(cell.isRoomCenter())))) {
 		            if (steps == 1 || cell.isRoomCenter()) {
-		            	if(!cell.isOccupied()) {
 		            	targets.add(cell);	
-		            	} 
-		                
 		            } else if (cell.isWalkway() || cell.isDoorway()){
 		                findTargets(cell, steps - 1);
 		            }
