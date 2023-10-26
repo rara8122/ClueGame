@@ -243,6 +243,7 @@ public class Board {
 						}
 					}
 				}
+				
 				//calculates adjacency relationships between cells when the current cell is a doorway.
 				if(currentCell.isDoorway()) {
 					switch(currentCell.getDoorDirection())
@@ -267,14 +268,25 @@ public class Board {
 							break;
 					}
 				}
+				
+				char currentCellPassage = currentCell.getSecretPassage();
 				//calculates adjacency relationships between cells when the current cell is a secret passage.
-				if(currentCell.getSecretPassage() != ' ') {
-					(roomMap.get(currentCell.getInitial()).getCenterCell()).addAdj((roomMap.get(currentCell.getSecretPassage())).getCenterCell());
-					(roomMap.get(currentCell.getSecretPassage()).getCenterCell()).addAdj((roomMap.get(currentCell.getInitial())).getCenterCell());
+				if (currentCellPassage != ' ') {
+				    Room currentRoom = roomMap.get(currentCell.getInitial());
+				    Room passageRoom = roomMap.get(currentCellPassage);
+
+				    BoardCell currentRoomCenter = currentRoom.getCenterCell();
+				    BoardCell passageRoomCenter = passageRoom.getCenterCell();
+
+				    currentRoomCenter.addAdj(passageRoomCenter);
+				    passageRoomCenter.addAdj(currentRoomCenter);
 				}
+				}
+				
+
 			}
 		}
-	}
+
 
 	//recursive function to find reachable target cells 
 	public void findTargets(BoardCell currentCell, int steps) {
