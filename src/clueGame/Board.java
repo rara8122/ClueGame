@@ -208,55 +208,6 @@ public class Board {
 			}
 		}
 	}
-	/*
-	  	if(currentStr.charAt(1) == 'v') {
-			currentCell.setDoorDirection(DoorDirection.DOWN);
-		}
-		if(currentStr.charAt(1) == '^') {
-			currentCell.setDoorDirection(DoorDirection.UP);
-		}
-		if(currentStr.charAt(1) == '<') {
-			currentCell.setDoorDirection(DoorDirection.LEFT);
-		}
-		if(currentStr.charAt(1) == '>') {
-			currentCell.setDoorDirection(DoorDirection.RIGHT);
-		}
-						
-		switch (currentStr.charAt(1))
-		{
-			case 'v':
-				currentCell.setDoorDirection(DoorDirection.DOWN);
-			case '^':
-				currentCell.setDoorDirection(DoorDirection.UP);
-			case '<':
-				currentCell.setDoorDirection(DoorDirection.LEFT);
-			case '>':
-				currentCell.setDoorDirection(DoorDirection.RIGHT);
-			default:
-				currentCell.setDoorDirection(DoorDirection.NONE);
-		}
-		if(currentStr.charAt(1) == '#') {
-			roomMap.get(currentStr.charAt(0)).setLabelCell(currentCell);
-			currentCell.setRoomLabel(true);
-		}else if(currentStr.charAt(1) == '*') {
-			roomMap.get(currentStr.charAt(0)).setCenterCell(currentCell);
-			currentCell.setRoomCenter(true);
-		} else {
-			currentCell.setSecretPassage(currentStr.charAt(1));
-		}
-		
-		switch (currentStr.charAt(1))
-		{
-			case '#':
-				roomMap.get(currentStr.charAt(0)).setLabelCell(currentCell);
-				currentCell.setRoomLabel(true);
-			case '*':
-				roomMap.get(currentStr.charAt(0)).setCenterCell(currentCell);
-				currentCell.setRoomCenter(true);
-			default:
-				currentCell.setSecretPassage(currentStr.charAt(1));
-		}
-*/
 	//method to build adjacency list for each cell 
 	public void calcAdjacencies() {
 		
@@ -294,21 +245,26 @@ public class Board {
 				}
 				//calculates adjacency relationships between cells when the current cell is a doorway.
 				if(currentCell.isDoorway()) {
-					if(currentCell.getDoorDirection() == DoorDirection.DOWN) {
-						currentCell.addAdj((roomMap.get(grid[i + 1][j].getInitial())).getCenterCell());
-						((roomMap.get(grid[i + 1][j].getInitial())).getCenterCell()).addAdj(currentCell);;
-					}
-					if(currentCell.getDoorDirection() == DoorDirection.UP) {
-						currentCell.addAdj((roomMap.get(grid[i - 1][j].getInitial())).getCenterCell());
-						((roomMap.get(grid[i - 1][j].getInitial())).getCenterCell()).addAdj(currentCell);;
-					}
-					if(currentCell.getDoorDirection() == DoorDirection.LEFT) {
-						currentCell.addAdj((roomMap.get(grid[i][j - 1].getInitial())).getCenterCell());
-						((roomMap.get(grid[i][j - 1].getInitial())).getCenterCell()).addAdj(currentCell);;
-					}
-					if(currentCell.getDoorDirection() == DoorDirection.RIGHT) {
-						currentCell.addAdj(roomMap.get(grid[i][j + 1].getInitial()).getCenterCell());
-						((roomMap.get(grid[i][j + 1].getInitial())).getCenterCell()).addAdj(currentCell);;
+					switch(currentCell.getDoorDirection())
+					{
+						case NONE:
+							break;
+						case DOWN:
+							currentCell.addAdj((roomMap.get(grid[i + 1][j].getInitial())).getCenterCell());
+							((roomMap.get(grid[i + 1][j].getInitial())).getCenterCell()).addAdj(currentCell);;
+							break;
+						case UP:
+							currentCell.addAdj((roomMap.get(grid[i - 1][j].getInitial())).getCenterCell());
+							((roomMap.get(grid[i - 1][j].getInitial())).getCenterCell()).addAdj(currentCell);;
+							break;
+						case LEFT:
+							currentCell.addAdj((roomMap.get(grid[i][j - 1].getInitial())).getCenterCell());
+							((roomMap.get(grid[i][j - 1].getInitial())).getCenterCell()).addAdj(currentCell);;
+							break;
+						case RIGHT:
+							currentCell.addAdj(roomMap.get(grid[i][j + 1].getInitial()).getCenterCell());
+							((roomMap.get(grid[i][j + 1].getInitial())).getCenterCell()).addAdj(currentCell);;
+							break;
 					}
 				}
 				//calculates adjacency relationships between cells when the current cell is a secret passage.
