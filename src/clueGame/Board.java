@@ -68,11 +68,13 @@ public class Board {
 		Room newRoom;
 		String comparer = "Room,";
 		
+		//reads from setup file to create room objects and populates room map
 		for (int i = 0; i < 2; i++) {
 			info = setupScanner.nextLine();
+			//this loops reds the next line from setUpScanner and stores it in the info variable 
 			while(setupScanner.hasNextLine()) {
 				info = setupScanner.next();
-				
+				//ereads the next token from setupscanner and stores it in the info variable
 				if (!info.equals(comparer)) {
 					if (info.equals("//")) {
 						break;
@@ -84,7 +86,7 @@ public class Board {
 				roomName = roomName.replace(",", "");
 				info = setupScanner.next();
 				info = info.trim();
-				
+				//continues as long as the length of info is not equal to one
 				while(info.length() != 1) {
 					roomName = roomName + " " + info;
 					roomName = roomName.replace(",", "");
@@ -94,7 +96,7 @@ public class Board {
 				roomChar = info.charAt(0);
 				newRoom = new Room(roomName);
 				roomMap.put(roomChar, newRoom);
-				
+				//checks if there is another line available and reads it 
 				if (setupScanner.hasNextLine()) {
 					info = setupScanner.nextLine();
 				}
@@ -112,7 +114,7 @@ public class Board {
 		String file = layoutScanner.nextLine();
 		String[] lines;
 		String line;
-		
+		//reads from layoutScanner
 		while (layoutScanner.hasNextLine()) {
 			line = layoutScanner.nextLine();
 			line = line.replace(" ", "");
@@ -123,7 +125,7 @@ public class Board {
 		String[][] strings = new String[numRows][];
 		strings[0] = lines[0].split(",");
 		numColumns = strings[0].length;
-		
+		//va;idates the format of the kine. if format is incorrect, exception is thrown
 		for (int l = 1; l < numRows; l++) {
 			strings[l] = lines[l].split(",");
 			if(strings[l].length != numColumns) {
@@ -135,7 +137,7 @@ public class Board {
 		String currentStr;
 		BoardCell currentCell;
 		Room correspondingRoom;
-		//loop through grid cells
+		//nested for loop that loops through grid cells
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numColumns; j++) {
 				grid[i][j] = new BoardCell(i, j, strings[i][j].charAt(0));
@@ -146,9 +148,11 @@ public class Board {
 				if (correspondingRoom == null) {
 					throw new BadConfigFormatException("Bad room: the layout file referes to a room that is not in the setup. ");
 				}
-				
+				//checks if the length of the current string is 2 
 				if(currentStr.length() == 2) {
+					//checks is the first chracter of the string is a W
 					if(currentStr.charAt(0) == 'W') {
+						//all the if statements check whether the next character in the string is v,^, <,>,#,* respectively
 						if(currentStr.charAt(1) == 'v') {
 							currentCell.setDoorDirection(DoorDirection.DOWN);
 						}
@@ -161,7 +165,9 @@ public class Board {
 						if(currentStr.charAt(1) == '>') {
 							currentCell.setDoorDirection(DoorDirection.RIGHT);
 						}
+						//checks other conditions
 					} else { 
+						
 						if(currentStr.charAt(1) == '#') {
 							roomMap.get(currentStr.charAt(0)).setLabelCell(currentCell);
 							currentCell.setRoomLabel(true);
@@ -182,10 +188,11 @@ public class Board {
 	public void calcAdjacencies() {
 		
 		BoardCell currentCell;
-		
+		//nested for loops that iterate through each cell row and columc respectively
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numColumns; j++) {
 				currentCell = grid[i][j];
+				//calculates adjacency relationships between cells when the current cell is a walkway. 
 				if(currentCell.isWalkway()) {
 					if(j > 0) {
 						if(grid[i][j - 1].isWalkway()) {
@@ -212,6 +219,7 @@ public class Board {
 						}
 					}
 				}
+				//calculates adjacency relationships between cells when the current cell is a doorway.
 				if(currentCell.isDoorway()) {
 					if(currentCell.getDoorDirection() == DoorDirection.DOWN) {
 						currentCell.addAdj((roomMap.get(grid[i + 1][j].getInitial())).getCenterCell());
@@ -230,7 +238,7 @@ public class Board {
 						((roomMap.get(grid[i][j + 1].getInitial())).getCenterCell()).addAdj(currentCell);;
 					}
 				}
-
+				//calculates adjacency relationships between cells when the current cell is a secret passage.
 				if(currentCell.getSecretPassage() != ' ') {
 					(roomMap.get(currentCell.getInitial()).getCenterCell()).addAdj((roomMap.get(currentCell.getSecretPassage())).getCenterCell());
 					(roomMap.get(currentCell.getSecretPassage()).getCenterCell()).addAdj((roomMap.get(currentCell.getInitial())).getCenterCell());
@@ -247,6 +255,7 @@ public class Board {
 		Set<BoardCell> adjacentCells = currentCell.getAdjList();
 		//iterates through adjacent cells 
 		for (BoardCell cell : adjacentCells) {
+			//checks if cell has been visitied, or is occupied, and that it is the room center
 			if (!(visited.contains(cell) || (cell.isOccupied() && !(cell.isRoomCenter())))) {
 				if (steps == 1 || cell.isRoomCenter()) {
 					targets.add(cell);	
