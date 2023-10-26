@@ -59,13 +59,15 @@ Date:   Wed Oct 18 19:12:15 2023 -0600
 
     Merge remote-tracking branch 'origin/changes' into main
     
-    Fixing an issue in partner's computer
+    Fixing an issue in partner's computer that prevented pushing normally
 
 commit a510fb565f1325b7e02e0bd804fa005c509b585c
 Author: MancMelP <melanie.mancera23@gmail.com>
 Date:   Wed Oct 18 18:30:07 2023 -0600
 
     modified calc targets method and findtargets
+
+******************************** Below this line is for past assignments ***************************
 
 commit 7990d46329749ad0f8967d37b8b5ce6c1cb6baa8
 Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>

@@ -8,6 +8,7 @@
 package clueGame;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -50,16 +51,22 @@ public class Board {
 			loadLayoutConfig();
 		} catch (BadConfigFormatException e) {
 			e.printStackTrace();
-		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		calcAdjacencies();
 	}
 	//loads setup config
-	public void loadSetupConfig () throws BadConfigFormatException, FileNotFoundException {
+	public void loadSetupConfig () throws BadConfigFormatException, IOException {
 		roomMap = new HashMap <Character, Room> ();
 		FileReader setupFile;
-		setupFile = new FileReader("data/" + setupConfigFile);
+		try {
+			setupFile = new FileReader("data/" + setupConfigFile);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			throw new BadConfigFormatException("The setup file cannot be found.");
+		}
 		Scanner setupScanner = new Scanner(setupFile);
 		//read and process the setup file (.txt)
 		String info;
@@ -79,6 +86,8 @@ public class Board {
 					if (info.equals("//")) {
 						break;
 					} else {
+						setupScanner.close();
+						setupFile.close(); //close scanner and file if the code never finishes
 						throw new BadConfigFormatException("The setup file is improperly formatted.");
 					}
 				}
@@ -102,15 +111,20 @@ public class Board {
 				}
 			}
 			comparer = "Space,";
-			
 		}
+		setupScanner.close();
+		setupFile.close();
 	}
 	//loads layout config
-	public void loadLayoutConfig () throws BadConfigFormatException, FileNotFoundException {
+	public void loadLayoutConfig () throws BadConfigFormatException, IOException {
 		FileReader layoutFile;
-		layoutFile = new FileReader("data/" + layoutConfigFile);
+		try {
+			layoutFile = new FileReader("data/" + layoutConfigFile);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			throw new BadConfigFormatException("The layout file cannot be found.");
+		}
 		Scanner layoutScanner = new Scanner(layoutFile);
-		int row = 0;
 		String file = layoutScanner.nextLine();
 		String[] lines;
 		String line;
@@ -130,9 +144,13 @@ public class Board {
 			strings[l] = lines[l].split(",");
 			if(strings[l].length != numColumns) {
 				//THROW BadConfigFormatException
+				layoutScanner.close();
+				layoutFile.close(); //close scanner and file of code never finishes
 				throw new BadConfigFormatException("The layout file has improper formatting.");
 			}
 		}
+		layoutScanner.close();
+		layoutFile.close();
 		grid = new BoardCell[numRows][numColumns];
 		String currentStr;
 		BoardCell currentCell;
