@@ -171,37 +171,92 @@ public class Board {
 					//checks is the first chracter of the string is a W
 					if(currentStr.charAt(0) == 'W') {
 						//all the if statements check whether the next character in the string is v,^, <,>,#,* respectively
-						if(currentStr.charAt(1) == 'v') {
-							currentCell.setDoorDirection(DoorDirection.DOWN);
+						switch (currentStr.charAt(1))
+						{
+							case 'v':
+								currentCell.setDoorDirection(DoorDirection.DOWN);
+								break;
+							case '^':
+								currentCell.setDoorDirection(DoorDirection.UP);
+								break;
+							case '<':
+								currentCell.setDoorDirection(DoorDirection.LEFT);
+								break;
+							case '>':
+								currentCell.setDoorDirection(DoorDirection.RIGHT);
+								break;
 						}
-						if(currentStr.charAt(1) == '^') {
-							currentCell.setDoorDirection(DoorDirection.UP);
-						}
-						if(currentStr.charAt(1) == '<') {
-							currentCell.setDoorDirection(DoorDirection.LEFT);
-						}
-						if(currentStr.charAt(1) == '>') {
-							currentCell.setDoorDirection(DoorDirection.RIGHT);
-						}
+						
 						//checks other conditions
 					} else { 
-						
-						if(currentStr.charAt(1) == '#') {
-							roomMap.get(currentStr.charAt(0)).setLabelCell(currentCell);
-							currentCell.setRoomLabel(true);
-						}else if(currentStr.charAt(1) == '*') {
-							roomMap.get(currentStr.charAt(0)).setCenterCell(currentCell);
-							currentCell.setRoomCenter(true);
-						} else {
-							currentCell.setSecretPassage(currentStr.charAt(1));
-							
+						switch (currentStr.charAt(1))
+						{
+							case '#':
+								roomMap.get(currentStr.charAt(0)).setLabelCell(currentCell);
+								currentCell.setRoomLabel(true);
+								break;
+							case '*':
+								roomMap.get(currentStr.charAt(0)).setCenterCell(currentCell);
+								currentCell.setRoomCenter(true);
+								break;
+							default:
+								currentCell.setSecretPassage(currentStr.charAt(1));
+								break;
 						}
 					}
 				}
 			}
 		}
 	}
-
+	/*
+	  	if(currentStr.charAt(1) == 'v') {
+			currentCell.setDoorDirection(DoorDirection.DOWN);
+		}
+		if(currentStr.charAt(1) == '^') {
+			currentCell.setDoorDirection(DoorDirection.UP);
+		}
+		if(currentStr.charAt(1) == '<') {
+			currentCell.setDoorDirection(DoorDirection.LEFT);
+		}
+		if(currentStr.charAt(1) == '>') {
+			currentCell.setDoorDirection(DoorDirection.RIGHT);
+		}
+						
+		switch (currentStr.charAt(1))
+		{
+			case 'v':
+				currentCell.setDoorDirection(DoorDirection.DOWN);
+			case '^':
+				currentCell.setDoorDirection(DoorDirection.UP);
+			case '<':
+				currentCell.setDoorDirection(DoorDirection.LEFT);
+			case '>':
+				currentCell.setDoorDirection(DoorDirection.RIGHT);
+			default:
+				currentCell.setDoorDirection(DoorDirection.NONE);
+		}
+		if(currentStr.charAt(1) == '#') {
+			roomMap.get(currentStr.charAt(0)).setLabelCell(currentCell);
+			currentCell.setRoomLabel(true);
+		}else if(currentStr.charAt(1) == '*') {
+			roomMap.get(currentStr.charAt(0)).setCenterCell(currentCell);
+			currentCell.setRoomCenter(true);
+		} else {
+			currentCell.setSecretPassage(currentStr.charAt(1));
+		}
+		
+		switch (currentStr.charAt(1))
+		{
+			case '#':
+				roomMap.get(currentStr.charAt(0)).setLabelCell(currentCell);
+				currentCell.setRoomLabel(true);
+			case '*':
+				roomMap.get(currentStr.charAt(0)).setCenterCell(currentCell);
+				currentCell.setRoomCenter(true);
+			default:
+				currentCell.setSecretPassage(currentStr.charAt(1));
+		}
+*/
 	//method to build adjacency list for each cell 
 	public void calcAdjacencies() {
 		
