@@ -116,6 +116,7 @@ public class Board {
 	//loads layout config
 	public void loadLayoutConfig () throws BadConfigFormatException, IOException {
 		FileReader layoutFile;
+		
 		try {
 			layoutFile = new FileReader("data/" + layoutConfigFile);
 		} catch (FileNotFoundException e) {
@@ -132,6 +133,7 @@ public class Board {
 			line = line.replace(" ", "");
 			file = file + " " + line;
 		}
+		
 		lines = file.split(" "); 
 		numRows = lines.length;
 		String[][] strings = new String[numRows][];
@@ -244,8 +246,7 @@ public class Board {
 
 				//calculates adjacency relationships between cells when the current cell is a doorway.
 				if(currentCell.isDoorway()) {
-					switch(currentCell.getDoorDirection())
-					{
+					switch(currentCell.getDoorDirection()){
 					case NONE:
 						break;
 					case DOWN:
