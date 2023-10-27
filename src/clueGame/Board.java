@@ -246,21 +246,26 @@ public class Board {
 				
 				//calculates adjacency relationships between cells when the current cell is a doorway.
 				if(currentCell.isDoorway()) {
-					if(currentCell.getDoorDirection() == DoorDirection.DOWN) {
-						currentCell.addAdj((roomMap.get(grid[i + 1][j].getInitial())).getCenterCell());
-						((roomMap.get(grid[i + 1][j].getInitial())).getCenterCell()).addAdj(currentCell);;
-					}
-					if(currentCell.getDoorDirection() == DoorDirection.UP) {
-						currentCell.addAdj((roomMap.get(grid[i - 1][j].getInitial())).getCenterCell());
-						((roomMap.get(grid[i - 1][j].getInitial())).getCenterCell()).addAdj(currentCell);;
-					}
-					if(currentCell.getDoorDirection() == DoorDirection.LEFT) {
-						currentCell.addAdj((roomMap.get(grid[i][j - 1].getInitial())).getCenterCell());
-						((roomMap.get(grid[i][j - 1].getInitial())).getCenterCell()).addAdj(currentCell);;
-					}
-					if(currentCell.getDoorDirection() == DoorDirection.RIGHT) {
-						currentCell.addAdj(roomMap.get(grid[i][j + 1].getInitial()).getCenterCell());
-						((roomMap.get(grid[i][j + 1].getInitial())).getCenterCell()).addAdj(currentCell);;
+					switch(currentCell.getDoorDirection())
+					{
+						case NONE:
+							break;
+						case DOWN:
+							currentCell.addAdj((roomMap.get(grid[i + 1][j].getInitial())).getCenterCell());
+							((roomMap.get(grid[i + 1][j].getInitial())).getCenterCell()).addAdj(currentCell);;
+							break;
+						case UP:
+							currentCell.addAdj((roomMap.get(grid[i - 1][j].getInitial())).getCenterCell());
+							((roomMap.get(grid[i - 1][j].getInitial())).getCenterCell()).addAdj(currentCell);;
+							break;
+						case LEFT:
+							currentCell.addAdj((roomMap.get(grid[i][j - 1].getInitial())).getCenterCell());
+							((roomMap.get(grid[i][j - 1].getInitial())).getCenterCell()).addAdj(currentCell);;
+							break;
+						case RIGHT:
+							currentCell.addAdj(roomMap.get(grid[i][j + 1].getInitial()).getCenterCell());
+							((roomMap.get(grid[i][j + 1].getInitial())).getCenterCell()).addAdj(currentCell);;
+							break;
 					}
 				}
 				
