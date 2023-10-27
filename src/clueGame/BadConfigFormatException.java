@@ -8,7 +8,9 @@
 package clueGame;
 
 public class BadConfigFormatException extends Exception {
-	
+
+	private static final long serialVersionUID = 1L;
+
 	//default constructor with a default message 
 	public BadConfigFormatException() {
 		super("Invalid configuration format detected.");
@@ -17,6 +19,5 @@ public class BadConfigFormatException extends Exception {
 	//constructor with a specific message
 	public BadConfigFormatException(String message) {
 		super(message);
-	}
-		
+	}		
 }

@@ -101,7 +101,5 @@ public class BoardCell {
 	public Set<BoardCell> getAdjList() {
 		return adjList;
 	}
-
-
 	
 }

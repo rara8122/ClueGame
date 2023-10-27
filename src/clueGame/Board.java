@@ -15,8 +15,6 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-import experiment.TestBoardCell;
-
 public class Board {
 	private BoardCell[][] grid;
 	private int numRows;
@@ -74,7 +72,7 @@ public class Board {
 		Character roomChar;
 		Room newRoom;
 		String comparer = "Room,";
-		
+
 		//reads from setup file to create room objects and populates room map
 		for (int i = 0; i < 2; i++) {
 			info = setupScanner.nextLine();
@@ -173,35 +171,35 @@ public class Board {
 						//all the if statements check whether the next character in the string is v,^, <,>,#,* respectively
 						switch (currentStr.charAt(1))
 						{
-							case 'v':
-								currentCell.setDoorDirection(DoorDirection.DOWN);
-								break;
-							case '^':
-								currentCell.setDoorDirection(DoorDirection.UP);
-								break;
-							case '<':
-								currentCell.setDoorDirection(DoorDirection.LEFT);
-								break;
-							case '>':
-								currentCell.setDoorDirection(DoorDirection.RIGHT);
-								break;
+						case 'v':
+							currentCell.setDoorDirection(DoorDirection.DOWN);
+							break;
+						case '^':
+							currentCell.setDoorDirection(DoorDirection.UP);
+							break;
+						case '<':
+							currentCell.setDoorDirection(DoorDirection.LEFT);
+							break;
+						case '>':
+							currentCell.setDoorDirection(DoorDirection.RIGHT);
+							break;
 						}
-						
+
 						//checks other conditions
 					} else { 
 						switch (currentStr.charAt(1))
 						{
-							case '#':
-								roomMap.get(currentStr.charAt(0)).setLabelCell(currentCell);
-								currentCell.setRoomLabel(true);
-								break;
-							case '*':
-								roomMap.get(currentStr.charAt(0)).setCenterCell(currentCell);
-								currentCell.setRoomCenter(true);
-								break;
-							default:
-								currentCell.setSecretPassage(currentStr.charAt(1));
-								break;
+						case '#':
+							roomMap.get(currentStr.charAt(0)).setLabelCell(currentCell);
+							currentCell.setRoomLabel(true);
+							break;
+						case '*':
+							roomMap.get(currentStr.charAt(0)).setCenterCell(currentCell);
+							currentCell.setRoomCenter(true);
+							break;
+						default:
+							currentCell.setSecretPassage(currentStr.charAt(1));
+							break;
 						}
 					}
 				}
@@ -210,7 +208,7 @@ public class Board {
 	}
 	//method to build adjacency list for each cell 
 	public void calcAdjacencies() {
-		
+
 		BoardCell currentCell;
 		//nested for loops that iterate through each cell row and columc respectively
 		for (int i = 0; i < numRows; i++) {
@@ -243,43 +241,43 @@ public class Board {
 						}
 					}
 				}
-				
+
 				//calculates adjacency relationships between cells when the current cell is a doorway.
 				if(currentCell.isDoorway()) {
 					switch(currentCell.getDoorDirection())
 					{
-						case NONE:
-							break;
-						case DOWN:
-							currentCell.addAdj((roomMap.get(grid[i + 1][j].getInitial())).getCenterCell());
-							((roomMap.get(grid[i + 1][j].getInitial())).getCenterCell()).addAdj(currentCell);;
-							break;
-						case UP:
-							currentCell.addAdj((roomMap.get(grid[i - 1][j].getInitial())).getCenterCell());
-							((roomMap.get(grid[i - 1][j].getInitial())).getCenterCell()).addAdj(currentCell);;
-							break;
-						case LEFT:
-							currentCell.addAdj((roomMap.get(grid[i][j - 1].getInitial())).getCenterCell());
-							((roomMap.get(grid[i][j - 1].getInitial())).getCenterCell()).addAdj(currentCell);;
-							break;
-						case RIGHT:
-							currentCell.addAdj(roomMap.get(grid[i][j + 1].getInitial()).getCenterCell());
-							((roomMap.get(grid[i][j + 1].getInitial())).getCenterCell()).addAdj(currentCell);;
-							break;
+					case NONE:
+						break;
+					case DOWN:
+						currentCell.addAdj((roomMap.get(grid[i + 1][j].getInitial())).getCenterCell());
+						((roomMap.get(grid[i + 1][j].getInitial())).getCenterCell()).addAdj(currentCell);;
+						break;
+					case UP:
+						currentCell.addAdj((roomMap.get(grid[i - 1][j].getInitial())).getCenterCell());
+						((roomMap.get(grid[i - 1][j].getInitial())).getCenterCell()).addAdj(currentCell);;
+						break;
+					case LEFT:
+						currentCell.addAdj((roomMap.get(grid[i][j - 1].getInitial())).getCenterCell());
+						((roomMap.get(grid[i][j - 1].getInitial())).getCenterCell()).addAdj(currentCell);;
+						break;
+					case RIGHT:
+						currentCell.addAdj(roomMap.get(grid[i][j + 1].getInitial()).getCenterCell());
+						((roomMap.get(grid[i][j + 1].getInitial())).getCenterCell()).addAdj(currentCell);;
+						break;
 					}
 				}
-				
+
 				char currentCellPassage = currentCell.getSecretPassage();
 				//calculates adjacency relationships between cells when the current cell is a secret passage.
 				if (currentCellPassage != ' ') {
-				    Room currentRoom = roomMap.get(currentCell.getInitial());
-				    Room passageRoom = roomMap.get(currentCellPassage);
+					Room currentRoom = roomMap.get(currentCell.getInitial());
+					Room passageRoom = roomMap.get(currentCellPassage);
 
-				    BoardCell currentRoomCenter = currentRoom.getCenterCell();
-				    BoardCell passageRoomCenter = passageRoom.getCenterCell();
+					BoardCell currentRoomCenter = currentRoom.getCenterCell();
+					BoardCell passageRoomCenter = passageRoom.getCenterCell();
 
-				    currentRoomCenter.addAdj(passageRoomCenter);
-				    passageRoomCenter.addAdj(currentRoomCenter);
+					currentRoomCenter.addAdj(passageRoomCenter);
+					passageRoomCenter.addAdj(currentRoomCenter);
 				}
 			}
 		}
