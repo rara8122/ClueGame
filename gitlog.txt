@@ -1,3 +1,98 @@
+commit 261340356dd8e2d510a4eba2506d27342ce99a4b
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Fri Oct 27 14:48:13 2023 -0600
+
+    fixed indentation and braces format in board class
+
+commit 6987136342b94973139d432feb95e724da80f6ae
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Fri Oct 27 14:39:34 2023 -0600
+
+    Changed Assert.assertTrue to assertTrue, Assert.assertFalse to assertFalse, and Assert.assertEquals to assertEquals
+
+commit 929bf90410788f5768f1d084bffba66be58b0999
+Merge: 5c3d258 37b7c10
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Fri Oct 27 14:29:57 2023 -0600
+
+    fixing merge conflict
+
+commit 5c3d2580a010404a68e8d9700f68ecbe65cf603b
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Fri Oct 27 14:28:09 2023 -0600
+
+    fixed some warning signs on code
+
+commit 37b7c10802e134bb9c4af24d8caa2ac77feb96fb
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Fri Oct 27 14:26:46 2023 -0600
+
+    fixed warning in BoardCell (doorDirection -> DoorDirection)
+
+commit 4cacf60ef1671cdb0f87ec151b219b04494d9f98
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Fri Oct 27 14:16:08 2023 -0600
+
+    added getters for row and column
+
+commit e713c82514065ad8fda3a1fd3409e3974550d9ab
+Merge: 392e407 59d7c7e
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Fri Oct 27 13:58:56 2023 -0600
+
+    made modifications to text file
+
+commit 392e40777513eae955d8bb2db2d19778dee7823f
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 26 16:55:58 2023 -0600
+
+    added text file showing significant change
+
+commit 59d7c7e91e0d2ee4337c8c6e98457a650043037a
+Merge: cc9da45 15a4a75
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 26 16:49:22 2023 -0600
+
+    Merge branch 'main' of https://github.com/rara8122/ClueGame into main
+    
+    calcAdjacencies doorway is now a switch statement, getDoorDirection returns a DoorDirection
+
+commit cc9da459b2e8afd1bbb97029493871eeba2b2006
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 26 16:48:54 2023 -0600
+
+    changed the if statements for doorDirection (calcAdjacencies) to be a switch statement, getDoorDirection returns a DoorDirection instead of an object
+
+commit 15a4a7598b70aaf497c1a8f87a3e9f316e347276
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 26 16:37:38 2023 -0600
+
+    restructured the secret passage in calcAdjacencies to make it clearer
+
+commit 35f576a1a2908a798d0510e6020bd2e18fee68c1
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 26 16:20:37 2023 -0600
+
+    changed the if statements in loadLayoutConfig to be switch statements
+
+commit 74a9c476370ab4f51956ee264f527353e749142f
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 26 16:06:57 2023 -0600
+
+    ensured all files and scanners close
+
+commit 5e2e53f65933d53728cefefa3d4fd6141651b67a
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 26 15:51:22 2023 -0600
+
+    added more inline comments to for loops and such for clarity
+*************************** below is previous assignments **************************
+commit 2927a0c014ebdf476311fb4f12b7ee18a91278f6
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Wed Oct 18 21:11:08 2023 -0600
+
+    git log
+
 commit 95cd02cc9de9331c68febb1d0bd28ebafdc8d9ab
 Author: MancMelP <melanie.mancera23@gmail.com>
 Date:   Wed Oct 18 21:07:27 2023 -0600
@@ -59,15 +154,13 @@ Date:   Wed Oct 18 19:12:15 2023 -0600
 
     Merge remote-tracking branch 'origin/changes' into main
     
-    Fixing an issue in partner's computer that prevented pushing normally
+    Fixing an issue in partner's computer
 
 commit a510fb565f1325b7e02e0bd804fa005c509b585c
 Author: MancMelP <melanie.mancera23@gmail.com>
 Date:   Wed Oct 18 18:30:07 2023 -0600
 
     modified calc targets method and findtargets
-
-******************************** Below this line is for past assignments ***************************
 
 commit 7990d46329749ad0f8967d37b8b5ce6c1cb6baa8
 Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
