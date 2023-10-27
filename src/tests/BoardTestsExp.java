@@ -6,7 +6,9 @@
  * Sources: lecture slides 
  */
 package tests;
+
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Set;
 
@@ -15,7 +17,6 @@ import org.junit.jupiter.api.Test;
 
 import experiment.TestBoard;
 import experiment.TestBoardCell;
-import junit.framework.Assert;
 
 public class BoardTestsExp {
 	TestBoard board; 
@@ -31,48 +32,48 @@ public class BoardTestsExp {
 	public void testTopLeftAdjacency() {
 		TestBoardCell cell = board.getCell(0,0);
 		Set<TestBoardCell> testList = cell.getAdjList();
-		Assert.assertTrue(testList.contains(board.getCell(0, 1)));
-		Assert.assertTrue(testList.contains(board.getCell(1, 0)));
-		Assert.assertEquals(2, testList.size());
+		assertTrue(testList.contains(board.getCell(0, 1)));
+		assertTrue(testList.contains(board.getCell(1, 0)));
+		assertEquals(2, testList.size());
 	}
 	//bottom right corner (i.e., location [3][3])
 	@Test
 	public void testBottomRightAdjacency() {
 		TestBoardCell cell = board.getCell(3,3);
 		Set<TestBoardCell> testList = cell.getAdjList();
-		Assert.assertTrue(testList.contains(board.getCell(2, 3)));
-		Assert.assertTrue(testList.contains(board.getCell(3, 2)));
-		Assert.assertEquals(2, testList.size());
+		assertTrue(testList.contains(board.getCell(2, 3)));
+		assertTrue(testList.contains(board.getCell(3, 2)));
+		assertEquals(2, testList.size());
 	}
 	//a right edge (e.g., location [1][3])
 	@Test
 	public void testRightEdgeAdjacency() {
 		TestBoardCell cell = board.getCell(1,3);
 		Set<TestBoardCell> testList = cell.getAdjList();
-		Assert.assertTrue(testList.contains(board.getCell(2, 3)));
-		Assert.assertTrue(testList.contains(board.getCell(0, 3)));
-		Assert.assertTrue(testList.contains(board.getCell(1, 2)));
-		Assert.assertEquals(3, testList.size());
+		assertTrue(testList.contains(board.getCell(2, 3)));
+		assertTrue(testList.contains(board.getCell(0, 3)));
+		assertTrue(testList.contains(board.getCell(1, 2)));
+		assertEquals(3, testList.size());
 	}
 	//a left edge (e.g., location [3][0])
 	@Test
 	public void testLeftEdgeAdjacency() {
 		TestBoardCell cell = board.getCell(3,0);
 		Set<TestBoardCell> testList = cell.getAdjList();
-		Assert.assertTrue(testList.contains(board.getCell(3, 1)));
-		Assert.assertTrue(testList.contains(board.getCell(2, 0)));
-		Assert.assertEquals(2, testList.size());
+		assertTrue(testList.contains(board.getCell(3, 1)));
+		assertTrue(testList.contains(board.getCell(2, 0)));
+		assertEquals(2, testList.size());
 	}
 	//middle of grid(e.g., location [2][2])
 	@Test
 	public void testMiddleAdjacency() {
 		TestBoardCell cell = board.getCell(2,2);
 		Set<TestBoardCell> testList = cell.getAdjList();
-		Assert.assertTrue(testList.contains(board.getCell(1, 2)));
-		Assert.assertTrue(testList.contains(board.getCell(3, 2)));
-		Assert.assertTrue(testList.contains(board.getCell(2, 1)));
-		Assert.assertTrue(testList.contains(board.getCell(2, 3)));
-		Assert.assertEquals(4, testList.size());
+		assertTrue(testList.contains(board.getCell(1, 2)));
+		assertTrue(testList.contains(board.getCell(3, 2)));
+		assertTrue(testList.contains(board.getCell(2, 1)));
+		assertTrue(testList.contains(board.getCell(2, 3)));
+		assertEquals(4, testList.size());
 	}
 	
 		//Methods to test target creation on a 4x4 board
@@ -82,13 +83,13 @@ public class BoardTestsExp {
 		TestBoardCell cell = board.getCell(0, 0);
 		board.calcTargets(cell, 3);
 		Set<TestBoardCell> targets = board.getTargets();
-		Assert.assertEquals(6, targets.size());
-		Assert.assertTrue(targets.contains(board.getCell(3, 0)));
-		Assert.assertTrue(targets.contains(board.getCell(2, 1)));
-		Assert.assertTrue(targets.contains(board.getCell(0, 1)));
-		Assert.assertTrue(targets.contains(board.getCell(1, 2)));
-		Assert.assertTrue(targets.contains(board.getCell(0, 3)));
-		Assert.assertTrue(targets.contains(board.getCell(1, 0)));
+		assertEquals(6, targets.size());
+		assertTrue(targets.contains(board.getCell(3, 0)));
+		assertTrue(targets.contains(board.getCell(2, 1)));
+		assertTrue(targets.contains(board.getCell(0, 1)));
+		assertTrue(targets.contains(board.getCell(1, 2)));
+		assertTrue(targets.contains(board.getCell(0, 3)));
+		assertTrue(targets.contains(board.getCell(1, 0)));
 	}
 	//Test for targets with the maximum dice roll
 	@Test
@@ -96,14 +97,14 @@ public class BoardTestsExp {
 		TestBoardCell cell = board.getCell(2, 3);
 		board.calcTargets(cell, 6);
 		Set<TestBoardCell> targets = board.getTargets();
-		Assert.assertEquals(7, targets.size());
-		Assert.assertTrue(targets.contains(board.getCell(0, 1)));
-		Assert.assertTrue(targets.contains(board.getCell(1, 0)));
-		Assert.assertTrue(targets.contains(board.getCell(3, 0)));
-		Assert.assertTrue(targets.contains(board.getCell(0, 3)));
-		Assert.assertTrue(targets.contains(board.getCell(2, 1)));
-		Assert.assertTrue(targets.contains(board.getCell(1, 2)));
-		Assert.assertTrue(targets.contains(board.getCell(3, 2)));
+		assertEquals(7, targets.size());
+		assertTrue(targets.contains(board.getCell(0, 1)));
+		assertTrue(targets.contains(board.getCell(1, 0)));
+		assertTrue(targets.contains(board.getCell(3, 0)));
+		assertTrue(targets.contains(board.getCell(0, 3)));
+		assertTrue(targets.contains(board.getCell(2, 1)));
+		assertTrue(targets.contains(board.getCell(1, 2)));
+		assertTrue(targets.contains(board.getCell(3, 2)));
 	}
 	//Test for targets when a room is involved - 2 test cases
 	@Test
@@ -112,13 +113,13 @@ public class BoardTestsExp {
 		TestBoardCell cell = board.getCell(1, 0);
 		board.calcTargets(cell, 4);
 		Set<TestBoardCell> targets = board.getTargets();
-		Assert.assertEquals(6, targets.size());
-		Assert.assertTrue(targets.contains(board.getCell(0, 1)));
-		Assert.assertTrue(targets.contains(board.getCell(0, 3)));
-		Assert.assertTrue(targets.contains(board.getCell(1, 2)));
-		Assert.assertTrue(targets.contains(board.getCell(2, 1)));
-		Assert.assertTrue(targets.contains(board.getCell(2, 3)));
-		Assert.assertTrue(targets.contains(board.getCell(3, 2)));
+		assertEquals(6, targets.size());
+		assertTrue(targets.contains(board.getCell(0, 1)));
+		assertTrue(targets.contains(board.getCell(0, 3)));
+		assertTrue(targets.contains(board.getCell(1, 2)));
+		assertTrue(targets.contains(board.getCell(2, 1)));
+		assertTrue(targets.contains(board.getCell(2, 3)));
+		assertTrue(targets.contains(board.getCell(3, 2)));
 	}
 	//Test for targets when an interfering occupied space is involved - 2 test cases
 	@Test
@@ -127,9 +128,9 @@ public class BoardTestsExp {
 		TestBoardCell cell = board.getCell(0, 3);
 		board.calcTargets(cell, 2);
 		Set<TestBoardCell> targets = board.getTargets();
-		Assert.assertEquals(2, targets.size());
-		Assert.assertTrue(targets.contains(board.getCell(1, 2)));
-		Assert.assertTrue(targets.contains(board.getCell(2, 3)));
+		assertEquals(2, targets.size());
+		assertTrue(targets.contains(board.getCell(1, 2)));
+		assertTrue(targets.contains(board.getCell(2, 3)));
 	}
 	//Test that includes rooms and occupied cells - 2 test cases 
 	@Test
@@ -139,9 +140,9 @@ public class BoardTestsExp {
 		TestBoardCell cell = board.getCell(0, 3);
 		board.calcTargets(cell, 3);
 		Set<TestBoardCell> targets = board.getTargets();
-		Assert.assertEquals(3, targets.size());
-		Assert.assertTrue(targets.contains(board.getCell(1, 2)));
-		Assert.assertTrue(targets.contains(board.getCell(2, 2)));
-		Assert.assertTrue(targets.contains(board.getCell(3, 3)));
+		assertEquals(3, targets.size());
+		assertTrue(targets.contains(board.getCell(1, 2)));
+		assertTrue(targets.contains(board.getCell(2, 2)));
+		assertTrue(targets.contains(board.getCell(3, 3)));
 	}
 }

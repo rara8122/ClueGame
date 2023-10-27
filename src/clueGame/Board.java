@@ -15,10 +15,6 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 37b7c10802e134bb9c4af24d8caa2ac77feb96fb
 public class Board {
 	private BoardCell[][] grid;
 	private int numRows;
