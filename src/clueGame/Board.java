@@ -281,18 +281,14 @@ public class Board {
 				    currentRoomCenter.addAdj(passageRoomCenter);
 				    passageRoomCenter.addAdj(currentRoomCenter);
 				}
-				}
-				
-
 			}
 		}
+	}
 
 
 	//recursive function to find reachable target cells 
 	public void findTargets(BoardCell currentCell, int steps) {
-
 		visited.add(currentCell);
-
 		Set<BoardCell> adjacentCells = currentCell.getAdjList();
 		//iterates through adjacent cells 
 		for (BoardCell cell : adjacentCells) {
@@ -305,7 +301,6 @@ public class Board {
 				}
 			}
 		}
-
 		visited.remove(currentCell);
 	} 
 	//method to calculate targets 
@@ -313,7 +308,6 @@ public class Board {
 		visited.clear(); 
 		targets.clear();
 		findTargets(cell, i);
-
 	}
 	//all setters here 
 	public void setGrid(BoardCell[][] grid) {

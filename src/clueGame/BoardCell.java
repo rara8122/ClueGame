@@ -25,7 +25,7 @@ public class BoardCell {
 		row = newRow;
 		column = newColumn;
 		initial = newInitial;
-		doorDirection = doorDirection.NONE;
+		doorDirection = DoorDirection.NONE;
 		roomLabel = false;
 		roomCenter = false;
 		adjList = new HashSet<>();
@@ -39,7 +39,7 @@ public class BoardCell {
 	
 	// Method to check if this cell is a doorway
 	public boolean isDoorway() {
-		return (doorDirection != doorDirection.NONE);
+		return (doorDirection != DoorDirection.NONE);
 	}
 	//method to check if this cell is a walkway 
 	public boolean isWalkway() {
@@ -80,6 +80,14 @@ public class BoardCell {
 	//all getters here
 	public char getInitial() {
 		return initial;
+	}
+	
+	public int getRow() {
+		return row;
+	}
+	
+	public int getColumn() {
+		return column;
 	}
 	
 	public DoorDirection getDoorDirection() {
