@@ -1,0 +1,670 @@
+	Most Meaningful Change:
+changed if statements in loadLayoutConfig to switch statements
+
+before: 
+if(currentStr.length() == 2) {
+	//checks is the first chracter of the string is a W
+	if(currentStr.charAt(0) == 'W') {
+		//all the if statements check whether the next character in the string is v,^, <,>,#,* respectively
+		if(currentStr.charAt(1) == 'v') {
+			currentCell.setDoorDirection(DoorDirection.DOWN);
+		}
+		if(currentStr.charAt(1) == '^') {
+			currentCell.setDoorDirection(DoorDirection.UP);
+		}
+		if(currentStr.charAt(1) == '<') {
+			currentCell.setDoorDirection(DoorDirection.LEFT);
+		}
+		if(currentStr.charAt(1) == '>') {
+			currentCell.setDoorDirection(DoorDirection.RIGHT);
+		}
+		//checks other conditions
+	} else { 
+						
+		if(currentStr.charAt(1) == '#') {
+			roomMap.get(currentStr.charAt(0)).setLabelCell(currentCell);
+			currentCell.setRoomLabel(true);
+		}else if(currentStr.charAt(1) == '*') {
+			roomMap.get(currentStr.charAt(0)).setCenterCell(currentCell);
+			currentCell.setRoomCenter(true);
+		} else {
+			currentCell.setSecretPassage(currentStr.charAt(1));
+						
+		}
+	}
+}
+								
+after: 
+if(currentStr.length() == 2) {
+	//checks is the first chracter of the string is a W
+	if(currentStr.charAt(0) == 'W') {
+		//all the if statements check whether the next character in the string is v,^, <,>,#,* respectively
+		switch (currentStr.charAt(1))
+		{
+			case 'v':
+				currentCell.setDoorDirection(DoorDirection.DOWN);
+					break;
+			case '^':
+				currentCell.setDoorDirection(DoorDirection.UP);
+				break;
+			case '<':
+				currentCell.setDoorDirection(DoorDirection.LEFT);
+				break;
+			case '>':
+				currentCell.setDoorDirection(DoorDirection.RIGHT);
+				break;
+		}
+				
+		//checks other conditions
+	} else { 
+		switch (currentStr.charAt(1))
+		{
+			case '#':
+				roomMap.get(currentStr.charAt(0)).setLabelCell(currentCell);
+				currentCell.setRoomLabel(true);
+				break;
+			case '*':
+				roomMap.get(currentStr.charAt(0)).setCenterCell(currentCell);
+				currentCell.setRoomCenter(true);
+				break;
+			default:
+				currentCell.setSecretPassage(currentStr.charAt(1));
+				break;
+		}
+	}
+}
+
+	Git Log
+commit 261340356dd8e2d510a4eba2506d27342ce99a4b
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Fri Oct 27 14:48:13 2023 -0600
+
+    fixed indentation and braces format in board class
+
+commit 6987136342b94973139d432feb95e724da80f6ae
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Fri Oct 27 14:39:34 2023 -0600
+
+    Changed Assert.assertTrue to assertTrue, Assert.assertFalse to assertFalse, and Assert.assertEquals to assertEquals
+
+commit 929bf90410788f5768f1d084bffba66be58b0999
+Merge: 5c3d258 37b7c10
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Fri Oct 27 14:29:57 2023 -0600
+
+    fixing merge conflict
+
+commit 5c3d2580a010404a68e8d9700f68ecbe65cf603b
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Fri Oct 27 14:28:09 2023 -0600
+
+    fixed some warning signs on code
+
+commit 37b7c10802e134bb9c4af24d8caa2ac77feb96fb
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Fri Oct 27 14:26:46 2023 -0600
+
+    fixed warning in BoardCell (doorDirection -> DoorDirection)
+
+commit 4cacf60ef1671cdb0f87ec151b219b04494d9f98
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Fri Oct 27 14:16:08 2023 -0600
+
+    added getters for row and column
+
+commit e713c82514065ad8fda3a1fd3409e3974550d9ab
+Merge: 392e407 59d7c7e
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Fri Oct 27 13:58:56 2023 -0600
+
+    made modifications to text file
+
+commit 392e40777513eae955d8bb2db2d19778dee7823f
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 26 16:55:58 2023 -0600
+
+    added text file showing significant change
+
+commit 59d7c7e91e0d2ee4337c8c6e98457a650043037a
+Merge: cc9da45 15a4a75
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 26 16:49:22 2023 -0600
+
+    Merge branch 'main' of https://github.com/rara8122/ClueGame into main
+    
+    calcAdjacencies doorway is now a switch statement, getDoorDirection returns a DoorDirection
+
+commit cc9da459b2e8afd1bbb97029493871eeba2b2006
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 26 16:48:54 2023 -0600
+
+    changed the if statements for doorDirection (calcAdjacencies) to be a switch statement, getDoorDirection returns a DoorDirection instead of an object
+
+commit 15a4a7598b70aaf497c1a8f87a3e9f316e347276
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 26 16:37:38 2023 -0600
+
+    restructured the secret passage in calcAdjacencies to make it clearer
+
+commit 35f576a1a2908a798d0510e6020bd2e18fee68c1
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 26 16:20:37 2023 -0600
+
+    changed the if statements in loadLayoutConfig to be switch statements
+
+commit 74a9c476370ab4f51956ee264f527353e749142f
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 26 16:06:57 2023 -0600
+
+    ensured all files and scanners close
+
+commit 5e2e53f65933d53728cefefa3d4fd6141651b67a
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 26 15:51:22 2023 -0600
+
+    added more inline comments to for loops and such for clarity
+
+*************************** below is previous assignments **************************
+
+commit 2927a0c014ebdf476311fb4f12b7ee18a91278f6
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Wed Oct 18 21:11:08 2023 -0600
+
+    git log
+
+commit 95cd02cc9de9331c68febb1d0bd28ebafdc8d9ab
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Wed Oct 18 21:07:27 2023 -0600
+
+    updated readme.txt
+
+commit 68e2cd019c05fea039dde5c5cfb7603429796a5d
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Wed Oct 18 21:05:54 2023 -0600
+
+    refactored and commented
+
+commit 2810f56e891d3034b34e743d154e6dc44191c1dd
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Wed Oct 18 20:39:22 2023 -0600
+
+    removed tester code
+
+commit 0ee4138dca6835df731cb4cd0b612afda2ea2f55
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Wed Oct 18 20:38:14 2023 -0600
+
+    fixed testTargetsOccupied
+
+commit 722c4ae0083793fee32f9d564c56dd793e69efa9
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Wed Oct 18 20:09:44 2023 -0600
+
+    BoardAdjTargetTest306.java is now working properly
+
+commit daad364e5b9477a320aad1fc0a36f495dfc6f36b
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Wed Oct 18 20:02:44 2023 -0600
+
+    find targets isccoupied tests
+
+commit ad2e16a2feb25f62a63556ccb2cc6a3f369712a8
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Wed Oct 18 20:01:16 2023 -0600
+
+    fixed incorrect tests
+
+commit d918b206011f3eb82d2e437ce4f68e811a82da5e
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Wed Oct 18 19:44:10 2023 -0600
+
+    calcAdjacencies now fully functional
+
+commit 46d1e9025e8b8f09da964e4d6a948b7b78ea05a7
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Wed Oct 18 19:40:08 2023 -0600
+
+    started calcAdjacencies
+
+commit a794fb215f96730e72ed8d81eb35ecef6dbfbcc7
+Merge: 7990d46 a510fb5
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Wed Oct 18 19:12:15 2023 -0600
+
+    Merge remote-tracking branch 'origin/changes' into main
+    
+    Fixing an issue in partner's computer
+
+commit a510fb565f1325b7e02e0bd804fa005c509b585c
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Wed Oct 18 18:30:07 2023 -0600
+
+    modified calc targets method and findtargets
+
+commit 7990d46329749ad0f8967d37b8b5ce6c1cb6baa8
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Mon Oct 16 20:42:42 2023 -0600
+
+    finished the BoardAdjTargetTest.java
+
+commit bff0619ff6b04a0bac3d3b0907aacead24b99965
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Mon Oct 16 20:42:11 2023 -0600
+
+    made sure the clue fits the requirements
+
+commit 2c15d30f33dc6b873cb947b34941f5e6f2cc2224
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Mon Oct 16 20:28:54 2023 -0600
+
+    updated git log and read me
+
+commit 371fa26e0fefb4db6322558abb548fbbe2c4895a
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Mon Oct 16 20:23:54 2023 -0600
+
+    modified comments and read me
+
+commit 02b2e74ab4fd4a6a58f1cdc252868130abf8cc65
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Mon Oct 16 20:20:21 2023 -0600
+
+    finished testTargetsOccupied
+
+commit 8fc58a38f216948c9e65e549ced925c6ccda25b3
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Mon Oct 16 20:13:53 2023 -0600
+
+    testTargetsOccupied 1 of 3
+
+commit 2ccfce7415f8168bd4c2ceffe47150a54ca74156
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Mon Oct 16 19:50:47 2023 -0600
+
+    finished writing testTargetsInWalkway1/2
+
+commit 3b63ea119da93a4111f092fc9fb2a52600bea8af
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Mon Oct 16 19:12:01 2023 -0600
+
+    BoardAdjTargetTest306.java no longer errors
+
+commit dcdca09d7b5676dba080f5473aca649ec57bb3aa
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Mon Oct 16 18:13:11 2023 -0600
+
+    added class header comments and worked on getting rid of errors in the tests
+
+commit b3ed39ba16dffab4b7504882df14808f44ad6b59
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Mon Oct 16 16:12:36 2023 -0600
+
+    got all but 2 targets working
+
+commit 8b7370cb749536912139b12bfb19093a39ac1fba
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Mon Oct 16 12:54:26 2023 -0600
+
+    planned places for testing targets
+
+commit c5866f20ef1e0c4164eab3bcfcae55c6e1201871
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Mon Oct 16 11:41:34 2023 -0600
+
+    added xlsx files
+
+commit efd0954789f3685b5574ef64f63eff324147c10b
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Sun Oct 15 15:24:12 2023 -0600
+
+    made tests for adjacencys
+
+commit be18093f76288f029ca729fad4cacafa6720b797
+Merge: a5f6f2d 382209e
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Fri Oct 13 12:02:39 2023 -0600
+
+    trying to fix merging conflict
+
+commit 382209ea031a1b764ea7faa756b0e8938a79b44d
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 17:10:46 2023 -0600
+
+    saved
+
+commit a5f6f2d227a7f00fb153e7047040f04de04958c3
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 12 17:10:43 2023 -0600
+
+    worked on 306 tests to fail
+
+commit 5ecea95adf9c09158a3587261a816d6834d7ea00
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 17:10:00 2023 -0600
+
+    started BoardAdjTargetTest.java
+
+commit 2eda59d4479a1ba4dea7966579040ee92f70d8a1
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 12 16:49:20 2023 -0600
+
+    added color coded clue layout
+
+commit 14ce56deb93164de2f94b4f6aaf58753fb5d3b5c
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 16:30:03 2023 -0600
+
+    added BoardAdjTargetTest306.java
+
+commit 22c8374f9c665fccb9a034d210b9226d001d0515
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 12 16:25:25 2023 -0600
+
+    fixed read me and adjusted header comments
+
+commit 9a0bc904c272801719b971734a998fc8c76b4f3f
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 16:21:51 2023 -0600
+
+    fixed readme
+
+commit 5f6f08e96be7366ac036fbe0d4cdbc95b941556e
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 16:21:06 2023 -0600
+
+    git log updated
+
+commit 180e4e8e530acd4362c02d8190a9601a4810ba18
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 16:20:03 2023 -0600
+
+    made gitrefactor.txt
+
+commit 7dd7fd7f644e87a4ecc62b501546133c409c0817
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 12 16:11:58 2023 -0600
+
+    refactored and made the code a little cleaner
+
+commit 8caee14fe90452a72642dbc3a0b67188adebe22f
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 15:36:39 2023 -0600
+
+    ExceptionTests306.java now passes all tests
+
+commit 48b8d7c9b4bf40d48de6a181729f010cd69b6f90
+Merge: 4c1e4ad f6e2027
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 15:28:58 2023 -0600
+
+    Merge branch 'main' of https://github.com/rara8122/ClueGame into main
+
+commit 4c1e4ad6922350af049986efb9404cb8e8e4df1a
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 15:27:00 2023 -0600
+
+    FileInitTests.java now passes
+
+commit f6e2027fa1cd4013b04c6575b5f22bce06ca0dee
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 12 15:23:09 2023 -0600
+
+    worked on badconfigformatexception and added to board class
+
+commit 715c81ad68d38d7c0f8d2c50997153595038ac77
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 15:03:05 2023 -0600
+
+    throws if it tries to make a nonexistant room
+
+commit 78f4ff2dcd8521a241fd620fe898588ea12a7a03
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 14:58:17 2023 -0600
+
+    added throws BadConfigFormatException to loadSetupConfig and loadLayoutConfig
+
+commit 340f57188071ad9c25783051e4e885b76232df5d
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 12 14:55:22 2023 -0600
+
+    FileInitTests306.java now passes
+
+commit db294cbb7890eb4aae4c9e37cb0c9bf880f7d339
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 12 14:31:29 2023 -0600
+
+    played around with the code in board class
+
+commit 44155d2353fe0e239cce6ce2452c3c3dd1793fbf
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Tue Oct 10 16:50:55 2023 -0600
+
+    got the second half of loadLayoutConfig working
+
+commit ae0e11a1cc49fda7da2239a45fc6ffb0c5581e43
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Tue Oct 10 16:05:19 2023 -0600
+
+    fixed bugs and finalized loadSetupConfig
+
+commit 50fea56050dce531759f1315a50a3cbb44a7467d
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Tue Oct 10 15:59:21 2023 -0600
+
+    started load layout config
+
+commit 8095aa0e2bdbe591e56fe3de5f07fa74b54860c2
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Tue Oct 10 15:38:56 2023 -0600
+
+    added comments
+
+commit 16478547ca3d8940fa736a655589f29952279961
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Tue Oct 10 15:11:06 2023 -0600
+
+    got testRoomLabels to pass
+
+commit 04dbbee0e5fe452369ecc8cbcaf373c936af51e8
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Tue Oct 10 15:04:44 2023 -0600
+
+    successfully read and processed top half of ClueSetup306.txt
+
+commit 1a2c7f45b606ced70d084e4061e56747c11d0428
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Tue Oct 10 14:59:38 2023 -0600
+
+    started initialize
+
+commit d87b07beade4efefc9aa599584b8ed10a58bce6b
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Sun Oct 8 17:43:32 2023 -0600
+
+    added gitlog
+
+commit 313db7e953f70eac4ca2e3b631f679b3b07da57c
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Sun Oct 8 17:43:06 2023 -0600
+
+    added Test.txt and altered readme.txt
+
+commit 064bb838d8543b792b68934f54d5d7af0bdbf514
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Sun Oct 8 17:36:17 2023 -0600
+
+    added comments to classes and methods
+
+commit a834760fc8a5dc5aa12cea82530f8b166a614c18
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Sun Oct 8 17:07:18 2023 -0600
+
+    Saved changes (oops)
+
+commit 53b40c98fd52d0b09807b7b6b82e09e09633dfb6
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Sun Oct 8 17:01:25 2023 -0600
+
+    Finished FileInitTests.java
+
+commit d217dd958232eaa813e32c7997fca1caeda6e95c
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Sun Oct 8 16:29:45 2023 -0600
+
+    added both custom tests classes exceptions tests and worked on file init tests class
+
+commit 3a036dd6b27c592c7b3ddc5be2ba5aeeb7d8fe64
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Sun Oct 8 15:50:50 2023 -0600
+
+    got all provided tests to fail
+
+commit cbd98ef1f505f7ca1a79f696e592d9d5d9667488
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Sun Oct 8 15:40:38 2023 -0600
+
+    added files again
+
+commit 266d333b205e823804b511d4e261e00efa05cd7b
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Sun Oct 8 15:36:35 2023 -0600
+
+    added our cluelayout and cluesetup
+
+commit 4b9d479137eae59ed5c1746ad3f1f4dc3adddc8c
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Sun Oct 8 15:33:24 2023 -0600
+
+    modified class and started wokring on fileinittest306
+
+commit 249ea091a501ecb259d17880a25155f50b15c4da
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Sun Oct 8 15:09:53 2023 -0600
+
+    added UML diagram variables and methods
+
+commit 97a29fd02d996dcf91ef4d0163df63bd65c406e0
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Fri Oct 6 17:07:19 2023 -0600
+
+    added starter code for C14A-2
+
+commit 640480b5815caf78de6e9f7a9cfbcb8649f37e51
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Fri Oct 6 17:06:28 2023 -0600
+
+    added starter files
+
+commit 96a8a07bd34311b516cb3fc2b3bd229c95e97b5d
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Fri Oct 6 17:01:30 2023 -0600
+
+    updated git log and readme
+
+commit 68707e14b3957bdaab738279a3405918bc67950a
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Fri Oct 6 16:53:49 2023 -0600
+
+    added comments
+
+commit 66014b74ff8d58ede21f468ed58240fc8a139895
+Author: Rachel <rara8122@csm-wl-dhcp-203-151.mines.edu>
+Date:   Fri Oct 6 16:28:54 2023 -0600
+
+    got all tests passing
+
+commit 8340a9b97965418d3f55f14e4191452f01d82bfd
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Fri Oct 6 16:08:05 2023 -0600
+
+    started occupied test
+
+commit 0ea35b5c3a8298ddd64acc002c5630b63c4dc287
+Author: Rachel <rara8122@csm-wl-dhcp-203-151.mines.edu>
+Date:   Fri Oct 6 15:49:33 2023 -0600
+
+    got calcTargets working on an empty graph
+
+commit e46dee0ddcefd8e2969343db3ef93aed52773614
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Fri Oct 6 15:37:19 2023 -0600
+
+    started calctargets
+
+commit 1850972024b4b9e83dc242220b8263f39ed21cf2
+Author: Rachel <rara8122@csm-wl-dhcp-203-151.mines.edu>
+Date:   Fri Oct 6 15:10:03 2023 -0600
+
+    added default constructor for TestBoard
+
+commit 33a509b9c7e0d304ae96179e2de2c14315ed02c0
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 5 16:14:25 2023 -0600
+
+    added git log
+
+commit 94f542c012ebb08626f7a53fb5d947aefdc08cb7
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 5 16:11:55 2023 -0600
+
+    added remaining comments to classes and methods
+
+commit 9c80da5c080a745545a5eacbcc0f070566a5a84a
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 5 15:53:51 2023 -0600
+
+    Added readme.txt
+
+commit a4df599fc3571718ffa88f3e29300ca3023e4f7e
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Thu Oct 5 15:49:03 2023 -0600
+
+    Added Tests
+
+commit 8aec7c62c5e0a59718602f7d507d1f02b955e742
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 5 13:22:43 2023 -0600
+
+    added junit library
+
+commit 1b3317a54ad0fb423f82c6b200aab1964df61917
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 5 13:20:04 2023 -0600
+
+    small additions to boardtestexp class
+
+commit ad4f5b32805537f8bc722a5a4430e4c72cc89d5d
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 5 13:11:26 2023 -0600
+
+    additions to tests class
+
+commit 571f235f494524b4c9263a09284c70f57173b491
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 5 12:24:55 2023 -0600
+
+    start of testboard class
+
+commit 41d50280247007e6dd2e1fd0b14801d9de40e787
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 5 12:15:15 2023 -0600
+
+    added method comments to testboard class methods
+
+commit cf9b7b6e0df94c83a635d61a33164b798a525e0a
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Oct 5 12:12:51 2023 -0600
+
+    testboard cell class
+
+commit dd60204fb5bc231fbd447e6701a5d7c5df3a743e
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Wed Oct 4 20:14:27 2023 -0600
+
+    added empty classes
+
+commit 636d40e79a582ae83c4a3f43951aac254009a27f
+Author: Rachel <rara8122@MacBook-Pro-3.local>
+Date:   Wed Oct 4 20:10:16 2023 -0600
+
+    first commit
