@@ -15,6 +15,10 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 37b7c10802e134bb9c4af24d8caa2ac77feb96fb
 public class Board {
 	private BoardCell[][] grid;
 	private int numRows;
@@ -210,7 +214,7 @@ public class Board {
 	public void calcAdjacencies() {
 
 		BoardCell currentCell;
-		//nested for loops that iterate through each cell row and columc respectively
+		//nested for loops that iterate through each cell row and column respectively
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numColumns; j++) {
 				currentCell = grid[i][j];
