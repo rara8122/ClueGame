@@ -12,16 +12,16 @@ Room, Jamestown, P
 Space, Unused, X
 Space, Walkway, W
 // Weapons
-Weapon, The Elder Wand, E
-Weapon, The One Ring, R
-Weapon, The Skywalker Lightsaber, L
-Weapon, The Infinity Gauntlet, I
-Weapon, Lazarus Pit Water, W
-Weapon, The Triforce, T
+Weapon, The Elder Wand
+Weapon, The One Ring
+Weapon, The Skywalker Lightsaber
+Weapon, The Infinity Gauntlet
+Weapon, Lazarus Pit Water
+Weapon, The Triforce
 // Players
-Player, Harry Potter, H
-Player, Frodo Baggins, F
-Player, Luke Skywalker, S
-Player, Tony Stark (Iron Man), I
-Player, Bruce Wayne (Batman), B
-Player, Link, L
+Player, Harry Potter, 245 191 3
+Player, Frodo Baggins, 153 101 21
+Player, Luke Skywalker, 0 255 255
+Player, Tony Stark (Iron Man), 225 0 0
+Player, Bruce Wayne (Batman), 0 0 0
+Player, Link, 0 200 0
