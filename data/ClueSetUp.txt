@@ -11,3 +11,17 @@ Room, Jamestown, P
 // other spaces on board
 Space, Unused, X
 Space, Walkway, W
+// Weapons
+Weapon, The Elder Wand, E
+Weapon, The One Ring, R
+Weapon, The Skywalker Lightsaber, L
+Weapon, The Infinity Gauntlet, I
+Weapon, Lazarus Pit Water, W
+Weapon, The Triforce, T
+// Players
+Player, Harry Potter, H
+Player, Frodo Baggins, F
+Player, Luke Skywalker, S
+Player, Tony Stark (Iron Man), I
+Player, Bruce Wayne (Batman), B
+Player, Link, L
