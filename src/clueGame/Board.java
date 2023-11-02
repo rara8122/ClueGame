@@ -432,4 +432,16 @@ public class Board {
 	public Set<BoardCell> getTargets() {
 		return targets;
 	}
+	public Set<Card> getDeck() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public Set<Card> getPeople() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public Set<Card> getWeapons() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

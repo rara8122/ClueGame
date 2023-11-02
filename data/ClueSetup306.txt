@@ -11,3 +11,17 @@ Room, Hall, H
 // other spaces on board
 Space, Unused, X
 Space, Walkway, W
+// Weapons
+Weapon, Lazarus Pit Water
+Weapon, The Elder Wand
+Weapon, The One Ring
+Weapon, The Skywalker Lightsaber
+Weapon, The Infinity Gauntlet
+Weapon, The Triforce
+// Players
+Player, Bruce Wayne (Batman), 0 0 0, 0 0
+Player, Harry Potter, 245 191 3, 0 0
+Player, Frodo Baggins, 153 101 21, 0 0
+Player, Luke Skywalker, 0 255 255, 0 0
+Player, Tony Stark (Iron Man), 225 0 0, 0 0
+Player, Link, 0 200 0, 0 0
