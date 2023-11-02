@@ -27,9 +27,6 @@ public class Board {
 	private Set<BoardCell> targets;
 	private Set<BoardCell> visited;
 	private Set<Card> deck;
-	private Set<Card> rooms;
-	private Set<Card> people;
-	private Set<Card> weapons;
 	private Set<Player> players;
 	private HumanPlayer user;
 	private Card room;
@@ -73,9 +70,6 @@ public class Board {
 	public void loadSetupConfig () throws BadConfigFormatException, IOException {
 		roomMap = new HashMap <Character, Room> ();
 		deck = new HashSet<Card>();
-		rooms = new HashSet<Card>();
-		people = new HashSet<Card>();
-		weapons = new HashSet<Card>();
 		players = new HashSet<Player>();
 		FileReader setupFile;
 		try {
@@ -117,7 +111,6 @@ public class Board {
 				newRoom = new Room(name);
 				newCard = new Card(name, CardType.ROOM);
 				deck.add(newCard); //add room to deck
-				rooms.add(newCard);
 				roomMap.put(roomChar, newRoom);
 				//checks if there is another line available and reads it 
 				if (setupScanner.hasNextLine()) {
@@ -147,7 +140,6 @@ public class Board {
 				name = name.replace(",", "");
 				newCard = new Card(name, CardType.WEAPON);
 				deck.add(newCard); //make a new card and add to deck + weapons
-				weapons.add(newCard);
 				//checks if there is another line available and reads it 
 				if (setupScanner.hasNextLine()) {
 					info = setupScanner.nextLine();
@@ -165,7 +157,6 @@ public class Board {
 				playerInfo[2] = playerInfo[2].trim();
 				newCard = new Card(playerInfo[0], CardType.PERSON);//makes a player card
 				deck.add(newCard);// deck is the overall deck, people holds all people cards.
-				people.add(newCard);
 				colorInts = playerInfo[1].split(" "); //colorInts holds the R, G, and B values (in that order)
 				playerLocation = playerInfo[2].split(" "); //playerLocation holds the row and column values (in that order)
 				if(colorInts.length != 3 || playerLocation.length != 2) { //if it does not hold enough info, throw an error
@@ -300,25 +291,25 @@ public class Board {
 	public void deal() {
 		Card newCard;
 		Random choice = new Random();
-		Card[] deckArray = (Card[]) deck.toArray();
+		Object[] deckArray = deck.toArray();
 		int card;
 		for (Player thisPlayer : players) {
-			while(!thisPlayer.deckFull()) {
-				card = choice.nextInt(deckArray.length);
-				if(room == null && deckArray[card].getCardType() == CardType.ROOM && deckArray[card] != null) {
-					room = new Card(deckArray[card]);
-					deckArray[card] = null;
+			while(!thisPlayer.deckFull()) {//deckFull returns true if the deck has 3 cards
+				card = choice.nextInt(deckArray.length);//pick a random card
+				if(deckArray[card] != null) {
+					if(room == null && ((Card) deckArray[card]).getCardType() == CardType.ROOM) { 
+						room = new Card((Card) deckArray[card]);//if its the first room picked, its the solution
+						deckArray[card] = null;// set the array index to be null so we don't give 2 people the same card (or someone a solution card)
+					}else if(weapon == null && ((Card) deckArray[card]).getCardType() == CardType.WEAPON) {
+						weapon = new Card((Card) deckArray[card]); //does the same for weapons as for room 
+						deckArray[card] = null;
+					} else if(player == null && ((Card) deckArray[card]).getCardType() == CardType.PERSON) {
+						player = new Card((Card) deckArray[card]);//does the same for player as for room 
+						deckArray[card] = null;
+					}
 				}
-				if(weapon == null && deckArray[card].getCardType() == CardType.WEAPON && deckArray[card] != null) {
-					weapon = new Card(deckArray[card]);
-					deckArray[card] = null;
-				}
-				if(player == null && deckArray[card].getCardType() == CardType.PERSON && deckArray[card] != null) {
-					player = new Card(deckArray[card]);
-					deckArray[card] = null;
-				}
-				if(deckArray[card] != null){
-					newCard = new Card(deckArray[card]);
+				if(deckArray[card] != null){ //if the card is still not picked, add it to this player's deck
+					newCard = new Card((Card) deckArray[card]);
 					thisPlayer.addCard(newCard);
 					deckArray[card] = null;
 				}
