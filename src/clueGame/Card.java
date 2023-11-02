@@ -9,6 +9,11 @@ public class Card {
 		cardName = name;
 		cardType = newType;
 	}
+	
+	public Card(Card card) {
+		cardName = card.getCardName();
+		cardType = card.getCardType();
+	}
 
 	public boolean equals() {
 		return false;	

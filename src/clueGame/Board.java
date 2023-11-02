@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -31,6 +32,9 @@ public class Board {
 	private Set<Card> weapons;
 	private Set<Player> players;
 	private HumanPlayer user;
+	private Card room;
+	private Card weapon;
+	private Card player;
 	
 	/*
 	 * variable and methods used for singleton pattern
@@ -48,14 +52,9 @@ public class Board {
 	 * initialize the board (since we are using singleton pattern)
 	 */
 	public void initialize(){
-		//Read in files/initialize roomMap
+		//Read in files/initialize sets
 		targets = new HashSet<BoardCell>();
 		visited = new HashSet<BoardCell>();
-		deck = new HashSet<Card>();
-		rooms = new HashSet<Card>();
-		people = new HashSet<Card>();
-		weapons = new HashSet<Card>();
-		players = new HashSet<Player>();
 
 		try {
 			loadSetupConfig();
@@ -68,10 +67,16 @@ public class Board {
 			e.printStackTrace();
 		}
 		calcAdjacencies();
+		deal();
 	}
 	//loads setup config
 	public void loadSetupConfig () throws BadConfigFormatException, IOException {
 		roomMap = new HashMap <Character, Room> ();
+		deck = new HashSet<Card>();
+		rooms = new HashSet<Card>();
+		people = new HashSet<Card>();
+		weapons = new HashSet<Card>();
+		players = new HashSet<Player>();
 		FileReader setupFile;
 		try {
 			setupFile = new FileReader("data/" + setupConfigFile);
@@ -291,6 +296,36 @@ public class Board {
 			}
 		}
 	}
+	
+	public void deal() {
+		Card newCard;
+		Random choice = new Random();
+		Card[] deckArray = (Card[]) deck.toArray();
+		int card;
+		for (Player thisPlayer : players) {
+			while(!thisPlayer.deckFull()) {
+				card = choice.nextInt(deckArray.length);
+				if(room == null && deckArray[card].getCardType() == CardType.ROOM && deckArray[card] != null) {
+					room = new Card(deckArray[card]);
+					deckArray[card] = null;
+				}
+				if(weapon == null && deckArray[card].getCardType() == CardType.WEAPON && deckArray[card] != null) {
+					weapon = new Card(deckArray[card]);
+					deckArray[card] = null;
+				}
+				if(player == null && deckArray[card].getCardType() == CardType.PERSON && deckArray[card] != null) {
+					player = new Card(deckArray[card]);
+					deckArray[card] = null;
+				}
+				if(deckArray[card] != null){
+					newCard = new Card(deckArray[card]);
+					thisPlayer.addCard(newCard);
+					deckArray[card] = null;
+				}
+			}
+		}
+	}
+	
 	//method to build adjacency list for each cell 
 	public void calcAdjacencies() {
 
@@ -367,7 +402,6 @@ public class Board {
 		}
 	}
 
-
 	//recursive function to find reachable target cells 
 	public void findTargets(BoardCell currentCell, int steps) {
 		visited.add(currentCell);
@@ -401,6 +435,14 @@ public class Board {
 		setupConfigFile = setupFile;
 	}
 	//all getters below
+	public Set<Player> getPlayers(){
+		return players;
+	}
+	
+	public HumanPlayer getUser() {
+		return user;
+	}
+	
 	public Map<Character, Room> getRoomMap() {
 		return roomMap;
 	}
