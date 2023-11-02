@@ -25,6 +25,13 @@ public class Board {
 	private Map<Character, Room> roomMap;
 	private Set<BoardCell> targets;
 	private Set<BoardCell> visited;
+	private Set<Card> deck;
+	private Set<Card> rooms;
+	private Set<Card> people;
+	private Set<Card> weapons;
+	private Set<Player> players;
+	private HumanPlayer user;
+	
 	/*
 	 * variable and methods used for singleton pattern
 	 */
@@ -42,16 +49,22 @@ public class Board {
 	 */
 	public void initialize(){
 		//Read in files/initialize roomMap
-		targets = new HashSet<>();
-		visited = new HashSet<>();
+		targets = new HashSet<BoardCell>();
+		visited = new HashSet<BoardCell>();
+		deck = new HashSet<Card>();
+		rooms = new HashSet<Card>();
+		people = new HashSet<Card>();
+		weapons = new HashSet<Card>();
+		players = new HashSet<Player>();
 
 		try {
 			loadSetupConfig();
 			loadLayoutConfig();
 		} catch (BadConfigFormatException e) {
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		calcAdjacencies();
@@ -75,65 +88,102 @@ public class Board {
 		Card newCard;
 		String[] playerInfo;
 		Color newColor;
+		String[] colorInts;
+		String[] playerLocation;
+		ComputerPlayer newPlayer;
 
-		//reads from setup file to create room objects and populates room map
-		for (int i = 0; i < 2; i++) {
-			info = setupScanner.nextLine();
-			//this loops reds the next line from setUpScanner and stores it in the info variable 
-			while(setupScanner.hasNextLine()) {
+		//this loops reds the next line from setUpScanner and stores it in the info variable 
+		while(setupScanner.hasNextLine()) {
+			info = setupScanner.next();
+			//ereads the next token from setupscanner and stores it in the info variable
+			if (info.equals("Room,")) {
+				name = setupScanner.next();
+				name = name.replace(",", "");
 				info = setupScanner.next();
-				//ereads the next token from setupscanner and stores it in the info variable
-				if (info.equals("Room,") || info.equals("Space,")) {
-					name = setupScanner.next();
+				info = info.trim();
+				//continues as long as the length of info is not equal to one
+				while(info.length() != 1) {
+					name = name + " " + info;
 					name = name.replace(",", "");
 					info = setupScanner.next();
 					info = info.trim();
-					//continues as long as the length of info is not equal to one
-					while(info.length() != 1) {
-						name = name + " " + info;
-						name = name.replace(",", "");
-						info = setupScanner.next();
-						info = info.trim();
-					}
-					roomChar = info.charAt(0);
-					newRoom = new Room(name);
-					newCard = new Card(name);
-					//ADD CARD TO DECK
-					roomMap.put(roomChar, newRoom);
-					//checks if there is another line available and reads it 
-					if (setupScanner.hasNextLine()) {
-						info = setupScanner.nextLine();
-					}
-				} else if (info.equals("Weapon,")) {
-					name = setupScanner.nextLine();
-					name = name.replace(",", "");
-					newCard = new Card(name);
-					//ADD CARD TO DECK
-					//checks if there is another line available and reads it 
-					if (setupScanner.hasNextLine()) {
-						info = setupScanner.nextLine();
-					}
-				} else if (info.equals("Player,")) {
+				}
+				roomChar = info.charAt(0);
+				newRoom = new Room(name);
+				newCard = new Card(name, CardType.ROOM);
+				deck.add(newCard);
+				rooms.add(newCard);
+				roomMap.put(roomChar, newRoom);
+				//checks if there is another line available and reads it 
+				if (setupScanner.hasNextLine()) {
 					info = setupScanner.nextLine();
-					playerInfo = info.split(",");
-					if (playerInfo.length != 2) {
-						throw new BadConfigFormatException("Improperly formatted player information");
-					}
-					newCard = new Card(playerInfo[0]);
-					//ADD CARD TO DECK
-					
-					//checks if there is another line available and reads it 
-					if (setupScanner.hasNextLine()) {
-						info = setupScanner.nextLine();
-					}
-				else {
-					if (info.equals("//")) {
-						break;
-					} else {
-						setupScanner.close();
-						setupFile.close(); //close scanner and file if the code never finishes
-						throw new BadConfigFormatException("The setup file is improperly formatted.");
-					}
+				}
+			} else if(info.equals("Space,")) {
+				name = setupScanner.next();
+				name = name.replace(",", "");
+				info = setupScanner.next();
+				info = info.trim();
+				//continues as long as the length of info is not equal to one
+				while(info.length() != 1) {
+					name = name + " " + info;
+					name = name.replace(",", "");
+					info = setupScanner.next();
+					info = info.trim();
+				}
+				roomChar = info.charAt(0);
+				newRoom = new Room(name);
+				roomMap.put(roomChar, newRoom);
+				//checks if there is another line available and reads it 
+				if (setupScanner.hasNextLine()) {
+					info = setupScanner.nextLine();
+				}
+			} else if (info.equals("Weapon,")) {
+				name = setupScanner.nextLine();
+				name = name.replace(",", "");
+				newCard = new Card(name, CardType.WEAPON);
+				deck.add(newCard);
+				weapons.add(newCard);
+				//checks if there is another line available and reads it 
+				if (setupScanner.hasNextLine()) {
+					info = setupScanner.nextLine();
+				}
+			} else if (info.equals("Player,")) {
+				info = setupScanner.nextLine();
+				playerInfo = info.split(",");
+				if (playerInfo.length != 3) {
+					setupScanner.close();
+					setupFile.close();
+					throw new BadConfigFormatException("Improperly formatted player information");
+				}
+				playerInfo[0] = playerInfo[0].trim();
+				playerInfo[1] = playerInfo[1].trim();
+				playerInfo[2] = playerInfo[2].trim();
+				newCard = new Card(playerInfo[0], CardType.PERSON);
+				deck.add(newCard);
+				people.add(newCard);
+				colorInts = playerInfo[1].split(" ");
+				playerLocation = playerInfo[2].split(" ");
+				if(colorInts.length != 3 || playerLocation.length != 2) {
+					setupScanner.close();
+					setupFile.close();
+					throw new BadConfigFormatException("Improperly formatted player information");
+				}
+				newColor = new Color(Integer.parseInt(colorInts[0]), Integer.parseInt(colorInts[1]), Integer.parseInt(colorInts[2]));
+				if(user == null) {
+					user = new HumanPlayer(playerInfo[0], newColor, Integer.parseInt(playerLocation[0]), Integer.parseInt(playerLocation[1]));
+					players.add(user);
+				} else {
+					newPlayer = new ComputerPlayer(playerInfo[0], newColor, Integer.parseInt(playerLocation[0]), Integer.parseInt(playerLocation[1]));
+					players.add(newPlayer);
+				}
+			} else {
+				//checks if there is another line available and reads it 
+				if (!info.equals("//")) {
+					setupScanner.close();
+					setupFile.close(); //close scanner and file if the code never finishes
+					throw new BadConfigFormatException("The setup file is improperly formatted.");
+				} else {
+					info = setupScanner.nextLine();
 				}
 			}
 		}

@@ -9,7 +9,7 @@ public abstract class Player {
 	private int row, column; 
 
 
-	public Player(String name, String color, int row, int column) {
+	public Player(String name, Color color, int row, int column) {
 		this.name = name;
 		this.color = color;
 		this.row = row;
@@ -24,11 +24,11 @@ public abstract class Player {
         this.name = name;
     }
 
-    public String getColor() {
+    public Color getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(Color color) {
         this.color = color;
     }
 
