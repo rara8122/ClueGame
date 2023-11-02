@@ -218,7 +218,7 @@ public class Board {
 		String[][] strings = new String[numRows][];
 		strings[0] = lines[0].split(",");
 		numColumns = strings[0].length;
-		//va;idates the format of the kine. if format is incorrect, exception is thrown
+		//validates the format of the line. if format is incorrect, exception is thrown
 		for (int l = 1; l < numRows; l++) {
 			strings[l] = lines[l].split(",");
 			if(strings[l].length != numColumns) {
@@ -292,6 +292,7 @@ public class Board {
 		Card newCard;
 		Random choice = new Random();
 		Object[] deckArray = deck.toArray();
+		int cardsRemaining = deckArray.length;
 		int card;
 		for (Player thisPlayer : players) {
 			while(!thisPlayer.deckFull()) {//deckFull returns true if the deck has 3 cards
@@ -300,18 +301,25 @@ public class Board {
 					if(room == null && ((Card) deckArray[card]).getCardType() == CardType.ROOM) { 
 						room = new Card((Card) deckArray[card]);//if its the first room picked, its the solution
 						deckArray[card] = null;// set the array index to be null so we don't give 2 people the same card (or someone a solution card)
+						cardsRemaining--;
 					}else if(weapon == null && ((Card) deckArray[card]).getCardType() == CardType.WEAPON) {
 						weapon = new Card((Card) deckArray[card]); //does the same for weapons as for room 
 						deckArray[card] = null;
+						cardsRemaining--;
 					} else if(player == null && ((Card) deckArray[card]).getCardType() == CardType.PERSON) {
 						player = new Card((Card) deckArray[card]);//does the same for player as for room 
 						deckArray[card] = null;
+						cardsRemaining--;
 					}
 				}
 				if(deckArray[card] != null){ //if the card is still not picked, add it to this player's deck
 					newCard = new Card((Card) deckArray[card]);
 					thisPlayer.addCard(newCard);
 					deckArray[card] = null;
+					cardsRemaining--;
+				}
+				if(cardsRemaining == 0) {
+					return;
 				}
 			}
 		}
@@ -467,14 +475,6 @@ public class Board {
 	}
 	public Set<Card> getDeck() {
 		// TODO Auto-generated method stub
-		return null;
-	}
-	public Set<Card> getPeople() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	public Set<Card> getWeapons() {
-		// TODO Auto-generated method stub
-		return null;
+		return deck;
 	}
 }
