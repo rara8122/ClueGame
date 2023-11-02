@@ -111,7 +111,7 @@ public class Board {
 				roomChar = info.charAt(0);
 				newRoom = new Room(name);
 				newCard = new Card(name, CardType.ROOM);
-				deck.add(newCard);
+				deck.add(newCard); //add room to deck
 				rooms.add(newCard);
 				roomMap.put(roomChar, newRoom);
 				//checks if there is another line available and reads it 
@@ -131,7 +131,7 @@ public class Board {
 					info = info.trim();
 				}
 				roomChar = info.charAt(0);
-				newRoom = new Room(name);
+				newRoom = new Room(name); //no card because spaces do not get cards
 				roomMap.put(roomChar, newRoom);
 				//checks if there is another line available and reads it 
 				if (setupScanner.hasNextLine()) {
@@ -141,7 +141,7 @@ public class Board {
 				name = setupScanner.nextLine();
 				name = name.replace(",", "");
 				newCard = new Card(name, CardType.WEAPON);
-				deck.add(newCard);
+				deck.add(newCard); //make a new card and add to deck + weapons
 				weapons.add(newCard);
 				//checks if there is another line available and reads it 
 				if (setupScanner.hasNextLine()) {
@@ -150,31 +150,37 @@ public class Board {
 			} else if (info.equals("Player,")) {
 				info = setupScanner.nextLine();
 				playerInfo = info.split(",");
-				if (playerInfo.length != 3) {
+				if (playerInfo.length != 3) { //playerInfo needs name, color, and location
 					setupScanner.close();
 					setupFile.close();
-					throw new BadConfigFormatException("Improperly formatted player information");
+					throw new BadConfigFormatException("Improperly formatted player information: not enough player information");
 				}
 				playerInfo[0] = playerInfo[0].trim();
 				playerInfo[1] = playerInfo[1].trim();
 				playerInfo[2] = playerInfo[2].trim();
-				newCard = new Card(playerInfo[0], CardType.PERSON);
-				deck.add(newCard);
+				newCard = new Card(playerInfo[0], CardType.PERSON);//makes a player card
+				deck.add(newCard);// deck is the overall deck, people holds all people cards.
 				people.add(newCard);
-				colorInts = playerInfo[1].split(" ");
-				playerLocation = playerInfo[2].split(" ");
-				if(colorInts.length != 3 || playerLocation.length != 2) {
+				colorInts = playerInfo[1].split(" "); //colorInts holds the R, G, and B values (in that order)
+				playerLocation = playerInfo[2].split(" "); //playerLocation holds the row and column values (in that order)
+				if(colorInts.length != 3 || playerLocation.length != 2) { //if it does not hold enough info, throw an error
 					setupScanner.close();
 					setupFile.close();
-					throw new BadConfigFormatException("Improperly formatted player information");
+					throw new BadConfigFormatException("Improperly formatted player information: not enough location or color information");
 				}
-				newColor = new Color(Integer.parseInt(colorInts[0]), Integer.parseInt(colorInts[1]), Integer.parseInt(colorInts[2]));
-				if(user == null) {
-					user = new HumanPlayer(playerInfo[0], newColor, Integer.parseInt(playerLocation[0]), Integer.parseInt(playerLocation[1]));
-					players.add(user);
-				} else {
-					newPlayer = new ComputerPlayer(playerInfo[0], newColor, Integer.parseInt(playerLocation[0]), Integer.parseInt(playerLocation[1]));
-					players.add(newPlayer);
+				try {
+					newColor = new Color(Integer.parseInt(colorInts[0]), Integer.parseInt(colorInts[1]), Integer.parseInt(colorInts[2]));
+					if(user == null) { //sets the first player to be the user
+						user = new HumanPlayer(playerInfo[0], newColor, Integer.parseInt(playerLocation[0]), Integer.parseInt(playerLocation[1]));
+						players.add(user);
+					} else {//all other players are computers
+						newPlayer = new ComputerPlayer(playerInfo[0], newColor, Integer.parseInt(playerLocation[0]), Integer.parseInt(playerLocation[1]));
+						players.add(newPlayer);
+					}
+				} catch (NumberFormatException e) { //if parseInt throws an exception, we throw one ourselves 
+					setupScanner.close();
+					setupFile.close();
+					throw new BadConfigFormatException("Improperly formatted player information: player location or color not integers");
 				}
 			} else {
 				//checks if there is another line available and reads it 
