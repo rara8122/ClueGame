@@ -6,6 +6,7 @@
  *Sources: none
  */
 package clueGame;
+import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -68,10 +69,12 @@ public class Board {
 		Scanner setupScanner = new Scanner(setupFile);
 		//read and process the setup file (.txt)
 		String info;
-		String roomName;
+		String name;
 		Character roomChar;
 		Room newRoom;
-		String comparer = "Room,";
+		Card newCard;
+		String[] playerInfo;
+		Color newColor;
 
 		//reads from setup file to create room objects and populates room map
 		for (int i = 0; i < 2; i++) {
@@ -80,7 +83,50 @@ public class Board {
 			while(setupScanner.hasNextLine()) {
 				info = setupScanner.next();
 				//ereads the next token from setupscanner and stores it in the info variable
-				if (!info.equals(comparer)) {
+				if (info.equals("Room,") || info.equals("Space,")) {
+					name = setupScanner.next();
+					name = name.replace(",", "");
+					info = setupScanner.next();
+					info = info.trim();
+					//continues as long as the length of info is not equal to one
+					while(info.length() != 1) {
+						name = name + " " + info;
+						name = name.replace(",", "");
+						info = setupScanner.next();
+						info = info.trim();
+					}
+					roomChar = info.charAt(0);
+					newRoom = new Room(name);
+					newCard = new Card(name);
+					//ADD CARD TO DECK
+					roomMap.put(roomChar, newRoom);
+					//checks if there is another line available and reads it 
+					if (setupScanner.hasNextLine()) {
+						info = setupScanner.nextLine();
+					}
+				} else if (info.equals("Weapon,")) {
+					name = setupScanner.nextLine();
+					name = name.replace(",", "");
+					newCard = new Card(name);
+					//ADD CARD TO DECK
+					//checks if there is another line available and reads it 
+					if (setupScanner.hasNextLine()) {
+						info = setupScanner.nextLine();
+					}
+				} else if (info.equals("Player,")) {
+					info = setupScanner.nextLine();
+					playerInfo = info.split(",");
+					if (playerInfo.length != 2) {
+						throw new BadConfigFormatException("Improperly formatted player information");
+					}
+					newCard = new Card(playerInfo[0]);
+					//ADD CARD TO DECK
+					
+					//checks if there is another line available and reads it 
+					if (setupScanner.hasNextLine()) {
+						info = setupScanner.nextLine();
+					}
+				else {
 					if (info.equals("//")) {
 						break;
 					} else {
@@ -89,26 +135,7 @@ public class Board {
 						throw new BadConfigFormatException("The setup file is improperly formatted.");
 					}
 				}
-				roomName = setupScanner.next();
-				roomName = roomName.replace(",", "");
-				info = setupScanner.next();
-				info = info.trim();
-				//continues as long as the length of info is not equal to one
-				while(info.length() != 1) {
-					roomName = roomName + " " + info;
-					roomName = roomName.replace(",", "");
-					info = setupScanner.next();
-					info = info.trim();
-				}
-				roomChar = info.charAt(0);
-				newRoom = new Room(roomName);
-				roomMap.put(roomChar, newRoom);
-				//checks if there is another line available and reads it 
-				if (setupScanner.hasNextLine()) {
-					info = setupScanner.nextLine();
-				}
 			}
-			comparer = "Space,";
 		}
 		setupScanner.close();
 		setupFile.close();
