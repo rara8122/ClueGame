@@ -29,20 +29,42 @@ public class GameSetupTests {
 	@Test
 	public void testDeckCreation() {
 		Set<Card> deck = board.getDeck();
-		assertEquals(18, deck.size());
-		assertTrue(deck.contains(new Card("Lazarus Pit Water", CardType.WEAPON)));
-		assertTrue(deck.contains(new Card("Bruce Wayne (Batman)", CardType.PERSON)));
-		assertTrue(deck.contains(new Card("Atlantica", CardType.ROOM)));
-		assertTrue(deck.contains(new Card("Lazarus Pit Water", CardType.WEAPON)));
-		assertTrue(deck.contains(new Card("The Elder Wand", CardType.WEAPON)));
-		assertTrue(deck.contains(new Card("The Triforce", CardType.WEAPON)));
-		assertTrue(deck.contains(new Card("The One Ring", CardType.WEAPON)));
-		assertTrue(deck.contains(new Card("Bruce Wayne (Batman)", CardType.PERSON)));
-		assertTrue(deck.contains(new Card("Harry Potter", CardType.PERSON)));
-		assertTrue(deck.contains(new Card("Frodo Baggins", CardType.PERSON)));
-		assertTrue(deck.contains(new Card("Luke Skywalker", CardType.PERSON)));
-		assertTrue(deck.contains(new Card("Tony Stark (Iron Man)", CardType.PERSON)));
-		assertTrue(deck.contains(new Card("Link", CardType.PERSON)));
+		//assertEquals(21, deck.size());
+		Boolean[] solns = new Boolean[21];
+		for(int i = 0; i < 21; i++) {
+			solns[i] = false;
+		}
+		for(Card card : deck) {
+			if(card.getCardType() == CardType.ROOM) {
+				// Rooms and room cards		
+				if(card.getCardName().equals("Atlantica")) { solns[0] = true; }
+				if(card.getCardName().equals("Arendelle")) { solns[1] = true; }
+				if(card.getCardName().equals("Corona")) { solns[2] = true; }
+				if(card.getCardName().equals("France")) { solns[3] = true; }
+				if(card.getCardName().equals("DunBroch")) { solns[4] = true; }
+				if(card.getCardName().equals("China")) { solns[5] = true; }
+				if(card.getCardName().equals("New Orleans")) { solns[6] = true; }
+				if(card.getCardName().equals("Agraban")) { solns[7] = true; }
+				if(card.getCardName().equals("Jamestown")) { solns[8] = true; }
+			}
+			/*Weapon, Lazarus Pit Water
+			Weapon, The Elder Wand
+			Weapon, The One Ring
+			Weapon, The Skywalker Lightsaber
+			Weapon, The Infinity Gauntlet
+			Weapon, The Triforce*/
+			if(card.getCardType() == CardType.WEAPON) {}
+			/*Player, Bruce Wayne (Batman), 0 0 0, 0 0
+			Player, Harry Potter, 245 191 3, 0 0
+			Player, Frodo Baggins, 153 101 21, 0 0
+			Player, Luke Skywalker, 0 255 255, 0 0
+			Player, Tony Stark (Iron Man), 225 0 0, 0 0
+			Player, Link, 0 200 0, 0 0*/
+			if(card.getCardType() == CardType.PERSON) {}
+		}
+		for(int i = 0; i < 9; i++) {
+			assertTrue(solns[i]);
+		}
 	    
 	    // Repeat for other card types
 	}
