@@ -1,5 +1,6 @@
 package tests;
 
+import java.awt.Color;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -66,5 +67,54 @@ public class GameSetupTests {
 		for(int i = 0; i < 21; i++) {
 			assertTrue(solns[i]);
 		}
-	} 
+		
+	}
+		
+	@Test
+	public void testPlayersLoadedCorrectly() {
+	    Set<Player> players = board.getPlayers();
+	    assertEquals(6, players.size()); // Assuming you have 6 players
+
+	    // Test individual players
+	    for (Player player : players) {
+	        if (player.getName().equals("Bruce Wayne (Batman)")) {
+	            assertEquals(Color.BLACK, player.getColor());
+	            assertEquals(18, player.getRow());
+	            assertEquals(0, player.getColumn());
+	        } 
+	        else if (player.getName().equals("Harry Potter")) {
+	            assertEquals(new Color(245, 191, 3), player.getColor());
+	            assertEquals(0, player.getRow());
+	            assertEquals(4, player.getColumn());
+	        } 
+	        else if (player.getName().equals("Frodo Baggins")) {
+	            assertEquals(new Color(153, 101, 21), player.getColor());
+	            assertEquals(0, player.getRow());
+	            assertEquals(15, player.getColumn());
+	        } 
+	        else if (player.getName().equals("Luke Skywalker")) {
+	            assertEquals(new Color(0, 255, 255), player.getColor());
+	            assertEquals(0, player.getRow());
+	            assertEquals(21, player.getColumn());
+	        } 
+	        else if (player.getName().equals("Tony Stark (Iron Man)")) {
+	            assertEquals(new Color(225, 0, 0), player.getColor());
+	            assertEquals(14, player.getRow());
+	            assertEquals(29, player.getColumn());
+	        } 
+	        else if (player.getName().equals("Link")) {
+	            assertEquals(new Color(0, 200, 0), player.getColor());
+	            assertEquals(19, player.getRow());
+	            assertEquals(21, player.getColumn());
+	        } 
+	        else {
+	            fail("Unexpected player: " + player.getName());
+	        }
+	    }
+	}
+
+	
 }
+
+
+
