@@ -433,6 +433,18 @@ public class Board {
 		setupConfigFile = setupFile;
 	}
 	//all getters below
+	public Card getRoomSoln() {
+		return room;
+	}
+	
+	public Card getWeaponSoln() {
+		return weapon;
+	}
+	
+	public Card getPlayerSoln() {
+		return player;
+	}
+	
 	public Set<Player> getPlayers(){
 		return players;
 	}
