@@ -1,3 +1,167 @@
+commit 362c9c381de19db6914c3913ee213aa4f53ea70c
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Nov 2 21:00:08 2023 -0600
+
+    checked that it meets coding standards and wrote header comments and inline comments, also updated the readme
+
+commit b6fc7548fb2d7be901ad84e86f4782731ee30503
+Author: Rachel <rara8122@MacBook-Pro-8.hsd1.co.comcast.net>
+Date:   Thu Nov 2 20:25:24 2023 -0600
+
+    small fix
+
+commit 32eabffc5bcb5212f4aab65bf0676daf2cc91fe0
+Merge: f92957e fd7a7d0
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Nov 2 20:20:45 2023 -0600
+
+    players loaded test passes
+
+commit f92957e461960db453d2e14074919751ca19aeb1
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Nov 2 20:15:50 2023 -0600
+
+    test for players loaded correctly complete
+
+commit fd7a7d0965131c46a691f5b8c1cfdcc7c61a7560
+Author: Rachel <rara8122@MacBook-Pro-8.hsd1.co.comcast.net>
+Date:   Thu Nov 2 20:08:29 2023 -0600
+
+    made code that checks if the cards were dealt properly
+
+commit c0915791e4466199fdd3eda9f994b974ed10e063
+Author: Rachel <rara8122@MacBook-Pro-8.hsd1.co.comcast.net>
+Date:   Thu Nov 2 19:55:08 2023 -0600
+
+    got the starting rows and columns
+
+commit 1518e5fe3722159ebed9abaca8059664f7550c17
+Author: Rachel <rara8122@MacBook-Pro-8.hsd1.co.comcast.net>
+Date:   Thu Nov 2 19:45:32 2023 -0600
+
+    got testDeckCreation passing
+
+commit de05bba4d44ea7b87d4100bc98c7f66d45b0a114
+Author: Rachel <rara8122@MacBook-Pro-8.hsd1.co.comcast.net>
+Date:   Thu Nov 2 19:29:44 2023 -0600
+
+    started testDeckCreation
+
+commit f00252f98d336f87ae9f68aaddf3665606e410ce
+Author: Rachel <rara8122@MacBook-Pro-8.local>
+Date:   Thu Nov 2 17:01:08 2023 -0600
+
+    debugged test code
+
+commit 7d303f3a98303b6bfb15650e92cc0e7a16bd341a
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Nov 2 16:25:26 2023 -0600
+
+    actually added the test class
+
+commit 9a6a40f59bfd689b22891cd6b9ca95f2e5986d16
+Merge: fccebf5 0fb9f30
+Author: Rachel <rara8122@MacBook-Pro-8.local>
+Date:   Thu Nov 2 16:20:08 2023 -0600
+
+    Merge branch 'main' of https://github.com/rara8122/ClueGame into main
+    
+    comments on deal code
+
+commit fccebf546ed2c376ca1c19a2464efda60f0bdb81
+Author: Rachel <rara8122@MacBook-Pro-8.local>
+Date:   Thu Nov 2 16:19:53 2023 -0600
+
+    comments on deal code
+
+commit 0fb9f3014703fc56a7e6d62825c9242ce1957772
+Merge: 394b419 16e6d76
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Nov 2 16:11:51 2023 -0600
+
+    added gamesetuptests
+
+commit 394b41995ff57c35412b660137d4ceeb44b1df5b
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Nov 2 16:07:47 2023 -0600
+
+    added solution class and tests class
+
+commit ed48856984b7374998a09dca2bfa221810ab8441
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Nov 2 16:05:25 2023 -0600
+
+    wrote some tests in gamesetuptests (not finished)
+
+commit 16e6d76e224a7de0e3a345adb75f151226b90243
+Author: Rachel <rara8122@MacBook-Pro-8.local>
+Date:   Thu Nov 2 16:04:20 2023 -0600
+
+    added deal code
+
+commit 6243563c68bf4caec7f555a3b3bc4506ee469a4b
+Author: Rachel <rara8122@MacBook-Pro-8.local>
+Date:   Thu Nov 2 15:14:06 2023 -0600
+
+    added comments and a try/catch for parseInt
+
+commit 6d449042b77aed73c37a391c66dd8c23a8b44782
+Author: Rachel <rara8122@MacBook-Pro-8.local>
+Date:   Thu Nov 2 15:06:58 2023 -0600
+
+    loadSetupConfig now loads all players and cards
+
+commit 16dc51c41ae22c5f32b35313728e2318bc23c4dd
+Merge: 29922ed 6006c38
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Nov 2 14:05:29 2023 -0600
+
+    fixing merging sissues sorry
+
+commit 29922eda2505b89b33221dbf91bde67aea58588b
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Nov 2 14:04:15 2023 -0600
+
+    basic code for player class and child classes
+
+commit 6006c38eec49fb255d6e061ca481fe34c931cb8f
+Author: Rachel <rara8122@MacBook-Pro-5.local>
+Date:   Tue Oct 31 16:19:11 2023 -0600
+
+    started the code to read in the weapon and player info
+
+commit b942480bb15e598f8257035be241b698a00c79e0
+Author: Rachel <rara8122@MacBook-Pro-5.local>
+Date:   Tue Oct 31 15:53:59 2023 -0600
+
+    added colors to the people
+
+commit 6a772c2814db9fedf090980112ba706ae3000829
+Author: Rachel <rara8122@MacBook-Pro-5.local>
+Date:   Tue Oct 31 15:27:29 2023 -0600
+
+    added the weapons and players to the setup file
+
+commit 7ba713c440e85eba1d93cfe38fea8798c4bf705c
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Tue Oct 31 14:39:04 2023 -0600
+
+    added additional classes Card, CardPlayer, Player, etc
+
+commit de669bb76b122bbfc84c6c028ec2446849abf0c4
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Fri Oct 27 14:58:46 2023 -0600
+
+*************************** Below this line is previous assignment commits *********************
+
+    added submission file
+
+commit c43c16fda7286de5f2e1688bcf6af46d537f213e
+Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
+Date:   Fri Oct 27 14:56:20 2023 -0600
+
+    git log
+
 commit 261340356dd8e2d510a4eba2506d27342ce99a4b
 Author: MancMelP <melanie.mancera23@gmail.com>
 Date:   Fri Oct 27 14:48:13 2023 -0600
@@ -86,7 +250,7 @@ Author: MancMelP <melanie.mancera23@gmail.com>
 Date:   Thu Oct 26 15:51:22 2023 -0600
 
     added more inline comments to for loops and such for clarity
-*************************** below is previous assignments **************************
+
 commit 2927a0c014ebdf476311fb4f12b7ee18a91278f6
 Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
 Date:   Wed Oct 18 21:11:08 2023 -0600

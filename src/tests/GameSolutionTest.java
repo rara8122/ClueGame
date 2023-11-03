@@ -6,66 +6,60 @@ import org.junit.jupiter.api.Test;
 import clueGame.Board;
 import clueGame.Card;
 import clueGame.CardType;
-import clueGame.Solution;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameSolutionTest {
 
 	private Board board;
-	private Solution correctSolution;
-	private Solution wrongPersonSolution;
-	private Solution wrongWeaponSolution;
-	private Solution wrongRoomSolution;
+	private Card correctRoom;
+	private Card correctWeapon;
+	private Card correctPerson;
 
 	@BeforeEach
 	public void setUp() {
 		board = Board.getInstance();
 		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		board.initialize();
+		correctRoom = board.getRoomSoln();
+		correctWeapon = board.getWeaponSoln();
+		correctPerson = board.getPlayerSoln();
 	}
 
 	@Test
 	public void testCorrectAccusation() {
-		correctSolution = new Solution(
-				new Card("Atlantica", CardType.ROOM),
-				new Card("Bruce Wayne (Batman)", CardType.PERSON),
-				new Card("Lazarus Pit Water", CardType.WEAPON)
-				);
 		// Check if the correct solution is correctly identified as correct
-		assertTrue(board.checkAccusation(correctSolution));
+		assertTrue(board.checkAccusation(correctRoom, correctWeapon, correctPerson));
 	}
 
 	@Test
 	public void testWrongPersonAccusation() {
 		// Check if a solution with the wrong person is correctly identified as incorrect
-		wrongPersonSolution = new Solution(
-				new Card("Atlantica", CardType.ROOM),
-				new Card("Harry Potter", CardType.PERSON),  // Wrong person
-				new Card("Lazarus Pit Water", CardType.WEAPON));
-		assertFalse(board.checkAccusation(wrongPersonSolution));
+		Card wrongPerson = new Card("Harry Potter", CardType.PERSON);
+		if(correctPerson.equals(wrongPerson)) {
+			wrongPerson = new Card("Bruce Wayne (Batman)", CardType.PERSON);
+		}
+		assertFalse(board.checkAccusation(correctRoom, correctWeapon, wrongPerson));
 	}
 
 	@Test
 	public void testWrongWeaponAccusation() {
-		wrongWeaponSolution = new Solution(
-				new Card("Atlantica", CardType.ROOM),
-				new Card("Bruce Wayne (Batman)", CardType.PERSON),
-				new Card("The Elder Wand", CardType.WEAPON)  // Wrong weapon
-				);
-		// Check if a solution with the wrong weapon is correctly identified as incorrect
-		assertFalse(board.checkAccusation(wrongWeaponSolution));
+		// Check if a solution with the wrong person is correctly identified as incorrect
+		Card wrongWeapon = new Card("The Elder Wand", CardType.WEAPON);
+		if(correctPerson.equals(wrongWeapon)) {
+			wrongWeapon = new Card("The Skywalker Lightsaber", CardType.WEAPON);
+		}
+		assertFalse(board.checkAccusation(correctRoom, wrongWeapon, correctPerson));
 	}
 
 	@Test
 	public void testWrongRoomAccusation() {
-		wrongRoomSolution = new Solution(
-				new Card("Arendelle", CardType.ROOM),  // Wrong room
-				new Card("Bruce Wayne (Batman)", CardType.PERSON),
-				new Card("Lazarus Pit Water", CardType.WEAPON)
-				);
-		// Check if a solution with the wrong room is correctly identified as incorrect
-		assertFalse(board.checkAccusation(wrongRoomSolution));
+		// Check if a solution with the wrong person is correctly identified as incorrect
+		Card wrongRoom = new Card("Atlantica", CardType.ROOM);
+		if(correctPerson.equals(wrongRoom)) {
+			wrongRoom = new Card("Arendelle", CardType.ROOM);
+		}
+		assertFalse(board.checkAccusation(wrongRoom, correctWeapon, correctPerson));
 	}
 }
 
