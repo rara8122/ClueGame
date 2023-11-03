@@ -1,3 +1,10 @@
+/*
+ *Class: This class is used for information about a card such as the cardname and cardtype. There are three kinds of card types; person, weapon, and room. 
+ *Authors: Melanie Perez, Rachel Davy 
+ *Date: 10/08/2023
+ *Collaborators: none
+ *Sources: none
+ */
 package clueGame;
 
 public class Card {

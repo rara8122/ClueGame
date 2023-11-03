@@ -1,4 +1,11 @@
-package clueGame;
+/*
+ *Class: represents the solution to a mystery or puzzle in a game, which typically includes the identification of three main components: the room, the person, and the weapon. Each of these components is represented by a Card object.
+ *Authors: Melanie Perez, Rachel Davy
+ *Date: 10/08/2023
+ *Collaborators: none
+ *Sources: none
+ */
+package clueGame; 
 
 public class Solution {
 	private Card room;

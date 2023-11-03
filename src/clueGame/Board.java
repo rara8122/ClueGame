@@ -286,7 +286,7 @@ public class Board {
 			}
 		}
 	}
-	
+	// Loop through each player to deal cards
 	public void deal() {
 		Card newCard;
 		Random choice = new Random();
@@ -485,7 +485,6 @@ public class Board {
 		return targets;
 	}
 	public Set<Card> getDeck() {
-		// TODO Auto-generated method stub
 		return deck;
 	}
 }
