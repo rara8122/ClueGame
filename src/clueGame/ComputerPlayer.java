@@ -8,12 +8,23 @@
 package clueGame;
 
 import java.awt.Color;
+import java.util.List;
 
 public class ComputerPlayer extends Player{
 
 	public ComputerPlayer(String name, Color color, int row, int column) {
 		super(name, color, row, column);
 		// TODO Auto-generated constructor stub
+	}
+
+	public List<BoardCell> selectTarget() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addTargetRoom(Room targetRoom) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
