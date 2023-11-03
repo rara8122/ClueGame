@@ -67,8 +67,6 @@ public class GameSetupTests {
 		for(int i = 0; i < 21; i++) {
 			assertTrue(solns[i]);
 		}
-<<<<<<< HEAD
-		
 	}
 		
 	@Test
@@ -112,11 +110,9 @@ public class GameSetupTests {
 	            fail("Unexpected player: " + player.getName());
 	        }
 	    }
+	    assertNotEquals(board.getUser(), null);
 	}
-
 	
-=======
-	}
 	@Test
 	public void testDeal() {
 		Set<Player> players = board.getPlayers();
@@ -140,7 +136,6 @@ public class GameSetupTests {
 		assertNotEquals(board.getWeaponSoln(), null);
 		assertNotEquals(board.getPlayerSoln(), null);
 	}
->>>>>>> fd7a7d0965131c46a691f5b8c1cfdcc7c61a7560
 }
 
 

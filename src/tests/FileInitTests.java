@@ -44,7 +44,7 @@ public class FileInitTests {
 			assertEquals("DunBroch", board.getRoom('M').getName() );
 			assertEquals("China", board.getRoom('F').getName() );
 			assertEquals("New Orleans", board.getRoom('T').getName() );
-			assertEquals("Agraban", board.getRoom('J').getName() );
+			assertEquals("Agrabah", board.getRoom('J').getName() );
 			assertEquals("Jamestown", board.getRoom('P').getName() );
 		}
 
