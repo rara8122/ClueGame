@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.function.BooleanSupplier;
 
 public class Board {
 	private BoardCell[][] grid;
@@ -487,4 +488,19 @@ public class Board {
 	public Set<Card> getDeck() {
 		return deck;
 	}
+	public boolean checkAccusation(Solution accusation) {
+	    // Compare the accusation with the correct solution
+	    Card correctRoom = getRoomSoln();
+	    Card correctPerson = getPlayerSoln();
+	    Card correctWeapon = getWeaponSoln();
+
+	    // Check if each part of the accusation matches the correct solution
+	    boolean isCorrectRoom = accusation.getRoom().equals(correctRoom);
+	    boolean isCorrectPerson = accusation.getPerson().equals(correctPerson);
+	    boolean isCorrectWeapon = accusation.getWeapon().equals(correctWeapon);
+
+	    // Return true if all three parts of the accusation are correct
+	    return isCorrectRoom && isCorrectPerson && isCorrectWeapon;
+	}
+
 }
