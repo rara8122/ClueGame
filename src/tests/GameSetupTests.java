@@ -66,5 +66,28 @@ public class GameSetupTests {
 		for(int i = 0; i < 21; i++) {
 			assertTrue(solns[i]);
 		}
-	} 
+	}
+	@Test
+	public void testDeal() {
+		Set<Player> players = board.getPlayers();
+		assertEquals(6, players.size());
+		int[] solns = new int[6];
+		Set<Card> deck;
+		int i = 0;
+		for (Player player: players) {
+			deck = player.getDeck();
+			for (Card card : deck) {
+				if(card != null) {
+					solns[i]++;
+				}
+			}
+			i++;
+		}
+		for(i = 0; i < 6; i++) {
+			assertEquals(3, solns[i]);
+		}
+		assertNotEquals(board.getRoomSoln(), null);
+		assertNotEquals(board.getWeaponSoln(), null);
+		assertNotEquals(board.getPlayerSoln(), null);
+	}
 }
