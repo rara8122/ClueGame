@@ -28,8 +28,8 @@ public class Board {
 	private Set<BoardCell> targets;
 	private Set<BoardCell> visited;
 	private Set<Card> deck;
-	private Set<Player> players;
 	private HumanPlayer user;
+	private Set<ComputerPlayer> computers;
 	private Card room;
 	private Card weapon;
 	private Card player;
@@ -71,7 +71,7 @@ public class Board {
 	public void loadSetupConfig () throws BadConfigFormatException, IOException {
 		roomMap = new HashMap <Character, Room> ();
 		deck = new HashSet<Card>();
-		players = new HashSet<Player>();
+		computers = new HashSet<ComputerPlayer>();
 		FileReader setupFile;
 		try {
 			setupFile = new FileReader("data/" + setupConfigFile);
@@ -168,10 +168,9 @@ public class Board {
 					newColor = new Color(Integer.parseInt(colorInts[0]), Integer.parseInt(colorInts[1]), Integer.parseInt(colorInts[2]));
 					if(user == null) { //sets the first player to be the user
 						user = new HumanPlayer(playerInfo[0], newColor, Integer.parseInt(playerLocation[0]), Integer.parseInt(playerLocation[1]));
-						players.add(user);
 					} else {//all other players are computers
 						newPlayer = new ComputerPlayer(playerInfo[0], newColor, Integer.parseInt(playerLocation[0]), Integer.parseInt(playerLocation[1]));
-						players.add(newPlayer);
+						computers.add(newPlayer);
 					}
 				} catch (NumberFormatException e) { //if parseInt throws an exception, we throw one ourselves 
 					setupScanner.close();
@@ -294,7 +293,7 @@ public class Board {
 		Object[] deckArray = deck.toArray();
 		int cardsRemaining = deckArray.length;
 		int card;
-		for (Player thisPlayer : players) {
+		for (Player thisPlayer : computers) {
 			while(!thisPlayer.deckFull()) {//deckFull returns true if the deck has 3 cards
 				card = choice.nextInt(deckArray.length);//pick a random card
 				if(deckArray[card] != null) {
@@ -318,9 +317,18 @@ public class Board {
 					deckArray[card] = null;
 					cardsRemaining--;
 				}
-				if(cardsRemaining == 0) {
+				if(cardsRemaining == 3) {
 					return;
 				}
+			}
+		}
+		while(cardsRemaining > 0) {
+			card = choice.nextInt(deckArray.length);//pick a random card
+			if(deckArray[card] != null){ //if the card is still not picked, add it to this player's deck
+				newCard = new Card((Card) deckArray[card]);
+				user.addCard(newCard);
+				deckArray[card] = null;
+				cardsRemaining--;
 			}
 		}
 	}
@@ -446,8 +454,8 @@ public class Board {
 		return player;
 	}
 	
-	public Set<Player> getPlayers(){
-		return players;
+	public Set<ComputerPlayer> getPlayers(){
+		return computers;
 	}
 	
 	public HumanPlayer getUser() {

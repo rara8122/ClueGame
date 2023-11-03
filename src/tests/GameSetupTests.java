@@ -17,6 +17,7 @@ import clueGame.Player;
 import clueGame.Board;
 import clueGame.Card;
 import clueGame.CardType;
+import clueGame.ComputerPlayer;
 
 
 public class GameSetupTests {
@@ -81,8 +82,8 @@ public class GameSetupTests {
 	 // This test ensures that the players were loaded correctly	
 	@Test
 	public void testPlayersLoadedCorrectly() {
-	    Set<Player> players = board.getPlayers();
-	    assertEquals(6, players.size()); // Assuming you have 6 players
+	    Set<ComputerPlayer> players = board.getPlayers();
+	    assertEquals(5, players.size()); // Assuming you have 6 players
 
 	    // Test individual players
 	    for (Player player : players) {
@@ -126,14 +127,54 @@ public class GameSetupTests {
 	            fail("Unexpected player: " + player.getName());
 	        }
 	    }
+	    Player player = board.getUser();
+	    if (player.getName().equals("Bruce Wayne (Batman)")) {
+        	// Check player details for Batman
+            assertEquals(Color.BLACK, player.getColor());
+            assertEquals(18, player.getRow());
+            assertEquals(0, player.getColumn());
+        } 
+        else if (player.getName().equals("Harry Potter")) {
+        	// Check player details for Harry Potter
+            assertEquals(new Color(245, 191, 3), player.getColor());
+            assertEquals(0, player.getRow());
+            assertEquals(4, player.getColumn());
+        } 
+        else if (player.getName().equals("Frodo Baggins")) {
+        	// Check player details for Frodo Baggins
+            assertEquals(new Color(153, 101, 21), player.getColor());
+            assertEquals(0, player.getRow());
+            assertEquals(15, player.getColumn());
+        } 
+        else if (player.getName().equals("Luke Skywalker")) {
+        	// Check player details for Luke Skywalker
+            assertEquals(new Color(0, 255, 255), player.getColor());
+            assertEquals(0, player.getRow());
+            assertEquals(21, player.getColumn());
+        } 
+        else if (player.getName().equals("Tony Stark (Iron Man)")) {
+        	// Check player details for Iron Man
+            assertEquals(new Color(225, 0, 0), player.getColor());
+            assertEquals(14, player.getRow());
+            assertEquals(29, player.getColumn());
+        } 
+        else if (player.getName().equals("Link")){
+        	// Check player details for Link
+            assertEquals(new Color(0, 200, 0), player.getColor());
+            assertEquals(19, player.getRow());
+            assertEquals(21, player.getColumn());
+        } 
+        else {
+            fail("Unexpected player: " + player.getName());
+        }
 	    assertNotEquals(board.getUser(), null);
 	}
 	
 	 // This test ensures that the deal() method correctly distributes cards to players 
 	@Test
 	public void testDeal() {
-		Set<Player> players = board.getPlayers();
-		assertEquals(6, players.size());
+		Set<ComputerPlayer> players = board.getPlayers();
+		assertEquals(5, players.size());
 		int[] solns = new int[6];
 		Set<Card> deck;
 		int i = 0;
@@ -147,6 +188,14 @@ public class GameSetupTests {
 				}
 			}
 			i++;
+		}
+		Player player = board.getUser();
+		deck = player.getDeck();
+		// Count the number of cards in each player's hand
+		for (Card card : deck) {
+			if(card != null) {
+				solns[i]++;
+			}
 		}
 		// Each player should have 3 cards
 		for(i = 0; i < 6; i++) {
