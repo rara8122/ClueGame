@@ -19,9 +19,9 @@ Weapon, The Skywalker Lightsaber
 Weapon, The Infinity Gauntlet
 Weapon, The Triforce
 // Players
-Player, Bruce Wayne (Batman), 0 0 0, 0 0
-Player, Harry Potter, 245 191 3, 0 0
-Player, Frodo Baggins, 153 101 21, 0 0
-Player, Luke Skywalker, 0 255 255, 0 0
-Player, Tony Stark (Iron Man), 225 0 0, 0 0
-Player, Link, 0 200 0, 0 0
+Player, Bruce Wayne (Batman), 0 0 0, 18 0
+Player, Harry Potter, 245 191 3, 0 4
+Player, Frodo Baggins, 153 101 21, 0 15
+Player, Luke Skywalker, 0 255 255, 0 21
+Player, Tony Stark (Iron Man), 225 0 0, 14 29
+Player, Link, 0 200 0, 19 21
