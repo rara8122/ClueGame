@@ -6,7 +6,7 @@ Room, France, B
 Room, DunBroch, M
 Room, China, F
 Room, New Orleans, T
-Room, Agraban, J
+Room, Agrabah, J
 Room, Jamestown, P
 // other spaces on board
 Space, Unused, X

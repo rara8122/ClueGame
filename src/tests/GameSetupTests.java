@@ -29,46 +29,42 @@ public class GameSetupTests {
 	@Test
 	public void testDeckCreation() {
 		Set<Card> deck = board.getDeck();
-		//assertEquals(21, deck.size());
+		assertEquals(21, deck.size());
 		Boolean[] solns = new Boolean[21];
 		for(int i = 0; i < 21; i++) {
 			solns[i] = false;
 		}
 		for(Card card : deck) {
 			if(card.getCardType() == CardType.ROOM) {
-				// Rooms and room cards		
-				if(card.getCardName().equals("Atlantica")) { solns[0] = true; }
-				if(card.getCardName().equals("Arendelle")) { solns[1] = true; }
-				if(card.getCardName().equals("Corona")) { solns[2] = true; }
-				if(card.getCardName().equals("France")) { solns[3] = true; }
-				if(card.getCardName().equals("DunBroch")) { solns[4] = true; }
-				if(card.getCardName().equals("China")) { solns[5] = true; }
-				if(card.getCardName().equals("New Orleans")) { solns[6] = true; }
-				if(card.getCardName().equals("Agraban")) { solns[7] = true; }
-				if(card.getCardName().equals("Jamestown")) { solns[8] = true; }
+				if(card.getCardName().equals("Atlantica")) { solns[0] = true; }//
+				if(card.getCardName().equals("Arendelle")) { solns[1] = true; }//
+				if(card.getCardName().equals("Corona")) { solns[2] = true; }//
+				if(card.getCardName().equals("France")) { solns[3] = true; }//
+				if(card.getCardName().equals("DunBroch")) { solns[4] = true; }//
+				if(card.getCardName().equals("China")) { solns[5] = true; }//
+				if(card.getCardName().equals("New Orleans")) { solns[6] = true; }//
+				if(card.getCardName().equals("Agrabah")) { solns[7] = true; }//
+				if(card.getCardName().equals("Jamestown")) { solns[8] = true; }//
 			}
-			/*Weapon, Lazarus Pit Water
-			Weapon, The Elder Wand
-			Weapon, The One Ring
-			Weapon, The Skywalker Lightsaber
-			Weapon, The Infinity Gauntlet
-			Weapon, The Triforce*/
-			if(card.getCardType() == CardType.WEAPON) {}
-			/*Player, Bruce Wayne (Batman), 0 0 0, 0 0
-			Player, Harry Potter, 245 191 3, 0 0
-			Player, Frodo Baggins, 153 101 21, 0 0
-			Player, Luke Skywalker, 0 255 255, 0 0
-			Player, Tony Stark (Iron Man), 225 0 0, 0 0
-			Player, Link, 0 200 0, 0 0*/
-			if(card.getCardType() == CardType.PERSON) {}
+			if(card.getCardType() == CardType.WEAPON) {
+				if(card.getCardName().equals("Lazarus Pit Water")) { solns[9] = true; }//
+				if(card.getCardName().equals("The Elder Wand")) { solns[10] = true; }
+				if(card.getCardName().equals("The One Ring")) { solns[11] = true; }//
+				if(card.getCardName().equals("The Skywalker Lightsaber")) { solns[12] = true; }
+				if(card.getCardName().equals("The Infinity Gauntlet")) { solns[13] = true; }//
+				if(card.getCardName().equals("The Triforce")) { solns[14] = true; }
+			}
+			if(card.getCardType() == CardType.PERSON) {
+				if(card.getCardName().equals("Bruce Wayne (Batman)")) { solns[15] = true; }//
+				if(card.getCardName().equals("Harry Potter")) { solns[16] = true; }//
+				if(card.getCardName().equals("Frodo Baggins")) { solns[17] = true; }//
+				if(card.getCardName().equals("Luke Skywalker")) { solns[18] = true; }//
+				if(card.getCardName().equals("Tony Stark (Iron Man)")) { solns[19] = true; }//
+				if(card.getCardName().equals("Link")) { solns[20] = true; }//
+			}
 		}
-		for(int i = 0; i < 9; i++) {
+		for(int i = 0; i < 21; i++) {
 			assertTrue(solns[i]);
 		}
-	    
-	    // Repeat for other card types
-	}
-
-    
-    
+	} 
 }

@@ -94,6 +94,7 @@ public class Board {
 		//this loops reds the next line from setUpScanner and stores it in the info variable 
 		while(setupScanner.hasNextLine()) {
 			info = setupScanner.next();
+			info.trim();
 			//ereads the next token from setupscanner and stores it in the info variable
 			if (info.equals("Room,")) {
 				name = setupScanner.next();
@@ -138,12 +139,10 @@ public class Board {
 			} else if (info.equals("Weapon,")) {
 				name = setupScanner.nextLine();
 				name = name.replace(",", "");
+				name = name.trim();
 				newCard = new Card(name, CardType.WEAPON);
 				deck.add(newCard); //make a new card and add to deck + weapons
 				//checks if there is another line available and reads it 
-				if (setupScanner.hasNextLine()) {
-					info = setupScanner.nextLine();
-				}
 			} else if (info.equals("Player,")) {
 				info = setupScanner.nextLine();
 				playerInfo = info.split(",");
