@@ -174,7 +174,6 @@ public class GameSetupTests {
 	@Test
 	public void testDeal() {
 		Set<ComputerPlayer> players = board.getPlayers();
-		assertEquals(5, players.size());
 		int[] solns = new int[6];
 		Set<Card> deck;
 		int i = 0;

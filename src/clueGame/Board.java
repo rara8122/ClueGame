@@ -16,7 +16,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.function.BooleanSupplier;
 
 public class Board {
 	private BoardCell[][] grid;
@@ -72,6 +71,7 @@ public class Board {
 		roomMap = new HashMap <Character, Room> ();
 		deck = new HashSet<Card>();
 		computers = new HashSet<ComputerPlayer>();
+		user = null;
 		FileReader setupFile;
 		try {
 			setupFile = new FileReader("data/" + setupConfigFile);
@@ -193,6 +193,9 @@ public class Board {
 	}
 	//loads layout config
 	public void loadLayoutConfig () throws BadConfigFormatException, IOException {
+		numRows = 0;
+		numColumns = 0;
+		
 		FileReader layoutFile;
 		
 		try {
@@ -288,6 +291,9 @@ public class Board {
 	}
 	// Loop through each player to deal cards
 	public void deal() {
+		room = null;
+		weapon = null;
+		player = null;
 		Card newCard;
 		Random choice = new Random();
 		Object[] deckArray = deck.toArray();
@@ -318,17 +324,34 @@ public class Board {
 					cardsRemaining--;
 				}
 				if(cardsRemaining == 3) {
-					return;
+					break;
 				}
 			}
 		}
 		while(cardsRemaining > 0) {
-			card = choice.nextInt(deckArray.length);//pick a random card
-			if(deckArray[card] != null){ //if the card is still not picked, add it to this player's deck
-				newCard = new Card((Card) deckArray[card]);
-				user.addCard(newCard);
-				deckArray[card] = null;
-				cardsRemaining--;
+			if(cardsRemaining < 5) {
+				for(int i = 0; i < deckArray.length; i++) {
+					if(deckArray[i] != null){ //if the card is still not picked, add it to this player's deck
+						newCard = new Card((Card) deckArray[i]);
+						user.addCard(newCard);
+						deckArray[i] = null;
+						cardsRemaining--;
+					}
+				}
+			} else {
+				for (Player thisPlayer : computers) {
+					for(int i = 0; i < deckArray.length; i++) {
+						if(cardsRemaining == 4) {
+							break;
+						}
+						if(deckArray[i] != null){ //if the card is still not picked, add it to this player's deck
+							newCard = new Card((Card) deckArray[i]);
+							user.addCard(newCard);
+							deckArray[i] = null;
+							cardsRemaining--;
+						}
+					}
+				}
 			}
 		}
 	}

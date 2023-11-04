@@ -22,8 +22,8 @@ public class Card {
 		cardType = card.getCardType();
 	}
 
-	public boolean equals() {
-		return false;	
+	public boolean equals(Card c) {
+		return (cardName == c.getCardName() && cardType == c.getCardType());	
 	}
 
 	//getters

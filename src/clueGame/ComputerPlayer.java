@@ -67,19 +67,15 @@ public class ComputerPlayer extends Player{
 		return ((BoardCell) targetsArray[choice.nextInt(targetsArray.length)]);
 	}
 
-	public Card getRoomSolution() {
+	public Card getRoomSuggestion() {
 		return roomSolution;
 	}
 	
-	public Card getWeaponSolution() {
+	public Card getWeaponSuggestion() {
 		return weaponSolution;
 	}
 	
-	public Card getPersonSolution() {
-		return personSolution;
-	}
-
-	public Card createSolution(Set<Card> deck) {
+	public Card getPersonSuggestion() {
 		return personSolution;
 	}
 
