@@ -9,6 +9,7 @@ package clueGame;
 
 import java.awt.Color;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 public abstract class Player {
@@ -29,6 +30,66 @@ public abstract class Player {
 		deck = new HashSet<Card>();
 		seen = new HashSet<Card>();
 		deckSize = 0;
+	}
+	public Card disproveSuggestion(Card room, Card weapon, Card player) {
+		Card disproveRoom = null;
+		Card disproveWeapon = null;
+		Card disprovePlayer = null;
+		for (Card c : deck) {
+			if (c.equals(room)) {
+				disproveRoom = c;
+			}
+			if (c.equals(weapon)) {
+				disproveWeapon = c;
+			}
+			if (c.equals(player)) {
+				disprovePlayer = c;
+			}
+		}
+		int cardsDisprove = 0;//how many cards we found
+		if(disproveRoom != null) {
+			if(disproveWeapon != null) {
+				if(disprovePlayer != null) { 
+					cardsDisprove = 3; //we have all 3 cards
+				} else { 
+					cardsDisprove = 2; //we do have the room and weapon cards
+				}
+			} else { 
+				if(disprovePlayer != null) { //we do have the player card
+					disproveWeapon = disprovePlayer; //we always make sure the cards are set room, then weapon, then player 
+														//(even if the types don't match)
+					cardsDisprove = 2;//we do have the room and player card
+				} else { 
+					cardsDisprove = 1;//we do have the room card
+				}
+			}
+		} else {
+			if(disproveWeapon != null) {
+				if(disprovePlayer != null) {
+					disproveRoom = disprovePlayer; 
+					cardsDisprove = 2;//we do have the player and weapon cards
+				} else {
+					disproveRoom = disproveWeapon; 
+					cardsDisprove = 1;// we do have the weapon cards
+				}
+			} else {
+				if(disprovePlayer != null) {
+					disproveRoom = disprovePlayer; 
+					cardsDisprove = 1; //we do have the player card
+				} else {
+					return null; //we found no cards that disprove the suggestion
+				}
+			}
+		}
+		Random choice = new Random();
+		int choose = choice.nextInt(cardsDisprove);
+		if(choose == 0) {
+			return disproveRoom;
+		} else if(choose == 1) {
+			return disproveWeapon;
+		} else {
+			return disprovePlayer;
+		}
 	}
 	public Boolean hasSeen(Card card) {
 		Boolean solution = false;
