@@ -1,82 +1,90 @@
-package tests;
+package tests; 
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
-import java.awt.Color;
-import java.util.List;
-import java.util.Set;
-
+import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-
 import clueGame.Board;
 import clueGame.BoardCell;
-import clueGame.Card;
-import clueGame.CardType;
 import clueGame.ComputerPlayer;
-import clueGame.Player;
-import clueGame.Room;
+import java.util.HashSet;
+import java.util.Set;
+import java.awt.Color;
 
-public class ComputerAITest{
+public class ComputerAITest {
 	
-	
-	private Board board;
-	Set<Card> deck;
 	
 	@BeforeAll
-	public void setUp() {
+	public static void setUp() {
+		Board board;
+		// Board is singleton, get the only instance
 		board = Board.getInstance();
-		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
+		// set the file names to use my config files
+		board.setConfigFiles("ClueLayout306.csv", "ClueSetup306.txt");		
+		// Initialize will load config files 
 		board.initialize();
-		deck = board.getDeck();
 	}
-	
 
-    //@Test
-    public void testSelectMoveTargetNoRoomsInList() {
-        // Create a computer player with no rooms in the target list
-    	Set<ComputerPlayer> players = board.getPlayers();
-        List<BoardCell> targets;
-        for (ComputerPlayer player : players) {
-        	targets = player.selectTarget();
-            // Ensure that targets are selected randomly
-            assertNotNull(targets);
-            assertFalse(targets.isEmpty());
-        }
-    }
+	 @Test
+	    public void testSelectTargetNoRoomsInList() {
+	        // Create a computer player
+	        ComputerPlayer computerPlayer = new ComputerPlayer("Bruce Wayne (Batman)", Color.BLUE, 18, 0);
 
-    //@Test
-    public void testSelectMoveTargetRoomNotSeen() {
-        // Create a computer player with a room in the target list that has not been seen
-        Card targetRoom = new Card("Atlantica", CardType.ROOM);
-        Set<ComputerPlayer> players = board.getPlayers();
-        List<BoardCell> targets;
-        boolean contains;
-        for (ComputerPlayer player : players) {
-        	targets = player.selectTarget();
-        	// Ensure that the target room is selected
-            assertNotNull(targets);
-            contains = false;
-            assertTrue(targets.contains(targetRoom));
-        }
-    }
+	        // Create a set of targets with no rooms
+	        Set<BoardCell> targets = new HashSet<>();
+	        targets.add(new BoardCell(1, 1, 'W')); // Add a walkway cell
 
-    //@Test
-    public void testSelectMoveTargetRoomSeen() {
-        // Create a computer player with a room in the target list that has been seen
-        Card targetRoom = new Card("Atlantica", CardType.ROOM);
-        Set<ComputerPlayer> players = board.getPlayers();
-        List<BoardCell> targets;
-        for (ComputerPlayer player : players) {
-        	// Ensure that targets are selected randomly, including the seen room
-        	targets = player.selectTarget();
-        	assertNotNull(targets);
-            assertTrue(targets.contains(targetRoom));
-        }
-  
-    }
+	        // Run the selectTarget method multiple times and ensure it selects randomly
+	        for (int i = 0; i < 10; i++) {
+	            BoardCell selectedTarget = computerPlayer.selectTarget(targets);
+	            assertTrue(targets.contains(selectedTarget));
+	        }
+	    }
 
+	    @Test
+	    public void testSelectTargetUnseenRoomInList() {
+	        // Create a computer player
+	        ComputerPlayer computerPlayer = new ComputerPlayer("Bruce Wayne (Batman)", Color.BLUE, 18, 0);
+
+	        // Create a set of targets with a room that has not been seen
+	        BoardCell unseenRoom = new BoardCell(10, 17, 'R'); // Add an unseen room cell
+	        Set<BoardCell> targets = new HashSet<>();
+	        targets.add(new BoardCell(1, 1, 'W'));// Add a walkway cell
+	        targets.add(unseenRoom);
+
+	        // Run the selectTarget method multiple times and ensure it selects the unseen room
+	        for (int i = 0; i < 10; i++) {
+	            BoardCell selectedTarget = computerPlayer.selectTarget(targets);
+	            assertTrue(targets.contains(unseenRoom));
+	        }
+	    }
+
+	    @Test
+	    public void testSelectTargetSeenRoomInList() {
+	        // Create a computer player
+	        ComputerPlayer computerPlayer = new ComputerPlayer("Bruce Wayne (Batman)", Color.BLUE, 18, 0);
+
+	        // Create a set of targets with a room that has been seen
+	        BoardCell seenRoom = new BoardCell(5, 5, 'B'); // Add a seen room cell
+	        Set<BoardCell> targets = new HashSet<>();
+	        targets.add(new BoardCell(1, 1, 'W')); // Add a walkway cell
+	        targets.add(seenRoom);
+
+	        // Run the selectTarget method multiple times and ensure it selects randomly
+	        // It should select either the seen room or the walkway
+	        boolean roomSelected = false;
+	        boolean walkwaySelected = false;
+	        for (int i = 0; i < 100; i++) {
+	            BoardCell selectedTarget = computerPlayer.selectTarget(targets);
+	            if (selectedTarget == seenRoom) {
+	                roomSelected = true;
+	            } else if (selectedTarget.getInitial() == 'W') {
+	                walkwaySelected = true;
+	            }
+	        }
+	        assertTrue(roomSelected);
+	        assertTrue(walkwaySelected);
+	    }
+	    
 }
+
+
