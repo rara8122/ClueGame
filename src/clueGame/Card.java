@@ -23,7 +23,7 @@ public class Card {
 	}
 
 	public boolean equals(Card c) {
-		return (cardName == c.getCardName() && cardType == c.getCardType());	
+		return (cardName.equals(c.getCardName()) && cardType == c.getCardType());	
 	}
 
 	//getters

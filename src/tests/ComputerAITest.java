@@ -139,39 +139,57 @@ public class ComputerAITest {
     public void testCreateSuggestionWithOneUnseenPerson() {
 	    ComputerPlayer computerPlayer = new ComputerPlayer("Bruce Wayne (Batman)", Color.BLACK, 18, 0);
 	    Card unseenPerson = new Card("Link", CardType.PERSON);  
-	    Set<Card> deck = new HashSet<>();
-	    deck.add(unseenPerson); 
-	    deck.add(unseenPerson);
-	    assertEquals(unseenPerson, computerPlayer.getPersonSuggestion());
+	    Set<Card> deck = board.getDeck();
+		
+	    computerPlayer.updateSeen(new Card("Bruce Wayne (Batman)", CardType.PERSON)); 
+	    computerPlayer.updateSeen(new Card("Harry Potter", CardType.PERSON)); 
+	    computerPlayer.updateSeen(new Card("Frodo Baggins", CardType.PERSON)); 
+	    computerPlayer.updateSeen(new Card("Luke Skywalker", CardType.PERSON)); 
+	    computerPlayer.updateSeen(new Card("Tony Stark (Iron Man)", CardType.PERSON)); 
+	    
+	    for(int i = 0; i < 100; i++) {
+	        computerPlayer.createSolution(deck, "Arendelle");
+	        // Ensure that the room in the suggestion matches the current room
+	        assertTrue(computerPlayer.getPersonSuggestion().equals(unseenPerson));
+        }
     }
     
   
-    //@Test
+    @Test
     public void testCreateSuggestionWithMultipleUnseenWeapons() {
     	ComputerPlayer computerPlayer = new ComputerPlayer("Bruce Wayne (Batman)", Color.BLACK, 18, 0);
         // Add multiple unseen weapon cards to the deck
-        Card unseenWeapon1 = new Card("The TriForce", CardType.WEAPON);
-        Card unseenWeapon2 = new Card("The Elder Ring", CardType.WEAPON);
+        Card unseenWeapon1 = new Card("The One Ring", CardType.WEAPON);
+        Card unseenWeapon2 = new Card("The Elder Wand", CardType.WEAPON);
         Card unseenWeapon3 = new Card("The Skywalker Lightsaber", CardType.WEAPON);
         
-        Set<Card> deck = new HashSet<>();
-        deck.add(unseenWeapon1);
-        deck.add(unseenWeapon2);
-        deck.add(unseenWeapon3);
-
-        // Create a set to track selected unseen weapons
-        Set<Card> selectedWeapons = new HashSet<>();
+        Set<Card> deck = board.getDeck();
+        Boolean unseen1Picked = false;
+        Boolean unseen2Picked = false;
+        Boolean unseen3Picked = false;
+        
+        computerPlayer.updateSeen(new Card("Lazarus Pit Water", CardType.WEAPON)); 
+	    computerPlayer.updateSeen(new Card("The Infinity Gauntlet", CardType.WEAPON)); 
+	    computerPlayer.updateSeen(new Card("The Triforce", CardType.WEAPON)); 
 
         // Run the createSolution method multiple times
         for (int i = 0; i < 100; i++) {
             computerPlayer.createSolution(deck, "");
-            selectedWeapons.add(computerPlayer.getWeaponSuggestion());
+            if(computerPlayer.getWeaponSuggestion().equals(unseenWeapon1)) {
+            	unseen1Picked = true;
+            }
+            if(computerPlayer.getWeaponSuggestion().equals(unseenWeapon2)) {
+            	unseen2Picked = true;
+            }
+            if(computerPlayer.getWeaponSuggestion().equals(unseenWeapon3)) {
+            	unseen3Picked = true;
+            }
         }
 
         // Ensure that all unseen weapons were selected at least once
-        assertTrue(selectedWeapons.contains(unseenWeapon1));
-        assertTrue(selectedWeapons.contains(unseenWeapon2));
-        assertTrue(selectedWeapons.contains(unseenWeapon3));
+        assertTrue(unseen1Picked);
+        assertTrue(unseen2Picked);
+        assertTrue(unseen3Picked);
      
     }
 }
