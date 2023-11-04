@@ -79,4 +79,28 @@ public class ComputerPlayer extends Player{
 		return personSolution;
 	}
 
+	public Card createSolution(Set<Card> deck) {
+		return personSolution;
+	}
+
+	public void setRoomSolution(Card roomSolution2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setCurrentRoom(Room currentRoom) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Object getRoom() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ComputerPlayer getSuggestion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

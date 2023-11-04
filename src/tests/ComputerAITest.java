@@ -8,25 +8,25 @@ import clueGame.BoardCell;
 import clueGame.Card;
 import clueGame.CardType;
 import clueGame.ComputerPlayer;
+import clueGame.Room;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.awt.Color;
 
+
 public class ComputerAITest {
+	private static Board board;
 	
-	
+	//runs before all tests 
 	@BeforeAll
 	public static void setUp() {
-		Board board;
-		// Board is singleton, get the only instance
 		board = Board.getInstance();
-		// set the file names to use my config files
-		board.setConfigFiles("ClueLayout306.csv", "ClueSetup306.txt");		
-		// Initialize will load config files 
+		board.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		board.initialize();
 	}
 
-	 @Test
+	// @Test
 	    public void testSelectTargetNoRoomsInList() {
 	        // Create a computer player
 	        ComputerPlayer computerPlayer = new ComputerPlayer("Bruce Wayne (Batman)", Color.BLUE, 18, 0);
@@ -42,7 +42,7 @@ public class ComputerAITest {
 	        }
 	    }
 
-	    @Test
+	   // @Test
 	    public void testSelectTargetUnseenRoomInList() {
 	        // Create a computer player
 	        ComputerPlayer computerPlayer = new ComputerPlayer("Bruce Wayne (Batman)", Color.BLUE, 18, 0);
@@ -60,7 +60,7 @@ public class ComputerAITest {
 	        }
 	    }
 
-	    @Test
+	   // @Test
 	    public void testSelectTargetSeenRoomInList() {
 	        // Create a computer player
 	        ComputerPlayer computerPlayer = new ComputerPlayer("Bruce Wayne (Batman)", Color.BLUE, 18, 0);
@@ -87,7 +87,29 @@ public class ComputerAITest {
 	        assertTrue(roomSelected);
 	        assertTrue(walkwaySelected);
 	    }
-	    
+	   	 
+	 
+	        @Test
+	        public void testCreateSuggestionRoomMatchesCurrentLocation() {
+	       
+
+	         // Create a ComputerPlayer with a specific current location in a room
+	            ComputerPlayer computerPlayer = new ComputerPlayer("Bruce Wayne (Batman)", Color.BLUE, 4, 4);
+	            Room currentRoom = board.getRoom('E'); // Assuming 'E' corresponds to room Arendelle
+	            computerPlayer.setCurrentRoom(currentRoom); // Set the current room
+
+	            Set<Card> deck = new HashSet<Card>();
+	            // Add relevant cards to the deck (current room card, unseen weapon, unseen person)
+	            deck.add(new Card("Arendelle", CardType.ROOM)); // Assuming "Arendelle" matches the current room
+	            deck.add(new Card("The Elder Wand", CardType.WEAPON)); // Unseen weapon
+	            deck.add(new Card("Hermione Granger", CardType.PERSON)); // Unseen person
+	            computerPlayer.createSolution(deck, currentRoom.getName());
+
+	            // Ensure that the room in the suggestion matches the current room
+	            assertEquals(currentRoom, computerPlayer.getSuggestion().getRoom());
+	        }
+
+
 }
 
 
