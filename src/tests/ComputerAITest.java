@@ -107,6 +107,57 @@ public class ComputerAITest {
         // Ensure that the room in the suggestion matches the current room
         assertEquals(currentRoom, computerPlayer.getRoomSuggestion());
     }
+    
+    //test if only one weapon not seen, it's selected
+    @Test
+    public void testCreateSuggestionWithOneUnseenWeapon() {
+    ComputerPlayer computerPlayer = new ComputerPlayer("Bruce Wayne (Batman)", Color.BLACK, 18, 0);
+    Card unseenWeapon = new Card("The One Ring", CardType.WEAPON);
+    Set<Card> deck = new HashSet<>();
+    deck.add(unseenWeapon); 
+    deck.add(unseenWeapon);
+    assertEquals(unseenWeapon, computerPlayer.getWeaponSuggestion());
+}
+    //tests if only one person not seen
+    @Test
+    public void testCreateSuggestionWithOneUnseenPerson() {
+    ComputerPlayer computerPlayer = new ComputerPlayer("Bruce Wayne (Batman)", Color.BLACK, 18, 0);
+    Card unseenPerson = new Card("Link", CardType.PERSON);  
+    Set<Card> deck = new HashSet<>();
+    deck.add(unseenPerson); 
+    deck.add(unseenPerson);
+    assertEquals(unseenPerson, computerPlayer.getPersonSuggestion());
+    }
+    
+  
+    @Test
+    public void testCreateSuggestionWithMultipleUnseenWeapons() {
+    	ComputerPlayer computerPlayer = new ComputerPlayer("Bruce Wayne (Batman)", Color.BLACK, 18, 0);
+        // Add multiple unseen weapon cards to the deck
+        Card unseenWeapon1 = new Card("The TriForce", CardType.WEAPON);
+        Card unseenWeapon2 = new Card("The Elder Ring", CardType.WEAPON);
+        Card unseenWeapon3 = new Card("The Skywalker Lightsaber", CardType.WEAPON);
+        
+        Set<Card> deck = new HashSet<>();
+        deck.add(unseenWeapon1);
+        deck.add(unseenWeapon2);
+        deck.add(unseenWeapon3);
+
+        // Create a set to track selected unseen weapons
+        Set<Card> selectedWeapons = new HashSet<>();
+
+        // Run the createSolution method multiple times
+        for (int i = 0; i < 100; i++) {
+            computerPlayer.createSolution(deck, "");
+            selectedWeapons.add(computerPlayer.getWeaponSuggestion());
+        }
+
+        // Ensure that all unseen weapons were selected at least once
+        assertTrue(selectedWeapons.contains(unseenWeapon1));
+        assertTrue(selectedWeapons.contains(unseenWeapon2));
+        assertTrue(selectedWeapons.contains(unseenWeapon3));
+     
+    }
 }
 
 
