@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
 import clueGame.Board;
 import clueGame.BoardCell;
+import clueGame.Card;
+import clueGame.CardType;
 import clueGame.ComputerPlayer;
 import java.util.HashSet;
 import java.util.Set;
@@ -31,7 +33,7 @@ public class ComputerAITest {
 
 	        // Create a set of targets with no rooms
 	        Set<BoardCell> targets = new HashSet<>();
-	        targets.add(new BoardCell(1, 1, 'W')); // Add a walkway cell
+	        targets.add(new BoardCell(1, 1, 'W', "Walkway")); // Add a walkway cell
 
 	        // Run the selectTarget method multiple times and ensure it selects randomly
 	        for (int i = 0; i < 10; i++) {
@@ -46,9 +48,9 @@ public class ComputerAITest {
 	        ComputerPlayer computerPlayer = new ComputerPlayer("Bruce Wayne (Batman)", Color.BLUE, 18, 0);
 
 	        // Create a set of targets with a room that has not been seen
-	        BoardCell unseenRoom = new BoardCell(10, 17, 'R'); // Add an unseen room cell
+	        BoardCell unseenRoom = new BoardCell(10, 17, 'R', "Corona"); // Add an unseen room cell
 	        Set<BoardCell> targets = new HashSet<>();
-	        targets.add(new BoardCell(1, 1, 'W'));// Add a walkway cell
+	        targets.add(new BoardCell(1, 1, 'W', "Walkway"));// Add a walkway cell
 	        targets.add(unseenRoom);
 
 	        // Run the selectTarget method multiple times and ensure it selects the unseen room
@@ -62,11 +64,12 @@ public class ComputerAITest {
 	    public void testSelectTargetSeenRoomInList() {
 	        // Create a computer player
 	        ComputerPlayer computerPlayer = new ComputerPlayer("Bruce Wayne (Batman)", Color.BLUE, 18, 0);
-
+	        computerPlayer.updateSeen(new Card("France", CardType.ROOM));
+	        
 	        // Create a set of targets with a room that has been seen
-	        BoardCell seenRoom = new BoardCell(5, 5, 'B'); // Add a seen room cell
+	        BoardCell seenRoom = new BoardCell(5, 5, 'B', "France"); // Add a seen room cell
 	        Set<BoardCell> targets = new HashSet<>();
-	        targets.add(new BoardCell(1, 1, 'W')); // Add a walkway cell
+	        targets.add(new BoardCell(1, 1, 'W', "Walkway")); // Add a walkway cell
 	        targets.add(seenRoom);
 
 	        // Run the selectTarget method multiple times and ensure it selects randomly

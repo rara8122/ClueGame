@@ -8,6 +8,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
@@ -27,7 +28,7 @@ public class ComputerPlayer extends Player{
 		
 	}
 	
-	public void createSolution(Set<Card> deck) {
+	public void createSolution(Set<Card> deck, String currentRoom) {
 		Random choice = new Random();
 		Card card;
 		Object[] deckArray = deck.toArray();
@@ -36,7 +37,7 @@ public class ComputerPlayer extends Player{
 		boolean personDone = false;
 		while(!(roomDone && weaponDone && personDone)) {
 			card = ((Card) deckArray[choice.nextInt(deckArray.length)]);//pick a random card
-			if(card.getCardType() == CardType.ROOM && !roomDone && !super.hasSeen(card)) { 
+			if(card.getCardType() == CardType.ROOM && !roomDone && card.getCardName() == currentRoom) { 
 				roomSolution = card;
 				roomDone = true;
 			}else if(card.getCardType() == CardType.WEAPON && !weaponDone && !super.hasSeen(card)) {
@@ -50,7 +51,18 @@ public class ComputerPlayer extends Player{
 	}
 
 	public BoardCell selectTarget(Set<BoardCell> targets) {
-		Object[] targetsArray = targets.toArray();
+		Set<BoardCell> chosenTargets = new HashSet<BoardCell>();
+		for(BoardCell target: targets) {
+			if(target.isRoomCenter()) {
+				if(!super.hasSeen(new Card(target.getRoomName(), CardType.ROOM))) {
+					chosenTargets.add(target);
+				}
+			}
+		}
+		if(chosenTargets.isEmpty()){
+			chosenTargets.addAll(targets);
+		}
+		Object[] targetsArray = chosenTargets.toArray();
 		Random choice = new Random();
 		return ((BoardCell) targetsArray[choice.nextInt(targetsArray.length)]);
 	}

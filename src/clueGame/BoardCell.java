@@ -13,6 +13,7 @@ public class BoardCell {
 	private int row;
 	private int column;
 	private char initial;
+	private String roomName;
 	private DoorDirection doorDirection;
 	private boolean roomLabel;
 	private boolean roomCenter;
@@ -21,13 +22,14 @@ public class BoardCell {
 	private boolean occupied;
 
 	
-	public BoardCell(int newRow, int newColumn, char newInitial) {
+	public BoardCell(int newRow, int newColumn, char newInitial, String newName) {
 		row = newRow;
 		column = newColumn;
 		initial = newInitial;
 		doorDirection = DoorDirection.NONE;
 		roomLabel = false;
 		roomCenter = false;
+		roomName = newName;
 		adjList = new HashSet<>();
 		secretPassage = ' ';
 	}
@@ -81,6 +83,11 @@ public class BoardCell {
 	public char getInitial() {
 		return initial;
 	}
+	
+	public String getRoomName() {
+		return roomName;
+	}
+	
 	
 	public int getRow() {
 		return row;

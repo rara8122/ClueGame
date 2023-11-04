@@ -236,14 +236,14 @@ public class Board {
 		//nested for loop that loops through grid cells
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numColumns; j++) {
-				grid[i][j] = new BoardCell(i, j, strings[i][j].charAt(0));
 				currentStr = strings[i][j];
-				currentCell = grid[i][j];
 				correspondingRoom = roomMap.get(currentStr.charAt(0));
 				//check if corresponding room is null
 				if (correspondingRoom == null) {
 					throw new BadConfigFormatException("Bad room: the layout file referes to a room that is not in the setup. ");
 				}
+				grid[i][j] = new BoardCell(i, j, currentStr.charAt(0), correspondingRoom.getName());
+				currentCell = grid[i][j];
 				//checks if the length of the current string is 2 
 				if(currentStr.length() == 2) {
 					//checks is the first chracter of the string is a W
