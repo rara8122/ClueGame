@@ -44,4 +44,9 @@ public class Card {
 		this.cardType = cardType;
 	}
 
+	public boolean contains(Card roomCard) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

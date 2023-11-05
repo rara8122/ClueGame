@@ -153,4 +153,8 @@ public abstract class Player {
 	public void setColumn(int column) {
 		this.column = column;
 	}
+	public Set<Card> getCards() {
+		return deck;	
+		// TODO Auto-generated method stub		
+	}
 }

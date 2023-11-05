@@ -526,5 +526,14 @@ public class Board {
 	    // Return true if all three parts of the accusation are correct
 	    return (roomAccusation.equals(room) && weaponAccusation.equals(weapon) && personAccusation.equals(player));
 	}
+	public Card handleSuggestion(Player suggestingPlayer, Card roomCard, Card weaponCard, Card personCard) {
+		return personCard;
+		// TODO Auto-generated method stub
+	
+	}
+	public Player getCurrentPlayer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
