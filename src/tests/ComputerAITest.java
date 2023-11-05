@@ -175,7 +175,7 @@ public class ComputerAITest {
 
         // Run the createSolution method multiple times
         for (int i = 0; i < RUN_TIMES; i++) {
-            computerPlayer.createSolution(deck, "");
+            computerPlayer.createSolution(deck, "Arendelle");
             if(computerPlayer.getWeaponSuggestion().equals(unseenWeapon1)) {
             	unseen1Picked = true;
             }

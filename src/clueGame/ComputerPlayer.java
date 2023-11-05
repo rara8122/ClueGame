@@ -35,12 +35,18 @@ public class ComputerPlayer extends Player{
 		boolean roomDone = false;
 		boolean weaponDone = false;
 		boolean personDone = false;
-		while(!(roomDone && weaponDone && personDone)) {
-			card = ((Card) deckArray[choice.nextInt(deckArray.length)]);//pick a random card
-			if(card.getCardType() == CardType.ROOM && !roomDone && card.getCardName() == currentRoom) { 
-				roomSolution = card;
+		for (Card room: deck) {
+			if(room.getCardType() == CardType.ROOM && !roomDone && room.getCardName() == currentRoom) { 
+				roomSolution = room;
 				roomDone = true;
-			}else if(card.getCardType() == CardType.WEAPON && !weaponDone && !super.hasSeen(card)) {
+			}
+		}
+		if (!roomDone) {
+			roomSolution = null;
+		}
+		while(!(weaponDone && personDone)) {
+			card = ((Card) deckArray[choice.nextInt(deckArray.length)]);//pick a random card
+			if(card.getCardType() == CardType.WEAPON && !weaponDone && !super.hasSeen(card)) {
 				weaponSolution = card; 
 				weaponDone = true;
 			} else if(card.getCardType() == CardType.PERSON && !personDone && !super.hasSeen(card)) {
