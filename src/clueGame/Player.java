@@ -31,6 +31,7 @@ public abstract class Player {
 		seen = new HashSet<Card>();
 		deckSize = 0;
 	}
+	//method to disprove a suggestion
 	public Card disproveSuggestion(Card room, Card weapon, Card player) {
 		Card disproveRoom = null;
 		Card disproveWeapon = null;
@@ -114,7 +115,7 @@ public abstract class Player {
 	public void updateSeen(Card newCard) {
 		seen.add(newCard);
 	}
-	//getters 
+	//getters and setters
 	public boolean deckFull() {
 		return deckSize == 3;
 	}

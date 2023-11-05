@@ -455,6 +455,27 @@ public class Board {
 		targets.clear();
 		findTargets(cell, i);
 	}
+	public boolean checkAccusation(Card roomAccusation, Card weaponAccusation, Card personAccusation) {
+	    // Compare the accusation with the correct solution
+	    // Check if each part of the accusation matches the correct solution
+
+	    // Return true if all three parts of the accusation are correct
+	    return (roomAccusation.equals(room) && weaponAccusation.equals(weapon) && personAccusation.equals(player));
+	}
+	public Card handleSuggestion(Player suggestingPlayer, Card roomCard, Card weaponCard, Card personCard) {
+		Card returnCard = user.disproveSuggestion(roomCard, weaponCard, personCard);
+		if(returnCard != null && suggestingPlayer != user) {
+			return returnCard;
+		}
+		for (Player person : computers) {
+			returnCard = person.disproveSuggestion(roomCard, weaponCard, personCard);
+			if(returnCard != null && suggestingPlayer != person) {
+				return returnCard;
+			}
+		}
+		return null;
+	}
+	
 	//all setters here 
 	public void setGrid(BoardCell[][] grid) {
 		this.grid = grid;
@@ -464,6 +485,7 @@ public class Board {
 		layoutConfigFile = layoutFile;
 		setupConfigFile = setupFile;
 	}
+	
 	//all getters below
 	public Card getRoomSoln() {
 		return room;
@@ -518,26 +540,6 @@ public class Board {
 	}
 	public Set<Card> getDeck() {
 		return deck;
-	}
-	public boolean checkAccusation(Card roomAccusation, Card weaponAccusation, Card personAccusation) {
-	    // Compare the accusation with the correct solution
-	    // Check if each part of the accusation matches the correct solution
-
-	    // Return true if all three parts of the accusation are correct
-	    return (roomAccusation.equals(room) && weaponAccusation.equals(weapon) && personAccusation.equals(player));
-	}
-	public Card handleSuggestion(Player suggestingPlayer, Card roomCard, Card weaponCard, Card personCard) {
-		Card returnCard = user.disproveSuggestion(roomCard, weaponCard, personCard);
-		if(returnCard != null && suggestingPlayer != user) {
-			return returnCard;
-		}
-		for (Player person : computers) {
-			returnCard = person.disproveSuggestion(roomCard, weaponCard, personCard);
-			if(returnCard != null && suggestingPlayer != person) {
-				return returnCard;
-			}
-		}
-		return null;
 	}
 
 }

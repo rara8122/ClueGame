@@ -18,16 +18,13 @@ public class ComputerPlayer extends Player{
 	private Card weaponSolution;
 	private Card personSolution;
 
+	//constructor
 	public ComputerPlayer(String name, Color color, int row, int column) {
 		super(name, color, row, column);
 		// TODO Auto-generated constructor stub
 	}
-
-	public void addTargetRoom(Room targetRoom) {
-		// TODO Auto-generated method stub
-		
-	}
 	
+	//method to create a solution
 	public void createSolution(Set<Card> deck, String currentRoom) {
 		Random choice = new Random();
 		Card card;
@@ -35,17 +32,21 @@ public class ComputerPlayer extends Player{
 		boolean roomDone = false;
 		boolean weaponDone = false;
 		boolean personDone = false;
+		// Iterate through the deck to find a matching room card
 		for (Card room: deck) {
 			if(room.getCardType() == CardType.ROOM && !roomDone && room.getCardName() == currentRoom) { 
 				roomSolution = room;
 				roomDone = true;
 			}
 		}
+		// If a matching room card is not found, set the room solution to null
 		if (!roomDone) {
 			roomSolution = null;
 		}
+		 // Keep looping until both weapon and person are chosen
 		while(!(weaponDone && personDone)) {
 			card = ((Card) deckArray[choice.nextInt(deckArray.length)]);//pick a random card
+	        // Check if it's a weapon card, not already chosen, and not seen by the player
 			if(card.getCardType() == CardType.WEAPON && !weaponDone && !super.hasSeen(card)) {
 				weaponSolution = card; 
 				weaponDone = true;
@@ -58,13 +59,16 @@ public class ComputerPlayer extends Player{
 
 	public BoardCell selectTarget(Set<BoardCell> targets) {
 		Set<BoardCell> chosenTargets = new HashSet<BoardCell>();
+		// Iterate through the available targets
 		for(BoardCell target: targets) {
 			if(target.isRoomCenter()) {
+				// Check if the target is a room center
 				if(!super.hasSeen(new Card(target.getRoomName(), CardType.ROOM))) {
 					chosenTargets.add(target);
 				}
 			}
 		}
+		// If no room centers are chosen, add all available targets to chosen targets
 		if(chosenTargets.isEmpty()){
 			chosenTargets.addAll(targets);
 		}
@@ -72,7 +76,8 @@ public class ComputerPlayer extends Player{
 		Random choice = new Random();
 		return ((BoardCell) targetsArray[choice.nextInt(targetsArray.length)]);
 	}
-
+	
+	//getters and setters
 	public Card getRoomSuggestion() {
 		return roomSolution;
 	}

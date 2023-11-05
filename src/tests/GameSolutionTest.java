@@ -1,3 +1,10 @@
+/*
+ *Class: This class is a test class that comprises of a set of tests that checks the game's card processing. It tests new methods checkAccusation, disproveSuggestion, and handleSuggestions. They tests different scenarios for each method.   
+ *Authors: Melanie Perez, Rachel Davy
+ *Date: 11/03/2023
+ *Collaborators: none
+ *Sources: none
+ */
 package tests;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -23,6 +30,7 @@ public class GameSolutionTest {
 	private Card correctPerson;
 	public static final int RUN_TIMES = 20;
 
+	//runs before each test; initializes the board and other important things
 	@BeforeEach
 	public void setUp() {
 		board = Board.getInstance();
@@ -32,56 +40,62 @@ public class GameSolutionTest {
 		correctWeapon = board.getWeaponSoln();
 		correctPerson = board.getPlayerSoln();
 	}
-
+	
+    // Check if the correct accusation is correctly identified as correct
 	@Test
 	public void testCorrectAccusation() {
-		// Check if the correct solution is correctly identified as correct
+		
 		assertTrue(board.checkAccusation(correctRoom, correctWeapon, correctPerson));
 	}
-
+	
+	// Check if an accusation with the wrong person is correctly identified as incorrect
 	@Test
 	public void testWrongPersonAccusation() {
-		// Check if a solution with the wrong person is correctly identified as incorrect
-		Card wrongPerson = new Card("Harry Potter", CardType.PERSON);
+				Card wrongPerson = new Card("Harry Potter", CardType.PERSON);
 		if(correctPerson.equals(wrongPerson)) {
 			wrongPerson = new Card("Bruce Wayne (Batman)", CardType.PERSON);
 		}
 		assertFalse(board.checkAccusation(correctRoom, correctWeapon, wrongPerson));
 	}
-
+	
+	// Check if an accusation with the wrong person is correctly identified as incorrect
 	@Test
 	public void testWrongWeaponAccusation() {
-		// Check if a solution with the wrong person is correctly identified as incorrect
+
 		Card wrongWeapon = new Card("The Elder Wand", CardType.WEAPON);
 		if(correctWeapon.equals(wrongWeapon)) {
 			wrongWeapon = new Card("The Skywalker Lightsaber", CardType.WEAPON);
 		}
 		assertFalse(board.checkAccusation(correctRoom, wrongWeapon, correctPerson));
 	}
-
+	
+	// Check if a suggestion with the wrong person is correctly identified as incorrect
 	@Test
 	public void testWrongRoomAccusation() {
-		// Check if a solution with the wrong person is correctly identified as incorrect
 		Card wrongRoom = new Card("Atlantica", CardType.ROOM);
 		if(correctRoom.equals(wrongRoom)) {
 			wrongRoom = new Card("Arendelle", CardType.ROOM);
 		}
 		assertFalse(board.checkAccusation(wrongRoom, correctWeapon, correctPerson));
 	}
-
+	
+	// Check if the correct suggestion is correctly identified as correct
 	public void testCorrectSuggestion() {
-		// Check if the correct solution is correctly identified as correct
 		assertNull(board.handleSuggestion(board.getUser(), correctRoom, correctWeapon, correctPerson));
 	}
-
+	
+	
 	@Test
 	public void testWrongSuggestion() {
 		Set<ComputerPlayer> players = board.getPlayers();
 		HumanPlayer user = board.getUser();
+		// Iterate through each player
 		for(Player player: players) {
 			Set<Card> deck = player.getCards();
+			// Iterate through the cards in the player's deck
 			for (Card card: deck) {
 				if (card.getCardType() == CardType.PERSON) {
+					// Ensure that the handleSuggestion method returns the expected card
 					assertTrue(card.equals(board.handleSuggestion(user, correctRoom, correctWeapon, card)));
 				}
 				if (card.getCardType() == CardType.WEAPON) {
@@ -94,6 +108,7 @@ public class GameSolutionTest {
 		}
 	}
 	
+	//test to ensure suggestion only human can disprove returns answer (i.e., card that disproves suggestion)
 	@Test
 	public void testSuggestionWeDisprove() {
 		HumanPlayer user = board.getUser();
@@ -125,7 +140,7 @@ public class GameSolutionTest {
 			}
 		}
 	}
-	
+	//Suggestion that two players can disprove, correct player (based on starting with next player in list) returns answer
 	@Test
 	public void testSuggestionTwoDisprove() {
 		HumanPlayer user = board.getUser();
@@ -135,18 +150,23 @@ public class GameSolutionTest {
 		Card roomSuggestion = correctRoom;
 		Card weaponSuggestion = correctWeapon;
 		Card personSuggestion = correctPerson;
+		// Iterate through the first set of players' cards
 		for(Player player1: players) {
 			deck1 = player1.getCards();
+			// Iterate through the second set of players' cards
 			for(Player player2: players) {
 				deck2 = player2.getCards();
 				if(player1 == player2) {
 					break;
 				}
+				// Iterate through the cards of the first player
 				for (Card card1: deck1) {
+					// Iterate through the cards of the second player
 					for (Card card2: deck2) {
 						roomSuggestion = correctRoom;
 						weaponSuggestion = correctWeapon;
 						personSuggestion = correctPerson;
+						// Update the suggestion based on the card type
 						if (card1.getCardType() == CardType.PERSON) {
 							personSuggestion = card1;
 						}
@@ -175,7 +195,7 @@ public class GameSolutionTest {
 						System.out.println(roomSuggestion.getCardName());
 						System.out.println(weaponSuggestion.getCardName());
 						System.out.println(personSuggestion.getCardName());
-						
+						// Print the result of the handleSuggestion method
 						System.out.println((board.handleSuggestion(user, roomSuggestion, weaponSuggestion, personSuggestion)).getCardName());
 						assertTrue(card2.equals(board.handleSuggestion(user, roomSuggestion, weaponSuggestion, personSuggestion)));
 					}
@@ -184,7 +204,6 @@ public class GameSolutionTest {
 		}
 	}
 
-	//disprove suggestions tests
     //disprove suggestion with no matching cards
     @Test
     public void testDisproveSuggestionNoMatchingCards() {
@@ -203,7 +222,7 @@ public class GameSolutionTest {
     
    
     
-    //disprove a suggestion with one matching card
+    //Disprove a suggestion with one matching card
     @Test
     public void testDisproveSuggestionOneMatchingCard() {
     	Player humanPlayer = new HumanPlayer("Harry Potter", Color.BLUE, 0, 4);
@@ -219,6 +238,7 @@ public class GameSolutionTest {
         assertTrue(disprovedCard.equals(personCard));
     }
     
+    //Test to check if players has >1 matching card, returned card should be chosen randomly
     @Test
     public void testDisproveSuggestionMultipleMatchingCards() {
         // Create a player with multiple matching cards
@@ -242,6 +262,7 @@ public class GameSolutionTest {
         boolean returnRoom = false;
         boolean returnWeapon = false;
         boolean returnPerson = false;
+        // Repeat the test multiple times to ensure randomness
         for (int i = 0; i < RUN_TIMES; i++) {
             Card disprovedCard = humanPlayer.disproveSuggestion(roomCard, weaponCard, personCard);
             assertTrue(disprovedCard.equals(roomCard) || disprovedCard.equals(weaponCard) || disprovedCard.equals(personCard));
@@ -268,17 +289,13 @@ public class GameSolutionTest {
     }
     
     
-    //handle suggestions tests
+    //checks that suggestion no one can disprove returns null
     @Test
     public void testSuggestionNoOneCanDisprove() {
-
-        // Make a suggestion that no one can disprove
         Card roomCard = new Card("RoomA", CardType.ROOM);
         Card weaponCard = new Card("WeaponY", CardType.WEAPON);
         Card personCard = new Card("PersonZ", CardType.PERSON);
         Player humanPlayer = new HumanPlayer("Harry Potter", Color.BLUE, 0, 4);
-
         assertNull(humanPlayer.disproveSuggestion(roomCard, weaponCard, personCard));
     }   
 }
-
