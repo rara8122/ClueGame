@@ -174,7 +174,7 @@ public class ComputerAITest {
 	    computerPlayer.updateSeen(new Card("The Triforce", CardType.WEAPON)); 
         // Run the createSolution method multiple times
         for (int i = 0; i < RUN_TIMES; i++) {
-            computerPlayer.createSolution(deck, "");
+            computerPlayer.createSolution(deck, "Arendelle");
             if(computerPlayer.getWeaponSuggestion().equals(unseenWeapon1)) {
             	unseen1Picked = true;
             }
@@ -196,9 +196,9 @@ public class ComputerAITest {
     public void testCreateSuggestionWithMultipleUnseenPersons() {
     	ComputerPlayer computerPlayer = new ComputerPlayer("Bruce Wayne (Batman)", Color.BLACK, 18, 0);
         // Add multiple unseen weapon cards to the deck
-        Card unseenPerson1 = new Card("Link", CardType.PERSON);
+        Card unseenPerson1 = new Card("Bruce Wayne (Batman)", CardType.PERSON);
         Card unseenPerson2 = new Card("Harry Potter", CardType.PERSON);
-        Card unseenPerson3 = new Card("The Skywalker Lightsaber", CardType.PERSON);
+        Card unseenPerson3 = new Card("Frodo Baggins", CardType.PERSON);
         
         Set<Card> deck = board.getDeck();
         Boolean unseen1 = false;
@@ -211,7 +211,7 @@ public class ComputerAITest {
 
         // Run the createSolution method multiple times
         for (int i = 0; i < RUN_TIMES; i++) {
-            computerPlayer.createSolution(deck, "");
+            computerPlayer.createSolution(deck, "Arendelle");
             if(computerPlayer.getPersonSuggestion().equals(unseenPerson1)) {
             	unseen1 = true;
             }
@@ -222,7 +222,9 @@ public class ComputerAITest {
             	unseen3 = true;
             }
         }
-        assertTrue(deck.contains(computerPlayer.getPersonSuggestion()));
+        assertTrue(unseen1);
+        assertTrue(unseen2);
+        assertTrue(unseen3);
          
     }
 }

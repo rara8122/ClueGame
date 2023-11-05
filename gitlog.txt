@@ -1,6 +1,110 @@
+commit acbed3aa923530eabdcd34170c9bf19d44b187a0
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Sun Nov 5 15:34:05 2023 -0700
+
+    comments and last tests
+
+commit 76aca2a15dfda4db7127fcca34bf4a7dc34b453f
+Author: Rachel <rara8122@MacBook-Pro-8.local>
+Date:   Sun Nov 5 14:39:15 2023 -0700
+
+    suggestion with multiple players
+
+commit 014f6ad891d49b8cdf0c45e66d1f34b81f8c5f1a
+Author: Rachel <rara8122@MacBook-Pro-8.local>
+Date:   Sun Nov 5 14:18:57 2023 -0700
+
+    ComputerAiTest.java now runs and passes
+
+commit edc9282e6e419fd91fbd44a63c1c273c0a82dd68
+Author: Rachel <rara8122@MacBook-Pro-8.local>
+Date:   Sun Nov 5 14:11:55 2023 -0700
+
+    handleSuggestion code and all tests pass
+
+commit ee832907571c109d5c4bdf25f177f72c3cc262e9
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Sun Nov 5 13:23:47 2023 -0700
+
+    disprove suggestions tests
+
+commit cc0b4d282b79032dae2c236a3a83daf0588d46c8
+Author: Rachel <rara8122@MacBook-Pro-8.hsd1.co.comcast.net>
+Date:   Sat Nov 4 16:39:30 2023 -0600
+
+    finished suggestion tests (i think)
+
+commit 21ed0443c91f49f8532ebd3fa1f836f32acb0236
+Author: Rachel <rara8122@MacBook-Pro-8.hsd1.co.comcast.net>
+Date:   Sat Nov 4 16:22:30 2023 -0600
+
+    started testCreateSuggestion functions
+
+commit 907a3fbba33695ef41e83861beb0090add2e2a53
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Sat Nov 4 15:54:54 2023 -0600
+
+    tests for computer player suggestion
+
+commit 3f8d923e2ecd794e9e72e9f3aa04e2006b6966b3
+Author: Rachel <rara8122@MacBook-Pro-8.hsd1.co.comcast.net>
+Date:   Sat Nov 4 15:52:38 2023 -0600
+
+    added disproveSuggestion code
+
+commit c9a6a14474a3a7636e21d22f6a50b189c63a9970
+Author: Rachel <rara8122@MacBook-Pro-8.hsd1.co.comcast.net>
+Date:   Sat Nov 4 15:18:01 2023 -0600
+
+    got tests passing, fixed deal code when initialize gets called more than once
+
+commit e10d0e38862b529c90c3d2331e22a3158cf62f15
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Sat Nov 4 14:34:58 2023 -0600
+
+    help on new test in ComputerAiTest
+
+commit ecb8e4ffb595c007c0339fc6c5191872198d515a
+Author: Rachel <rara8122@MacBook-Pro-8.hsd1.co.comcast.net>
+Date:   Sat Nov 4 13:24:22 2023 -0600
+
+    altered select target logic to choose rooms first
+
+commit 1b9c5d35b002f963180b04a6e6e3d77efdf5c0b9
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Sat Nov 4 12:52:38 2023 -0600
+
+    got ComputerAI selected targets test to pass
+
+commit 268ee45a72d234b6552526f3220bf945af970960
+Author: Rachel <rara8122@MacBook-Pro-8.hsd1.co.comcast.net>
+Date:   Fri Nov 3 17:03:33 2023 -0600
+
+    code for computerPlayer
+
+commit a8ce8bc69317d70fa206f61376c8464ffe093dc4
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Fri Nov 3 16:03:42 2023 -0600
+
+    teets for computer player select a target
+
+commit 1386d485ba8ed6bc35f700406c8f62bcfb45d53b
+Author: Rachel <rara8122@MacBook-Pro-8.hsd1.co.comcast.net>
+Date:   Fri Nov 3 15:25:25 2023 -0600
+
+    GameSolutionTest.java now passes
+
+commit 6ce8b5aa459c3d87483b9e3b40b7cce58f151e53
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Fri Nov 3 14:35:20 2023 -0600
+
+    added both test classes and wrote failing tests for testCorrectAccusation
+
 commit 362c9c381de19db6914c3913ee213aa4f53ea70c
 Author: MancMelP <melanie.mancera23@gmail.com>
 Date:   Thu Nov 2 21:00:08 2023 -0600
+
+****************************** below is previous assignment ************************************
 
     checked that it meets coding standards and wrote header comments and inline comments, also updated the readme
 
@@ -151,8 +255,6 @@ Date:   Tue Oct 31 14:39:04 2023 -0600
 commit de669bb76b122bbfc84c6c028ec2446849abf0c4
 Author: Rachel <rara8122@MacBook-Pro-3.hsd1.co.comcast.net>
 Date:   Fri Oct 27 14:58:46 2023 -0600
-
-*************************** Below this line is previous assignment commits *********************
 
     added submission file
 
