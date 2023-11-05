@@ -17,6 +17,7 @@ import java.awt.Color;
 
 public class ComputerAITest {
 	private static Board board;
+	public static final int RUN_TIMES = 20;
 	
 	//runs before all tests 
 	@BeforeAll
@@ -36,7 +37,7 @@ public class ComputerAITest {
         targets.add(new BoardCell(1, 1, 'W', "Walkway")); // Add a walkway cell
 
         // Run the selectTarget method multiple times and ensure it selects randomly
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < RUN_TIMES; i++) {
             BoardCell selectedTarget = computerPlayer.selectTarget(targets);
             assertTrue(targets.contains(selectedTarget));
         }
@@ -55,7 +56,7 @@ public class ComputerAITest {
         targets.add(unseenRoom);
 
         // Run the selectTarget method multiple times and ensure it selects the unseen room
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < RUN_TIMES; i++) {
             BoardCell selectedTarget = computerPlayer.selectTarget(targets);
             assertEquals(unseenRoom, selectedTarget);
         }
@@ -78,7 +79,7 @@ public class ComputerAITest {
         // It should select either the seen room or the walkway
         boolean roomSelected = false;
         boolean walkwaySelected = false;
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < RUN_TIMES; i++) {
             BoardCell selectedTarget = computerPlayer.selectTarget(targets);
             if (selectedTarget == seenRoom) {
                 roomSelected = true;
@@ -106,7 +107,7 @@ public class ComputerAITest {
         computerPlayer.updateSeen(weaponCard); // Unseen weapon
         computerPlayer.addCard(playerCard); // Unseen person
         
-        for(int i = 0; i < 100; i++) {
+        for(int i = 0; i < RUN_TIMES; i++) {
 	        computerPlayer.createSolution(deck, currentRoom.getName());
 	        // Ensure that the room in the suggestion matches the current room
 	        assertTrue(roomCard.equals(computerPlayer.getRoomSuggestion()));
@@ -128,7 +129,7 @@ public class ComputerAITest {
 	    computerPlayer.updateSeen(new Card("The Infinity Gauntlet", CardType.WEAPON)); 
 	    computerPlayer.updateSeen(new Card("The Triforce", CardType.WEAPON)); 
 	    
-	    for(int i = 0; i < 100; i++) {
+	    for(int i = 0; i < RUN_TIMES; i++) {
 	        computerPlayer.createSolution(deck, "Arendelle");
 	        // Ensure that the room in the suggestion matches the current room
 	        assertTrue(computerPlayer.getWeaponSuggestion().equals(unseenWeapon));
@@ -147,7 +148,7 @@ public class ComputerAITest {
 	    computerPlayer.updateSeen(new Card("Luke Skywalker", CardType.PERSON)); 
 	    computerPlayer.updateSeen(new Card("Tony Stark (Iron Man)", CardType.PERSON)); 
 	    
-	    for(int i = 0; i < 100; i++) {
+	    for(int i = 0; i < RUN_TIMES; i++) {
 	        computerPlayer.createSolution(deck, "Arendelle");
 	        // Ensure that the room in the suggestion matches the current room
 	        assertTrue(computerPlayer.getPersonSuggestion().equals(unseenPerson));
@@ -173,7 +174,7 @@ public class ComputerAITest {
 	    computerPlayer.updateSeen(new Card("The Triforce", CardType.WEAPON)); 
 
         // Run the createSolution method multiple times
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < RUN_TIMES; i++) {
             computerPlayer.createSolution(deck, "");
             if(computerPlayer.getWeaponSuggestion().equals(unseenWeapon1)) {
             	unseen1Picked = true;

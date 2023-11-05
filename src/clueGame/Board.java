@@ -527,13 +527,17 @@ public class Board {
 	    return (roomAccusation.equals(room) && weaponAccusation.equals(weapon) && personAccusation.equals(player));
 	}
 	public Card handleSuggestion(Player suggestingPlayer, Card roomCard, Card weaponCard, Card personCard) {
-		return personCard;
-		// TODO Auto-generated method stub
-	
-	}
-	public Player getCurrentPlayer() {
-		// TODO Auto-generated method stub
-		return null;
+		Card returnCard = null;
+		for (Player person : computers) {
+			returnCard = person.disproveSuggestion(roomCard, weaponCard, personCard);
+			if(returnCard != null && suggestingPlayer != person) {
+				return returnCard;
+			}
+		}
+		if(suggestingPlayer == user) {
+			return null;
+		}
+		return user.disproveSuggestion(roomCard, weaponCard, personCard);
 	}
 
 }
