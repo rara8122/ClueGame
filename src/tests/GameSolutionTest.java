@@ -95,7 +95,7 @@ public class GameSolutionTest {
 	}
 	
 	@Test
-	public void testSuggestionWeHave() {
+	public void testSuggestionWeDisprove() {
 		HumanPlayer user = board.getUser();
 		Set<ComputerPlayer> players = board.getPlayers();
 		Set<Card> deck = user.getCards();
@@ -121,6 +121,64 @@ public class GameSolutionTest {
 				}
 				if (card.getCardType() == CardType.ROOM) {
 					assertNull((board.handleSuggestion(player, card, correctWeapon, correctPerson)));
+				}
+			}
+		}
+	}
+	
+	@Test
+	public void testSuggestionTwoDisprove() {
+		HumanPlayer user = board.getUser();
+		Set<ComputerPlayer> players = board.getPlayers();
+		Set<Card> deck1 = user.getCards();
+		Set<Card> deck2 = user.getCards();
+		Card roomSuggestion = correctRoom;
+		Card weaponSuggestion = correctWeapon;
+		Card personSuggestion = correctPerson;
+		for(Player player1: players) {
+			deck1 = player1.getCards();
+			for(Player player2: players) {
+				deck2 = player2.getCards();
+				if(player1 == player2) {
+					break;
+				}
+				for (Card card1: deck1) {
+					for (Card card2: deck2) {
+						roomSuggestion = correctRoom;
+						weaponSuggestion = correctWeapon;
+						personSuggestion = correctPerson;
+						if (card1.getCardType() == CardType.PERSON) {
+							personSuggestion = card1;
+						}
+						if (card1.getCardType() == CardType.WEAPON) {
+							weaponSuggestion = card1;
+						}
+						if (card1.getCardType() == CardType.ROOM) {
+							roomSuggestion = card1;
+						}
+						if (card2.getCardType() == CardType.PERSON) {
+							personSuggestion = card2;
+						}
+						if (card2.getCardType() == CardType.WEAPON) {
+							weaponSuggestion = card2;
+						}
+						if (card2.getCardType() == CardType.ROOM) {
+							roomSuggestion = card2;
+						}
+						System.out.println();
+						System.out.println(player1.getName());
+						System.out.println(card1.getCardName());
+						System.out.println(player2.getName());
+						System.out.println(card2.getCardName());
+						
+						System.out.println();
+						System.out.println(roomSuggestion.getCardName());
+						System.out.println(weaponSuggestion.getCardName());
+						System.out.println(personSuggestion.getCardName());
+						
+						System.out.println((board.handleSuggestion(user, roomSuggestion, weaponSuggestion, personSuggestion)).getCardName());
+						assertTrue(card2.equals(board.handleSuggestion(user, roomSuggestion, weaponSuggestion, personSuggestion)));
+					}
 				}
 			}
 		}

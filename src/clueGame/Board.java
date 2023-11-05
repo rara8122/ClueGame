@@ -527,17 +527,17 @@ public class Board {
 	    return (roomAccusation.equals(room) && weaponAccusation.equals(weapon) && personAccusation.equals(player));
 	}
 	public Card handleSuggestion(Player suggestingPlayer, Card roomCard, Card weaponCard, Card personCard) {
-		Card returnCard = null;
+		Card returnCard = user.disproveSuggestion(roomCard, weaponCard, personCard);
+		if(returnCard != null && suggestingPlayer != user) {
+			return returnCard;
+		}
 		for (Player person : computers) {
 			returnCard = person.disproveSuggestion(roomCard, weaponCard, personCard);
 			if(returnCard != null && suggestingPlayer != person) {
 				return returnCard;
 			}
 		}
-		if(suggestingPlayer == user) {
-			return null;
-		}
-		return user.disproveSuggestion(roomCard, weaponCard, personCard);
+		return null;
 	}
 
 }
