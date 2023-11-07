@@ -2,12 +2,14 @@ package clueGame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
@@ -16,17 +18,21 @@ public class GameControlPanel extends JPanel{
 	/**
 	 * Constructor for the panel, it does 90% of the work
 	 */
+	private JTextArea player;
+	private JTextArea roll;
+	private JTextArea guess;
+	private JTextArea guessResult;
 	public GameControlPanel()  {
 		JButton nextPlayerButton = new JButton("Next Player");
         JButton makeAccusationButton = new JButton("Make Accusation");
         JLabel dieRollLabel = new JLabel("Roll: ");
         JLabel whoseTurn = new JLabel("Whose Turn?");
         //text field for whose turn
-        JTextField player = new JTextField();
+        player = new JTextArea();
         //text field for roll number
-        JTextField roll = new JTextField();
-        JTextField guess = new JTextField();
-        JTextField guessResult = new JTextField();
+        roll = new JTextArea();
+        guess = new JTextArea();
+        guessResult = new JTextArea();
         
         //panel with the player turn label and player
         JPanel whoseTurnP = new JPanel(); 
@@ -48,12 +54,14 @@ public class GameControlPanel extends JPanel{
         
         //create right panel
         JPanel rightPanel = new JPanel();
+        rightPanel.setLayout(new GridLayout(2, 2));
         rightPanel.add(whoseTurnP);
         rightPanel.add(dieRollP);
-        rightPanel.add(nextPlayerButton);
         rightPanel.add(makeAccusationButton);
+        rightPanel.add(nextPlayerButton);
         //create left panel
         JPanel leftPanel = new JPanel();
+        leftPanel.setLayout(new GridLayout(2, 1));
         leftPanel.add(guessPanel);
         leftPanel.add(guessResultPanel);
         setLayout(new BorderLayout());   
@@ -62,9 +70,7 @@ public class GameControlPanel extends JPanel{
         JPanel wholePanel = new JPanel();
         wholePanel.add(leftPanel);
         wholePanel.add(rightPanel);
-        add(wholePanel);
-        
-        
+        add(wholePanel);  
 	}
 	
 	
@@ -85,15 +91,20 @@ public class GameControlPanel extends JPanel{
 		// test filling in the data
 		panel.setTurn(new ComputerPlayer("Bruce Wayne (Batman)", Color.BLACK, 18, 0));
 		panel.setGuess( "I have no guess!");
-		panel.setGuess( "So you have nothing?");
+		panel.setGuessResult( "So you have nothing?");
 	}
 
 
+
+	private void setGuessResult(String string) {
+		guessResult.setText(string);
+	}
 
 	private void setGuess(String string) {
-		// TODO Auto-generated method stub		
+		guess.setText(string);	
 	}
-	private void setTurn(ComputerPlayer computerPlayer) {
-		// TODO Auto-generated method stub		
+	private void setTurn(Player currentTurn) {
+		player.setText(currentTurn.getName());	
+		player.setBackground(currentTurn.getColor());
 	}
 }
