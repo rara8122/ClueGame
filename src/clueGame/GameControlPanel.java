@@ -49,7 +49,7 @@ public class GameControlPanel extends JPanel{
         //panel guess results
         JPanel guessResultPanel = new JPanel();
         guessResultPanel.add(guessResult);
-        guessPanel.setBorder(new TitledBorder( new EtchedBorder(), "Guess Result"));
+        guessResultPanel.setBorder(new TitledBorder( new EtchedBorder(), "Guess Result"));
         
         
         //create right panel
@@ -89,7 +89,7 @@ public class GameControlPanel extends JPanel{
 		frame.setVisible(true); // make it visible
 		
 		// test filling in the data
-		panel.setTurn(new ComputerPlayer("Bruce Wayne (Batman)", Color.BLUE, 18, 0));
+		panel.setTurn(new ComputerPlayer("Bruce Wayne (Batman)", Color.BLACK, 18, 0));
 		panel.setGuess( "I have no guess!");
 		panel.setGuessResult( "So you have nothing?");
 	}
