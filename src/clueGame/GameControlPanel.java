@@ -89,7 +89,7 @@ public class GameControlPanel extends JPanel{
 		frame.setVisible(true); // make it visible
 		
 		// test filling in the data
-		panel.setTurn(new ComputerPlayer("Bruce Wayne (Batman)", Color.BLACK, 18, 0));
+		panel.setTurn(new ComputerPlayer("Bruce Wayne (Batman)", Color.BLUE, 18, 0));
 		panel.setGuess( "I have no guess!");
 		panel.setGuessResult( "So you have nothing?");
 	}
@@ -103,8 +103,13 @@ public class GameControlPanel extends JPanel{
 	private void setGuess(String string) {
 		guess.setText(string);	
 	}
-	private void setTurn(Player currentTurn) {
-		player.setText(currentTurn.getName());	
+	private void setTurn(Player currentTurn) {	
+		if(currentTurn.getColor().getBlue() + currentTurn.getColor().getGreen() + currentTurn.getColor().getRed() <= 255) {
+			player.setForeground(Color.WHITE);
+		} else {
+			player.setSelectedTextColor(Color.BLACK);
+		}
 		player.setBackground(currentTurn.getColor());
+		player.setText(currentTurn.getName());
 	}
 }
