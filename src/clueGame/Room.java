@@ -7,6 +7,8 @@
 */
 package clueGame;
 
+import java.awt.Graphics;
+
 public class Room {
 	private String name;
 	private BoardCell centerCell;
@@ -34,5 +36,12 @@ public class Room {
 
 	public BoardCell getCenterCell() {
 		return centerCell;
+	}
+	public void draw(int width, int height, Graphics newGraphic) {
+		if(labelCell != null) {
+			int x = width * labelCell.getColumn();
+			int y = height * labelCell.getRow();
+			newGraphic.drawString(name, x, y);
+		}
 	}
 }

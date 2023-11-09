@@ -8,6 +8,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -157,6 +158,11 @@ public abstract class Player {
 	}
 	public Set<Card> getCards() {
 		return deck;	
-		// TODO Auto-generated method stub		
+			
+	}
+	public void draw(int width, int height, Graphics newGraphic) {
+		int x = width * column;
+		int y = height * row;
+		newGraphic.drawOval(x, y, width, height);
 	}
 }

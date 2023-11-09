@@ -11,6 +11,7 @@ import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -76,12 +77,17 @@ public class Board extends JPanel{
 		super.paintComponent(newGraphic);
 		int width = getWidth()/numColumns;
 		int height = getHeight()/numRows;
-		System.out.println(getWidth());
-		System.out.println(getHeight());
 		for (int i = 0; i < numRows; i++) {
 			for(int j = 0; j < numColumns; j++) {
 				grid[i][j].draw(width, height, newGraphic);
 			}
+		}
+		Collection<Room> rooms = roomMap.values();
+		for (Room room : rooms) {
+			room.draw(width, height, newGraphic);
+		}
+		for (Player player : computers) {
+			player.draw(width, height, newGraphic);
 		}
 	}
 	//loads setup config
