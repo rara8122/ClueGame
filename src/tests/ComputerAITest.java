@@ -68,7 +68,7 @@ public class ComputerAITest {
 	@Test
     public void testSelectTargetSeenRoomInList() {
         ComputerPlayer computerPlayer = new ComputerPlayer("Bruce Wayne (Batman)", Color.BLUE, 18, 0);
-        computerPlayer.updateSeen(new Card("France", CardType.ROOM));      
+        computerPlayer.updateSeen(new Card("France", CardType.ROOM), Color.WHITE);      
         // Create a set of targets with a room that has been seen
         BoardCell seenRoom = new BoardCell(5, 5, 'B', "France"); // Add a seen room cell
         seenRoom.setRoomCenter(true);
@@ -103,8 +103,8 @@ public class ComputerAITest {
         Card roomCard = new Card("Arendelle", CardType.ROOM);
         Card weaponCard = new Card("The Elder Wand", CardType.WEAPON);
         Card playerCard = new Card("Hermione Granger", CardType.PERSON);
-        computerPlayer.updateSeen(roomCard); // Assuming "Arendelle" matches the current room
-        computerPlayer.updateSeen(weaponCard); // Unseen weapon
+        computerPlayer.updateSeen(roomCard, Color.WHITE); // Assuming "Arendelle" matches the current room
+        computerPlayer.updateSeen(weaponCard, Color.WHITE); // Unseen weapon
         computerPlayer.addCard(playerCard); // Unseen person
         //ensures randomness
         for(int i = 0; i < RUN_TIMES; i++) {
@@ -123,11 +123,11 @@ public class ComputerAITest {
 	    Card unseenWeapon = new Card("The One Ring", CardType.WEAPON);
 	    Set<Card> deck = board.getDeck();
 		
-	    computerPlayer.updateSeen(new Card("Lazarus Pit Water", CardType.WEAPON)); 
-	    computerPlayer.updateSeen(new Card("The Elder Wand", CardType.WEAPON)); 
-	    computerPlayer.updateSeen(new Card("The Skywalker Lightsaber", CardType.WEAPON)); 
-	    computerPlayer.updateSeen(new Card("The Infinity Gauntlet", CardType.WEAPON)); 
-	    computerPlayer.updateSeen(new Card("The Triforce", CardType.WEAPON)); 
+	    computerPlayer.updateSeen(new Card("Lazarus Pit Water", CardType.WEAPON), Color.WHITE); 
+	    computerPlayer.updateSeen(new Card("The Elder Wand", CardType.WEAPON), Color.WHITE); 
+	    computerPlayer.updateSeen(new Card("The Skywalker Lightsaber", CardType.WEAPON), Color.WHITE); 
+	    computerPlayer.updateSeen(new Card("The Infinity Gauntlet", CardType.WEAPON), Color.WHITE); 
+	    computerPlayer.updateSeen(new Card("The Triforce", CardType.WEAPON), Color.WHITE); 
 	    
 	    for(int i = 0; i < RUN_TIMES; i++) {
 	        computerPlayer.createSolution(deck, "Arendelle");
@@ -142,11 +142,11 @@ public class ComputerAITest {
 	    Card unseenPerson = new Card("Link", CardType.PERSON);  
 	    Set<Card> deck = board.getDeck();
 		
-	    computerPlayer.updateSeen(new Card("Bruce Wayne (Batman)", CardType.PERSON)); 
-	    computerPlayer.updateSeen(new Card("Harry Potter", CardType.PERSON)); 
-	    computerPlayer.updateSeen(new Card("Frodo Baggins", CardType.PERSON)); 
-	    computerPlayer.updateSeen(new Card("Luke Skywalker", CardType.PERSON)); 
-	    computerPlayer.updateSeen(new Card("Tony Stark (Iron Man)", CardType.PERSON)); 
+	    computerPlayer.updateSeen(new Card("Bruce Wayne (Batman)", CardType.PERSON), Color.WHITE); 
+	    computerPlayer.updateSeen(new Card("Harry Potter", CardType.PERSON), Color.WHITE); 
+	    computerPlayer.updateSeen(new Card("Frodo Baggins", CardType.PERSON), Color.WHITE); 
+	    computerPlayer.updateSeen(new Card("Luke Skywalker", CardType.PERSON), Color.WHITE); 
+	    computerPlayer.updateSeen(new Card("Tony Stark (Iron Man)", CardType.PERSON), Color.WHITE); 
 	    
 	    for(int i = 0; i < RUN_TIMES; i++) {
 	        computerPlayer.createSolution(deck, "Arendelle");
@@ -169,9 +169,9 @@ public class ComputerAITest {
         Boolean unseen2Picked = false;
         Boolean unseen3Picked = false;
         
-        computerPlayer.updateSeen(new Card("Lazarus Pit Water", CardType.WEAPON)); 
-	    computerPlayer.updateSeen(new Card("The Infinity Gauntlet", CardType.WEAPON)); 
-	    computerPlayer.updateSeen(new Card("The Triforce", CardType.WEAPON)); 
+        computerPlayer.updateSeen(new Card("Lazarus Pit Water", CardType.WEAPON), Color.WHITE); 
+	    computerPlayer.updateSeen(new Card("The Infinity Gauntlet", CardType.WEAPON), Color.WHITE); 
+	    computerPlayer.updateSeen(new Card("The Triforce", CardType.WEAPON), Color.WHITE); 
         // Run the createSolution method multiple times
         for (int i = 0; i < RUN_TIMES; i++) {
             computerPlayer.createSolution(deck, "Arendelle");
@@ -205,9 +205,9 @@ public class ComputerAITest {
         Boolean unseen2 = false;
         Boolean unseen3 = false;
         
-        computerPlayer.updateSeen(new Card("Tony Stark (Iron Man)", CardType.PERSON)); 
-	    computerPlayer.updateSeen(new Card("Luke Skywalker", CardType.PERSON)); 
-	    computerPlayer.updateSeen(new Card("Link", CardType.PERSON)); 
+        computerPlayer.updateSeen(new Card("Tony Stark (Iron Man)", CardType.PERSON), Color.WHITE); 
+	    computerPlayer.updateSeen(new Card("Luke Skywalker", CardType.PERSON), Color.WHITE); 
+	    computerPlayer.updateSeen(new Card("Link", CardType.PERSON), Color.WHITE); 
 
         // Run the createSolution method multiple times
         for (int i = 0; i < RUN_TIMES; i++) {

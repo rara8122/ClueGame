@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.TextArea;
 import java.util.HashSet;
@@ -30,13 +31,19 @@ public class ClueCardsPanel extends JPanel{
 		setLayout(new GridLayout(3, 1));	
 		
 		inHandPeople = new JPanel();
+		inHandPeople.setBorder(new TitledBorder( new EtchedBorder(), "In Hand:"));
 		seenPeople = new JPanel();
+		seenPeople.setBorder(new TitledBorder( new EtchedBorder(), "Seen:"));
 		
 		inHandRooms = new JPanel();
+		inHandRooms.setBorder(new TitledBorder( new EtchedBorder(), "In Hand:"));
 		seenRooms = new JPanel();
+		seenRooms.setBorder(new TitledBorder( new EtchedBorder(), "Seen:"));
 		
 		inHandWeapons = new JPanel();
+		inHandWeapons.setBorder(new TitledBorder( new EtchedBorder(), "In Hand:"));
 		seenWeapons = new JPanel();
+		seenWeapons.setBorder(new TitledBorder( new EtchedBorder(), "Seen:"));
 		
 		peoplePanel = new JPanel();
 		peoplePanel.setBorder(new TitledBorder( new EtchedBorder(), "People"));
@@ -49,15 +56,17 @@ public class ClueCardsPanel extends JPanel{
 		roomsPanel.setBorder(new TitledBorder( new EtchedBorder(), "Rooms"));
 		roomsPanel.setLayout(new GridLayout(2, 1));
 		roomsPanel.add(inHandRooms);
-		peoplePanel.add(seenRooms);
+		roomsPanel.add(seenRooms);
 		
 		weaponsPanel = new JPanel();
 		weaponsPanel.setBorder(new TitledBorder( new EtchedBorder(), "Weapons"));
 		weaponsPanel.setLayout(new GridLayout(2, 1));
 		weaponsPanel.add(inHandWeapons);
-		peoplePanel.add(seenWeapons);
+		weaponsPanel.add(seenWeapons);
 		
-		
+		add(peoplePanel);
+		add(roomsPanel);
+		add(weaponsPanel);
 		
 	}
 	
@@ -87,24 +96,42 @@ public class ClueCardsPanel extends JPanel{
 		roomsPanel.add(inHandRooms);
 		weaponsPanel.add(inHandWeapons);
 	}
-	public void updateSeenCards(Set<Card> newCards) {
+	public void updateSeenCards(Set<SeenCard> newCards) {
 		seenPeople.removeAll();
 		seenRooms.removeAll();
 		seenWeapons.removeAll();
 		JTextArea newCardArea;
-		for (Card card : newCards) {
+		for (SeenCard card : newCards) {
 			if(card.getCardType() == CardType.PERSON) {
 				newCardArea = new JTextArea();
+				if(card.getColor().getBlue() + card.getColor().getGreen() + card.getColor().getRed() <= 255) {
+					newCardArea.setForeground(Color.WHITE);
+				} else {
+					newCardArea.setSelectedTextColor(Color.BLACK);
+				}
+				newCardArea.setBackground(card.getColor());
 				newCardArea.setText(card.getCardName());
 				seenPeople.add(newCardArea);
 			}
 			if(card.getCardType() == CardType.ROOM) {
 				newCardArea = new JTextArea();
+				if(card.getColor().getBlue() + card.getColor().getGreen() + card.getColor().getRed() <= 255) {
+					newCardArea.setForeground(Color.WHITE);
+				} else {
+					newCardArea.setSelectedTextColor(Color.BLACK);
+				}
+				newCardArea.setBackground(card.getColor());
 				newCardArea.setText(card.getCardName());
 				seenRooms.add(newCardArea);
 			}
 			if(card.getCardType() == CardType.WEAPON) {
 				newCardArea = new JTextArea();
+				if(card.getColor().getBlue() + card.getColor().getGreen() + card.getColor().getRed() <= 255) {
+					newCardArea.setForeground(Color.WHITE);
+				} else {
+					newCardArea.setSelectedTextColor(Color.BLACK);
+				}
+				newCardArea.setBackground(card.getColor());
 				newCardArea.setText(card.getCardName());
 				seenWeapons.add(newCardArea);
 			}

@@ -18,7 +18,7 @@ public abstract class Player {
 	private Color color;
 	private int row, column; 
 	private Set<Card> deck;
-	private Set<Card> seen;
+	private Set<SeenCard> seen;
 	private int deckSize;
 
 
@@ -28,7 +28,7 @@ public abstract class Player {
 		this.row = row;
 		this.column = column;
 		deck = new HashSet<Card>();
-		seen = new HashSet<Card>();
+		seen = new HashSet<SeenCard>();
 		deckSize = 0;
 	}
 	//method to disprove a suggestion
@@ -99,8 +99,8 @@ public abstract class Player {
 				solution = true;
 			}
 		}
-		for (Card c : seen) {
-			if (c.equals(card)) {
+		for (SeenCard c : seen) {
+			if (c.getCard().equals(card)) {
 				solution = true;
 			}
 		}
@@ -112,8 +112,9 @@ public abstract class Player {
 		deckSize++;
 	}
 	//adds a card to the seen cards
-	public void updateSeen(Card newCard) {
-		seen.add(newCard);
+	public void updateSeen(Card newCard, Color color) {
+		SeenCard newSeenCard = new SeenCard(newCard, color);
+		seen.add(newSeenCard);
 	}
 	//getters and setters
 	public boolean deckFull() {

@@ -7,6 +7,8 @@
  */
 package clueGame;
 
+import java.awt.Color;
+
 public class Card {
 	
 	private String cardName;
