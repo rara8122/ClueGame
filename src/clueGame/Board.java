@@ -86,6 +86,7 @@ public class Board extends JPanel{
 		for (Room room : rooms) {
 			room.draw(width, height, newGraphic);
 		}
+		user.draw(width, height, newGraphic);
 		for (Player player : computers) {
 			player.draw(width, height, newGraphic);
 		}

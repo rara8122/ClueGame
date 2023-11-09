@@ -164,5 +164,7 @@ public abstract class Player {
 		int x = width * column;
 		int y = height * row;
 		newGraphic.drawOval(x, y, width, height);
+		newGraphic.setColor(color);
+		newGraphic.fillOval(x, y, width, height);
 	}
 }
