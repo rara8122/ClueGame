@@ -131,8 +131,10 @@ public class ClueCardsPanel extends JPanel{
 				handWeapons.add(card);
 			}
 		}
+		// Check if there are cards in the handPeople deck
 		if(handPeople.size() >= 1) {
 			inHandPeople.removeAll();
+			// Iterate through the 'handPeople' deck and display each card's name in 'inHandPeople'
 			for (Card card : handPeople) {
 				newCardArea = new JTextArea();
 				newCardArea.setText(card.getCardName());
@@ -140,6 +142,7 @@ public class ClueCardsPanel extends JPanel{
 				inHandPeople.add(newCardArea);
 			}
 		}
+		// Repeat the above process for 'handRooms' deck
 		if(handRooms.size() >= 1) {
 			inHandRooms.removeAll();
 			for (Card card : handRooms) {
@@ -148,7 +151,7 @@ public class ClueCardsPanel extends JPanel{
 				newCardArea.setEditable( false );
 				inHandRooms.add(newCardArea);
 			}
-		}
+		}// Repeat the above process for 'handWeapons' deck
 		if(handWeapons.size() >= 1) {
 			inHandWeapons.removeAll();
 			//inHandWeapons.setLayout(new GridLayout(handWeapons.size(), 1));
@@ -170,8 +173,11 @@ public class ClueCardsPanel extends JPanel{
 		Set<SeenCard> people = new HashSet<>();
 		Set<SeenCard> rooms = new HashSet<>();
 		Set<SeenCard> weapons = new HashSet<>();
+		// Iterate through a list of 'newCards' containing cards of different types
 		for (SeenCard card : newCards) {
+			// Check if the card is of type PERSON
 			if(card.getCardType() == CardType.PERSON) {
+				// If it's a person card, add it to the 'people' list
 				people.add(card);
 			}
 			if(card.getCardType() == CardType.ROOM) {
@@ -181,10 +187,14 @@ public class ClueCardsPanel extends JPanel{
 				weapons.add(card);
 			}
 		}
+		// Check if there are cards in the 'people' list
 		if(people.size() > 0) {
 			seenPeople.removeAll();
+			// Iterate through the 'people' list and display each 'SeenCard' object in 'seenPeople'
 			for (SeenCard card : people) {
+				// Create a new text area for displaying the card's name
 				newCardArea = new JTextArea();
+				// Iterate through the 'people' list and display each 'SeenCard' object in 'seenPeople'
 				if(card.getColor().getBlue() + card.getColor().getGreen() + card.getColor().getRed() <= 255) {
 					newCardArea.setForeground(Color.WHITE);
 				} else {
@@ -196,6 +206,7 @@ public class ClueCardsPanel extends JPanel{
 				seenPeople.add(newCardArea);
 			}
 		}
+		//repeats process as last loop but for rooms
 		if(rooms.size() > 0) {
 			seenRooms.removeAll();
 			for (SeenCard card : rooms) {
@@ -211,6 +222,7 @@ public class ClueCardsPanel extends JPanel{
 				seenRooms.add(newCardArea);
 			}
 		}
+		//repeats prcess as last loop but for weapons
 		if(weapons.size() > 0) {
 			seenWeapons.removeAll();
 			for (SeenCard card : weapons) {
@@ -231,6 +243,11 @@ public class ClueCardsPanel extends JPanel{
 		weaponsPanel.add(seenWeapons);
 	}
 	
+	/**
+	 * Main to test the panel
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		ClueCardsPanel panel = new ClueCardsPanel();  // create the panel
 		JFrame frame = new JFrame();  // create the frame 
