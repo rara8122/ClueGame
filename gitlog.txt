@@ -1,3 +1,41 @@
+commit 085d562238a3fd5eef5489db2ad0371ef09fd4a8
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Wed Nov 8 18:51:37 2023 -0700
+
+    altered readme
+
+commit e277026ae51b0b5e6509e978bfdfc128129ec73f
+Author: Rachel <rara8122@MacBook-Pro-8.local>
+Date:   Tue Nov 7 15:44:34 2023 -0700
+
+    guessResult Border
+
+commit 1d9bf60bce1131b5f8add0884fc7d69924ecfd7f
+Author: Rachel <rara8122@MacBook-Pro-8.local>
+Date:   Tue Nov 7 15:42:24 2023 -0700
+
+    text color
+
+commit f3b24252a22a6db5e47e9dd88f7c44a3b1e57fc1
+Author: Rachel <rara8122@MacBook-Pro-8.local>
+Date:   Tue Nov 7 15:22:47 2023 -0700
+
+    text now works for setTurn, setGuess, and setGuessResult
+
+commit d72338583d7f8d5196658c822f362108d3768fd7
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Tue Nov 7 15:02:58 2023 -0700
+
+    added class, created panels main six panels
+
+commit 6fae3c3c85d032d6583fce6081bc22cb82d16757
+Author: Rachel <rara8122@MacBook-Pro-8.local>
+Date:   Sun Nov 5 15:41:17 2023 -0700
+
+***************************** Below is the previous assignments ****************************
+
+    gitlog
+
 commit acbed3aa923530eabdcd34170c9bf19d44b187a0
 Author: MancMelP <melanie.mancera23@gmail.com>
 Date:   Sun Nov 5 15:34:05 2023 -0700
@@ -103,8 +141,6 @@ Date:   Fri Nov 3 14:35:20 2023 -0600
 commit 362c9c381de19db6914c3913ee213aa4f53ea70c
 Author: MancMelP <melanie.mancera23@gmail.com>
 Date:   Thu Nov 2 21:00:08 2023 -0600
-
-****************************** below is previous assignment ************************************
 
     checked that it meets coding standards and wrote header comments and inline comments, also updated the readme
 
