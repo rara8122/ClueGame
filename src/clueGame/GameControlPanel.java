@@ -102,10 +102,14 @@ public class GameControlPanel extends JPanel{
 		panel.setTurn(new ComputerPlayer("Bruce Wayne (Batman)", Color.BLACK, 18, 0));
 		panel.setGuess( "I have no guess!");
 		panel.setGuessResult( "So you have nothing?");
+		panel.setRoll(5);
 	}
 
 
 	//setters
+	private void setRoll(int rollNum) {
+		roll.setText(Integer.toString(rollNum));	
+	}
 	private void setGuessResult(String string) {
 		guessResult.setText(string);
 	}
