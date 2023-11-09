@@ -159,9 +159,9 @@ public class ClueCardsPanel extends JPanel{
 				inHandWeapons.add(newCardArea);
 			}
 		}
-		peoplePanel.add(seenPeople);
-		roomsPanel.add(seenRooms);
-		weaponsPanel.add(seenWeapons);
+		peoplePanel.add(inHandPeople);
+		roomsPanel.add(inHandRooms);
+		weaponsPanel.add(inHandWeapons);
 	}
 	
 	//method to update seen cards
@@ -237,8 +237,7 @@ public class ClueCardsPanel extends JPanel{
 		frame.setContentPane(panel); // put the panel in the frame
 		frame.setSize(300,400 );  // size the frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
-		frame.setVisible(true); // make it visible
-		
+		frame.setVisible(true); // make it visible	
 		  
 	    Set<Card> inHandCards = new HashSet<>();
 	    inHandCards.add(new Card("Link", CardType.PERSON));

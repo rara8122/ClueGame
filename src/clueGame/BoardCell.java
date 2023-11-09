@@ -6,6 +6,7 @@
 */
 package clueGame;
 
+import java.awt.Graphics;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -108,5 +109,10 @@ public class BoardCell {
 	public Set<BoardCell> getAdjList() {
 		return adjList;
 	}
-	
+
+	public void draw(int width, int height, Graphics newGraphic) {
+		int x = width * column;
+		int y = height * row;
+		newGraphic.drawRect(x, y, width, height);
+	}
 }

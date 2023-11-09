@@ -7,6 +7,7 @@
  */
 package clueGame;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,7 +18,10 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
-public class Board {
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Board extends JPanel{
 	private BoardCell[][] grid;
 	private int numRows;
 	private int numColumns;
@@ -65,6 +69,20 @@ public class Board {
 		}
 		calcAdjacencies();
 		deal();
+	}
+	
+	@Override
+	public void paintComponent(Graphics newGraphic) {
+		super.paintComponent(newGraphic);
+		int width = getWidth()/numColumns;
+		int height = getHeight()/numRows;
+		System.out.println(getWidth());
+		System.out.println(getHeight());
+		for (int i = 0; i < numRows; i++) {
+			for(int j = 0; j < numColumns; j++) {
+				grid[i][j].draw(width, height, newGraphic);
+			}
+		}
 	}
 	//loads setup config
 	public void loadSetupConfig () throws BadConfigFormatException, IOException {
@@ -346,7 +364,7 @@ public class Board {
 						}
 						if(deckArray[i] != null){ //if the card is still not picked, add it to this player's deck
 							newCard = new Card((Card) deckArray[i]);
-							user.addCard(newCard);
+							thisPlayer.addCard(newCard);
 							deckArray[i] = null;
 							cardsRemaining--;
 						}
@@ -540,6 +558,17 @@ public class Board {
 	}
 	public Set<Card> getDeck() {
 		return deck;
+	}
+	
+	public static void main(String[] args) {
+		theInstance.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
+		theInstance.initialize();
+		JFrame frame = new JFrame();  // create the frame 
+		frame.setContentPane(theInstance); // put the panel in the frame
+		frame.setSize(1200, 828);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
+	    frame.setVisible(true); // make it visible
+        
 	}
 
 }
