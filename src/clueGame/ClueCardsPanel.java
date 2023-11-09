@@ -14,56 +14,105 @@ import javax.swing.border.TitledBorder;
 
 public class ClueCardsPanel extends JPanel{
 	
-	private JTextArea inHandCards;
-	private JTextArea seenCards;
-	private JLabel inHand;
-	private JLabel seen;
-	private Set<String> handPeopleCards;
-    private Set<String> seenPeopleCards;
-    private Set<String> handRoomsCards;
-    private Set<String> seenRoomsCards;
-    private Set<String> handWeaponsCards;
-    private Set<String> seenWeaponsCards;
-	
+	private JPanel peoplePanel;
+	private JPanel roomsPanel;
+	private JPanel weaponsPanel;
+	private JPanel inHandPeople;
+	private JPanel seenPeople;
+	private JPanel inHandRooms;
+	private JPanel seenRooms;
+	private JPanel inHandWeapons;
+	private JPanel seenWeapons;
 	
 	public ClueCardsPanel() {
-	
-	inHandCards = new JTextArea("None");
-	seenCards = new JTextArea("None");
-	inHand = new JLabel("In Hand: ");
-	seen = new JLabel("Seen: ");
-	handPeopleCards = new HashSet<>();
-    seenPeopleCards = new HashSet<>();
-    handRoomsCards = new HashSet<>();
-    seenRoomsCards = new HashSet<>();
-    handWeaponsCards = new HashSet<>();
-    seenWeaponsCards = new HashSet<>();
 		
-	JPanel knownCards = new JPanel();
-	knownCards.setBorder(new TitledBorder( new EtchedBorder(), "Known Cards"));
-	knownCards.setLayout(new GridLayout(3, 1));
-	add(knownCards);
+		setBorder(new TitledBorder( new EtchedBorder(), "Known Cards"));
+		setLayout(new GridLayout(3, 1));	
+		
+		inHandPeople = new JPanel();
+		seenPeople = new JPanel();
+		
+		inHandRooms = new JPanel();
+		seenRooms = new JPanel();
+		
+		inHandWeapons = new JPanel();
+		seenWeapons = new JPanel();
+		
+		peoplePanel = new JPanel();
+		peoplePanel.setBorder(new TitledBorder( new EtchedBorder(), "People"));
+		peoplePanel.setLayout(new GridLayout(2, 1));
+		peoplePanel.add(inHandPeople);
+		peoplePanel.add(seenPeople);
+		
 	
+		roomsPanel = new JPanel();
+		roomsPanel.setBorder(new TitledBorder( new EtchedBorder(), "Rooms"));
+		roomsPanel.setLayout(new GridLayout(2, 1));
+		roomsPanel.add(inHandRooms);
+		peoplePanel.add(seenRooms);
+		
+		weaponsPanel = new JPanel();
+		weaponsPanel.setBorder(new TitledBorder( new EtchedBorder(), "Weapons"));
+		weaponsPanel.setLayout(new GridLayout(2, 1));
+		weaponsPanel.add(inHandWeapons);
+		peoplePanel.add(seenWeapons);
+		
+		
+		
+	}
 	
-	JPanel peoplePanel = new JPanel();
-	peoplePanel.setBorder(new TitledBorder( new EtchedBorder(), "People"));
-	peoplePanel.add(inHand);
-	peoplePanel.add(seen);
-	
-
-	JPanel roomsPanel = new JPanel();
-	roomsPanel.setBorder(new TitledBorder( new EtchedBorder(), "Rooms"));
-	roomsPanel.add(inHand);
-	peoplePanel.add(seen);
-	
-	JPanel Weapons = new JPanel();
-	Weapons.setBorder(new TitledBorder( new EtchedBorder(), "Weapons"));
-	Weapons.add(inHand);
-	peoplePanel.add(seen);
-	
-	
-	
-}
+	public void updateDeckCards(Set<Card> newCards) {
+		inHandPeople.removeAll();
+		inHandRooms.removeAll();
+		inHandWeapons.removeAll();
+		JTextArea newCardArea;
+		for (Card card : newCards) {
+			if(card.getCardType() == CardType.PERSON) {
+				newCardArea = new JTextArea();
+				newCardArea.setText(card.getCardName());
+				inHandPeople.add(newCardArea);
+			}
+			if(card.getCardType() == CardType.ROOM) {
+				newCardArea = new JTextArea();
+				newCardArea.setText(card.getCardName());
+				inHandRooms.add(newCardArea);
+			}
+			if(card.getCardType() == CardType.WEAPON) {
+				newCardArea = new JTextArea();
+				newCardArea.setText(card.getCardName());
+				inHandWeapons.add(newCardArea);
+			}
+		}
+		peoplePanel.add(inHandPeople);
+		roomsPanel.add(inHandRooms);
+		weaponsPanel.add(inHandWeapons);
+	}
+	public void updateSeenCards(Set<Card> newCards) {
+		seenPeople.removeAll();
+		seenRooms.removeAll();
+		seenWeapons.removeAll();
+		JTextArea newCardArea;
+		for (Card card : newCards) {
+			if(card.getCardType() == CardType.PERSON) {
+				newCardArea = new JTextArea();
+				newCardArea.setText(card.getCardName());
+				seenPeople.add(newCardArea);
+			}
+			if(card.getCardType() == CardType.ROOM) {
+				newCardArea = new JTextArea();
+				newCardArea.setText(card.getCardName());
+				seenRooms.add(newCardArea);
+			}
+			if(card.getCardType() == CardType.WEAPON) {
+				newCardArea = new JTextArea();
+				newCardArea.setText(card.getCardName());
+				seenWeapons.add(newCardArea);
+			}
+		}
+		peoplePanel.add(seenPeople);
+		peoplePanel.add(seenRooms);
+		peoplePanel.add(seenWeapons);
+	}
 	
 	public static void main(String[] args) {
 		ClueCardsPanel panel = new ClueCardsPanel();  // create the panel
