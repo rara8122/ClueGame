@@ -1,3 +1,9 @@
+/*Class: This class extends JPanel to create a panel with some game controls, It has butttons for the player to make an accusation and move to the next player. It also does other things like display of the roll of the die, display whose turn it is, display guesses made by players and the result.
+ * Authors: Rachel Davy, Melanie Perez
+ * Date: 11/08/2023
+ * Sources: none other than lecture videos
+ * Collaborators: none
+ */
 package clueGame;
 
 import java.awt.Color;
@@ -8,18 +14,20 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 public class GameControlPanel extends JPanel{
-	/**
-	 * Constructor for the panel, it does 90% of the work
-	 */
+	
 	private JTextArea player;
 	private JTextArea roll;
-	private JTextArea guess;
+	private JTextField guess;
 	private JTextArea guessResult;
 	
+	/**
+	 * Constructor for the panel, it does 90% of the work
+	 */	
 	public GameControlPanel()  {
 		JButton nextPlayerButton = new JButton("Next Player");
         JButton makeAccusationButton = new JButton("Make Accusation");
@@ -27,10 +35,14 @@ public class GameControlPanel extends JPanel{
         JLabel whoseTurn = new JLabel("Whose Turn?");
         //text field for whose turn
         player = new JTextArea();
+        player.setEditable( false );
         //text field for roll number
         roll = new JTextArea();
-        guess = new JTextArea();
+        roll.setEditable( false );
+        guess = new JTextField();
+        guess.setEditable( false );
         guessResult = new JTextArea();
+        guessResult.setEditable( false );
         
         //panel with the player turn label and player
         JPanel whoseTurnP = new JPanel(); 

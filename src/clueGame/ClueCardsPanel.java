@@ -1,3 +1,9 @@
+/*Class: This class creates the cards panel which shows human player’s cards in their hand and shows human player’s seen cards. It also has a main method to display the panel and updates the data in the fields
+ * Authors: Rachel Davy, Melanie Perez
+ * Date: 11/08/2023
+ * Sources: none other than lecture videos
+ * Collaborators: none
+ */
 package clueGame;
 
 import java.awt.Color;
@@ -7,7 +13,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EtchedBorder;
@@ -25,6 +30,9 @@ public class ClueCardsPanel extends JPanel{
 	private JPanel inHandWeapons;
 	private JPanel seenWeapons;
 	
+	/*
+	 * Constructor for class
+	 */
 	public ClueCardsPanel() {
 		
 		setBorder(new TitledBorder( new EtchedBorder(), "Known Cards"));
@@ -99,12 +107,15 @@ public class ClueCardsPanel extends JPanel{
 		
 	}
 	
+	//method to update the cards 
 	public void updateDeckCards(Set<Card> newCards) {
 		Set<Card> handPeople = new HashSet<>();
 		Set<Card> handRooms = new HashSet<>();
 		Set<Card> handWeapons = new HashSet<>();
 		JTextArea newCardArea;
+		//iterates through each card object in newCards
 		for (Card card : newCards) {
+			//checks type and adds card to approriate deck
 			if(card.getCardType() == CardType.PERSON) {
 				handPeople.add(card);
 			}
@@ -117,7 +128,6 @@ public class ClueCardsPanel extends JPanel{
 		}
 		if(handPeople.size() >= 1) {
 			inHandPeople.removeAll();
-			//inHandPeople.setLayout(new GridLayout(handPeople.size(), 1));
 			for (Card card : handPeople) {
 				newCardArea = new JTextArea();
 				newCardArea.setText(card.getCardName());
@@ -126,7 +136,6 @@ public class ClueCardsPanel extends JPanel{
 		}
 		if(handRooms.size() >= 1) {
 			inHandRooms.removeAll();
-			//inHandRooms.setLayout(new GridLayout(handRooms.size(), 1));
 			for (Card card : handRooms) {
 				newCardArea = new JTextArea();
 				newCardArea.setText(card.getCardName());
@@ -146,6 +155,8 @@ public class ClueCardsPanel extends JPanel{
 		roomsPanel.add(seenRooms);
 		weaponsPanel.add(seenWeapons);
 	}
+	
+	//method to update seen cards
 	public void updateSeenCards(Set<SeenCard> newCards) {
 		JTextArea newCardArea;
 		Set<SeenCard> people = new HashSet<>();
@@ -164,7 +175,6 @@ public class ClueCardsPanel extends JPanel{
 		}
 		if(people.size() > 0) {
 			seenPeople.removeAll();
-			//seenPeople.setLayout(new GridLayout(people.size(), 1));
 			for (SeenCard card : people) {
 				newCardArea = new JTextArea();
 				if(card.getColor().getBlue() + card.getColor().getGreen() + card.getColor().getRed() <= 255) {
@@ -179,7 +189,6 @@ public class ClueCardsPanel extends JPanel{
 		}
 		if(rooms.size() > 0) {
 			seenRooms.removeAll();
-			//seenRooms.setLayout(new GridLayout(rooms.size(), 1));
 			for (SeenCard card : rooms) {
 				newCardArea = new JTextArea();
 				if(card.getColor().getBlue() + card.getColor().getGreen() + card.getColor().getRed() <= 255) {
@@ -194,7 +203,6 @@ public class ClueCardsPanel extends JPanel{
 		}
 		if(weapons.size() > 0) {
 			seenWeapons.removeAll();
-			//seenWeapons.setLayout(new GridLayout(weapons.size(), 1));
 			for (SeenCard card : weapons) {
 				newCardArea = new JTextArea();
 				if(card.getColor().getBlue() + card.getColor().getGreen() + card.getColor().getRed() <= 255) {
@@ -211,6 +219,7 @@ public class ClueCardsPanel extends JPanel{
 		roomsPanel.add(seenRooms);
 		weaponsPanel.add(seenWeapons);
 	}
+	
 	public static void main(String[] args) {
 		ClueCardsPanel panel = new ClueCardsPanel();  // create the panel
 		JFrame frame = new JFrame();  // create the frame 
@@ -235,6 +244,5 @@ public class ClueCardsPanel extends JPanel{
 	    frame.setVisible(true); // make it visible
         
 	}
-	
-	
+		
 }
