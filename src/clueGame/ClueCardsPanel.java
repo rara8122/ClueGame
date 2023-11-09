@@ -30,20 +30,49 @@ public class ClueCardsPanel extends JPanel{
 		setBorder(new TitledBorder( new EtchedBorder(), "Known Cards"));
 		setLayout(new GridLayout(3, 1));	
 		
+		JTextArea newCardArea;
 		inHandPeople = new JPanel();
 		inHandPeople.setBorder(new TitledBorder( new EtchedBorder(), "In Hand:"));
+		inHandPeople.setLayout(new GridLayout(0, 1));
+		newCardArea = new JTextArea();
+		newCardArea.setText("None");
+		inHandPeople.add(newCardArea);
+		
 		seenPeople = new JPanel();
 		seenPeople.setBorder(new TitledBorder( new EtchedBorder(), "Seen:"));
+		seenPeople.setLayout(new GridLayout(0, 1));
+		newCardArea = new JTextArea();
+		newCardArea.setText("None");
+		seenPeople.add(newCardArea);
 		
 		inHandRooms = new JPanel();
 		inHandRooms.setBorder(new TitledBorder( new EtchedBorder(), "In Hand:"));
+		inHandRooms.setLayout(new GridLayout(0, 1));
+		newCardArea = new JTextArea();
+		newCardArea.setText("None");
+		inHandRooms.add(newCardArea);
+		
 		seenRooms = new JPanel();
 		seenRooms.setBorder(new TitledBorder( new EtchedBorder(), "Seen:"));
+		seenRooms.setLayout(new GridLayout(0, 1));
+		newCardArea = new JTextArea();
+		newCardArea.setText("None");
+		seenRooms.add(newCardArea);
 		
 		inHandWeapons = new JPanel();
 		inHandWeapons.setBorder(new TitledBorder( new EtchedBorder(), "In Hand:"));
+		inHandWeapons.setLayout(new GridLayout(0, 1));
+		newCardArea = new JTextArea();
+		newCardArea.setText("None");
+		inHandWeapons.add(newCardArea);
+		
 		seenWeapons = new JPanel();
 		seenWeapons.setBorder(new TitledBorder( new EtchedBorder(), "Seen:"));
+		seenWeapons.setLayout(new GridLayout(0, 1));
+		newCardArea = new JTextArea();
+		newCardArea.setText("None");
+		seenWeapons.add(newCardArea);
+		newCardArea = new JTextArea();
 		
 		peoplePanel = new JPanel();
 		peoplePanel.setBorder(new TitledBorder( new EtchedBorder(), "People"));
@@ -71,38 +100,72 @@ public class ClueCardsPanel extends JPanel{
 	}
 	
 	public void updateDeckCards(Set<Card> newCards) {
-		inHandPeople.removeAll();
-		inHandRooms.removeAll();
-		inHandWeapons.removeAll();
+		Set<Card> handPeople = new HashSet<>();
+		Set<Card> handRooms = new HashSet<>();
+		Set<Card> handWeapons = new HashSet<>();
 		JTextArea newCardArea;
 		for (Card card : newCards) {
 			if(card.getCardType() == CardType.PERSON) {
+				handPeople.add(card);
+			}
+			if(card.getCardType() == CardType.ROOM) {
+				handRooms.add(card);
+			}
+			if(card.getCardType() == CardType.WEAPON) {
+				handWeapons.add(card);
+			}
+		}
+		if(handPeople.size() >= 1) {
+			inHandPeople.removeAll();
+			//inHandPeople.setLayout(new GridLayout(handPeople.size(), 1));
+			for (Card card : handPeople) {
 				newCardArea = new JTextArea();
 				newCardArea.setText(card.getCardName());
 				inHandPeople.add(newCardArea);
 			}
-			if(card.getCardType() == CardType.ROOM) {
+		}
+		if(handRooms.size() >= 1) {
+			inHandRooms.removeAll();
+			//inHandRooms.setLayout(new GridLayout(handRooms.size(), 1));
+			for (Card card : handRooms) {
 				newCardArea = new JTextArea();
 				newCardArea.setText(card.getCardName());
 				inHandRooms.add(newCardArea);
 			}
-			if(card.getCardType() == CardType.WEAPON) {
+		}
+		if(handWeapons.size() >= 1) {
+			inHandWeapons.removeAll();
+			//inHandWeapons.setLayout(new GridLayout(handWeapons.size(), 1));
+			for (Card card : handWeapons) {
 				newCardArea = new JTextArea();
 				newCardArea.setText(card.getCardName());
 				inHandWeapons.add(newCardArea);
 			}
 		}
-		peoplePanel.add(inHandPeople);
-		roomsPanel.add(inHandRooms);
-		weaponsPanel.add(inHandWeapons);
+		peoplePanel.add(seenPeople);
+		roomsPanel.add(seenRooms);
+		weaponsPanel.add(seenWeapons);
 	}
 	public void updateSeenCards(Set<SeenCard> newCards) {
-		seenPeople.removeAll();
-		seenRooms.removeAll();
-		seenWeapons.removeAll();
 		JTextArea newCardArea;
+		Set<SeenCard> people = new HashSet<>();
+		Set<SeenCard> rooms = new HashSet<>();
+		Set<SeenCard> weapons = new HashSet<>();
 		for (SeenCard card : newCards) {
 			if(card.getCardType() == CardType.PERSON) {
+				people.add(card);
+			}
+			if(card.getCardType() == CardType.ROOM) {
+				rooms.add(card);
+			}
+			if(card.getCardType() == CardType.WEAPON) {
+				weapons.add(card);
+			}
+		}
+		if(people.size() > 0) {
+			seenPeople.removeAll();
+			//seenPeople.setLayout(new GridLayout(people.size(), 1));
+			for (SeenCard card : people) {
 				newCardArea = new JTextArea();
 				if(card.getColor().getBlue() + card.getColor().getGreen() + card.getColor().getRed() <= 255) {
 					newCardArea.setForeground(Color.WHITE);
@@ -113,7 +176,11 @@ public class ClueCardsPanel extends JPanel{
 				newCardArea.setText(card.getCardName());
 				seenPeople.add(newCardArea);
 			}
-			if(card.getCardType() == CardType.ROOM) {
+		}
+		if(rooms.size() > 0) {
+			seenRooms.removeAll();
+			//seenRooms.setLayout(new GridLayout(rooms.size(), 1));
+			for (SeenCard card : rooms) {
 				newCardArea = new JTextArea();
 				if(card.getColor().getBlue() + card.getColor().getGreen() + card.getColor().getRed() <= 255) {
 					newCardArea.setForeground(Color.WHITE);
@@ -124,7 +191,11 @@ public class ClueCardsPanel extends JPanel{
 				newCardArea.setText(card.getCardName());
 				seenRooms.add(newCardArea);
 			}
-			if(card.getCardType() == CardType.WEAPON) {
+		}
+		if(weapons.size() > 0) {
+			seenWeapons.removeAll();
+			//seenWeapons.setLayout(new GridLayout(weapons.size(), 1));
+			for (SeenCard card : weapons) {
 				newCardArea = new JTextArea();
 				if(card.getColor().getBlue() + card.getColor().getGreen() + card.getColor().getRed() <= 255) {
 					newCardArea.setForeground(Color.WHITE);
@@ -137,17 +208,15 @@ public class ClueCardsPanel extends JPanel{
 			}
 		}
 		peoplePanel.add(seenPeople);
-		peoplePanel.add(seenRooms);
-		peoplePanel.add(seenWeapons);
+		roomsPanel.add(seenRooms);
+		weaponsPanel.add(seenWeapons);
 	}
-	
 	public static void main(String[] args) {
 		ClueCardsPanel panel = new ClueCardsPanel();  // create the panel
 		JFrame frame = new JFrame();  // create the frame 
 		frame.setContentPane(panel); // put the panel in the frame
 		frame.setSize(300,400 );  // size the frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
-		frame.setVisible(true); // make it visible
 		
 		  
 	    Set<Card> inHandCards = new HashSet<>();
@@ -163,6 +232,7 @@ public class ClueCardsPanel extends JPanel{
 	  
 	    panel.updateDeckCards(inHandCards);
 	    panel.updateSeenCards(seenCards);
+	    frame.setVisible(true); // make it visible
         
 	}
 	
