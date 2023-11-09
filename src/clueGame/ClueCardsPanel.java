@@ -148,6 +148,22 @@ public class ClueCardsPanel extends JPanel{
 		frame.setSize(300,400 );  // size the frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 		frame.setVisible(true); // make it visible
+		
+		  
+	    Set<Card> inHandCards = new HashSet<>();
+	    inHandCards.add(new Card("Link", CardType.PERSON));
+	    inHandCards.add(new Card("France", CardType.ROOM));
+	    inHandCards.add(new Card("The One Ring", CardType.WEAPON));
+
+	    Set<SeenCard> seenCards = new HashSet<>();
+	    seenCards.add(new SeenCard(new Card("Frodo Baggins", CardType.PERSON), Color.RED));
+	    seenCards.add(new SeenCard(new Card("Agraban", CardType.ROOM), Color.GREEN));
+	    seenCards.add(new SeenCard(new Card("The Triforce", CardType.WEAPON), Color.BLUE));
+
+	  
+	    panel.updateDeckCards(inHandCards);
+	    panel.updateSeenCards(seenCards);
+        
 	}
 	
 	
