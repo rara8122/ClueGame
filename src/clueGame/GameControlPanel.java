@@ -1,16 +1,13 @@
 package clueGame;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
@@ -22,6 +19,7 @@ public class GameControlPanel extends JPanel{
 	private JTextArea roll;
 	private JTextArea guess;
 	private JTextArea guessResult;
+	
 	public GameControlPanel()  {
 		JButton nextPlayerButton = new JButton("Next Player");
         JButton makeAccusationButton = new JButton("Make Accusation");
@@ -64,7 +62,7 @@ public class GameControlPanel extends JPanel{
         leftPanel.setLayout(new GridLayout(2, 1));
         leftPanel.add(guessPanel);
         leftPanel.add(guessResultPanel);
-        setLayout(new BorderLayout());   
+        //setLayout(new BorderLayout());   
         
        
         JPanel wholePanel = new JPanel();
@@ -95,7 +93,7 @@ public class GameControlPanel extends JPanel{
 	}
 
 
-
+	//setters
 	private void setGuessResult(String string) {
 		guessResult.setText(string);
 	}
