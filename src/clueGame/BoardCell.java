@@ -6,6 +6,7 @@
 */
 package clueGame;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.HashSet;
 import java.util.Set;
@@ -114,5 +115,19 @@ public class BoardCell {
 		int x = width * column;
 		int y = height * row;
 		newGraphic.drawRect(x, y, width, height);
+			
+			if ( isWalkway()) {
+		        newGraphic.setColor(Color.YELLOW);
+		        newGraphic.fillRect(x, y, width, height);
+		        newGraphic.setColor(Color.BLACK);
+		    } else if (isRoomCenter()||isLabel()) {
+		        newGraphic.setColor(Color.GRAY);
+		        newGraphic.fillRect(x, y, width, height);
+		        newGraphic.drawRect(x, y, width, height);
+		    } else {
+		        newGraphic.setColor(Color.BLACK);
+		        newGraphic.fillRect(x, y, width, height);
+		        newGraphic.drawRect(x, y, width, height);
+				}
 	}
 }
