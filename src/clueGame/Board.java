@@ -82,6 +82,11 @@ public class Board extends JPanel{
 				grid[i][j].draw(width, height, newGraphic);
 			}
 		}
+		for (int i = 0; i < numRows; i++) {
+			for(int j = 0; j < numColumns; j++) {
+				grid[i][j].drawDoor(width, height, newGraphic);
+			}
+		}
 		Collection<Room> rooms = roomMap.values();
 		for (Room room : rooms) {
 			room.draw(width, height, newGraphic);

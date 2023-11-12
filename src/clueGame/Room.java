@@ -41,10 +41,10 @@ public class Room {
 	}
 	public void draw(int width, int height, Graphics newGraphic) {
 		if(labelCell != null) {
-			int x = width * labelCell.getColumn();
-			int y = height * labelCell.getRow();
-			newGraphic.setColor(Color.BLACK);
-			Font font = new Font("roomFont", 1, (2*width)/3);
+			int x = width * (labelCell.getColumn() - 1);
+			int y = height * (labelCell.getRow() + 1);
+			newGraphic.setColor(Color.BLUE);
+			Font font = new Font("roomFont", 1, (3*width)/5);
 			newGraphic.setFont(font);
 			newGraphic.drawString(name, x, y);
 		}

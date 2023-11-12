@@ -22,6 +22,7 @@ public class BoardCell {
 	private char secretPassage;
 	private Set<BoardCell> adjList;
 	private boolean occupied;
+	public static final int BORDER_SIZE = 20; //increase this number to make the black walkway borders thinner, decrease to make it thicker
 
 	
 	public BoardCell(int newRow, int newColumn, char newInitial, String newName) {
@@ -115,22 +116,34 @@ public class BoardCell {
 		int x = width * column;
 		int y = height * row;
 		newGraphic.setColor(Color.BLACK);
-		newGraphic.drawRect(x, y, width, height);
 		
+		if (initial == 'W') {
+			newGraphic.setColor(Color.BLACK);
+			newGraphic.fillRect(x, y, width, height); //draw a big black rectangle, and draw a slightly smaller rectangle inside it
+	        newGraphic.setColor(Color.YELLOW);
+	        newGraphic.fillRect(x + width/BORDER_SIZE, y + height/BORDER_SIZE, ((BORDER_SIZE - 2) * width)/BORDER_SIZE, ((BORDER_SIZE - 2) * height)/BORDER_SIZE);
+	    } else if (initial == 'X') {
+	    	newGraphic.setColor(Color.BLACK);
+	        newGraphic.fillRect(x, y, width, height);
+	    } else {
+	        newGraphic.setColor(Color.GRAY);
+	        newGraphic.fillRect(x, y, width, height);
+		}
+	}
+	public void drawDoor(int width, int height, Graphics newGraphic) {
+		int x = width * column;
+		int y = height * row;
+		newGraphic.setColor(Color.BLUE);
 		if(doorDirection == DoorDirection.DOWN) {
-			newGraphic.setColor(Color.BLUE);
 			newGraphic.fillRect(x, y + height, width, height/10);
 		}
 		if(doorDirection == DoorDirection.LEFT) {
-			newGraphic.setColor(Color.BLUE);
 			newGraphic.fillRect(x - width/10, y, width/10, height);
 		}
 		if(doorDirection == DoorDirection.RIGHT) {
-			newGraphic.setColor(Color.BLUE);
 			newGraphic.fillRect(x + width, y, width/10, height);
 		}
 		if(doorDirection == DoorDirection.UP) {
-			newGraphic.setColor(Color.BLUE);
 			newGraphic.fillRect(x, y - height/10, width, height/10);
 		}
 	}

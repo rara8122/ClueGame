@@ -21,6 +21,7 @@ public abstract class Player {
 	private Set<Card> deck;
 	private Set<SeenCard> seen;
 	private int deckSize;
+	public static final int BORDER_SIZE = 20; //increase this number to make the player borders thinner, decrease to make it thicker
 
 
 	public Player(String name, Color color, int row, int column) {
@@ -161,10 +162,13 @@ public abstract class Player {
 			
 	}
 	public void draw(int width, int height, Graphics newGraphic) {
-		int x = width * column;
-		int y = height * row;
-		newGraphic.drawOval(x, y, width, height);
+		int x = width * column + width/BoardCell.BORDER_SIZE;
+		int y = height * row + height/BoardCell.BORDER_SIZE;
+		int w = ((BoardCell.BORDER_SIZE - 2) * width)/BoardCell.BORDER_SIZE;
+		int h = ((BoardCell.BORDER_SIZE - 2) * height)/BoardCell.BORDER_SIZE;
+		newGraphic.setColor(Color.BLACK);
+		newGraphic.fillOval(x, y, w, h);
 		newGraphic.setColor(color);
-		newGraphic.fillOval(x, y, width, height);
+		newGraphic.fillOval(x + w/BORDER_SIZE, y + h/BORDER_SIZE, ((BORDER_SIZE - 1) * w)/BORDER_SIZE, ((BORDER_SIZE - 1) * h)/BORDER_SIZE);
 	}
 }
