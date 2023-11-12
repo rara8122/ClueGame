@@ -7,6 +7,7 @@
 */
 package clueGame;
 
+import java.awt.Font;
 import java.awt.Graphics;
 
 public class Room {
@@ -41,6 +42,8 @@ public class Room {
 		if(labelCell != null) {
 			int x = width * labelCell.getColumn();
 			int y = height * labelCell.getRow();
+			Font font = new Font("roomFont", 1, (2*width)/3);
+			newGraphic.setFont(font);
 			newGraphic.drawString(name, x, y);
 		}
 	}
