@@ -6,6 +6,7 @@
 */
 package clueGame;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.HashSet;
 import java.util.Set;
@@ -113,6 +114,24 @@ public class BoardCell {
 	public void draw(int width, int height, Graphics newGraphic) {
 		int x = width * column;
 		int y = height * row;
+		newGraphic.setColor(Color.BLACK);
 		newGraphic.drawRect(x, y, width, height);
+		
+		if(doorDirection == DoorDirection.DOWN) {
+			newGraphic.setColor(Color.BLUE);
+			newGraphic.fillRect(x, y + height, width, height/10);
+		}
+		if(doorDirection == DoorDirection.LEFT) {
+			newGraphic.setColor(Color.BLUE);
+			newGraphic.fillRect(x - width/10, y, width/10, height);
+		}
+		if(doorDirection == DoorDirection.RIGHT) {
+			newGraphic.setColor(Color.BLUE);
+			newGraphic.fillRect(x + width, y, width/10, height);
+		}
+		if(doorDirection == DoorDirection.UP) {
+			newGraphic.setColor(Color.BLUE);
+			newGraphic.fillRect(x, y - height/10, width, height/10);
+		}
 	}
 }
