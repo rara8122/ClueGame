@@ -130,6 +130,10 @@ public abstract class Player {
 	public Set<Card> getDeck(){
 		return deck;
 	}
+	
+	public Set<SeenCard> getSeen(){
+		return seen;
+	}
 
 	public void setName(String name) {
 		this.name = name;
@@ -157,10 +161,7 @@ public abstract class Player {
 	public void setColumn(int column) {
 		this.column = column;
 	}
-	public Set<Card> getCards() {
-		return deck;	
-			
-	}
+	
 	public void draw(int width, int height, Graphics newGraphic) {
 		int x = width * column + width/BoardCell.BORDER_SIZE;
 		int y = height * row + height/BoardCell.BORDER_SIZE;

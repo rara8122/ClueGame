@@ -107,17 +107,17 @@ public class GameControlPanel extends JPanel{
 
 
 	//setters
-	private void setRoll(int rollNum) {
+	public void setRoll(int rollNum) {
 		roll.setText(Integer.toString(rollNum));	
 	}
-	private void setGuessResult(String string) {
+	public void setGuessResult(String string) {
 		guessResult.setText(string);
 	}
 
-	private void setGuess(String string) {
+	public void setGuess(String string) {
 		guess.setText(string);	
 	}
-	private void setTurn(Player currentTurn) {	
+	public void setTurn(Player currentTurn) {	
 		if(currentTurn.getColor().getBlue() + currentTurn.getColor().getGreen() + currentTurn.getColor().getRed() <= 255) {
 			player.setForeground(Color.WHITE);
 		} else {
