@@ -3,12 +3,15 @@
  * Author: Rachel Davy, Melanie Perez
  * Date: 11/13/2023
  * Collaborators: none
+ * Sources: https://docs.oracle.com/javase%2F7%2Fdocs%2Fapi%2F%2F/javax/swing/JOptionPane.html
  */
 package clueGame;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class ClueGame extends JFrame{
 	
@@ -20,10 +23,16 @@ public class ClueGame extends JFrame{
 	 */
 	public ClueGame(Board newBoard, ClueCardsPanel newcards, GameControlPanel newcontrol) {
 		super();
+		HumanPlayer currentPlayer = new HumanPlayer("Harry Potter", Color.BLUE, 0, 0);
+		
+
 		
 		theBoard =  newBoard;
 		cards = newcards;
 		control = newcontrol;
+		
+		initializeMainFrame(); 
+		
 		HumanPlayer user = theBoard.getUser();
 		for(Card card : user.getDeck()) {
 			System.out.println(card.getCardName());
@@ -36,13 +45,23 @@ public class ClueGame extends JFrame{
 		control.setGuessResult( "So you have nothing?");
 		control.setRoll(5);
 		
+		showSplashScreen(currentPlayer); 	
+	}
+	
+	private void initializeMainFrame() {
 		super.add(theBoard, BorderLayout.CENTER);
 		super.add(cards, BorderLayout.EAST);
-		super.add(newcontrol, BorderLayout.SOUTH);
+		super.add(control, BorderLayout.SOUTH);
 		super.setSize(1500,1000 );  // size the frame
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 		super.setVisible(true); // make it visible
+		
 	}
+	private void showSplashScreen(HumanPlayer user) {
+		String message = "You are " + user.getName() + ". " + "Can you find the solution before the computer players?";
+        JOptionPane.showMessageDialog(this,message, "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
+    }
+	
 	public static void main(String[] args) {
 		Board theBoard = Board.getInstance();
 		theBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
@@ -50,6 +69,5 @@ public class ClueGame extends JFrame{
 		ClueCardsPanel cards = new ClueCardsPanel();  // create the panel
 		GameControlPanel control = new GameControlPanel();  // create the panel
 		ClueGame frame = new ClueGame(theBoard, cards, control);  // create the frame 
-        
 	}
 }
