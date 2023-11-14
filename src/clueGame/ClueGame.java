@@ -1,3 +1,9 @@
+/*
+ * Class: This class creates the entire Jframe clue game gui with the board panel, clue cards panel, and game control panels. The clue cards panel and game control panel are in their own seperate classes. We extended JPanel on the existing board class to create the board panel. All the  panels were incorporated into this class to create he full clue game frame.  
+ * Author: Rachel Davy, Melanie Perez
+ * Date: 11/13/2023
+ * Collaborators: none
+ */
 package clueGame;
 
 import java.awt.BorderLayout;
@@ -5,9 +11,13 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
 public class ClueGame extends JFrame{
+	
 	Board theBoard;
 	ClueCardsPanel cards;
 	GameControlPanel control;
+	/*
+	 * Constructor for cluegame
+	 */
 	public ClueGame(Board newBoard, ClueCardsPanel newcards, GameControlPanel newcontrol) {
 		super();
 		

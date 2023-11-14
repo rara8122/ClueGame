@@ -111,7 +111,7 @@ public class BoardCell {
 	public Set<BoardCell> getAdjList() {
 		return adjList;
 	}
-
+	//method to draw the rooms, walkways, and unused spaces on the board.
 	public void draw(int width, int height, Graphics newGraphic) {
 		int x = width * column;
 		int y = height * row;
@@ -130,6 +130,7 @@ public class BoardCell {
 	        newGraphic.fillRect(x, y, width, height);
 		}
 	}
+	//method to draw the doors in the board gui
 	public void drawDoor(int width, int height, Graphics newGraphic) {
 		int x = width * column;
 		int y = height * row;

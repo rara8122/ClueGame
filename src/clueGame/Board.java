@@ -72,6 +72,7 @@ public class Board extends JPanel{
 		deal();
 	}
 	
+	//method to draw the board and players
 	@Override
 	public void paintComponent(Graphics newGraphic) {
 		super.paintComponent(newGraphic);
