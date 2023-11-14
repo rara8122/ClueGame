@@ -1,3 +1,94 @@
+commit ebb9728641f0bc62c42f613b5622f9d24c0725e3 (HEAD -> main, origin/main, origin/HEAD)
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Tue Nov 14 14:40:06 2023 -0700
+
+    updated read me and added comments
+
+commit cc84b77f139540f36c60112969af44add9a7c752
+Author: Rachel <rara8122@Blackie.local>
+Date:   Tue Nov 14 10:00:43 2023 -0700
+
+    added ClueGame.java (actually
+
+commit fea11278d548ace677e2c04b2fddd224e4fa1c55
+Author: Rachel <rara8122@Blackie.local>
+Date:   Mon Nov 13 17:35:53 2023 -0700
+
+    colors on cards in hand
+
+commit 7969812e6cbe170c22fe19cfeb05d5bfde76a979
+Author: Rachel <rara8122@Blackie.local>
+Date:   Mon Nov 13 10:21:54 2023 -0700
+
+    started ClueGame
+
+commit 5a51999e5fd15119eb793e89a8d443ab1c0bf9a8
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Sun Nov 12 12:53:46 2023 -0700
+
+    minor fix
+
+commit 0d3e6f2a96f09ba90315b6ae237006a6e2da1424
+Merge: 06a2a13 5cea331
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Sun Nov 12 12:52:09 2023 -0700
+
+    finished board drawing
+
+commit 06a2a1380b9fb591f72ed2171a9b44c1e08eeeab
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Sun Nov 12 11:36:51 2023 -0700
+
+    doors
+
+commit 5cea33125b6960220cc201920d9f0729d375da51
+Merge: 2f2498a 6381e46
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Sat Nov 11 17:16:07 2023 -0700
+
+    Merge branch 'main' of https://github.com/rara8122/ClueGame
+    merge
+
+commit 2f2498a2ca8a2d2750ec7c2650dbc87d6e548365
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Sat Nov 11 16:50:39 2023 -0700
+
+    draw method in boardcell- got walkways and unused cells painted
+
+commit 6381e46291a7c9b1c55fc3fbb848459f501a5972
+Author: Rachel <rara8122@Blackie.local>
+Date:   Thu Nov 9 15:43:05 2023 -0700
+
+    room label fonts
+
+commit c2a46fc4fda1710230f563896bd2b46eedf03cb0
+Author: Rachel <rara8122@Blackie.local>
+Date:   Thu Nov 9 15:13:33 2023 -0700
+
+    player colors
+
+commit 5485ab9f393cdeec99c56704ab8699d401ef589d
+Merge: f10e159 74e60a6
+Author: Rachel <rara8122@Blackie.local>
+Date:   Thu Nov 9 15:08:58 2023 -0700
+
+    Merge branch 'main' of https://github.com/rara8122/ClueGame into main
+    
+    Started draw room and player
+
+commit f10e15934162022da59e1413a5affdf467598be8
+Author: Rachel <rara8122@Blackie.local>
+Date:   Thu Nov 9 15:08:39 2023 -0700
+
+    draw room and player
+
+commit a00a25e346aa0218ac0be18151a66e3d1848ebf5
+Author: Rachel <rara8122@Blackie.local>
+Date:   Thu Nov 9 14:57:21 2023 -0700
+
+    draws empty rectangles
+
+***************************** Below is the previous assignments ****************************
 commit 085d562238a3fd5eef5489db2ad0371ef09fd4a8
 Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
 Date:   Wed Nov 8 18:51:37 2023 -0700
