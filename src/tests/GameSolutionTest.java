@@ -79,7 +79,7 @@ public class GameSolutionTest {
 		Set<ComputerPlayer> players = board.getPlayers();
 		HumanPlayer user = board.getUser();
 		for(Player player: players) {
-			Set<Card> deck = player.getCards();
+			Set<Card> deck = player.getDeck();
 			for (Card card: deck) {
 				if (card.getCardType() == CardType.PERSON) {
 					assertTrue(card.equals(board.handleSuggestion(user, correctRoom, correctWeapon, card)));
@@ -98,7 +98,7 @@ public class GameSolutionTest {
 	public void testSuggestionWeDisprove() {
 		HumanPlayer user = board.getUser();
 		Set<ComputerPlayer> players = board.getPlayers();
-		Set<Card> deck = user.getCards();
+		Set<Card> deck = user.getDeck();
 		for (Card card: deck) {
 			if (card.getCardType() == CardType.PERSON) {
 				assertNull((board.handleSuggestion(user, correctRoom, correctWeapon, card)));
@@ -111,7 +111,7 @@ public class GameSolutionTest {
 			}
 		}
 		for(Player player: players) {
-			deck = player.getCards();
+			deck = player.getDeck();
 			for (Card card: deck) {
 				if (card.getCardType() == CardType.PERSON) {
 					assertNull((board.handleSuggestion(player, correctRoom, correctWeapon, card)));
@@ -130,15 +130,15 @@ public class GameSolutionTest {
 	public void testSuggestionTwoDisprove() {
 		HumanPlayer user = board.getUser();
 		Set<ComputerPlayer> players = board.getPlayers();
-		Set<Card> deck1 = user.getCards();
-		Set<Card> deck2 = user.getCards();
+		Set<Card> deck1 = user.getDeck();
+		Set<Card> deck2 = user.getDeck();
 		Card roomSuggestion = correctRoom;
 		Card weaponSuggestion = correctWeapon;
 		Card personSuggestion = correctPerson;
 		for(Player player1: players) {
-			deck1 = player1.getCards();
+			deck1 = player1.getDeck();
 			for(Player player2: players) {
-				deck2 = player2.getCards();
+				deck2 = player2.getDeck();
 				if(player1 == player2) {
 					break;
 				}

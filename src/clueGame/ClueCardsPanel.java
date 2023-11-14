@@ -8,7 +8,6 @@ package clueGame;
 
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.TextArea;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -113,7 +112,7 @@ public class ClueCardsPanel extends JPanel{
 	}
 	
 	//method to update the cards 
-	public void updateDeckCards(Set<Card> newCards) {
+	public void updateDeckCards(Set<Card> newCards, Color color) {
 		Set<Card> handPeople = new HashSet<>();
 		Set<Card> handRooms = new HashSet<>();
 		Set<Card> handWeapons = new HashSet<>();
@@ -137,6 +136,12 @@ public class ClueCardsPanel extends JPanel{
 			// Iterate through the 'handPeople' deck and display each card's name in 'inHandPeople'
 			for (Card card : handPeople) {
 				newCardArea = new JTextArea();
+				if(color.getBlue() + color.getGreen() + color.getRed() <= 255) {
+					newCardArea.setForeground(Color.WHITE);
+				} else {
+					newCardArea.setSelectedTextColor(Color.BLACK);
+				}
+				newCardArea.setBackground(color);
 				newCardArea.setText(card.getCardName());
 				newCardArea.setEditable( false );
 				inHandPeople.add(newCardArea);
@@ -147,6 +152,12 @@ public class ClueCardsPanel extends JPanel{
 			inHandRooms.removeAll();
 			for (Card card : handRooms) {
 				newCardArea = new JTextArea();
+				if(color.getBlue() + color.getGreen() + color.getRed() <= 255) {
+					newCardArea.setForeground(Color.WHITE);
+				} else {
+					newCardArea.setSelectedTextColor(Color.BLACK);
+				}
+				newCardArea.setBackground(color);
 				newCardArea.setText(card.getCardName());
 				newCardArea.setEditable( false );
 				inHandRooms.add(newCardArea);
@@ -157,6 +168,12 @@ public class ClueCardsPanel extends JPanel{
 			//inHandWeapons.setLayout(new GridLayout(handWeapons.size(), 1));
 			for (Card card : handWeapons) {
 				newCardArea = new JTextArea();
+				if(color.getBlue() + color.getGreen() + color.getRed() <= 255) {
+					newCardArea.setForeground(Color.WHITE);
+				} else {
+					newCardArea.setSelectedTextColor(Color.BLACK);
+				}
+				newCardArea.setBackground(color);
 				newCardArea.setText(card.getCardName());
 				newCardArea.setEditable( false );
 				inHandWeapons.add(newCardArea);
@@ -267,7 +284,7 @@ public class ClueCardsPanel extends JPanel{
 	    seenCards.add(new SeenCard(new Card("The Triforce", CardType.WEAPON), Color.BLUE));
 
 	  
-	    panel.updateDeckCards(inHandCards);
+	    panel.updateDeckCards(inHandCards, Color.BLACK);
 	    panel.updateSeenCards(seenCards);
 	    frame.setVisible(true); // make it visible
         
