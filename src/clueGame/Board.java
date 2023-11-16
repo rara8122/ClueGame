@@ -81,10 +81,16 @@ public class Board extends JPanel{
 		}
 		calcAdjacencies();
 		deal();
-		currentPlayer = computers.size();
-		playerFinished = false;
+		currentPlayer = computers.size() - 1;
+		playerFinished = true;
 		
 		addMouseListener(new BoardListener());
+		try {
+			nextPlayer();
+		} catch (MisClick e) {
+			e.printStackTrace();
+		}
+		play();
 	}
 	
 	//method to draw the board and players
@@ -547,20 +553,21 @@ public class Board extends JPanel{
 		if(currentPlayer != computers.size()) {
 			return;
 		}
-		if(!targets.contains(grid[row][column])) {
+		BoardCell target = roomMap.get(grid[row][column].getInitial()).getCenterCell();
+		if(target == null) {
+			target = grid[row][column];
+		}
+		if(!targets.contains(target)) {
 			throw new MisClick("Player clicked on a BoardCell that is not a target");
 		}
-		if(roomMap.containsKey(grid[row][column].getInitial())) {
-			user.setRow(roomMap.get(grid[row][column].getInitial()).getCenterCell().getRow());
-			user.setRow(roomMap.get(grid[row][column].getInitial()).getCenterCell().getColumn());
-		} else {
-			user.setRow(row);
-			user.setColumn(column);
-		}
-		if(grid[row][column].isRoomCenter()) {
+		user.setRow(target.getRow());
+		user.setColumn(target.getColumn());
+		if(target.isRoomCenter()) {
 			//Handle Suggestion
 		}
 		playerFinished = true;
+		displayTargets = false;
+		repaint();
 	}
 	
 	public void nextPlayer() throws MisClick{
@@ -576,9 +583,10 @@ public class Board extends JPanel{
 		roll = rollDice();
 		if(currentPlayer == computers.size()) {
 			findTargets(grid[user.getRow()][user.getColumn()], roll);
+		} else {
+			ComputerPlayer player = computers.get(currentPlayer);
+			findTargets(grid[player.getRow()][player.getColumn()], roll);
 		}
-		ComputerPlayer player = computers.get(currentPlayer);
-		findTargets(grid[player.getRow()][player.getColumn()], roll);
 	}
 	
 	public void play() {

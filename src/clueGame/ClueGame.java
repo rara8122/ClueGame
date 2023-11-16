@@ -32,16 +32,14 @@ public class ClueGame extends JFrame{
 		initializeMainFrame(); 
 		
 		HumanPlayer user = theBoard.getUser();
-		for(Card card : user.getDeck()) {
-			System.out.println(card.getCardName());
-		}
+		
 		cards.updateDeckCards(user.getDeck(), user.getColor());
 		cards.updateSeenCards(user.getSeen());
 		
 		control.setTurn(user);
 		control.setGuess( "I have no guess!");
 		control.setGuessResult( "So you have nothing?");
-		control.setRoll(5);
+		control.setRoll(theBoard.getRoll());
 		
 		showSplashScreen(user); 
 			
