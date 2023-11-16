@@ -439,9 +439,6 @@ public class Board extends JPanel{
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numColumns; j++) {
 				currentCell = grid[i][j];
-				if(i == 12 && j == 4) {
-					System.out.println("Here");
-				}
 				//calculates adjacency relationships between cells when the current cell is a walkway. 
 				if(currentCell.isWalkway()) {
 					if(j > 0) {
