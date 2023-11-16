@@ -1,9 +1,9 @@
-C23A
-Clue Board GUI (Clue Pair)
+C24A
+Clue- Moving the Players (Clue Pair)
 
 Author: Rachel Davy - Section C
 Author: Melanie Perez - Section C
 Sources: We did no use any outside sources
 We did commits on both machines, but both commits were done with pair programming
-  I, Rachel Davy, certify that I participated equitably in the creation of assignment C23A, dated November 15, 2023.
-  I, Melanie Perez, certify that I participated equitably in the creation of this assignment C23A, dated November 15, 2023
+  I, Rachel Davy, certify that I participated equitably in the creation of assignment C24A, dated November 20, 2023.
+  I, Melanie Perez, certify that I participated equitably in the creation of this assignment C24A, dated November 20, 2023

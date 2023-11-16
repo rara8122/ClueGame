@@ -1,3 +1,109 @@
+commit 0477c4655e57f894d7b4fe1afb2c4ee0a6c7ed4b (HEAD -> main, origin/main, origin/HEAD)
+Author: Rachel <rara8122@Blackie.local>
+Date:   Thu Nov 16 16:03:15 2023 -0700
+
+    updated ClueLayout.xlsx
+
+commit daa90e3dd48389ea91a08e9299f867ecd885eac0
+Author: Rachel <rara8122@Blackie.local>
+Date:   Thu Nov 16 16:01:22 2023 -0700
+
+    font
+
+commit 229d44bcb3885c529a9ed3ddf8bbebf9b07e31fb
+Author: Rachel <rara8122@Blackie.local>
+Date:   Thu Nov 16 15:53:15 2023 -0700
+
+    removed test code
+
+commit a882c195073bea664b2d84504462e7485714a28f
+Author: Rachel <rara8122@Blackie.local>
+Date:   Thu Nov 16 15:52:43 2023 -0700
+
+    players in rooms do not draw over eachother, fixed targets not passing
+
+commit 95c359b5bba784ce893019420bd5fc5c8571232a
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Nov 16 11:03:22 2023 -0700
+
+    gui works (players move, error messages show up when necessary etc.) and comments across most classes
+
+commit 3bfd2927989e36a08208692c0fcae91e4800b05b
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Wed Nov 15 22:05:15 2023 -0700
+
+    fixed errors
+
+commit 503c40dc43e462ff65168f303022a4fd7596c1a9
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Wed Nov 15 21:43:19 2023 -0700
+
+    next player button listener in game control
+
+commit 926cdb08c5abe01ae9eebe7659efd93e2dfd84df
+Author: Rachel <rara8122@Blackie.local>
+Date:   Wed Nov 15 20:29:06 2023 -0700
+
+    first turn
+
+commit abb51087b9b7eb48a16fef2521cd9f70495bc97a
+Author: Rachel <rara8122@Blackie.local>
+Date:   Wed Nov 15 20:12:00 2023 -0700
+
+    target code done
+
+commit 726372b0539b538a13d06c4b58bd1d38670405cb
+Merge: cbb671d 97700ee
+Author: Rachel <rara8122@Blackie.local>
+Date:   Wed Nov 15 19:49:31 2023 -0700
+
+    button shells working
+
+commit cbb671d3c74ea791430e5bb4fde9309cf26eb210
+Author: Rachel <rara8122@Blackie.local>
+Date:   Wed Nov 15 19:40:24 2023 -0700
+
+    saved code
+
+commit 97700eeddc8a1e4200f72b083ff4f9fd4ef8140c
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Wed Nov 15 19:39:55 2023 -0700
+
+    tried to make the buttons work
+
+commit 87ac6aea70e3e7a7686cc5837f0da9ef95c620ea
+Author: Rachel <rara8122@Blackie.local>
+Date:   Wed Nov 15 18:55:33 2023 -0700
+
+    board click logic
+
+commit 8fb43524cf78c51cb4392e1f2e123e2b2ffaae70
+Author: Rachel <rara8122@Blackie.local>
+Date:   Wed Nov 15 18:46:26 2023 -0700
+
+    added new exception
+
+commit b18ab6541ad4b96f8438c9c88f68dabf9b571515
+Merge: 68419fc 204796c
+Author: Rachel <rara8122@Blackie.local>
+Date:   Wed Nov 15 18:43:21 2023 -0700
+
+    fixed merge conflict
+
+commit 68419fcedcd91a2766409cf6b54f90398bbef855
+Author: Rachel <rara8122@Blackie.local>
+Date:   Wed Nov 15 18:40:53 2023 -0700
+
+    logic for next button
+
+commit 204796c83e7989ab5dd9e7cba4a6fd1cd3c68a7b
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Tue Nov 14 16:15:05 2023 -0700
+
+    splash screen the presents and works
+
+***************************** Below is the previous assignments ****************************
+
 commit ebb9728641f0bc62c42f613b5622f9d24c0725e3 (HEAD -> main, origin/main, origin/HEAD)
 Author: MancMelP <melanie.mancera23@gmail.com>
 Date:   Tue Nov 14 14:40:06 2023 -0700
