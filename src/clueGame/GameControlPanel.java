@@ -102,7 +102,7 @@ public class GameControlPanel extends JPanel{
 	    // Fetch current player's information and update the panel
 	    Player currentPlayer = gameBoard.getCurrentPlayer();
 	    setTurn(currentPlayer);
-	    setRoll(gameBoard.rollDice());
+	    setRoll(gameBoard.getRoll());
 	    setGuess("Some guess");
 	    setGuessResult("Some guess result");
 	    repaint();

@@ -66,5 +66,12 @@ public class ClueGame extends JFrame{
 		ClueCardsPanel cards = new ClueCardsPanel();  // create the panel
 		GameControlPanel control = new GameControlPanel(theBoard);  // create the panel
 		ClueGame frame = new ClueGame(theBoard, cards, control);  // create the frame 
+		try {
+			theBoard.nextPlayer();
+		} catch (MisClick e) {
+			e.printStackTrace();
+		}
+		theBoard.play();
+		control.setRoll(theBoard.getRoll());
 	}
 }
