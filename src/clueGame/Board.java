@@ -81,6 +81,7 @@ public class Board extends JPanel{
 		playerFinished = false;
 	}
 	
+	//method to draw the board and players
 	@Override
 	public void paintComponent(Graphics newGraphic) {
 		super.paintComponent(newGraphic);
