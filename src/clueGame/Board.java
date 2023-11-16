@@ -8,6 +8,9 @@
 package clueGame;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -21,6 +24,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Board extends JPanel{
@@ -41,7 +45,7 @@ public class Board extends JPanel{
 	private int currentPlayer;
 	private boolean playerFinished;
 	private int roll;
-	public boolean displayTargets;
+	private boolean displayTargets;
 	
 	public static final int DIE_SIDES = 6;
 	
@@ -79,6 +83,8 @@ public class Board extends JPanel{
 		deal();
 		currentPlayer = computers.size();
 		playerFinished = false;
+		
+		addMouseListener(new BoardListener());
 	}
 	
 	//method to draw the board and players
@@ -544,11 +550,17 @@ public class Board extends JPanel{
 		if(!targets.contains(grid[row][column])) {
 			throw new MisClick("Player clicked on a BoardCell that is not a target");
 		}
-		user.setRow(row);
-		user.setColumn(column);
-		if(!grid[row][column].isRoomCenter()) {
-			playerFinished = true;
+		if(roomMap.containsKey(grid[row][column].getInitial())) {
+			user.setRow(roomMap.get(grid[row][column].getInitial()).getCenterCell().getRow());
+			user.setRow(roomMap.get(grid[row][column].getInitial()).getCenterCell().getColumn());
+		} else {
+			user.setRow(row);
+			user.setColumn(column);
 		}
+		if(grid[row][column].isRoomCenter()) {
+			//Handle Suggestion
+		}
+		playerFinished = true;
 	}
 	
 	public void nextPlayer() throws MisClick{
@@ -607,7 +619,8 @@ public class Board extends JPanel{
 			return computers.get(currentPlayer);
 		}
 	}
- 	public Card getRoomSoln() {
+ 	
+	public Card getRoomSoln() {
 		return room;
 	}
 	
@@ -672,6 +685,27 @@ public class Board extends JPanel{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 	    frame.setVisible(true); // make it visible
         
+	}
+	
+	private class BoardListener implements MouseListener {
+		// Empty definitions for unused event methods.
+		public void mousePressed (MouseEvent event) {}
+		public void mouseReleased (MouseEvent event) {}
+		public void mouseEntered (MouseEvent event) {}
+		public void mouseExited (MouseEvent event) {}
+		public void mouseClicked (MouseEvent event) {
+			Point point = event.getPoint();
+			int column = (point.x * numColumns)/getWidth();
+			int row = (point.y * numRows)/getHeight();
+			
+			try {
+				boardClick(row, column);
+			} catch (MisClick e) {
+				String message = "That is not a target";
+		        JOptionPane.showMessageDialog(Board.getInstance(), message, "Error", JOptionPane.INFORMATION_MESSAGE);
+			}
+			repaint();
+		}
 	}
 
 }

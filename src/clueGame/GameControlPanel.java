@@ -120,6 +120,7 @@ public class GameControlPanel extends JPanel{
 	public void setRoll(int rollNum) {
 		roll.setText(Integer.toString(rollNum));	
 	}
+	
 	public void setGuessResult(String string) {
 		guessResult.setText(string);
 	}
@@ -127,6 +128,7 @@ public class GameControlPanel extends JPanel{
 	public void setGuess(String string) {
 		guess.setText(string);	
 	}
+	
 	public void setTurn(Player currentTurn) {	
 		if(currentTurn.getColor().getBlue() + currentTurn.getColor().getGreen() + currentTurn.getColor().getRed() <= 255) {
 			player.setForeground(Color.WHITE);
@@ -138,6 +140,7 @@ public class GameControlPanel extends JPanel{
 	}
 	
 	private class NextPlayer implements ActionListener {
+		
 		public void actionPerformed(ActionEvent e) {
 			//temp code
 			System.out.println("next button pressed");
