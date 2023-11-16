@@ -88,8 +88,6 @@ public class Board extends JPanel{
 		playerFinished = true;
 
 		addMouseListener(new BoardListener());
-		//String fonts[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
-		//for (String font : fonts) {}
 	}
 	
 	//method to draw the board and players

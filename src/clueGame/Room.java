@@ -64,8 +64,7 @@ public class Room {
 			int x = width * (labelCell.getColumn() - 1);
 			int y = height * (labelCell.getRow() + 1);
 			newGraphic.setColor(Color.BLUE);
-			Font font = new Font("Calibri Bold", 1, (3*width)/5);
-			
+			Font font = new Font("Academy Engraved LET", 1, (5*width)/7);
 			newGraphic.setFont(font);
 			newGraphic.drawString(name, x, y);
 		}
