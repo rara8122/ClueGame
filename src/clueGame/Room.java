@@ -10,15 +10,32 @@ package clueGame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Room {
 	private String name;
 	private BoardCell centerCell;
 	private BoardCell labelCell;
+	private Set<Player> players;
 	//constructor 
 	public Room(String newName) {
 		this.name = newName;
+		players = new HashSet<Player>();
 	}
+	
+	public void addPlayer(Player newPlayer) {
+		players.add(newPlayer);
+	}
+	
+	public void removePlayer(Player newPlayer) {
+		players.remove(newPlayer);
+	}
+	
+	public void emptyPlayers() {
+		players.clear();
+	}
+	
 	//all setters here
 	public void setCenterCell(BoardCell centerCell) {
 		this.centerCell = centerCell;
@@ -42,14 +59,31 @@ public class Room {
 	/*
 	 * Draw method to visualize the room
 	 */
-	public void draw(int width, int height, Graphics newGraphic) {
+	public void drawLabel(int width, int height, Graphics newGraphic) {
 		if(labelCell != null) {
 			int x = width * (labelCell.getColumn() - 1);
 			int y = height * (labelCell.getRow() + 1);
 			newGraphic.setColor(Color.BLUE);
-			Font font = new Font("roomFont", 1, (3*width)/5);
+			Font font = new Font("Calibri Bold", 1, (3*width)/5);
+			
 			newGraphic.setFont(font);
 			newGraphic.drawString(name, x, y);
+		}
+	}
+	public void drawPlayers(int width, int height, int w, int h, Graphics newGraphic) {
+		if(labelCell == null) {
+			for (Player player: players) {
+				int x = width * player.getColumn() + width/BoardCell.BORDER_SIZE;
+				int y = height * player.getRow() + height/BoardCell.BORDER_SIZE;
+				player.draw(x, y, w, h, newGraphic);
+			}
+		} else {
+			int x = width * ((centerCell.getColumn()) - players.size()/4);
+			int y = height * (centerCell.getRow());
+			for (Player player: players) {
+				player.draw(x, y, w, h, newGraphic);
+				x = x + width/2;
+			}
 		}
 	}
 }

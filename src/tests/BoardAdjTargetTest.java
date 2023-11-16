@@ -203,13 +203,13 @@ public class BoardAdjTargetTest {
 	@Test
 	public void testTargetsNewOrleans() {
 		// test a roll of 1
-		board.calcTargets(board.getCell(12, 4), 1);
+		board.calcTargets(board.getCell(12, 3), 1);
 		Set<BoardCell> targets= board.getTargets();
 		assertEquals(1, targets.size());
 		assertTrue(targets.contains(board.getCell(10, 1)));
 		
 		// test a roll of 3
-		board.calcTargets(board.getCell(12, 4), 3);
+		board.calcTargets(board.getCell(12, 3), 3);
 		targets= board.getTargets();
 		assertEquals(4, targets.size());
 		assertTrue(targets.contains(board.getCell(11, 0)));
@@ -218,7 +218,7 @@ public class BoardAdjTargetTest {
 		assertTrue(targets.contains(board.getCell(8, 1)));
 		
 		// test a roll of 4
-		board.calcTargets(board.getCell(12, 4), 4);
+		board.calcTargets(board.getCell(12, 3), 4);
 		targets= board.getTargets();
 		assertEquals(8, targets.size());
 		assertTrue(targets.contains(board.getCell(13, 1)));

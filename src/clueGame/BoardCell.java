@@ -112,7 +112,7 @@ public class BoardCell {
 		return adjList;
 	}
 	//method to draw the rooms, walkways, and unused spaces on the board.
-	public void draw(int width, int height, Graphics newGraphic, boolean target) {
+	public void draw(int width, int height, Graphics newGraphic, boolean target, int walkwayWidth, int walkwayHeight) {
 		int x = width * column;
 		int y = height * row;
 		newGraphic.setColor(Color.BLACK);
@@ -125,7 +125,7 @@ public class BoardCell {
 			} else {
 				newGraphic.setColor(Color.YELLOW);
 			}
-	        newGraphic.fillRect(x + width/BORDER_SIZE, y + height/BORDER_SIZE, ((BORDER_SIZE - 2) * width)/BORDER_SIZE, ((BORDER_SIZE - 2) * height)/BORDER_SIZE);
+	        newGraphic.fillRect(x + width/BORDER_SIZE, y + height/BORDER_SIZE, walkwayWidth, walkwayHeight);
 	    } else if (initial == 'X') {
 	    	//draw an unused cell in black
 	    	newGraphic.setColor(Color.BLACK);

@@ -8,6 +8,7 @@
 package clueGame;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -82,10 +83,13 @@ public class Board extends JPanel{
 		}
 		calcAdjacencies();
 		deal();
+		setRooms();
 		currentPlayer = computers.size() - 1;
 		playerFinished = true;
 
 		addMouseListener(new BoardListener());
+		//String fonts[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+		//for (String font : fonts) {}
 	}
 	
 	//method to draw the board and players
@@ -94,6 +98,8 @@ public class Board extends JPanel{
 		super.paintComponent(newGraphic);
 		int width = getWidth()/numColumns;
 		int height = getHeight()/numRows;
+		int walkwayWidth = ((BoardCell.BORDER_SIZE - 2) * width)/BoardCell.BORDER_SIZE;
+		int walkwayHeight = ((BoardCell.BORDER_SIZE - 2) * height)/BoardCell.BORDER_SIZE;
 		BoardCell currentCell;
 		Boolean isTarget;
 		for (int i = 0; i < numRows; i++) {
@@ -106,7 +112,7 @@ public class Board extends JPanel{
 				if (targets.contains((roomMap.get(currentCell.getInitial()).getCenterCell())) && displayTargets) {
 					isTarget = true;
 				}
-				currentCell.draw(width, height, newGraphic, isTarget);
+				currentCell.draw(width, height, newGraphic, isTarget, walkwayWidth, walkwayHeight);
 			}
 		}
 		for (int i = 0; i < numRows; i++) {
@@ -116,11 +122,10 @@ public class Board extends JPanel{
 		}
 		Collection<Room> rooms = roomMap.values();
 		for (Room room : rooms) {
-			room.draw(width, height, newGraphic);
+			room.drawLabel(width, height, newGraphic);
 		}
-		user.draw(width, height, newGraphic);
-		for (Player player : computers) {
-			player.draw(width, height, newGraphic);
+		for (Room room : rooms) {
+			room.drawPlayers(width, height, walkwayWidth, walkwayHeight, newGraphic);
 		}
 	}
 	
@@ -349,6 +354,16 @@ public class Board extends JPanel{
 		}
 	}
 	
+	public void setRooms() {
+		Collection<Room> rooms = roomMap.values();
+		for (Room room : rooms) {
+			room.emptyPlayers();
+		}
+		roomMap.get(grid[user.getRow()][user.getColumn()].getInitial()).addPlayer(user);
+		for(Player player: computers) {
+			roomMap.get(grid[player.getRow()][player.getColumn()].getInitial()).addPlayer(player);
+		}
+	}
 	// Loop through each player to deal cards
 	public void deal() {
 		room = null;
@@ -424,6 +439,9 @@ public class Board extends JPanel{
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numColumns; j++) {
 				currentCell = grid[i][j];
+				if(i == 12 && j == 4) {
+					System.out.println("Here");
+				}
 				//calculates adjacency relationships between cells when the current cell is a walkway. 
 				if(currentCell.isWalkway()) {
 					if(j > 0) {
@@ -524,6 +542,7 @@ public class Board extends JPanel{
 	    // Return true if all three parts of the accusation are correct
 	    return (roomAccusation.equals(room) && weaponAccusation.equals(weapon) && personAccusation.equals(player));
 	}
+	
 	//method that handles the player's suggestion
 	public Card handleSuggestion(Player suggestingPlayer, Card roomCard, Card weaponCard, Card personCard) {
 		Card returnCard = user.disproveSuggestion(roomCard, weaponCard, personCard);
@@ -538,11 +557,13 @@ public class Board extends JPanel{
 		}
 		return null;
 	}
+	
 	//method to roll the dice 
 	public int rollDice() {
 		Random choice = new Random();
 		return choice.nextInt(DIE_SIDES - 1) + 1;
 	}
+	
 	/*
 	 * Handles the click event on the board by a player.
 	 * Moves the user's game piece to the clicked target if it's a valid target.
@@ -559,6 +580,8 @@ public class Board extends JPanel{
 		if(!targets.contains(target)) {
 			throw new MisClick("Player clicked on a BoardCell that is not a target");
 		}
+		roomMap.get(grid[user.getRow()][user.getColumn()].getInitial()).removePlayer(user);;
+		roomMap.get(target.getInitial()).addPlayer(user);
 		user.setRow(target.getRow());
 		user.setColumn(target.getColumn());
 		if(target.isRoomCenter()) {
@@ -606,6 +629,8 @@ public class Board extends JPanel{
 			BoardCell location = grid[player.getRow()][player.getColumn()];
 			//create accusation
 			location = player.selectTarget(targets);
+			roomMap.get(grid[player.getRow()][player.getColumn()].getInitial()).removePlayer(player);
+			roomMap.get(location.getInitial()).addPlayer(player);
 			player.setRow(location.getRow());
 			player.setColumn(location.getColumn());
 			//make suggestion

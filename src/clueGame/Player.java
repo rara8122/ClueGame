@@ -33,6 +33,7 @@ public abstract class Player {
 		seen = new HashSet<SeenCard>();
 		deckSize = 0;
 	}
+	
 	//method to disprove a suggestion
 	public Card disproveSuggestion(Card room, Card weapon, Card player) {
 		Card disproveRoom = null;
@@ -94,6 +95,7 @@ public abstract class Player {
 			return disprovePlayer;
 		}
 	}
+	
 	//method to check whether a card is in the deck or seen list
 	public Boolean hasSeen(Card card) {
 		Boolean solution = false;
@@ -111,16 +113,19 @@ public abstract class Player {
 		}
 		return solution;
 	}
+	
 	//adds a card to deck
 	public void addCard(Card newCard) {
 		deck.add(newCard);
 		deckSize++;
 	}
+	
 	//adds a card to the seen cards
 	public void updateSeen(Card newCard, Color color) {
 		SeenCard newSeenCard = new SeenCard(newCard, color);
 		seen.add(newSeenCard);
 	}
+	
 	//getters and setters
 	public boolean deckFull() {
 		return deckSize == 3;
@@ -149,9 +154,11 @@ public abstract class Player {
 	public int getRow() {
 		return row;
 	}
+	
 	public int getColumn() {
 		return column;
 	}
+	
 	//setters  
 	public void setColor(Color color) {
 		this.color = color;
@@ -164,12 +171,9 @@ public abstract class Player {
 	public void setColumn(int column) {
 		this.column = column;
 	}
+	
 	//draws the players on the board
-	public void draw(int width, int height, Graphics newGraphic) {
-		int x = width * column + width/BoardCell.BORDER_SIZE;
-		int y = height * row + height/BoardCell.BORDER_SIZE;
-		int w = ((BoardCell.BORDER_SIZE - 2) * width)/BoardCell.BORDER_SIZE;
-		int h = ((BoardCell.BORDER_SIZE - 2) * height)/BoardCell.BORDER_SIZE;
+	public void draw(int x, int y, int w, int h, Graphics newGraphic) {
 		newGraphic.setColor(Color.BLACK);
 		newGraphic.fillOval(x, y, w, h);
 		newGraphic.setColor(color);
