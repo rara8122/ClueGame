@@ -64,7 +64,7 @@ public class ClueGame extends JFrame{
 		theBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		theBoard.initialize();
 		ClueCardsPanel cards = new ClueCardsPanel();  // create the panel
-		GameControlPanel control = new GameControlPanel();  // create the panel
+		GameControlPanel control = new GameControlPanel(theBoard);  // create the panel
 		ClueGame frame = new ClueGame(theBoard, cards, control);  // create the frame 
 	}
 }

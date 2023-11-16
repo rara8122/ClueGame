@@ -8,17 +8,17 @@ package clueGame;
 
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import clueGame.Board;
 
 public class GameControlPanel extends JPanel{
 	
@@ -26,15 +26,15 @@ public class GameControlPanel extends JPanel{
 	private JTextArea roll;
 	private JTextField guess;
 	private JTextArea guessResult;
-	JButton nextPlayerButton;
-    JButton makeAccusationButton;
+	private static Board gameBoard;
 	
 	/**
 	 * Constructor for the panel, it does 90% of the work
 	 */	
-	public GameControlPanel()  {
-		nextPlayerButton = new JButton("Next Player");
-        makeAccusationButton = new JButton("Make Accusation");
+	public GameControlPanel(Board gameBoard)  {
+		this.gameBoard = gameBoard; 
+		JButton nextPlayerButton = new JButton("Next Player");
+        JButton makeAccusationButton = new JButton("Make Accusation");
         JLabel dieRollLabel = new JLabel("Roll: ");
         JLabel whoseTurn = new JLabel("Whose Turn?");
         //text field for whose turn
@@ -84,16 +84,29 @@ public class GameControlPanel extends JPanel{
         JPanel wholePanel = new JPanel();
         wholePanel.add(leftPanel);
         wholePanel.add(rightPanel);
-        add(wholePanel);  
+        add(wholePanel); 
+
+        nextPlayerButton.addActionListener(e -> {
+            try {
+                gameBoard.nextPlayer();
+                gameBoard.play();
+                updatePanel(); // Update the panel after the player's turn
+            } catch (MisClick misClick) {
+            	 JOptionPane.showMessageDialog(this, "Please finish your turn ", "Message", JOptionPane.ERROR_MESSAGE);
+            }
+        });
         
-        NextPlayer next = new NextPlayer();
-        nextPlayerButton.addActionListener(next);
-        
-        MakeAccusation accuse = new MakeAccusation();
-        makeAccusationButton.addActionListener(accuse);
 	}
 	
-	
+	private void updatePanel() {
+	    // Fetch current player's information and update the panel
+	    Player currentPlayer = gameBoard.getCurrentPlayer();
+	    setTurn(currentPlayer);
+	    setRoll(gameBoard.rollDice());
+	    setGuess("Some guess");
+	    setGuessResult("Some guess result");
+	    repaint();
+	}
 	
 	/**
 	 * Main to test the panel
@@ -101,7 +114,7 @@ public class GameControlPanel extends JPanel{
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		GameControlPanel panel = new GameControlPanel();  // create the panel
+		GameControlPanel panel = new GameControlPanel(gameBoard);  // create the panel
 		JFrame frame = new JFrame();  // create the frame 
 		frame.setContentPane(panel); // put the panel in the frame
 		frame.setSize(750, 180);  // size the frame
@@ -120,7 +133,6 @@ public class GameControlPanel extends JPanel{
 	public void setRoll(int rollNum) {
 		roll.setText(Integer.toString(rollNum));	
 	}
-	
 	public void setGuessResult(String string) {
 		guessResult.setText(string);
 	}
@@ -128,7 +140,6 @@ public class GameControlPanel extends JPanel{
 	public void setGuess(String string) {
 		guess.setText(string);	
 	}
-	
 	public void setTurn(Player currentTurn) {	
 		if(currentTurn.getColor().getBlue() + currentTurn.getColor().getGreen() + currentTurn.getColor().getRed() <= 255) {
 			player.setForeground(Color.WHITE);
@@ -137,21 +148,6 @@ public class GameControlPanel extends JPanel{
 		}
 		player.setBackground(currentTurn.getColor());
 		player.setText(currentTurn.getName());
-	}
-	
-	private class NextPlayer implements ActionListener {
-		
-		public void actionPerformed(ActionEvent e) {
-			//temp code
-			System.out.println("next button pressed");
-		}
-	}
-	
-	private class MakeAccusation implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			//insert code here
-			System.out.println("accuse button pressed");
-		}
 	}
 
 }

@@ -8,9 +8,6 @@
 package clueGame;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -24,7 +21,6 @@ import java.util.Scanner;
 import java.util.Set;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Board extends JPanel{
@@ -45,7 +41,7 @@ public class Board extends JPanel{
 	private int currentPlayer;
 	private boolean playerFinished;
 	private int roll;
-	private boolean displayTargets;
+	public boolean displayTargets;
 	
 	public static final int DIE_SIDES = 6;
 	
@@ -56,6 +52,7 @@ public class Board extends JPanel{
 	// constructor is private to ensure only one can be created
 	private Board() {
 		super() ;
+		
 	}
 	// this method returns the only Board
 	public static Board getInstance() {
@@ -81,16 +78,8 @@ public class Board extends JPanel{
 		}
 		calcAdjacencies();
 		deal();
-		currentPlayer = computers.size() - 1;
-		playerFinished = true;
-		
-		addMouseListener(new BoardListener());
-		try {
-			nextPlayer();
-		} catch (MisClick e) {
-			e.printStackTrace();
-		}
-		play();
+		currentPlayer = computers.size();
+		playerFinished = false;
 	}
 	
 	//method to draw the board and players
@@ -549,33 +538,12 @@ public class Board extends JPanel{
 		return choice.nextInt(DIE_SIDES) + choice.nextInt(DIE_SIDES);
 	}
 	
-	public void boardClick(int row, int column) throws MisClick{
-		if(currentPlayer != computers.size()) {
-			return;
-		}
-		BoardCell target = roomMap.get(grid[row][column].getInitial()).getCenterCell();
-		if(target == null) {
-			target = grid[row][column];
-		}
-		if(!targets.contains(target)) {
-			throw new MisClick("Player clicked on a BoardCell that is not a target");
-		}
-		user.setRow(target.getRow());
-		user.setColumn(target.getColumn());
-		if(target.isRoomCenter()) {
-			//Handle Suggestion
-		}
-		playerFinished = true;
-		displayTargets = false;
-		repaint();
-	}
-	
 	public void nextPlayer() throws MisClick{
 		if(currentPlayer == computers.size()) {
 			if(playerFinished) {
 				currentPlayer = 0;
 			} else {
-				throw new MisClick("Player turn is not finished");
+				throw new MisClick();
 			}
 		} else {
 			currentPlayer++;
@@ -583,10 +551,9 @@ public class Board extends JPanel{
 		roll = rollDice();
 		if(currentPlayer == computers.size()) {
 			findTargets(grid[user.getRow()][user.getColumn()], roll);
-		} else {
-			ComputerPlayer player = computers.get(currentPlayer);
-			findTargets(grid[player.getRow()][player.getColumn()], roll);
 		}
+		ComputerPlayer player = computers.get(currentPlayer);
+		findTargets(grid[player.getRow()][player.getColumn()], roll);
 	}
 	
 	public void play() {
@@ -627,8 +594,7 @@ public class Board extends JPanel{
 			return computers.get(currentPlayer);
 		}
 	}
- 	
-	public Card getRoomSoln() {
+ 	public Card getRoomSoln() {
 		return room;
 	}
 	
@@ -693,27 +659,6 @@ public class Board extends JPanel{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 	    frame.setVisible(true); // make it visible
         
-	}
-	
-	private class BoardListener implements MouseListener {
-		// Empty definitions for unused event methods.
-		public void mousePressed (MouseEvent event) {}
-		public void mouseReleased (MouseEvent event) {}
-		public void mouseEntered (MouseEvent event) {}
-		public void mouseExited (MouseEvent event) {}
-		public void mouseClicked (MouseEvent event) {
-			Point point = event.getPoint();
-			int column = (point.x * numColumns)/getWidth();
-			int row = (point.y * numRows)/getHeight();
-			
-			try {
-				boardClick(row, column);
-			} catch (MisClick e) {
-				String message = "That is not a target";
-		        JOptionPane.showMessageDialog(Board.getInstance(), message, "Error", JOptionPane.INFORMATION_MESSAGE);
-			}
-			repaint();
-		}
 	}
 
 }
