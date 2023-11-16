@@ -8,6 +8,7 @@
 package tests;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -82,7 +83,7 @@ public class GameSetupTests {
 	 // This test ensures that the players were loaded correctly	
 	@Test
 	public void testPlayersLoadedCorrectly() {
-	    Set<ComputerPlayer> players = board.getPlayers();
+		ArrayList<ComputerPlayer> players = board.getPlayers();
 	    assertEquals(5, players.size()); // Assuming you have 6 players
 
 	    // Test individual players
@@ -173,7 +174,7 @@ public class GameSetupTests {
 	 // This test ensures that the deal() method correctly distributes cards to players 
 	@Test
 	public void testDeal() {
-		Set<ComputerPlayer> players = board.getPlayers();
+		ArrayList<ComputerPlayer> players = board.getPlayers();
 		int[] solns = new int[6];
 		Set<Card> deck;
 		int i = 0;

@@ -112,7 +112,7 @@ public class BoardCell {
 		return adjList;
 	}
 
-	public void draw(int width, int height, Graphics newGraphic) {
+	public void draw(int width, int height, Graphics newGraphic, boolean target) {
 		int x = width * column;
 		int y = height * row;
 		newGraphic.setColor(Color.BLACK);
@@ -120,13 +120,21 @@ public class BoardCell {
 		if (initial == 'W') {
 			newGraphic.setColor(Color.BLACK);
 			newGraphic.fillRect(x, y, width, height); //draw a big black rectangle, and draw a slightly smaller rectangle inside it
-	        newGraphic.setColor(Color.YELLOW);
+			if(target) {
+				newGraphic.setColor(Color.CYAN);
+			} else {
+				newGraphic.setColor(Color.YELLOW);
+			}
 	        newGraphic.fillRect(x + width/BORDER_SIZE, y + height/BORDER_SIZE, ((BORDER_SIZE - 2) * width)/BORDER_SIZE, ((BORDER_SIZE - 2) * height)/BORDER_SIZE);
 	    } else if (initial == 'X') {
 	    	newGraphic.setColor(Color.BLACK);
 	        newGraphic.fillRect(x, y, width, height);
 	    } else {
-	        newGraphic.setColor(Color.GRAY);
+	    	if(target) {
+				newGraphic.setColor(Color.CYAN);
+			} else {
+				newGraphic.setColor(Color.GRAY);
+			}
 	        newGraphic.fillRect(x, y, width, height);
 		}
 	}

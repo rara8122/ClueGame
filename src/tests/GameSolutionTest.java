@@ -13,6 +13,7 @@ import clueGame.Player;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Set;
 
 public class GameSolutionTest {
@@ -76,7 +77,7 @@ public class GameSolutionTest {
 
 	@Test
 	public void testWrongSuggestion() {
-		Set<ComputerPlayer> players = board.getPlayers();
+		ArrayList<ComputerPlayer> players = board.getPlayers();
 		HumanPlayer user = board.getUser();
 		for(Player player: players) {
 			Set<Card> deck = player.getDeck();
@@ -97,7 +98,7 @@ public class GameSolutionTest {
 	@Test
 	public void testSuggestionWeDisprove() {
 		HumanPlayer user = board.getUser();
-		Set<ComputerPlayer> players = board.getPlayers();
+		ArrayList<ComputerPlayer> players = board.getPlayers();
 		Set<Card> deck = user.getDeck();
 		for (Card card: deck) {
 			if (card.getCardType() == CardType.PERSON) {
@@ -129,7 +130,7 @@ public class GameSolutionTest {
 	@Test
 	public void testSuggestionTwoDisprove() {
 		HumanPlayer user = board.getUser();
-		Set<ComputerPlayer> players = board.getPlayers();
+		ArrayList<ComputerPlayer> players = board.getPlayers();
 		Set<Card> deck1 = user.getDeck();
 		Set<Card> deck2 = user.getDeck();
 		Card roomSuggestion = correctRoom;

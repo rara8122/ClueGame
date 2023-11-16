@@ -11,6 +11,7 @@ import java.awt.Graphics;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -33,10 +34,16 @@ public class Board extends JPanel{
 	private Set<BoardCell> visited;
 	private Set<Card> deck;
 	private HumanPlayer user;
-	private Set<ComputerPlayer> computers;
+	private ArrayList<ComputerPlayer> computers;
 	private Card room;
 	private Card weapon;
 	private Card player;
+	private int currentPlayer;
+	private boolean playerFinished;
+	private int roll;
+	public boolean displayTargets;
+	
+	public static final int DIE_SIDES = 6;
 	
 	/*
 	 * variable and methods used for singleton pattern
@@ -70,6 +77,8 @@ public class Board extends JPanel{
 		}
 		calcAdjacencies();
 		deal();
+		currentPlayer = computers.size();
+		playerFinished = false;
 	}
 	
 	@Override
@@ -77,9 +86,19 @@ public class Board extends JPanel{
 		super.paintComponent(newGraphic);
 		int width = getWidth()/numColumns;
 		int height = getHeight()/numRows;
+		BoardCell currentCell;
+		Boolean isTarget;
 		for (int i = 0; i < numRows; i++) {
 			for(int j = 0; j < numColumns; j++) {
-				grid[i][j].draw(width, height, newGraphic);
+				isTarget = false;
+				currentCell = grid[i][j];
+				if(targets.contains(currentCell) && displayTargets) {
+					isTarget = true;
+				}
+				if (targets.contains((roomMap.get(currentCell.getInitial()).getCenterCell())) && displayTargets) {
+					isTarget = true;
+				}
+				currentCell.draw(width, height, newGraphic, isTarget);
 			}
 		}
 		for (int i = 0; i < numRows; i++) {
@@ -96,11 +115,12 @@ public class Board extends JPanel{
 			player.draw(width, height, newGraphic);
 		}
 	}
+	
 	//loads setup config
 	public void loadSetupConfig () throws BadConfigFormatException, IOException {
 		roomMap = new HashMap <Character, Room> ();
 		deck = new HashSet<Card>();
-		computers = new HashSet<ComputerPlayer>();
+		computers = new ArrayList<ComputerPlayer>();
 		user = null;
 		FileReader setupFile;
 		try {
@@ -221,6 +241,7 @@ public class Board extends JPanel{
 		setupScanner.close();
 		setupFile.close();
 	}
+	
 	//loads layout config
 	public void loadLayoutConfig () throws BadConfigFormatException, IOException {
 		numRows = 0;
@@ -319,6 +340,7 @@ public class Board extends JPanel{
 			}
 		}
 	}
+	
 	// Loop through each player to deal cards
 	public void deal() {
 		room = null;
@@ -479,12 +501,14 @@ public class Board extends JPanel{
 		}
 		visited.remove(currentCell);
 	} 
+	
 	//method to calculate targets 
 	public void calcTargets(BoardCell cell, int i) {
 		visited.clear(); 
 		targets.clear();
 		findTargets(cell, i);
 	}
+	
 	public boolean checkAccusation(Card roomAccusation, Card weaponAccusation, Card personAccusation) {
 	    // Compare the accusation with the correct solution
 	    // Check if each part of the accusation matches the correct solution
@@ -492,6 +516,7 @@ public class Board extends JPanel{
 	    // Return true if all three parts of the accusation are correct
 	    return (roomAccusation.equals(room) && weaponAccusation.equals(weapon) && personAccusation.equals(player));
 	}
+	
 	public Card handleSuggestion(Player suggestingPlayer, Card roomCard, Card weaponCard, Card personCard) {
 		Card returnCard = user.disproveSuggestion(roomCard, weaponCard, personCard);
 		if(returnCard != null && suggestingPlayer != user) {
@@ -506,6 +531,45 @@ public class Board extends JPanel{
 		return null;
 	}
 	
+	public int rollDice() {
+		Random choice = new Random();
+		return choice.nextInt(DIE_SIDES) + choice.nextInt(DIE_SIDES);
+	}
+	
+	public void nextPlayer() throws PlayerNotFinished{
+		if(currentPlayer == computers.size()) {
+			if(playerFinished) {
+				currentPlayer = 0;
+			} else {
+				throw new PlayerNotFinished();
+			}
+		} else {
+			currentPlayer++;
+		}
+		roll = rollDice();
+		if(currentPlayer == computers.size()) {
+			findTargets(grid[user.getRow()][user.getColumn()], roll);
+		}
+		ComputerPlayer player = computers.get(currentPlayer);
+		findTargets(grid[player.getRow()][player.getColumn()], roll);
+	}
+	
+	public void play() {
+		if(currentPlayer == computers.size()) {
+			displayTargets = true;
+			playerFinished = false;
+		} else {
+			ComputerPlayer player = computers.get(currentPlayer);
+			BoardCell location = grid[player.getRow()][player.getColumn()];
+			//create accusation
+			location = player.selectTarget(targets);
+			player.setRow(location.getRow());
+			player.setColumn(location.getColumn());
+			//make suggestion
+		}
+		super.repaint();
+	}
+	
 	//all setters here 
 	public void setGrid(BoardCell[][] grid) {
 		this.grid = grid;
@@ -517,7 +581,18 @@ public class Board extends JPanel{
 	}
 	
 	//all getters below
-	public Card getRoomSoln() {
+	public int getRoll() {
+		return roll;
+	}
+	
+	public Player getCurrentPlayer() {
+		if(currentPlayer == computers.size()) {
+			return user;
+		} else {
+			return computers.get(currentPlayer);
+		}
+	}
+ 	public Card getRoomSoln() {
 		return room;
 	}
 	
@@ -529,7 +604,7 @@ public class Board extends JPanel{
 		return player;
 	}
 	
-	public Set<ComputerPlayer> getPlayers(){
+	public ArrayList<ComputerPlayer> getPlayers(){
 		return computers;
 	}
 	
@@ -568,6 +643,7 @@ public class Board extends JPanel{
 	public Set<BoardCell> getTargets() {
 		return targets;
 	}
+	
 	public Set<Card> getDeck() {
 		return deck;
 	}
