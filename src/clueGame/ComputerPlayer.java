@@ -56,7 +56,7 @@ public class ComputerPlayer extends Player{
 			}
 		}
 	}
-
+	//method to select  a target
 	public BoardCell selectTarget(Set<BoardCell> targets) {
 		Set<BoardCell> chosenTargets = new HashSet<BoardCell>();
 		// Iterate through the available targets
@@ -91,23 +91,17 @@ public class ComputerPlayer extends Player{
 	}
 
 	public void setRoomSolution(Card roomSolution2) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public void setCurrentRoom(Room currentRoom) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	public Object getRoom() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public ComputerPlayer getSuggestion() {
-		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

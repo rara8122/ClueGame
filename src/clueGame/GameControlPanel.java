@@ -97,7 +97,7 @@ public class GameControlPanel extends JPanel{
         });
         
 	}
-	
+	//method to update the panel 
 	private void updatePanel() {
 	    // Fetch current player's information and update the panel
 	    Player currentPlayer = gameBoard.getCurrentPlayer();

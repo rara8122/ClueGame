@@ -524,7 +524,7 @@ public class Board extends JPanel{
 	    // Return true if all three parts of the accusation are correct
 	    return (roomAccusation.equals(room) && weaponAccusation.equals(weapon) && personAccusation.equals(player));
 	}
-	
+	//method that handles the player's suggestion
 	public Card handleSuggestion(Player suggestingPlayer, Card roomCard, Card weaponCard, Card personCard) {
 		Card returnCard = user.disproveSuggestion(roomCard, weaponCard, personCard);
 		if(returnCard != null && suggestingPlayer != user) {
@@ -538,12 +538,16 @@ public class Board extends JPanel{
 		}
 		return null;
 	}
-	
+	//method to roll the dice 
 	public int rollDice() {
 		Random choice = new Random();
 		return choice.nextInt(DIE_SIDES - 1) + 1;
 	}
-	
+	/*
+	 * Handles the click event on the board by a player.
+	 * Moves the user's game piece to the clicked target if it's a valid target.
+	 * Throws a MisClick exception if the clicked cell is not a target.
+	*/
 	public void boardClick(int row, int column) throws MisClick{
 		if(currentPlayer != computers.size()) {
 			return;
@@ -565,17 +569,23 @@ public class Board extends JPanel{
 		repaint();
 	}
 	
+	/*
+	 * Moves the game to the next player's turn.
+	 * Throws a MisClick exception if a player tries to switch turns before finishing their turn.
+	 */
 	public void nextPlayer() throws MisClick{
+		 // Check if it's the last player's turn and their turn is finished
 		if(currentPlayer == computers.size()) {
 			if(playerFinished) {
-				currentPlayer = 0;
+				currentPlayer = 0; // Move to the first player if the last player finished their turn
 			} else {
 				throw new MisClick("Player turn is not finished");
 			}
 		} else {
 			currentPlayer++;
 		}
-		roll = rollDice();
+		roll = rollDice(); //roll the dice for current player's turn.
+		 // Calculate targets for the next player based on their current location and roll
 		if(currentPlayer == computers.size()) {
 			calcTargets(grid[user.getRow()][user.getColumn()], roll);
 		} else {
@@ -583,7 +593,10 @@ public class Board extends JPanel{
 			calcTargets(grid[player.getRow()][player.getColumn()], roll);
 		}
 	}
-	
+	/**
+	 * Controls the gameplay logic, either showing targets for the human player or executing the computer player's turn.
+	 * Repaints the board after each turn.
+	 */
 	public void play() {
 		if(currentPlayer == computers.size()) {
 			displayTargets = true;
@@ -597,7 +610,7 @@ public class Board extends JPanel{
 			player.setColumn(location.getColumn());
 			//make suggestion
 		}
-		super.repaint();
+		super.repaint(); //Redraw the board after the turn
 	}
 	
 	//all setters here 
@@ -613,8 +626,7 @@ public class Board extends JPanel{
 	//all getters below
 	public int getRoll() {
 		return roll;
-	}
-	
+	} 
 	public Player getCurrentPlayer() {
 		if(currentPlayer == computers.size()) {
 			return user;
@@ -678,7 +690,9 @@ public class Board extends JPanel{
 	public Set<Card> getDeck() {
 		return deck;
 	}
-	
+	/*
+	 * Main method for testing
+	 */
 	public static void main(String[] args) {
 		theInstance.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		theInstance.initialize();
@@ -687,9 +701,30 @@ public class Board extends JPanel{
 		frame.setSize(1200, 828);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 	    frame.setVisible(true); // make it visible
-        
+       
+	}
+	
+	public void mouseClicked(MouseEvent event) {
+	    if (getCurrentPlayer() instanceof HumanPlayer) {
+	        int mouseX = event.getX();
+	        int mouseY = event.getY();
+	        int clickedColumn = mouseX / (getWidth() / numColumns);
+	        int clickedRow = mouseY / (getHeight() / numRows);
+
+	        try {
+	            boardClick(clickedRow, clickedColumn); // Implement boardClick method
+	        } catch (MisClick e) {
+	            // Show error message for invalid click
+	            String message = "That is not a valid target.";
+	            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.INFORMATION_MESSAGE);
+	        }
+	    }
+	    repaint(); // Refresh the board display
 	}
 
+	/*
+	 * Inner class implementing MouseListener to handle mouse events on the board.
+	 */
 	private class BoardListener implements MouseListener {
 		// Empty definitions for unused event methods.
 		public void mousePressed (MouseEvent event) {}
@@ -697,8 +732,8 @@ public class Board extends JPanel{
 		public void mouseEntered (MouseEvent event) {}
 		public void mouseExited (MouseEvent event) {}
 		public void mouseClicked (MouseEvent event) {
-			Point point = event.getPoint();
-			int column = (point.x * numColumns)/getWidth();
+			Point point = event.getPoint(); //get the point clicked
+			int column = (point.x * numColumns)/getWidth();// Calculate the column and row based on the click position
 			int row = (point.y * numRows)/getHeight();
 
 			try {
@@ -710,4 +745,5 @@ public class Board extends JPanel{
 			repaint();
 		}
 	}
+
 }

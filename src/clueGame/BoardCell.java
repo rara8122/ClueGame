@@ -116,7 +116,7 @@ public class BoardCell {
 		int x = width * column;
 		int y = height * row;
 		newGraphic.setColor(Color.BLACK);
-		
+		//drawing logic based on cell type
 		if (initial == 'W') {
 			newGraphic.setColor(Color.BLACK);
 			newGraphic.fillRect(x, y, width, height); //draw a big black rectangle, and draw a slightly smaller rectangle inside it
@@ -127,6 +127,7 @@ public class BoardCell {
 			}
 	        newGraphic.fillRect(x + width/BORDER_SIZE, y + height/BORDER_SIZE, ((BORDER_SIZE - 2) * width)/BORDER_SIZE, ((BORDER_SIZE - 2) * height)/BORDER_SIZE);
 	    } else if (initial == 'X') {
+	    	//draw an unused cell in black
 	    	newGraphic.setColor(Color.BLACK);
 	        newGraphic.fillRect(x, y, width, height);
 	    } else {

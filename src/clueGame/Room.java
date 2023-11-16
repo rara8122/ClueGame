@@ -39,6 +39,9 @@ public class Room {
 	public BoardCell getCenterCell() {
 		return centerCell;
 	}
+	/*
+	 * Draw method to visualize the room
+	 */
 	public void draw(int width, int height, Graphics newGraphic) {
 		if(labelCell != null) {
 			int x = width * (labelCell.getColumn() - 1);

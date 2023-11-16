@@ -20,7 +20,7 @@ public class ClueGame extends JFrame{
 	ClueCardsPanel cards;
 	GameControlPanel control;
 	/*
-	 * Constructor for cluegame
+	 * Constructor for class 
 	 */
 	public ClueGame(Board newBoard, ClueCardsPanel newcards, GameControlPanel newcontrol) {
 		super();
@@ -28,14 +28,10 @@ public class ClueGame extends JFrame{
 		theBoard =  newBoard;
 		cards = newcards;
 		control = newcontrol;
-		
-		initializeMainFrame(); 
-		
-		HumanPlayer user = theBoard.getUser();
-		
+		initializeMainFrame(); 		
+		HumanPlayer user = theBoard.getUser();		
 		cards.updateDeckCards(user.getDeck(), user.getColor());
 		cards.updateSeenCards(user.getSeen());
-		
 		control.setTurn(user);
 		control.setGuess( "I have no guess!");
 		control.setGuessResult( "So you have nothing?");
@@ -44,7 +40,7 @@ public class ClueGame extends JFrame{
 		showSplashScreen(user); 
 			
 	}
-	
+	//method to initialize the main frame with all the panels and splash screen
 	private void initializeMainFrame() {
 		super.add(theBoard, BorderLayout.CENTER);
 		super.add(cards, BorderLayout.EAST);
@@ -54,11 +50,14 @@ public class ClueGame extends JFrame{
 		super.setVisible(true); // make it visible
 		
 	}
+	//presents the splash screen at the beginning of the game
 	private void showSplashScreen(HumanPlayer user) {
 		String message = "You are " + user.getName() + ". " + "Can you find the solution before the computer players?";
         JOptionPane.showMessageDialog(this,message, "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
     }
-
+	/*
+	 * Main to test the panel
+	 */
 	public static void main(String[] args) {
 		Board theBoard = Board.getInstance();
 		theBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");

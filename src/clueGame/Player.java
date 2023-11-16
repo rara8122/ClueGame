@@ -94,13 +94,16 @@ public abstract class Player {
 			return disprovePlayer;
 		}
 	}
+	//method to check whether a card is in the deck or seen list
 	public Boolean hasSeen(Card card) {
 		Boolean solution = false;
+		//check if card exists in the deck
 		for (Card c : deck) {
 			if (c.equals(card)) {
 				solution = true;
 			}
 		}
+		//check if card exists in the seen list
 		for (SeenCard c : seen) {
 			if (c.getCard().equals(card)) {
 				solution = true;
@@ -161,7 +164,7 @@ public abstract class Player {
 	public void setColumn(int column) {
 		this.column = column;
 	}
-	
+	//draws the players on the board
 	public void draw(int width, int height, Graphics newGraphic) {
 		int x = width * column + width/BoardCell.BORDER_SIZE;
 		int y = height * row + height/BoardCell.BORDER_SIZE;
