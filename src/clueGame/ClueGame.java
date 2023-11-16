@@ -9,6 +9,7 @@ package clueGame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.Set;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -42,7 +43,8 @@ public class ClueGame extends JFrame{
 		control.setGuessResult( "So you have nothing?");
 		control.setRoll(5);
 		
-		showSplashScreen(user); 	
+		showSplashScreen(user); 
+			
 	}
 	
 	private void initializeMainFrame() {
@@ -58,7 +60,7 @@ public class ClueGame extends JFrame{
 		String message = "You are " + user.getName() + ". " + "Can you find the solution before the computer players?";
         JOptionPane.showMessageDialog(this,message, "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
     }
-	
+
 	public static void main(String[] args) {
 		Board theBoard = Board.getInstance();
 		theBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");

@@ -81,6 +81,7 @@ public class GameControlPanel extends JPanel{
         wholePanel.add(leftPanel);
         wholePanel.add(rightPanel);
         add(wholePanel);  
+        
 	}
 	
 	
@@ -104,7 +105,7 @@ public class GameControlPanel extends JPanel{
 		panel.setGuessResult( "So you have nothing?");
 		panel.setRoll(5);
 	}
-
+	
 
 	//setters
 	public void setRoll(int rollNum) {
@@ -126,4 +127,5 @@ public class GameControlPanel extends JPanel{
 		player.setBackground(currentTurn.getColor());
 		player.setText(currentTurn.getName());
 	}
+
 }

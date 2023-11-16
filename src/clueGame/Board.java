@@ -537,12 +537,12 @@ public class Board extends JPanel{
 		return choice.nextInt(DIE_SIDES) + choice.nextInt(DIE_SIDES);
 	}
 	
-	public void nextPlayer() throws PlayerNotFinished{
+	public void nextPlayer() throws MisClick{
 		if(currentPlayer == computers.size()) {
 			if(playerFinished) {
 				currentPlayer = 0;
 			} else {
-				throw new PlayerNotFinished();
+				throw new MisClick();
 			}
 		} else {
 			currentPlayer++;
