@@ -537,12 +537,26 @@ public class Board extends JPanel{
 		return choice.nextInt(DIE_SIDES) + choice.nextInt(DIE_SIDES);
 	}
 	
-	public void nextPlayer() throws PlayerNotFinished{
+	public void boardClick(int row, int column) throws MisClick{
+		if(currentPlayer != computers.size()) {
+			return;
+		}
+		if(!targets.contains(grid[row][column])) {
+			throw new MisClick("Player clicked on a BoardCell that is not a target");
+		}
+		user.setRow(row);
+		user.setColumn(column);
+		if(!grid[row][column].isRoomCenter()) {
+			playerFinished = true;
+		}
+	}
+	
+	public void nextPlayer() throws MisClick{
 		if(currentPlayer == computers.size()) {
 			if(playerFinished) {
 				currentPlayer = 0;
 			} else {
-				throw new PlayerNotFinished();
+				throw new MisClick("Player turn is not finished");
 			}
 		} else {
 			currentPlayer++;
