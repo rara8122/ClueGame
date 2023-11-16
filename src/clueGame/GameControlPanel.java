@@ -8,6 +8,8 @@ package clueGame;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,13 +26,15 @@ public class GameControlPanel extends JPanel{
 	private JTextArea roll;
 	private JTextField guess;
 	private JTextArea guessResult;
+	JButton nextPlayerButton;
+    JButton makeAccusationButton;
 	
 	/**
 	 * Constructor for the panel, it does 90% of the work
 	 */	
 	public GameControlPanel()  {
-		JButton nextPlayerButton = new JButton("Next Player");
-        JButton makeAccusationButton = new JButton("Make Accusation");
+		nextPlayerButton = new JButton("Next Player");
+        makeAccusationButton = new JButton("Make Accusation");
         JLabel dieRollLabel = new JLabel("Roll: ");
         JLabel whoseTurn = new JLabel("Whose Turn?");
         //text field for whose turn
@@ -81,6 +85,12 @@ public class GameControlPanel extends JPanel{
         wholePanel.add(leftPanel);
         wholePanel.add(rightPanel);
         add(wholePanel);  
+        
+        NextPlayer next = new NextPlayer();
+        nextPlayerButton.addActionListener(next);
+        
+        MakeAccusation accuse = new MakeAccusation();
+        makeAccusationButton.addActionListener(accuse);
 	}
 	
 	
@@ -104,7 +114,7 @@ public class GameControlPanel extends JPanel{
 		panel.setGuessResult( "So you have nothing?");
 		panel.setRoll(5);
 	}
-
+	
 
 	//setters
 	public void setRoll(int rollNum) {
@@ -126,4 +136,19 @@ public class GameControlPanel extends JPanel{
 		player.setBackground(currentTurn.getColor());
 		player.setText(currentTurn.getName());
 	}
+	
+	private class NextPlayer implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			//temp code
+			System.out.println("next button pressed");
+		}
+	}
+	
+	private class MakeAccusation implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			//insert code here
+			System.out.println("accuse button pressed");
+		}
+	}
+
 }
