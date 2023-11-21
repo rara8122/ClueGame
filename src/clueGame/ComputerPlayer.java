@@ -18,13 +18,17 @@ public class ComputerPlayer extends Player{
 	private Card weaponSolution;
 	private Card personSolution;
 
-	//constructor
+	/*
+	 * constructor that takes in the computer player's name, color, column
+	 */
 	public ComputerPlayer(String name, Color color, int row, int column) {
 		super(name, color, row, column);
 		// TODO Auto-generated constructor stub
 	}
 	
-	//method to create a solution
+	/*method to create a solution
+	 * 
+	 */
 	public void createSolution(Set<Card> deck, String currentRoom) {
 		Random choice = new Random();
 		Card card;
@@ -56,7 +60,9 @@ public class ComputerPlayer extends Player{
 			}
 		}
 	}
-	//method to select  a target
+	/*method to select  a target
+	 * 
+	 */
 	public BoardCell selectTarget(Set<BoardCell> targets) {
 		Set<BoardCell> chosenTargets = new HashSet<BoardCell>();
 		// Iterate through the available targets

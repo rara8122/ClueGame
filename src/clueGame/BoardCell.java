@@ -38,27 +38,37 @@ public class BoardCell {
 		secretPassage = ' ';
 	}
 	
-	// Method to add an adjacent cell to the adjacency list	
+	/*
+	 *  Method to add an adjacent cell to the adjacency list	
+	 */
 	public void addAdj(BoardCell adj) {
 		adjList.add(adj);
 	}
 	
-	// Method to check if this cell is a doorway
+	/*
+	 *  Method to check if this cell is a doorway
+	 */
 	public boolean isDoorway() {
 		return (doorDirection != DoorDirection.NONE);
 	}
 	
-	//method to check if this cell is a walkway 
+	/*
+	 * method to check if this cell is a walkway 
+	 */
 	public boolean isWalkway() {
 		return initial == 'W';
 	}
 		
-	// Method to check if this cell is a label
+	/* Method to check if this cell is a label
+	 * 
+	 */
 	public boolean isLabel() {
 		return roomLabel;
 	}
 
-	// Method to check if this cell is a room center
+	/*
+	 *  Method to check if this cell is a room center
+	 */
 	public boolean isRoomCenter() {
 		return roomCenter;
 	}
@@ -118,7 +128,9 @@ public class BoardCell {
 		return adjList;
 	}
 	
-	//method to draw the rooms, walkways, and unused spaces on the board.
+	/*
+	 * method to draw the rooms, walkways, and unused spaces on the board.
+	 */
 	public void draw(int width, int height, Graphics newGraphic, boolean target, int walkwayWidth, int walkwayHeight) {
 		int x = width * column;
 		int y = height * row;
@@ -163,7 +175,9 @@ public class BoardCell {
 		}
 	}
 	
-	//method to draw the doors in the board gui
+	/*method to draw the doors in the board gui
+	 * 
+	 */
 	public void drawDoor(int width, int height, Graphics newGraphic) {
 		int x = width * column;
 		int y = height * row;
