@@ -83,24 +83,24 @@ public class Board extends JPanel{
 		}
 		calcAdjacencies();
 		deal();
-		setRooms();
-		currentPlayer = computers.size() - 1;
-		playerFinished = true;
+		setRooms(); //setRooms sets the rooms of the player
+		currentPlayer = computers.size() - 1; // so next player is the user (when we call nextPlayer)
+		playerFinished = true; //so nextPlayer will run instead of throwing an error
 
-		addMouseListener(new BoardListener());
+		addMouseListener(new BoardListener()); //listens for mouse clicks
 	}
 	
 	//method to draw the board and players
 	@Override
 	public void paintComponent(Graphics newGraphic) {
 		super.paintComponent(newGraphic);
-		int width = getWidth()/numColumns;
-		int height = getHeight()/numRows;
-		int walkwayWidth = ((BoardCell.BORDER_SIZE - 2) * width)/BoardCell.BORDER_SIZE;
-		int walkwayHeight = ((BoardCell.BORDER_SIZE - 2) * height)/BoardCell.BORDER_SIZE;
+		int width = getWidth()/numColumns;//the width of one cell
+		int height = getHeight()/numRows;//the height of one cell
+		int walkwayWidth = ((BoardCell.BORDER_SIZE - 2) * width)/BoardCell.BORDER_SIZE;//the inner width of the walkway
+		int walkwayHeight = ((BoardCell.BORDER_SIZE - 2) * height)/BoardCell.BORDER_SIZE;//the inner height of the walkway
 		BoardCell currentCell;
 		Boolean isTarget;
-		for (int i = 0; i < numRows; i++) {
+		for (int i = 0; i < numRows; i++) {//draw every cell
 			for(int j = 0; j < numColumns; j++) {
 				isTarget = false;
 				currentCell = grid[i][j];
@@ -113,16 +113,16 @@ public class Board extends JPanel{
 				currentCell.draw(width, height, newGraphic, isTarget, walkwayWidth, walkwayHeight);
 			}
 		}
-		for (int i = 0; i < numRows; i++) {
+		for (int i = 0; i < numRows; i++) {//draw every door
 			for(int j = 0; j < numColumns; j++) {
 				grid[i][j].drawDoor(width, height, newGraphic);
 			}
 		}
 		Collection<Room> rooms = roomMap.values();
-		for (Room room : rooms) {
+		for (Room room : rooms) {//draw every room
 			room.drawLabel(width, height, newGraphic);
 		}
-		for (Room room : rooms) {
+		for (Room room : rooms) {//draw every player
 			room.drawPlayers(width, height, walkwayWidth, walkwayHeight, newGraphic);
 		}
 	}
@@ -355,11 +355,11 @@ public class Board extends JPanel{
 	public void setRooms() {
 		Collection<Room> rooms = roomMap.values();
 		for (Room room : rooms) {
-			room.emptyPlayers();
+			room.emptyPlayers(); //empty players so we start from scratch
 		}
-		roomMap.get(grid[user.getRow()][user.getColumn()].getInitial()).addPlayer(user);
+		roomMap.get(grid[user.getRow()][user.getColumn()].getInitial()).addPlayer(user); //add the user to the room (separate from the other players)
 		for(Player player: computers) {
-			roomMap.get(grid[player.getRow()][player.getColumn()].getInitial()).addPlayer(player);
+			roomMap.get(grid[player.getRow()][player.getColumn()].getInitial()).addPlayer(player); //for every player, add to the associated room
 		}
 	}
 	// Loop through each player to deal cards
@@ -556,7 +556,7 @@ public class Board extends JPanel{
 	//method to roll the dice 
 	public int rollDice() {
 		Random choice = new Random();
-		return choice.nextInt(DIE_SIDES - 1) + 1;
+		return choice.nextInt(DIE_SIDES - 1) + 1; //roll a DIE_SIDES sided die from 0 to DIE_SIDES - 1 (and then add 1 so its 1 to DIE_SIDES)
 	}
 	
 	/*
@@ -566,25 +566,25 @@ public class Board extends JPanel{
 	*/
 	public void boardClick(int row, int column) throws MisClick{
 		if(currentPlayer != computers.size()) {
-			return;
+			return; //if it isn't the player, we clicked wrong
 		}
-		BoardCell target = roomMap.get(grid[row][column].getInitial()).getCenterCell();
-		if(target == null) {
+		BoardCell target = roomMap.get(grid[row][column].getInitial()).getCenterCell();//set to be center of associated room (so we can click anywhere in a room)
+		if(target == null) {//if the target is a walkway this will be true
 			target = grid[row][column];
 		}
 		if(!targets.contains(target)) {
-			throw new MisClick("Player clicked on a BoardCell that is not a target");
+			throw new MisClick("Player clicked on a BoardCell that is not a target"); //if we didn't click a target, we clicked wrong
 		}
-		roomMap.get(grid[user.getRow()][user.getColumn()].getInitial()).removePlayer(user);;
+		roomMap.get(grid[user.getRow()][user.getColumn()].getInitial()).removePlayer(user);//remove player from current room and add to new room
 		roomMap.get(target.getInitial()).addPlayer(user);
-		user.setRow(target.getRow());
+		user.setRow(target.getRow());//set new location
 		user.setColumn(target.getColumn());
 		if(target.isRoomCenter()) {
-			//Handle Suggestion
+			//Handle Suggestion TODO
 		}
-		playerFinished = true;
+		playerFinished = true;//end the turn and stop displaying target options
 		displayTargets = false;
-		repaint();
+		repaint();//repaint so the targets stop displaying
 	}
 	
 	/*
@@ -617,7 +617,7 @@ public class Board extends JPanel{
 	 */
 	public void play() {
 		if(currentPlayer == computers.size()) {
-			displayTargets = true;
+			displayTargets = true;//make sure the player is not done and we display movement options
 			playerFinished = false;
 		} else {
 			ComputerPlayer player = computers.get(currentPlayer);

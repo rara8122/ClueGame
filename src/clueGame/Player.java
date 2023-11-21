@@ -175,8 +175,8 @@ public abstract class Player {
 	//draws the players on the board
 	public void draw(int x, int y, int w, int h, Graphics newGraphic) {
 		newGraphic.setColor(Color.BLACK);
-		newGraphic.fillOval(x, y, w, h);
+		newGraphic.fillOval(x, y, w, h); //draw black circle with slightly smaller colored circle inside
 		newGraphic.setColor(color);
-		newGraphic.fillOval(x + w/BORDER_SIZE, y + h/BORDER_SIZE, ((BORDER_SIZE - 1) * w)/BORDER_SIZE, ((BORDER_SIZE - 1) * h)/BORDER_SIZE);
+		newGraphic.fillOval(x + w/BORDER_SIZE, y + h/BORDER_SIZE, ((BORDER_SIZE - 1) * w)/BORDER_SIZE, ((BORDER_SIZE - 1) * h)/BORDER_SIZE); 
 	}
 }

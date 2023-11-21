@@ -137,26 +137,26 @@ public class BoardCell {
 	    	//draw an unused cell in black
 	    	newGraphic.setColor(Color.BLACK);
 	        newGraphic.fillRect(x, y, width, height);
-	    } else {
-	    	if(secretPassage == ' ') {
+	    } else { //rooms
+	    	if(secretPassage == ' ') { //if this cell is not a secret passage
 		    	if(target) {
 					newGraphic.setColor(Color.CYAN);
 				} else {
 					newGraphic.setColor(Color.GRAY);
 				}
 		        newGraphic.fillRect(x, y, width, height);
-	    	} else {
-	    		newGraphic.setColor(Color.BLACK);
+	    	} else { //secret passages draw a trapezoid (with an s inside it)
+	    		newGraphic.setColor(Color.BLACK);//the black background
 				newGraphic.fillRect(x, y, width, height);
 				newGraphic.setColor(Color.YELLOW);
-	    		int x2 = x + 4*width/5;
+	    		int x2 = x + 4*width/5; //the trapezoid
 	    		int[] xs = {x, x2, x2, x}; 
 	    		int y2 = y + height/5;
 	    		int y3 = y + height;
 	    		int[] ys = {y, y2, y3, y3}; 
 	    		newGraphic.fillPolygon(xs, ys, 4);
 	    		newGraphic.setColor(Color.BLUE);
-	    		Font font = new Font("Academy Engraved LET", 1, (9*width/10));
+	    		Font font = new Font("Academy Engraved LET", 1, (9*width/10)); //the s
 				newGraphic.setFont(font);
 				newGraphic.drawString("S", x + height/8, y + 7*height/8);
 	    	}
@@ -168,7 +168,7 @@ public class BoardCell {
 		int x = width * column;
 		int y = height * row;
 		newGraphic.setColor(Color.BLUE);
-		if(doorDirection == DoorDirection.DOWN) {
+		if(doorDirection == DoorDirection.DOWN) { //we calculate where the door goes based on it's direction (down = upper of the cell below, etc.)
 			newGraphic.fillRect(x, y + height, width, height/10);
 		}
 		if(doorDirection == DoorDirection.LEFT) {

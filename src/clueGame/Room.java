@@ -65,7 +65,7 @@ public class Room {
 		if(labelCell != null) {
 			int x = width * (labelCell.getColumn() - 1);
 			int y = height * (labelCell.getRow() + 1);
-			newGraphic.setColor(Color.BLUE);
+			newGraphic.setColor(Color.BLUE); 
 			Font font = new Font("Academy Engraved LET", 1, (5*width)/7);
 			newGraphic.setFont(font);
 			newGraphic.drawString(name, x, y);
@@ -73,18 +73,18 @@ public class Room {
 	}
 	
 	public void drawPlayers(int width, int height, int w, int h, Graphics newGraphic) {
-		if(labelCell == null) {
+		if(labelCell == null) { //walkways don't need special logic
 			for (Player player: players) {
 				int x = width * player.getColumn() + width/BoardCell.BORDER_SIZE;
 				int y = height * player.getRow() + height/BoardCell.BORDER_SIZE;
 				player.draw(x, y, w, h, newGraphic);
 			}
-		} else {
+		} else {//if we're in a room players may be drawn on top of each other
 			int x = width * ((centerCell.getColumn()) - players.size()/4);
 			int y = height * (centerCell.getRow());
 			for (Player player: players) {
 				player.draw(x, y, w, h, newGraphic);
-				x = x + width/2;
+				x = x + width/2; //so the players draw offset to eachother
 			}
 		}
 	}
