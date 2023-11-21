@@ -670,7 +670,64 @@ public class Board extends JPanel{
 			return computers.get(currentPlayer);
 		}
 	}
- 	
+ 		/*
+	 * Main method for testing
+	 */
+	public static void main(String[] args) {
+		theInstance.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
+		theInstance.initialize();
+		JFrame frame = new JFrame();  // create the frame 
+		frame.setContentPane(theInstance); // put the panel in the frame
+		frame.setSize(1200, 828);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
+	    frame.setVisible(true); // make it visible
+       
+	}
+	
+	public void mouseClicked(MouseEvent event) {
+	    if (getCurrentPlayer() instanceof HumanPlayer) {
+	        int mouseX = event.getX();
+	        int mouseY = event.getY();
+	        int clickedColumn = mouseX / (getWidth() / numColumns);
+	        int clickedRow = mouseY / (getHeight() / numRows);
+
+	        try {
+	            boardClick(clickedRow, clickedColumn); // Implement boardClick method
+	        } catch (MisClick e) {
+	            // Show error message for invalid click
+	            String message = "That is not a valid target.";
+	            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.INFORMATION_MESSAGE);
+	        }
+	    }
+	    repaint(); // Refresh the board display
+	}
+
+	/*
+	 * Inner class implementing MouseListener to handle mouse events on the board.
+	 */
+	private class BoardListener implements MouseListener {
+		// Empty definitions for unused event methods.
+		public void mousePressed (MouseEvent event) {}
+		public void mouseReleased (MouseEvent event) {}
+		public void mouseEntered (MouseEvent event) {}
+		public void mouseExited (MouseEvent event) {}
+		public void mouseClicked (MouseEvent event) {
+			Point point = event.getPoint(); //get the point clicked
+			int column = (point.x * numColumns)/getWidth();// Calculate the column and row based on the click position
+			int row = (point.y * numRows)/getHeight();
+
+			try {
+				boardClick(row, column);
+			} catch (MisClick e) {
+				String message = "That is not a target";
+		        JOptionPane.showMessageDialog(Board.getInstance(), message, "Error", JOptionPane.INFORMATION_MESSAGE);
+			}
+			repaint();
+		}
+	}
+	/*
+	 * all getters and setters below
+	 */
 	public Card getRoomSoln() {
 		return room;
 	}
@@ -726,60 +783,6 @@ public class Board extends JPanel{
 	public Set<Card> getDeck() {
 		return deck;
 	}
-	/*
-	 * Main method for testing
-	 */
-	public static void main(String[] args) {
-		theInstance.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
-		theInstance.initialize();
-		JFrame frame = new JFrame();  // create the frame 
-		frame.setContentPane(theInstance); // put the panel in the frame
-		frame.setSize(1200, 828);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
-	    frame.setVisible(true); // make it visible
-       
-	}
-	
-	public void mouseClicked(MouseEvent event) {
-	    if (getCurrentPlayer() instanceof HumanPlayer) {
-	        int mouseX = event.getX();
-	        int mouseY = event.getY();
-	        int clickedColumn = mouseX / (getWidth() / numColumns);
-	        int clickedRow = mouseY / (getHeight() / numRows);
 
-	        try {
-	            boardClick(clickedRow, clickedColumn); // Implement boardClick method
-	        } catch (MisClick e) {
-	            // Show error message for invalid click
-	            String message = "That is not a valid target.";
-	            JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.INFORMATION_MESSAGE);
-	        }
-	    }
-	    repaint(); // Refresh the board display
-	}
-
-	/*
-	 * Inner class implementing MouseListener to handle mouse events on the board.
-	 */
-	private class BoardListener implements MouseListener {
-		// Empty definitions for unused event methods.
-		public void mousePressed (MouseEvent event) {}
-		public void mouseReleased (MouseEvent event) {}
-		public void mouseEntered (MouseEvent event) {}
-		public void mouseExited (MouseEvent event) {}
-		public void mouseClicked (MouseEvent event) {
-			Point point = event.getPoint(); //get the point clicked
-			int column = (point.x * numColumns)/getWidth();// Calculate the column and row based on the click position
-			int row = (point.y * numRows)/getHeight();
-
-			try {
-				boardClick(row, column);
-			} catch (MisClick e) {
-				String message = "That is not a target";
-		        JOptionPane.showMessageDialog(Board.getInstance(), message, "Error", JOptionPane.INFORMATION_MESSAGE);
-			}
-			repaint();
-		}
-	}
 
 }

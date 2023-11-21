@@ -36,27 +36,6 @@ public class Room {
 		players.clear();
 	}
 	
-	//all setters here
-	public void setCenterCell(BoardCell centerCell) {
-		this.centerCell = centerCell;
-	}
-	
-	public void setLabelCell(BoardCell labelCell) {
-		this.labelCell = labelCell;
-	}
-	
-	//all getters here
-	public String getName() {
-		return name;
-	}
-	
-	public BoardCell getLabelCell() {
-		return labelCell;
-	}
-
-	public BoardCell getCenterCell() {
-		return centerCell;
-	}
 	
 	/*
 	 * Draw method to visualize the room
@@ -87,5 +66,27 @@ public class Room {
 				x = x + width/2; //so the players draw offset to eachother
 			}
 		}
+	}
+	
+	//all setters here
+	public void setCenterCell(BoardCell centerCell) {
+		this.centerCell = centerCell;
+	}
+	
+	public void setLabelCell(BoardCell labelCell) {
+		this.labelCell = labelCell;
+	}
+	
+	//all getters here
+	public String getName() {
+		return name;
+	}
+	
+	public BoardCell getLabelCell() {
+		return labelCell;
+	}
+
+	public BoardCell getCenterCell() {
+		return centerCell;
 	}
 }

@@ -18,7 +18,9 @@ public class SeenCard {
 		card = newCard;
 		color = newColor;
 	}
-	//all getters here
+	/*
+	 * all getters here
+	 */
 	public Card getCard() {
 		return card;
 	}

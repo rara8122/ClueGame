@@ -77,56 +77,7 @@ public class BoardCell {
 		return occupied;
 	}	
 	
-	//all setters here
-	public void setOccupied(boolean b) {
-		occupied = b;
-	}
-	
-	public void setDoorDirection(DoorDirection newDoorDirection) {
-		doorDirection = newDoorDirection;
-	}
-	
-	public void setRoomCenter(boolean newRoomCenter) {
-		roomCenter = newRoomCenter;
-	}
-	
-	public void setRoomLabel(boolean newRoomLabel) {
-		roomLabel = newRoomLabel;
-	}
-	
-	public void setSecretPassage(char newSecretPassage) {
-		secretPassage = newSecretPassage;
-	}
-	
-	//all getters here
-	public char getInitial() {
-		return initial;
-	}
-	
-	public String getRoomName() {
-		return roomName;
-	}
-	
-	
-	public int getRow() {
-		return row;
-	}
-	
-	public int getColumn() {
-		return column;
-	}
-	
-	public DoorDirection getDoorDirection() {
-		return doorDirection;
-	}
-	
-	public char getSecretPassage() {
-		return secretPassage;
-	}
 
-	public Set<BoardCell> getAdjList() {
-		return adjList;
-	}
 	
 	/*
 	 * method to draw the rooms, walkways, and unused spaces on the board.
@@ -194,5 +145,55 @@ public class BoardCell {
 		if(doorDirection == DoorDirection.UP) {
 			newGraphic.fillRect(x, y - height/10, width, height/10);
 		}
+	}
+	//all setters here
+	public void setOccupied(boolean b) {
+		occupied = b;
+	}
+	
+	public void setDoorDirection(DoorDirection newDoorDirection) {
+		doorDirection = newDoorDirection;
+	}
+	
+	public void setRoomCenter(boolean newRoomCenter) {
+		roomCenter = newRoomCenter;
+	}
+	
+	public void setRoomLabel(boolean newRoomLabel) {
+		roomLabel = newRoomLabel;
+	}
+	
+	public void setSecretPassage(char newSecretPassage) {
+		secretPassage = newSecretPassage;
+	}
+	
+	//all getters here
+	public char getInitial() {
+		return initial;
+	}
+	
+	public String getRoomName() {
+		return roomName;
+	}
+	
+	
+	public int getRow() {
+		return row;
+	}
+	
+	public int getColumn() {
+		return column;
+	}
+	
+	public DoorDirection getDoorDirection() {
+		return doorDirection;
+	}
+	
+	public char getSecretPassage() {
+		return secretPassage;
+	}
+
+	public Set<BoardCell> getAdjList() {
+		return adjList;
 	}
 }
