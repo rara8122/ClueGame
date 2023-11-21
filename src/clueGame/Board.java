@@ -54,17 +54,22 @@ public class Board extends JPanel{
 	 * variable and methods used for singleton pattern
 	 */
 	private static Board theInstance = new Board();
-	// constructor is private to ensure only one can be created
+	
+	/*
+	 * constructor is private to ensure only one can be created
+	 */
 	private Board() {
 		super() ;
 		
 	}
+	
 	/*
 	 *  this method returns the only Board
 	 */
 	public static Board getInstance() {
 		return theInstance;
 	}
+	
 	/*
 	 * initialize the board (since we are using singleton pattern)
 	 */
@@ -85,7 +90,7 @@ public class Board extends JPanel{
 		}
 		calcAdjacencies();
 		deal();
-		setRooms(); //setRooms sets the rooms of the player
+		setRooms(); 
 		currentPlayer = computers.size() - 1; // so next player is the user (when we call nextPlayer)
 		playerFinished = true; //so nextPlayer will run instead of throwing an error
 
@@ -360,17 +365,29 @@ public class Board extends JPanel{
 		}
 	}
 	
+	/*
+	 * sets player locations
+	 */
 	public void setRooms() {
 		Collection<Room> rooms = roomMap.values();
 		for (Room room : rooms) {
 			room.emptyPlayers(); //empty players so we start from scratch
 		}
 		roomMap.get(grid[user.getRow()][user.getColumn()].getInitial()).addPlayer(user); //add the user to the room (separate from the other players)
+		if(grid[user.getRow()][user.getColumn()].getInitial() == 'W') {//if the target is a walkway this will be true
+			grid[user.getRow()][user.getColumn()].setOccupied(true);
+		}
 		for(Player player: computers) {
 			roomMap.get(grid[player.getRow()][player.getColumn()].getInitial()).addPlayer(player); //for every player, add to the associated room
+			if(grid[player.getRow()][player.getColumn()].getInitial() == 'W') {//if the target is a walkway this will be true
+				grid[player.getRow()][player.getColumn()].setOccupied(true);
+			}
 		}
 	}
-	// Loop through each player to deal cards
+	
+	/*
+	 * Loop through each player to deal cards
+	 */
 	public void deal() {
 		room = null;
 		weapon = null;
@@ -515,7 +532,9 @@ public class Board extends JPanel{
 		}
 	}
 
-	//recursive function to find reachable target cells 
+	/*
+	 * recursive function to find reachable target cells 
+	 */
 	public void findTargets(BoardCell currentCell, int steps) {
 		visited.add(currentCell);
 		Set<BoardCell> adjacentCells = currentCell.getAdjList();
@@ -587,12 +606,14 @@ public class Board extends JPanel{
 		BoardCell target = roomMap.get(grid[row][column].getInitial()).getCenterCell();//set to be center of associated room (so we can click anywhere in a room)
 		if(target == null) {//if the target is a walkway this will be true
 			target = grid[row][column];
+			target.setOccupied(true);
 		}
 		if(!targets.contains(target)) {
 			throw new MisClick("Player clicked on a BoardCell that is not a target"); //if we didn't click a target, we clicked wrong
 		}
 		roomMap.get(grid[user.getRow()][user.getColumn()].getInitial()).removePlayer(user);//remove player from current room and add to new room
 		roomMap.get(target.getInitial()).addPlayer(user);
+		grid[user.getRow()][user.getColumn()].setOccupied(false);
 		user.setRow(target.getRow());//set new location
 		user.setColumn(target.getColumn());
 		if(target.isRoomCenter()) {
@@ -640,8 +661,12 @@ public class Board extends JPanel{
 			BoardCell location = grid[player.getRow()][player.getColumn()];
 			//create accusation
 			location = player.selectTarget(targets);
+			if(location.getInitial() == 'W') {//if the target is a walkway this will be true
+				location.setOccupied(true);
+			}
 			roomMap.get(grid[player.getRow()][player.getColumn()].getInitial()).removePlayer(player);
 			roomMap.get(location.getInitial()).addPlayer(player);
+			grid[player.getRow()][player.getColumn()].setOccupied(false);
 			player.setRow(location.getRow());
 			player.setColumn(location.getColumn());
 			//make suggestion
