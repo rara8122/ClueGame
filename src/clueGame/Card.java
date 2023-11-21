@@ -14,6 +14,7 @@ public class Card {
 	private String cardName;
 	private CardType cardType;
 	
+	
 	public Card(String name, CardType newType) {
 		cardName = name;
 		cardType = newType;

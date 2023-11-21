@@ -111,7 +111,9 @@ public class ClueCardsPanel extends JPanel{
 		
 	}
 	
-	//method to update the cards 
+	/*
+	 * method to update the cards by iterating through each card object
+	 */
 	public void updateDeckCards(Set<Card> newCards, Color color) {
 		Set<Card> handPeople = new HashSet<>();
 		Set<Card> handRooms = new HashSet<>();
@@ -184,7 +186,9 @@ public class ClueCardsPanel extends JPanel{
 		weaponsPanel.add(inHandWeapons);
 	}
 	
-	//method to update seen cards
+	/*
+	 * method to update seen cards by iterating through a list of newCards
+	 */
 	public void updateSeenCards(Set<SeenCard> newCards) {
 		JTextArea newCardArea;
 		Set<SeenCard> people = new HashSet<>();

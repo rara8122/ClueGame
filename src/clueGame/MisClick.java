@@ -7,11 +7,15 @@
 package clueGame;
 
 public class MisClick extends Exception{
-	//default constructor with a default message 
+	/*
+	 * default constructor with a default message 
+	 */
 	public MisClick() {
 		super("Player is not finished with their turn");
 	}	
-	//constructor with a specific message
+	/*
+	 * constructor with a specific message for the exception
+	 */
 	public MisClick(String message) {
 		super(message);
 	}

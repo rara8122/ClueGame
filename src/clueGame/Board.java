@@ -50,7 +50,7 @@ public class Board extends JPanel{
 	
 	public static final int DIE_SIDES = 6;
 	
-	/*
+	/*  
 	 * variable and methods used for singleton pattern
 	 */
 	private static Board theInstance = new Board();
@@ -59,7 +59,9 @@ public class Board extends JPanel{
 		super() ;
 		
 	}
-	// this method returns the only Board
+	/*
+	 *  this method returns the only Board
+	 */
 	public static Board getInstance() {
 		return theInstance;
 	}
@@ -90,7 +92,9 @@ public class Board extends JPanel{
 		addMouseListener(new BoardListener()); //listens for mouse clicks
 	}
 	
-	//method to draw the board and players
+	/*
+	 * method to draw the board and players
+	 */
 	@Override
 	public void paintComponent(Graphics newGraphic) {
 		super.paintComponent(newGraphic);
@@ -127,7 +131,9 @@ public class Board extends JPanel{
 		}
 	}
 	
-	//loads setup config
+	/*
+	 * method to load setup config
+	 */
 	public void loadSetupConfig () throws BadConfigFormatException, IOException {
 		roomMap = new HashMap <Character, Room> ();
 		deck = new HashSet<Card>();
@@ -253,7 +259,9 @@ public class Board extends JPanel{
 		setupFile.close();
 	}
 	
-	//loads layout config
+	/*
+	 * loads layout config
+	 */
 	public void loadLayoutConfig () throws BadConfigFormatException, IOException {
 		numRows = 0;
 		numColumns = 0;
@@ -429,7 +437,9 @@ public class Board extends JPanel{
 		}
 	}
 	
-	//method to build adjacency list for each cell 
+	/*
+	 * method to build adjacency list for each cell 
+	 */
 	public void calcAdjacencies() {
 
 		BoardCell currentCell;
@@ -523,7 +533,9 @@ public class Board extends JPanel{
 		visited.remove(currentCell);
 	} 
 	
-	//method to calculate targets 
+	/*
+	 * method to calculate targets 
+	 */
 	public void calcTargets(BoardCell cell, int i) {
 		visited.clear(); 
 		targets.clear();
@@ -538,7 +550,9 @@ public class Board extends JPanel{
 	    return (roomAccusation.equals(room) && weaponAccusation.equals(weapon) && personAccusation.equals(player));
 	}
 	
-	//method that handles the player's suggestion
+	/*
+	 * method that handles the player's suggestion
+	 */
 	public Card handleSuggestion(Player suggestingPlayer, Card roomCard, Card weaponCard, Card personCard) {
 		Card returnCard = user.disproveSuggestion(roomCard, weaponCard, personCard);
 		if(returnCard != null && suggestingPlayer != user) {
@@ -553,7 +567,9 @@ public class Board extends JPanel{
 		return null;
 	}
 	
-	//method to roll the dice 
+	/*
+	 * method to roll the dice 
+	 */
 	public int rollDice() {
 		Random choice = new Random();
 		return choice.nextInt(DIE_SIDES - 1) + 1; //roll a DIE_SIDES sided die from 0 to DIE_SIDES - 1 (and then add 1 so its 1 to DIE_SIDES)
