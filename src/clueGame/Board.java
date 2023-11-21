@@ -674,27 +674,6 @@ public class Board extends JPanel{
 		super.repaint(); //Redraw the board after the turn
 	}
 	
-	//all setters here 
-	public void setGrid(BoardCell[][] grid) {
-		this.grid = grid;
-	}
-
-	public void setConfigFiles(String layoutFile, String setupFile) {
-		layoutConfigFile = layoutFile;
-		setupConfigFile = setupFile;
-	}
-	
-	//all getters below
-	public int getRoll() {
-		return roll;
-	} 
-	public Player getCurrentPlayer() {
-		if(currentPlayer == computers.size()) {
-			return user;
-		} else {
-			return computers.get(currentPlayer);
-		}
-	}
  		/*
 	 * Main method for testing
 	 */
@@ -808,6 +787,27 @@ public class Board extends JPanel{
 	public Set<Card> getDeck() {
 		return deck;
 	}
+	
+	//all setters here 
+	public void setGrid(BoardCell[][] grid) {
+		this.grid = grid;
+	}
 
+	public void setConfigFiles(String layoutFile, String setupFile) {
+		layoutConfigFile = layoutFile;
+		setupConfigFile = setupFile;
+	}
+	
+	//all getters below
+	public int getRoll() {
+		return roll;
+	} 
+	public Player getCurrentPlayer() {
+		if(currentPlayer == computers.size()) {
+			return user;
+		} else {
+			return computers.get(currentPlayer);
+		}
+	}
 
 }

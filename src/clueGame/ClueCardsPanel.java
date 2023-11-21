@@ -110,163 +110,117 @@ public class ClueCardsPanel extends JPanel{
 		add(weaponsPanel);
 		
 	}
-	
 	/*
-	 * method to update the cards by iterating through each card object
+	 * method to update deck cards that calls in helper methods 
 	 */
 	public void updateDeckCards(Set<Card> newCards, Color color) {
-		Set<Card> handPeople = new HashSet<>();
-		Set<Card> handRooms = new HashSet<>();
-		Set<Card> handWeapons = new HashSet<>();
-		JTextArea newCardArea;
-		//iterates through each card object in newCards
-		for (Card card : newCards) {
-			//checks type and adds card to approriate deck
-			if(card.getCardType() == CardType.PERSON) {
-				handPeople.add(card);
-			}
-			if(card.getCardType() == CardType.ROOM) {
-				handRooms.add(card);
-			}
-			if(card.getCardType() == CardType.WEAPON) {
-				handWeapons.add(card);
-			}
-		}
-		// Check if there are cards in the handPeople deck
-		if(handPeople.size() >= 1) {
-			inHandPeople.removeAll();
-			// Iterate through the 'handPeople' deck and display each card's name in 'inHandPeople'
-			for (Card card : handPeople) {
-				newCardArea = new JTextArea();
-				if(color.getBlue() + color.getGreen() + color.getRed() <= 255) {
-					newCardArea.setForeground(Color.WHITE);
-				} else {
-					newCardArea.setSelectedTextColor(Color.BLACK);
-				}
-				newCardArea.setBackground(color);
-				newCardArea.setText(card.getCardName());
-				newCardArea.setEditable( false );
-				inHandPeople.add(newCardArea);
-			}
-		}
-		// Repeat the above process for 'handRooms' deck
-		if(handRooms.size() >= 1) {
-			inHandRooms.removeAll();
-			for (Card card : handRooms) {
-				newCardArea = new JTextArea();
-				if(color.getBlue() + color.getGreen() + color.getRed() <= 255) {
-					newCardArea.setForeground(Color.WHITE);
-				} else {
-					newCardArea.setSelectedTextColor(Color.BLACK);
-				}
-				newCardArea.setBackground(color);
-				newCardArea.setText(card.getCardName());
-				newCardArea.setEditable( false );
-				inHandRooms.add(newCardArea);
-			}
-		}// Repeat the above process for 'handWeapons' deck
-		if(handWeapons.size() >= 1) {
-			inHandWeapons.removeAll();
-			//inHandWeapons.setLayout(new GridLayout(handWeapons.size(), 1));
-			for (Card card : handWeapons) {
-				newCardArea = new JTextArea();
-				if(color.getBlue() + color.getGreen() + color.getRed() <= 255) {
-					newCardArea.setForeground(Color.WHITE);
-				} else {
-					newCardArea.setSelectedTextColor(Color.BLACK);
-				}
-				newCardArea.setBackground(color);
-				newCardArea.setText(card.getCardName());
-				newCardArea.setEditable( false );
-				inHandWeapons.add(newCardArea);
-			}
-		}
-		peoplePanel.add(inHandPeople);
-		roomsPanel.add(inHandRooms);
-		weaponsPanel.add(inHandWeapons);
+	    Set<Card> handPeople = new HashSet<>();
+	    Set<Card> handRooms = new HashSet<>();
+	    Set<Card> handWeapons = new HashSet<>();
+	    // Separate cards into different sets based on type
+	    for (Card card : newCards) {
+	        switch (card.getCardType()) {
+	            case PERSON:
+	                handPeople.add(card);
+	                break;
+	            case ROOM:
+	                handRooms.add(card);
+	                break;
+	            case WEAPON:
+	                handWeapons.add(card);
+	                break;
+	            default:
+	                // Handle unexpected card types, if any
+	                break;
+	        }
+	    }
+	    // Helper method to add cards to their respective panels
+	    addCardsToPanel(handPeople, inHandPeople, color);
+	    addCardsToPanel(handRooms, inHandRooms, color);
+	    addCardsToPanel(handWeapons, inHandWeapons, color);
+	    // Add panels to their corresponding container
+	    peoplePanel.add(inHandPeople);
+	    roomsPanel.add(inHandRooms);
+	    weaponsPanel.add(inHandWeapons);
+	}
+	/*
+	 *  Method to add cards to a panel
+	 */
+	private void addCardsToPanel(Set<Card> cards, JPanel panel, Color color) {
+	    if (cards.isEmpty()) {
+	        panel.removeAll();// Clear the panel if there are no cards
+	        return;
+	    }
+	    panel.removeAll();// Clear the panel before adding cards
+	    for (Card card : cards) {
+	        JTextArea newCardArea = new JTextArea();
+	        setColorAndText(newCardArea, color, card.getCardName());
+	        panel.add(newCardArea);//add card to panel
+	    }
+	}
+	/*
+	 *  Method to set color and text for a JTextArea
+	 */
+	private void setColorAndText(JTextArea textArea, Color color, String text) {
+	    textArea.setBackground(color);
+	    textArea.setText(text);
+	    textArea.setEditable(false);
+
+	    if (color.getBlue() + color.getGreen() + color.getRed() <= 255) {
+	        textArea.setForeground(Color.WHITE);
+	    } else {
+	        textArea.setSelectedTextColor(Color.BLACK);
+	    }
 	}
 	
 	/*
-	 * method to update seen cards by iterating through a list of newCards
+	 * Method to update seen cards 
 	 */
 	public void updateSeenCards(Set<SeenCard> newCards) {
-		JTextArea newCardArea;
-		Set<SeenCard> people = new HashSet<>();
-		Set<SeenCard> rooms = new HashSet<>();
-		Set<SeenCard> weapons = new HashSet<>();
-		// Iterate through a list of 'newCards' containing cards of different types
-		for (SeenCard card : newCards) {
-			// Check if the card is of type PERSON
-			if(card.getCardType() == CardType.PERSON) {
-				// If it's a person card, add it to the 'people' list
-				people.add(card);
-			}
-			if(card.getCardType() == CardType.ROOM) {
-				rooms.add(card);
-			}
-			if(card.getCardType() == CardType.WEAPON) {
-				weapons.add(card);
-			}
-		}
-		// Check if there are cards in the 'people' list
-		if(people.size() > 0) {
-			seenPeople.removeAll();
-			// Iterate through the 'people' list and display each 'SeenCard' object in 'seenPeople'
-			for (SeenCard card : people) {
-				// Create a new text area for displaying the card's name
-				newCardArea = new JTextArea();
-				// Iterate through the 'people' list and display each 'SeenCard' object in 'seenPeople'
-				if(card.getColor().getBlue() + card.getColor().getGreen() + card.getColor().getRed() <= 255) {
-					newCardArea.setForeground(Color.WHITE);
-				} else {
-					newCardArea.setSelectedTextColor(Color.BLACK);
-				}
-				newCardArea.setBackground(card.getColor());
-				newCardArea.setText(card.getCardName());
-				newCardArea.setEditable( false );
-				seenPeople.add(newCardArea);
-			}
-		}
-		//repeats process as last loop but for rooms
-		if(rooms.size() > 0) {
-			seenRooms.removeAll();
-			for (SeenCard card : rooms) {
-				newCardArea = new JTextArea();
-				if(card.getColor().getBlue() + card.getColor().getGreen() + card.getColor().getRed() <= 255) {
-					newCardArea.setForeground(Color.WHITE);
-				} else {
-					newCardArea.setSelectedTextColor(Color.BLACK);
-				}
-				newCardArea.setBackground(card.getColor());
-				newCardArea.setText(card.getCardName());
-				newCardArea.setEditable( false );
-				seenRooms.add(newCardArea);
-			}
-		}
-		//repeats prcess as last loop but for weapons
-		if(weapons.size() > 0) {
-			seenWeapons.removeAll();
-			for (SeenCard card : weapons) {
-				newCardArea = new JTextArea();
-				if(card.getColor().getBlue() + card.getColor().getGreen() + card.getColor().getRed() <= 255) {
-					newCardArea.setForeground(Color.WHITE);
-				} else {
-					newCardArea.setSelectedTextColor(Color.BLACK);
-				}
-				newCardArea.setBackground(card.getColor());
-				newCardArea.setText(card.getCardName());
-				newCardArea.setEditable( false );
-				seenWeapons.add(newCardArea);
-			}
-		}
-		peoplePanel.add(seenPeople);
-		roomsPanel.add(seenRooms);
-		weaponsPanel.add(seenWeapons);
+	    displayCards(newCards, CardType.PERSON, seenPeople);
+	    displayCards(newCards, CardType.ROOM, seenRooms);
+	    displayCards(newCards, CardType.WEAPON, seenWeapons);
+
+	    peoplePanel.add(seenPeople);
+	    roomsPanel.add(seenRooms);
+	    weaponsPanel.add(seenWeapons);
 	}
-	
-	/**
+	/*
+	 * Method to display cards in a panel based on card type
+	 */
+	private void displayCards(Set<SeenCard> newCards, CardType type, JPanel panel) {
+	    Set<SeenCard> cards = new HashSet<>();
+	    for (SeenCard card : newCards) {
+	        if (card.getCardType() == type) {
+	            cards.add(card);
+	        }
+	    }
+	    if (!cards.isEmpty()) {
+	        panel.removeAll();
+	        for (SeenCard card : cards) {
+	            JTextArea newCardArea = createCardTextArea(card.getColor(), card.getCardName());
+	            panel.add(newCardArea);
+	        }
+	    }
+	}
+	/*
+	 * Method to create a JTextArea for a card with specified color and name
+	 */
+	private JTextArea createCardTextArea(Color color, String cardName) {
+	    JTextArea newCardArea = new JTextArea();
+	    if (color.getBlue() + color.getGreen() + color.getRed() <= 255) {
+	        newCardArea.setForeground(Color.WHITE);
+	    } else {
+	        newCardArea.setSelectedTextColor(Color.BLACK);
+	    }
+	    newCardArea.setBackground(color);
+	    newCardArea.setText(cardName);
+	    newCardArea.setEditable(false);
+	    return newCardArea;
+	}
+		
+	/*
 	 * Main to test the panel
-	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
