@@ -7,6 +7,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.util.HashSet;
 import java.util.Set;
@@ -46,6 +47,7 @@ public class BoardCell {
 	public boolean isDoorway() {
 		return (doorDirection != DoorDirection.NONE);
 	}
+	
 	//method to check if this cell is a walkway 
 	public boolean isWalkway() {
 		return initial == 'W';
@@ -60,13 +62,16 @@ public class BoardCell {
 	public boolean isRoomCenter() {
 		return roomCenter;
 	}
+	
 	public boolean isOccupied() {
 		return occupied;
 	}	
+	
 	//all setters here
 	public void setOccupied(boolean b) {
 		occupied = b;
 	}
+	
 	public void setDoorDirection(DoorDirection newDoorDirection) {
 		doorDirection = newDoorDirection;
 	}
@@ -82,6 +87,7 @@ public class BoardCell {
 	public void setSecretPassage(char newSecretPassage) {
 		secretPassage = newSecretPassage;
 	}
+	
 	//all getters here
 	public char getInitial() {
 		return initial;
@@ -111,6 +117,7 @@ public class BoardCell {
 	public Set<BoardCell> getAdjList() {
 		return adjList;
 	}
+	
 	//method to draw the rooms, walkways, and unused spaces on the board.
 	public void draw(int width, int height, Graphics newGraphic, boolean target, int walkwayWidth, int walkwayHeight) {
 		int x = width * column;
@@ -131,14 +138,31 @@ public class BoardCell {
 	    	newGraphic.setColor(Color.BLACK);
 	        newGraphic.fillRect(x, y, width, height);
 	    } else {
-	    	if(target) {
-				newGraphic.setColor(Color.CYAN);
-			} else {
-				newGraphic.setColor(Color.GRAY);
-			}
-	        newGraphic.fillRect(x, y, width, height);
+	    	if(secretPassage == ' ') {
+		    	if(target) {
+					newGraphic.setColor(Color.CYAN);
+				} else {
+					newGraphic.setColor(Color.GRAY);
+				}
+		        newGraphic.fillRect(x, y, width, height);
+	    	} else {
+	    		newGraphic.setColor(Color.BLACK);
+				newGraphic.fillRect(x, y, width, height);
+				newGraphic.setColor(Color.YELLOW);
+	    		int x2 = x + 4*width/5;
+	    		int[] xs = {x, x2, x2, x}; 
+	    		int y2 = y + height/5;
+	    		int y3 = y + height;
+	    		int[] ys = {y, y2, y3, y3}; 
+	    		newGraphic.fillPolygon(xs, ys, 4);
+	    		newGraphic.setColor(Color.BLUE);
+	    		Font font = new Font("Academy Engraved LET", 1, (9*width/10));
+				newGraphic.setFont(font);
+				newGraphic.drawString("S", x + height/8, y + 7*height/8);
+	    	}
 		}
 	}
+	
 	//method to draw the doors in the board gui
 	public void drawDoor(int width, int height, Graphics newGraphic) {
 		int x = width * column;

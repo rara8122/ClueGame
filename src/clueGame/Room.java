@@ -44,6 +44,7 @@ public class Room {
 	public void setLabelCell(BoardCell labelCell) {
 		this.labelCell = labelCell;
 	}
+	
 	//all getters here
 	public String getName() {
 		return name;
@@ -56,6 +57,7 @@ public class Room {
 	public BoardCell getCenterCell() {
 		return centerCell;
 	}
+	
 	/*
 	 * Draw method to visualize the room
 	 */
@@ -69,6 +71,7 @@ public class Room {
 			newGraphic.drawString(name, x, y);
 		}
 	}
+	
 	public void drawPlayers(int width, int height, int w, int h, Graphics newGraphic) {
 		if(labelCell == null) {
 			for (Player player: players) {
