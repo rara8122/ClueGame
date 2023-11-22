@@ -36,35 +36,34 @@ public class Room {
 	public void emptyPlayers() {
 		players.clear();
 	}
-	
-	
+		
 	/*
 	 * Draw method to visualize the room
 	 */
-	public void drawLabel(int width, int height, Graphics newGraphic) {
+	public void drawLabel(int cellWidth, int cellHeight, Graphics newGraphic) {
 		if(labelCell != null) {
-			int x = width * (labelCell.getColumn() - 1);
-			int y = height * (labelCell.getRow() + 1);
+			int x = cellWidth * (labelCell.getColumn() - 1);
+			int y = cellHeight * (labelCell.getRow() + 1);
 			newGraphic.setColor(Color.BLUE); 
-			Font font = new Font("Academy Engraved LET", 1, (5*width)/7);
+			Font font = new Font("Academy Engraved LET", 1, (5*cellWidth)/7);
 			newGraphic.setFont(font);
 			newGraphic.drawString(name, x, y);
 		}
 	}
 	
-	public void drawPlayers(int width, int height, int w, int h, Graphics newGraphic) {
+	public void drawPlayers(int cellWidth, int cellHeight, int playerWidth, int playerHeight, Graphics newGraphic) {
 		if(labelCell == null) { //walkways don't need special logic
 			for (Player player: players) {
-				int x = width * player.getColumn() + width/BoardCell.BORDER_SIZE;
-				int y = height * player.getRow() + height/BoardCell.BORDER_SIZE;
-				player.draw(x, y, w, h, newGraphic);
+				int x = cellWidth * player.getColumn() + cellWidth/BoardCell.BORDER_SIZE;
+				int y = cellHeight * player.getRow() + cellHeight/BoardCell.BORDER_SIZE;
+				player.draw(x, y, playerWidth, playerHeight, newGraphic);
 			}
 		} else {//if we're in a room players may be drawn on top of each other
-			int x = width * ((centerCell.getColumn()) - players.size()/4);
-			int y = height * (centerCell.getRow());
+			int x = cellWidth * ((centerCell.getColumn()) - players.size()/4);
+			int y = cellHeight * (centerCell.getRow());
 			for (Player player: players) {
-				player.draw(x, y, w, h, newGraphic);
-				x = x + width/2; //so the players draw offset to eachother
+				player.draw(x, y, playerWidth, playerHeight, newGraphic);
+				x = x + cellWidth/2; //so the players draw offset to eachother
 			}
 		}
 	}

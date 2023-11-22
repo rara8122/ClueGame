@@ -63,6 +63,7 @@ public class Board extends JPanel{
 		
 	}
 	
+	//init Methods Below
 	/*
 	 *  this method returns the only Board
 	 */
@@ -90,56 +91,17 @@ public class Board extends JPanel{
 		}
 		calcAdjacencies();
 		deal();
-		setRooms(); 
+		setPlayerLocation(); 
 		currentPlayer = computers.size() - 1; // so next player is the user (when we call nextPlayer)
 		playerFinished = true; //so nextPlayer will run instead of throwing an error
 
 		addMouseListener(new BoardListener()); //listens for mouse clicks
 	}
-	
-	/*
-	 * method to draw the board and players
-	 */
-	@Override
-	public void paintComponent(Graphics newGraphic) {
-		super.paintComponent(newGraphic);
-		int width = getWidth()/numColumns;//the width of one cell
-		int height = getHeight()/numRows;//the height of one cell
-		int walkwayWidth = ((BoardCell.BORDER_SIZE - 2) * width)/BoardCell.BORDER_SIZE;//the inner width of the walkway
-		int walkwayHeight = ((BoardCell.BORDER_SIZE - 2) * height)/BoardCell.BORDER_SIZE;//the inner height of the walkway
-		BoardCell currentCell;
-		Boolean isTarget;
-		for (int i = 0; i < numRows; i++) {//draw every cell
-			for(int j = 0; j < numColumns; j++) {
-				isTarget = false;
-				currentCell = grid[i][j];
-				if(targets.contains(currentCell) && displayTargets) {
-					isTarget = true;
-				}
-				if (targets.contains((roomMap.get(currentCell.getInitial()).getCenterCell())) && displayTargets) {
-					isTarget = true;
-				}
-				currentCell.draw(width, height, newGraphic, isTarget, walkwayWidth, walkwayHeight);
-			}
-		}
-		for (int i = 0; i < numRows; i++) {//draw every door
-			for(int j = 0; j < numColumns; j++) {
-				grid[i][j].drawDoor(width, height, newGraphic);
-			}
-		}
-		Collection<Room> rooms = roomMap.values();
-		for (Room room : rooms) {//draw every room
-			room.drawLabel(width, height, newGraphic);
-		}
-		for (Room room : rooms) {//draw every player
-			room.drawPlayers(width, height, walkwayWidth, walkwayHeight, newGraphic);
-		}
-	}
-	
+		
 	/*
 	 * method to load setup config
 	 */
-	public void loadSetupConfig () throws BadConfigFormatException, IOException {
+	private void loadSetupConfig () throws BadConfigFormatException, IOException {
 		roomMap = new HashMap <Character, Room> ();
 		deck = new HashSet<Card>();
 		computers = new ArrayList<ComputerPlayer>();
@@ -267,7 +229,7 @@ public class Board extends JPanel{
 	/*
 	 * loads layout config
 	 */
-	public void loadLayoutConfig () throws BadConfigFormatException, IOException {
+	private void loadLayoutConfig () throws BadConfigFormatException, IOException {
 		numRows = 0;
 		numColumns = 0;
 		
@@ -368,7 +330,7 @@ public class Board extends JPanel{
 	/*
 	 * sets player locations
 	 */
-	public void setRooms() {
+	private void setPlayerLocation() {
 		Collection<Room> rooms = roomMap.values();
 		for (Room room : rooms) {
 			room.emptyPlayers(); //empty players so we start from scratch
@@ -388,7 +350,7 @@ public class Board extends JPanel{
 	/*
 	 * Loop through each player to deal cards
 	 */
-	public void deal() {
+	private void deal() {
 		room = null;
 		weapon = null;
 		player = null;
@@ -457,7 +419,7 @@ public class Board extends JPanel{
 	/*
 	 * method to build adjacency list for each cell 
 	 */
-	public void calcAdjacencies() {
+	private void calcAdjacencies() {
 
 		BoardCell currentCell;
 		//nested for loops that iterate through each cell row and column respectively
@@ -532,10 +494,11 @@ public class Board extends JPanel{
 		}
 	}
 
+	//Target Methods Below:
 	/*
 	 * recursive function to find reachable target cells 
 	 */
-	public void findTargets(BoardCell currentCell, int steps) {
+	private void findTargets(BoardCell currentCell, int steps) {
 		visited.add(currentCell);
 		Set<BoardCell> adjacentCells = currentCell.getAdjList();
 		//iterates through adjacent cells 
@@ -561,6 +524,7 @@ public class Board extends JPanel{
 		findTargets(cell, i);
 	}
 	
+	// Other: 
 	public boolean checkAccusation(Card roomAccusation, Card weaponAccusation, Card personAccusation) {
 	    // Compare the accusation with the correct solution
 	    // Check if each part of the accusation matches the correct solution
@@ -589,11 +553,12 @@ public class Board extends JPanel{
 	/*
 	 * method to roll the dice 
 	 */
-	public int rollDice() {
+	private int rollDice() {
 		Random choice = new Random();
 		return choice.nextInt(DIE_SIDES - 1) + 1; //roll a DIE_SIDES sided die from 0 to DIE_SIDES - 1 (and then add 1 so its 1 to DIE_SIDES)
 	}
 	
+	//Draw Methods Below: 
 	/*
 	 * Handles the click event on the board by a player.
 	 * Moves the user's game piece to the clicked target if it's a valid target.
@@ -660,7 +625,7 @@ public class Board extends JPanel{
 		} else {
 			ComputerPlayer player = computers.get(currentPlayer);
 			BoardCell location = grid[player.getRow()][player.getColumn()];
-			//create accusation
+			//create accusation TODO
 			location = player.selectTarget(targets);
 			if(location.getInitial() == 'W') {//if the target is a walkway this will be true
 				location.setOccupied(true);
@@ -670,48 +635,16 @@ public class Board extends JPanel{
 			grid[player.getRow()][player.getColumn()].setOccupied(false);
 			player.setRow(location.getRow());
 			player.setColumn(location.getColumn());
-			//make suggestion
+			//make suggestion TODO
 		}
 		super.repaint(); //Redraw the board after the turn
 	}
 	
-	//all setters here 
-	public void setGrid(BoardCell[][] grid) {
-		this.grid = grid;
-	}
-
-	public void setConfigFiles(String layoutFile, String setupFile) {
-		layoutConfigFile = layoutFile;
-		setupConfigFile = setupFile;
-	}
-	
-	//all getters below
-	public int getRoll() {
-		return roll;
-	} 
-	
-	public Player getCurrentPlayer() {
-		if(currentPlayer == computers.size()) {
-			return user;
-		} else {
-			return computers.get(currentPlayer);
-		}
-	}
- 	
 	/*
-	 * Main method for testing
+	 * This method checks if the current player is a human player. 
+	 * It then processes the click to determine the column and row clicked
+	 * Eventually it calls a boardClick method	
 	 */
-	public static void main(String[] args) {
-		theInstance.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
-		theInstance.initialize();
-		JFrame frame = new JFrame();  // create the frame 
-		frame.setContentPane(theInstance); // put the panel in the frame
-		frame.setSize(1200, 828);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
-	    frame.setVisible(true); // make it visible
-       
-	}
-	
 	public void mouseClicked(MouseEvent event) {
 	    if (getCurrentPlayer() instanceof HumanPlayer) {
 	        int mouseX = event.getX();
@@ -730,6 +663,45 @@ public class Board extends JPanel{
 	    repaint(); // Refresh the board display
 	}
 
+	/*
+	 * method to draw the board and players
+	 */
+	@Override
+	public void paintComponent(Graphics newGraphic) {
+		super.paintComponent(newGraphic);
+		int width = getWidth()/numColumns;//the width of one cell
+		int height = getHeight()/numRows;//the height of one cell
+		int walkwayWidth = ((BoardCell.BORDER_SIZE - 2) * width)/BoardCell.BORDER_SIZE;//the inner width of the walkway
+		int walkwayHeight = ((BoardCell.BORDER_SIZE - 2) * height)/BoardCell.BORDER_SIZE;//the inner height of the walkway
+		BoardCell currentCell;
+		Boolean isTarget;
+		for (int i = 0; i < numRows; i++) {//draw every cell
+			for(int j = 0; j < numColumns; j++) {
+				isTarget = false;
+				currentCell = grid[i][j];
+				if(targets.contains(currentCell) && displayTargets) {
+					isTarget = true;
+				}
+				if (targets.contains((roomMap.get(currentCell.getInitial()).getCenterCell())) && displayTargets) {
+					isTarget = true;
+				}
+				currentCell.draw(width, height, newGraphic, isTarget, walkwayWidth, walkwayHeight);
+			}
+		}
+		for (int i = 0; i < numRows; i++) {//draw every door
+			for(int j = 0; j < numColumns; j++) {
+				grid[i][j].drawDoor(width, height, newGraphic);
+			}
+		}
+		Collection<Room> rooms = roomMap.values();
+		for (Room room : rooms) {//draw every room
+			room.drawLabel(width, height, newGraphic);
+		}
+		for (Room room : rooms) {//draw every player
+			room.drawPlayers(width, height, walkwayWidth, walkwayHeight, newGraphic);
+		}
+	}
+	
 	/*
 	 * Inner class implementing MouseListener to handle mouse events on the board.
 	 */
@@ -752,6 +724,20 @@ public class Board extends JPanel{
 			}
 			repaint();
 		}
+	}
+	
+	/*
+	 * Main method for testing
+	 */
+	public static void main(String[] args) {
+		theInstance.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
+		theInstance.initialize();
+		JFrame frame = new JFrame();  // create the frame 
+		frame.setContentPane(theInstance); // put the panel in the frame
+		frame.setSize(1200, 828);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
+	    frame.setVisible(true); // make it visible
+       
 	}
 	
 	/*
@@ -812,6 +798,28 @@ public class Board extends JPanel{
 	public Set<Card> getDeck() {
 		return deck;
 	}
+	
+	//all setters here 
+	public void setGrid(BoardCell[][] grid) {
+		this.grid = grid;
+	}
 
+	public void setConfigFiles(String layoutFile, String setupFile) {
+		layoutConfigFile = layoutFile;
+		setupConfigFile = setupFile;
+	}
+	
+	//all getters below
+	public int getRoll() {
+		return roll;
+	} 
+	
+	public Player getCurrentPlayer() {
+		if(currentPlayer == computers.size()) {
+			return user;
+		} else {
+			return computers.get(currentPlayer);
+		}
+	}
 
 }
