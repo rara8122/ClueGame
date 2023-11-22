@@ -23,7 +23,9 @@ public abstract class Player {
 	private int deckSize;
 	public static final int BORDER_SIZE = 20; //increase this number to make the player borders thinner, decrease to make it thicker
 
-
+	/*
+	 * Player class constructor that takes in 4 parameters name, color, row, and column
+	 */
 	public Player(String name, Color color, int row, int column) {
 		this.name = name;
 		this.color = color;
@@ -34,7 +36,9 @@ public abstract class Player {
 		deckSize = 0;
 	}
 	
-	//method to disprove a suggestion
+	/*
+	 * method to disprove a suggestion
+	 */
 	public Card disproveSuggestion(Card room, Card weapon, Card player) {
 		Card disproveRoom = null;
 		Card disproveWeapon = null;
@@ -96,7 +100,9 @@ public abstract class Player {
 		}
 	}
 	
-	//method to check whether a card is in the deck or seen list
+	/*
+	 * method to check whether a card is in the deck or seen list
+	 */
 	public Boolean hasSeen(Card card) {
 		Boolean solution = false;
 		//check if card exists in the deck
@@ -114,24 +120,30 @@ public abstract class Player {
 		return solution;
 	}
 	
-	//adds a card to deck
+	/*
+	 * adds a card to deck
+	 */
 	public void addCard(Card newCard) {
 		deck.add(newCard);
 		deckSize++;
 	}
 	
-	//adds a card to the seen cards
+	/*
+	 * adds a card to the seen cards
+	 */
 	public void updateSeen(Card newCard, Color color) {
 		SeenCard newSeenCard = new SeenCard(newCard, color);
 		seen.add(newSeenCard);
 	}
 	
-	//draws the players on the board
-	public void draw(int x, int y, int w, int h, Graphics newGraphic) {
+	/*
+	 * draws the players on the board
+	 */
+	public void draw(int innerCircleWidth, int innerCircleHeight, int outerCircleWidth, int outerCircleHeight, Graphics newGraphic) {
 		newGraphic.setColor(Color.BLACK);
-		newGraphic.fillOval(x, y, w, h); //draw black circle with slightly smaller colored circle inside
+		newGraphic.fillOval(innerCircleWidth, innerCircleHeight, outerCircleWidth, outerCircleHeight); //draw black circle with slightly smaller colored circle inside
 		newGraphic.setColor(color);
-		newGraphic.fillOval(x + w/BORDER_SIZE, y + h/BORDER_SIZE, ((BORDER_SIZE - 1) * w)/BORDER_SIZE, ((BORDER_SIZE - 1) * h)/BORDER_SIZE); 
+		newGraphic.fillOval(innerCircleWidth + outerCircleWidth/BORDER_SIZE, innerCircleHeight + outerCircleHeight/BORDER_SIZE, ((BORDER_SIZE - 1) * outerCircleWidth)/BORDER_SIZE, ((BORDER_SIZE - 1) * outerCircleHeight)/BORDER_SIZE); 
 	}
 	
 	//getters and setters

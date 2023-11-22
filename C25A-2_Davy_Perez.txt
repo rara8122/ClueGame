@@ -140,3 +140,43 @@ public void updateDeckCards(Set<Card> newCards, Color color) {
 	}
 	
 Gitlog 
+
+commit 47e642f8c6644fb324080d4b23ffc9c2595c7a18
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Tue Nov 21 16:06:53 2023 -0700
+
+    condensed update deck cards method and update seen cards method and added separate methods to reduce repetition and enhance readability, also added the significanr change text file
+
+commit 9e2dc828d169efea980873a8fb722629b813b70e
+Author: Rachel <rara8122@Blackie.local>
+Date:   Tue Nov 21 15:01:35 2023 -0700
+
+    fixed spacing between functions:
+
+commit 2b96312bb2fc112d4ba8cce11c8ba0e847410e2d
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Tue Nov 21 14:48:43 2023 -0700
+
+    fixed format of classes to fit class standards and for better readability
+
+commit 09f909c4e258f8f2b553763e80204f440d7bf7e2
+Merge: 7101274 d89ca96
+Author: Rachel <rara8122@Blackie.local>
+Date:   Tue Nov 21 14:38:51 2023 -0700
+
+    Merge branch 'main' of https://github.com/rara8122/ClueGame into main
+    
+    Added inline comments
+
+commit 71012745d70072554c3ea79ac0502cde1ecda84c
+Author: Rachel <rara8122@Blackie.local>
+Date:   Tue Nov 21 14:38:48 2023 -0700
+
+    added inline comments
+
+commit d89ca96b1219213782b56119b9cba0b395cf86f4
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Tue Nov 21 14:28:03 2023 -0700
+
+    changed comments to proper purposes; block comments on methods instead of inline comments
+    

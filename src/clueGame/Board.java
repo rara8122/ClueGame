@@ -674,7 +674,7 @@ public class Board extends JPanel{
 		super.repaint(); //Redraw the board after the turn
 	}
 	
- 		/*
+ 	/*
 	 * Main method for testing
 	 */
 	public static void main(String[] args) {
@@ -687,7 +687,11 @@ public class Board extends JPanel{
 	    frame.setVisible(true); // make it visible
        
 	}
-	
+	/*
+	 * This method checks if the current player is a human player. 
+	 * It then processes the click to determine the column and row clicked
+	 * Eventually it calls a boardClick method	
+	 */
 	public void mouseClicked(MouseEvent event) {
 	    if (getCurrentPlayer() instanceof HumanPlayer) {
 	        int mouseX = event.getX();

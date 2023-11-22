@@ -26,8 +26,8 @@ public class ComputerPlayer extends Player{
 		// TODO Auto-generated constructor stub
 	}
 	
-	/*method to create a solution
-	 * 
+	/*
+	 * method to create a solution 
 	 */
 	public void createSolution(Set<Card> deck, String currentRoom) {
 		Random choice = new Random();

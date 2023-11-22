@@ -121,8 +121,7 @@ public class GameControlPanel extends JPanel{
 		frame.setContentPane(panel); // put the panel in the frame
 		frame.setSize(750, 180);  // size the frame
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
-		frame.setVisible(true); // make it visible
-		
+		frame.setVisible(true); // make it visible	
 		// test filling in the data
 		panel.setTurn(new ComputerPlayer("Bruce Wayne (Batman)", Color.BLACK, 18, 0));
 		panel.setGuess( "I have no guess!");
