@@ -18,6 +18,7 @@ public class Room {
 	private BoardCell centerCell;
 	private BoardCell labelCell;
 	private Set<Player> players;
+	
 	//constructor 
 	public Room(String newName) {
 		this.name = newName;

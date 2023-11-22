@@ -648,6 +648,7 @@ public class Board extends JPanel{
 			calcTargets(grid[player.getRow()][player.getColumn()], roll);
 		}
 	}
+	
 	/**
 	 * Controls the gameplay logic, either showing targets for the human player or executing the computer player's turn.
 	 * Repaints the board after each turn.
@@ -688,6 +689,7 @@ public class Board extends JPanel{
 	public int getRoll() {
 		return roll;
 	} 
+	
 	public Player getCurrentPlayer() {
 		if(currentPlayer == computers.size()) {
 			return user;
@@ -695,7 +697,8 @@ public class Board extends JPanel{
 			return computers.get(currentPlayer);
 		}
 	}
- 		/*
+ 	
+	/*
 	 * Main method for testing
 	 */
 	public static void main(String[] args) {
@@ -750,6 +753,7 @@ public class Board extends JPanel{
 			repaint();
 		}
 	}
+	
 	/*
 	 * all getters and setters below
 	 */

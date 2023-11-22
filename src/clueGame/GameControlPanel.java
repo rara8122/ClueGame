@@ -18,7 +18,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-import clueGame.Board;
 
 public class GameControlPanel extends JPanel{
 	
@@ -26,12 +25,12 @@ public class GameControlPanel extends JPanel{
 	private JTextArea roll;
 	private JTextField guess;
 	private JTextArea guessResult;
-	private static Board gameBoard;
+	private static Board gameBoard = Board.getInstance();
 	
 	/**
 	 * Constructor for the panel, it does 90% of the work
 	 */	
-	public GameControlPanel(Board gameBoard)  {
+	public GameControlPanel()  {
 		this.gameBoard = gameBoard; 
 		JButton nextPlayerButton = new JButton("Next Player");
         JButton makeAccusationButton = new JButton("Make Accusation");
@@ -97,6 +96,7 @@ public class GameControlPanel extends JPanel{
         });
         
 	}
+	
 	/*method to update the panel 
 	 * 
 	 */
@@ -116,7 +116,7 @@ public class GameControlPanel extends JPanel{
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		GameControlPanel panel = new GameControlPanel(gameBoard);  // create the panel
+		GameControlPanel panel = new GameControlPanel();  // create the panel
 		JFrame frame = new JFrame();  // create the frame 
 		frame.setContentPane(panel); // put the panel in the frame
 		frame.setSize(750, 180);  // size the frame
@@ -130,11 +130,11 @@ public class GameControlPanel extends JPanel{
 		panel.setRoll(5);
 	}
 	
-
 	//setters
 	public void setRoll(int rollNum) {
 		roll.setText(Integer.toString(rollNum));	
 	}
+	
 	public void setGuessResult(String string) {
 		guessResult.setText(string);
 	}
@@ -142,6 +142,7 @@ public class GameControlPanel extends JPanel{
 	public void setGuess(String string) {
 		guess.setText(string);	
 	}
+	
 	public void setTurn(Player currentTurn) {	
 		if(currentTurn.getColor().getBlue() + currentTurn.getColor().getGreen() + currentTurn.getColor().getRed() <= 255) {
 			player.setForeground(Color.WHITE);

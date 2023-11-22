@@ -60,6 +60,7 @@ public class ComputerPlayer extends Player{
 			}
 		}
 	}
+	
 	/*method to select  a target
 	 * 
 	 */

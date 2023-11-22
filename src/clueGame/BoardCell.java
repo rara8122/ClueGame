@@ -76,9 +76,7 @@ public class BoardCell {
 	public boolean isOccupied() {
 		return occupied;
 	}	
-	
-
-	
+		
 	/*
 	 * method to draw the rooms, walkways, and unused spaces on the board.
 	 */
@@ -146,6 +144,7 @@ public class BoardCell {
 			newGraphic.fillRect(x, y - height/10, width, height/10);
 		}
 	}
+	
 	//all setters here
 	public void setOccupied(boolean b) {
 		occupied = b;
@@ -175,7 +174,6 @@ public class BoardCell {
 	public String getRoomName() {
 		return roomName;
 	}
-	
 	
 	public int getRow() {
 		return row;

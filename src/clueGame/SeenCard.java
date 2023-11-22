@@ -11,6 +11,7 @@ import java.awt.Color;
 public class SeenCard {
 	private Card card;
 	private Color color;
+	
 	/*
 	 * constructor to initialize a seencard 
 	 */
@@ -18,6 +19,7 @@ public class SeenCard {
 		card = newCard;
 		color = newColor;
 	}
+	
 	/*
 	 * all getters here
 	 */

@@ -19,6 +19,7 @@ public class ClueGame extends JFrame{
 	Board theBoard;
 	ClueCardsPanel cards;
 	GameControlPanel control;
+	
 	/*
 	 * Constructor for class 
 	 */
@@ -40,6 +41,7 @@ public class ClueGame extends JFrame{
 		showSplashScreen(user); 
 			
 	}
+	
 	/*
 	 * method to initialize the main frame with all the panels and splash screen
 	 */
@@ -52,6 +54,7 @@ public class ClueGame extends JFrame{
 		super.setVisible(true); // make it visible
 		
 	}
+	
 	/*
 	 * presents the splash screen at the beginning of the game
 	 */
@@ -59,6 +62,7 @@ public class ClueGame extends JFrame{
 		String message = "You are " + user.getName() + ". " + "Can you find the solution before the computer players?";
         JOptionPane.showMessageDialog(this,message, "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
     }
+	
 	/*
 	 * Main to test the panel
 	 */
@@ -67,7 +71,7 @@ public class ClueGame extends JFrame{
 		theBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		theBoard.initialize();
 		ClueCardsPanel cards = new ClueCardsPanel();  // create the panel
-		GameControlPanel control = new GameControlPanel(theBoard);  // create the panel
+		GameControlPanel control = new GameControlPanel();  // create the panel
 		ClueGame frame = new ClueGame(theBoard, cards, control);  // create the frame 
 		try {
 			theBoard.nextPlayer();
