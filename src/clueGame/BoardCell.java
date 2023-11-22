@@ -85,7 +85,9 @@ public class BoardCell {
 		int y = height * row;
 		newGraphic.setColor(Color.BLACK);
 		//drawing logic based on cell type
-		if (initial == 'W') {
+		switch (initial) //we calculate where the door goes based on it's direction (down = upper of the cell below, etc.)
+		{
+		case 'W':
 			newGraphic.setColor(Color.BLACK);
 			newGraphic.fillRect(x, y, width, height); //draw a big black rectangle, and draw a slightly smaller rectangle inside it
 			if(target) {
@@ -94,12 +96,14 @@ public class BoardCell {
 				newGraphic.setColor(Color.YELLOW);
 			}
 	        newGraphic.fillRect(x + width/BORDER_SIZE, y + height/BORDER_SIZE, walkwayWidth, walkwayHeight);
-	    } else if (initial == 'X') {
-	    	//draw an unused cell in black
+	        break;
+		case 'X':
+			//draw an unused cell in black
 	    	newGraphic.setColor(Color.BLACK);
 	        newGraphic.fillRect(x, y, width, height);
-	    } else { //rooms
-	    	if(secretPassage == ' ') { //if this cell is not a secret passage
+			break;
+		default:
+			if(secretPassage == ' ') { //if this cell is not a secret passage
 		    	if(target) {
 					newGraphic.setColor(Color.CYAN);
 				} else {
@@ -121,6 +125,7 @@ public class BoardCell {
 				newGraphic.setFont(font);
 				newGraphic.drawString("S", x + height/8, y + 7*height/8);
 	    	}
+			break;
 		}
 	}
 	
@@ -131,17 +136,22 @@ public class BoardCell {
 		int x = width * column;
 		int y = height * row;
 		newGraphic.setColor(Color.BLUE);
-		if(doorDirection == DoorDirection.DOWN) { //we calculate where the door goes based on it's direction (down = upper of the cell below, etc.)
+		switch (doorDirection) //we calculate where the door goes based on it's direction (down = upper of the cell below, etc.)
+		{
+		case DOWN:
 			newGraphic.fillRect(x, y + height, width, height/10);
-		}
-		if(doorDirection == DoorDirection.LEFT) {
+			break;
+		case LEFT:
 			newGraphic.fillRect(x - width/10, y, width/10, height);
-		}
-		if(doorDirection == DoorDirection.RIGHT) {
+			break;
+		case RIGHT:
 			newGraphic.fillRect(x + width, y, width/10, height);
-		}
-		if(doorDirection == DoorDirection.UP) {
+			break;
+		case UP:
 			newGraphic.fillRect(x, y - height/10, width, height/10);
+			break;
+		default:
+			break;
 		}
 	}
 	

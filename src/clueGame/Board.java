@@ -101,7 +101,7 @@ public class Board extends JPanel{
 	/*
 	 * method to load setup config
 	 */
-	private void loadSetupConfig () throws BadConfigFormatException, IOException {
+	public void loadSetupConfig () throws BadConfigFormatException, IOException {
 		roomMap = new HashMap <Character, Room> ();
 		deck = new HashSet<Card>();
 		computers = new ArrayList<ComputerPlayer>();
@@ -229,7 +229,7 @@ public class Board extends JPanel{
 	/*
 	 * loads layout config
 	 */
-	private void loadLayoutConfig () throws BadConfigFormatException, IOException {
+	public void loadLayoutConfig () throws BadConfigFormatException, IOException {
 		numRows = 0;
 		numColumns = 0;
 		
