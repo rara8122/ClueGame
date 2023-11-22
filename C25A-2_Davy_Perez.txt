@@ -141,6 +141,12 @@ public void updateDeckCards(Set<Card> newCards, Color color) {
 	
 Gitlog 
 
+commit b5d99883e84674dde8e7ee8c350b5ec0058eaaa6 
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Tue Nov 21 17:08:57 2023 -0700
+
+    changed variable names for clarity particularly in the draw methods in player class and room class0
+
 commit 47e642f8c6644fb324080d4b23ffc9c2595c7a18
 Author: MancMelP <melanie.mancera23@gmail.com>
 Date:   Tue Nov 21 16:06:53 2023 -0700
