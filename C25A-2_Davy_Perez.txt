@@ -139,13 +139,38 @@ public void updateDeckCards(Set<Card> newCards, Color color) {
 	    }
 	}
 	
-Gitlog 
+	Gitlog (for this assignment):
 
-commit b5d99883e84674dde8e7ee8c350b5ec0058eaaa6 
+commit 46958bf62e4e9e6e570edcdbc46a41b5b0b7e33f
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Tue Nov 21 19:03:24 2023 -0700
+
+    changed if statements in BoardCell.java to case statements (where beneficial)
+
+commit b11cc7dd7f92e0fc3f2d97efedebdc8cd138f219
+Merge: b378d7b 0ac0981
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Tue Nov 21 18:55:53 2023 -0700
+
+    changed public to private when methods should not be called outside of a given class
+
+commit b378d7be2ae1433d9b84ccfa478f6eec92e68913
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Tue Nov 21 18:35:59 2023 -0700
+
+    made gameBoard in GameControlPanel accessed through Board.getInstance()
+
+commit 0ac0981dd3d6d578a4d0c4d050b4e2bef18f3deb
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Tue Nov 21 17:17:52 2023 -0700
+
+    updated text file
+
+commit b5d99883e84674dde8e7ee8c350b5ec0058eaaa6
 Author: MancMelP <melanie.mancera23@gmail.com>
 Date:   Tue Nov 21 17:08:57 2023 -0700
 
-    changed variable names for clarity particularly in the draw methods in player class and room class0
+    changed variable names for clarity particularly in the draw methods in player class and room class
 
 commit 47e642f8c6644fb324080d4b23ffc9c2595c7a18
 Author: MancMelP <melanie.mancera23@gmail.com>
@@ -185,4 +210,6 @@ Author: MancMelP <melanie.mancera23@gmail.com>
 Date:   Tue Nov 21 14:28:03 2023 -0700
 
     changed comments to proper purposes; block comments on methods instead of inline comments
+
+
     

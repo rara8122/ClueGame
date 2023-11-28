@@ -536,15 +536,15 @@ public class Board extends JPanel{
 	/*
 	 * method that handles the player's suggestion
 	 */
-	public Card handleSuggestion(Player suggestingPlayer, Card roomCard, Card weaponCard, Card personCard) {
+	public SeenCard handleSuggestion(Player suggestingPlayer, Card roomCard, Card weaponCard, Card personCard) {
 		Card returnCard = user.disproveSuggestion(roomCard, weaponCard, personCard);
 		if(returnCard != null && suggestingPlayer != user) {
-			return returnCard;
+			return new SeenCard(returnCard, user.getColor());
 		}
 		for (Player person : computers) {
 			returnCard = person.disproveSuggestion(roomCard, weaponCard, personCard);
 			if(returnCard != null && suggestingPlayer != person) {
-				return returnCard;
+				return new SeenCard(returnCard, person.getColor());
 			}
 		}
 		return null;

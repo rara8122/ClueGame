@@ -83,13 +83,13 @@ public class GameSolutionTest {
 			Set<Card> deck = player.getDeck();
 			for (Card card: deck) {
 				if (card.getCardType() == CardType.PERSON) {
-					assertTrue(card.equals(board.handleSuggestion(user, correctRoom, correctWeapon, card)));
+					assertTrue(card.equals((board.handleSuggestion(user, correctRoom, correctWeapon, card).getCard())));
 				}
 				if (card.getCardType() == CardType.WEAPON) {
-					assertTrue(card.equals(board.handleSuggestion(user, correctRoom, card, correctPerson)));
+					assertTrue(card.equals((board.handleSuggestion(user, correctRoom, card, correctPerson).getCard())));
 				}
 				if (card.getCardType() == CardType.ROOM) {
-					assertTrue(card.equals(board.handleSuggestion(user, card, correctWeapon, correctPerson)));
+					assertTrue(card.equals((board.handleSuggestion(user, card, correctWeapon, correctPerson).getCard())));
 				}
 			}
 		}
@@ -166,7 +166,7 @@ public class GameSolutionTest {
 						if (card2.getCardType() == CardType.ROOM) {
 							roomSuggestion = card2;
 						}
-						assertTrue(card2.equals(board.handleSuggestion(user, roomSuggestion, weaponSuggestion, personSuggestion)));
+						assertTrue(card2.equals((board.handleSuggestion(user, roomSuggestion, weaponSuggestion, personSuggestion).getCard())));
 					}
 				}
 			}

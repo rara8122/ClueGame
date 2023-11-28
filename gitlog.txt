@@ -1,4 +1,95 @@
-commit 0477c4655e57f894d7b4fe1afb2c4ee0a6c7ed4b (HEAD -> main, origin/main, origin/HEAD)
+commit 46958bf62e4e9e6e570edcdbc46a41b5b0b7e33f
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Tue Nov 21 19:03:24 2023 -0700
+
+    changed if statements in BoardCell.java to case statements (where beneficial)
+
+commit b11cc7dd7f92e0fc3f2d97efedebdc8cd138f219
+Merge: b378d7b 0ac0981
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Tue Nov 21 18:55:53 2023 -0700
+
+    changed public to private when methods should not be called outside of a given class
+
+commit b378d7be2ae1433d9b84ccfa478f6eec92e68913
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Tue Nov 21 18:35:59 2023 -0700
+
+    made gameBoard in GameControlPanel accessed through Board.getInstance()
+
+commit 0ac0981dd3d6d578a4d0c4d050b4e2bef18f3deb
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Tue Nov 21 17:17:52 2023 -0700
+
+    updated text file
+
+commit b5d99883e84674dde8e7ee8c350b5ec0058eaaa6
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Tue Nov 21 17:08:57 2023 -0700
+
+    changed variable names for clarity particularly in the draw methods in player class and room class
+
+commit 47e642f8c6644fb324080d4b23ffc9c2595c7a18
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Tue Nov 21 16:06:53 2023 -0700
+
+    condensed update deck cards method and update seen cards method and added separate methods to reduce repetition and enhance readability, also added the significanr change text file
+
+commit 9e2dc828d169efea980873a8fb722629b813b70e
+Author: Rachel <rara8122@Blackie.local>
+Date:   Tue Nov 21 15:01:35 2023 -0700
+
+    fixed spacing between functions:
+
+commit 2b96312bb2fc112d4ba8cce11c8ba0e847410e2d
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Tue Nov 21 14:48:43 2023 -0700
+
+    fixed format of classes to fit class standards and for better readability
+
+commit 09f909c4e258f8f2b553763e80204f440d7bf7e2
+Merge: 7101274 d89ca96
+Author: Rachel <rara8122@Blackie.local>
+Date:   Tue Nov 21 14:38:51 2023 -0700
+
+    Merge branch 'main' of https://github.com/rara8122/ClueGame into main
+    
+    Added inline comments
+
+commit 71012745d70072554c3ea79ac0502cde1ecda84c
+Author: Rachel <rara8122@Blackie.local>
+Date:   Tue Nov 21 14:38:48 2023 -0700
+
+    added inline comments
+
+commit d89ca96b1219213782b56119b9cba0b395cf86f4
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Tue Nov 21 14:28:03 2023 -0700
+
+    changed comments to proper purposes; block comments on methods instead of inline comments
+
+commit 2d71f8fdff74affd958b7c6b97ee12d37d7198cc
+Merge: dcdf83e 9a3a8c1
+Author: Rachel <rara8122@Blackie.local>
+Date:   Tue Nov 21 14:19:04 2023 -0700
+
+    Merge branch 'main' of https://github.com/rara8122/ClueGame into main
+    
+    Added secret passages
+
+commit dcdf83eb84d85d3329bf7af96dc094a189717369
+Author: Rachel <rara8122@Blackie.local>
+Date:   Tue Nov 21 14:18:34 2023 -0700
+
+    secret passages
+
+commit 9a3a8c158cd7f3feda546f972d20453a8a41465b
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Thu Nov 16 16:08:19 2023 -0700
+
+    read me and gitlog
+
+commit 0477c4655e57f894d7b4fe1afb2c4ee0a6c7ed4b
 Author: Rachel <rara8122@Blackie.local>
 Date:   Thu Nov 16 16:03:15 2023 -0700
 
@@ -102,9 +193,13 @@ Date:   Tue Nov 14 16:15:05 2023 -0700
 
     splash screen the presents and works
 
-***************************** Below is the previous assignments ****************************
+commit 86b94f8fc6bb5feae21c77decf6581bb1ac4b631
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Tue Nov 14 14:44:27 2023 -0700
 
-commit ebb9728641f0bc62c42f613b5622f9d24c0725e3 (HEAD -> main, origin/main, origin/HEAD)
+    updated git log
+
+commit ebb9728641f0bc62c42f613b5622f9d24c0725e3
 Author: MancMelP <melanie.mancera23@gmail.com>
 Date:   Tue Nov 14 14:40:06 2023 -0700
 
@@ -194,12 +289,78 @@ Date:   Thu Nov 9 14:57:21 2023 -0700
 
     draws empty rectangles
 
-***************************** Below is the previous assignments ****************************
+commit 74e60a6a3f359ba04c35af1450284da262fe2e79
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Wed Nov 8 21:32:22 2023 -0700
+
+    final comments
+
+commit c3eb5a2c06a30dc71123241c114a641bc0883f8d
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Wed Nov 8 21:18:19 2023 -0700
+
+    tested the code and set editable false
+
+commit b5b40bced3db939431a47dc95a1c8a27b003187a
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Wed Nov 8 21:12:27 2023 -0700
+
+    fixed game controltext areas to not be edited
+
+commit 8d83812e0212e536797ea9e76cbcaf3145376cb0
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Wed Nov 8 20:36:10 2023 -0700
+
+    working (mostly)
+
+commit 2cea1b1351608b5b7a9b30168c04182f674f419b
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Wed Nov 8 19:54:37 2023 -0700
+
+    test code to test cards
+
+commit 092f2ce1149071e3dec8927c6de2f1a5de0f6193
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Wed Nov 8 19:41:19 2023 -0700
+
+    added seenCards
+
+commit 8f07c90390393c1da0796746be6a1f61a69432bf
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Wed Nov 8 19:39:03 2023 -0700
+
+    added seen colors and got the panels to draw properly
+
+commit 748415247ea18e6d15b035334f4eed1d3798e7de
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Wed Nov 8 19:15:33 2023 -0700
+
+    update cards functions
+
+commit 7264132955945235a76a57c48a3f6342448debf6
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Wed Nov 8 18:56:12 2023 -0700
+
+    added clue card panel class and starter code for panels
+
+commit 8a0f319f1ceccc7fd062d662b01839328f61c2ad
+Merge: 085d562 25a9309
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Wed Nov 8 18:54:57 2023 -0700
+
+    git log
+
 commit 085d562238a3fd5eef5489db2ad0371ef09fd4a8
 Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
 Date:   Wed Nov 8 18:51:37 2023 -0700
 
     altered readme
+
+commit 25a930928e0011c4ca918508ebeec35dc5796196
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Wed Nov 8 18:49:35 2023 -0700
+
+    updated read me
 
 commit e277026ae51b0b5e6509e978bfdfc128129ec73f
 Author: Rachel <rara8122@MacBook-Pro-8.local>
@@ -228,8 +389,6 @@ Date:   Tue Nov 7 15:02:58 2023 -0700
 commit 6fae3c3c85d032d6583fce6081bc22cb82d16757
 Author: Rachel <rara8122@MacBook-Pro-8.local>
 Date:   Sun Nov 5 15:41:17 2023 -0700
-
-***************************** Below is the previous assignments ****************************
 
     gitlog
 
