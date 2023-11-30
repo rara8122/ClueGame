@@ -143,6 +143,7 @@ public class ClueCardsPanel extends JPanel{
 	    peoplePanel.add(inHandPeople);
 	    roomsPanel.add(inHandRooms);
 	    weaponsPanel.add(inHandWeapons);
+	    repaint();
 	}
 	
 	/*
@@ -187,6 +188,7 @@ public class ClueCardsPanel extends JPanel{
 	    peoplePanel.add(seenPeople);
 	    roomsPanel.add(seenRooms);
 	    weaponsPanel.add(seenWeapons);
+	    repaint();
 	}
 	
 	/*

@@ -84,7 +84,13 @@ public class GameControlPanel extends JPanel{
         wholePanel.add(leftPanel);
         wholePanel.add(rightPanel);
         add(wholePanel); 
-
+        
+        makeAccusationButton.addActionListener(e -> {
+        	AccusationDialogue accuse = new AccusationDialogue();
+        	accuse.setVisible(true);
+        	gameBoard.setAccuse(accuse);
+        });
+        
         nextPlayerButton.addActionListener(e -> {
             try {
                 gameBoard.nextPlayer();
@@ -97,7 +103,7 @@ public class GameControlPanel extends JPanel{
         
 	}
 	
-	/*method to update the panel 
+	/*method to update the panel  to the default
 	 * 
 	 */
 	private void updatePanel() {
@@ -136,10 +142,12 @@ public class GameControlPanel extends JPanel{
 	
 	public void setGuessResult(String string) {
 		guessResult.setText(string);
+		repaint();
 	}
 
 	public void setGuess(String string) {
 		guess.setText(string);	
+		repaint();
 	}
 	
 	public void setTurn(Player currentTurn) {	

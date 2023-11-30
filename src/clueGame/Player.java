@@ -17,7 +17,7 @@ public abstract class Player {
 
 	private String name; 
 	private Color color;
-	private int row, column; 
+	private int row, column, startRow, startColumn; 
 	private Set<Card> deck;
 	private Set<SeenCard> seen;
 	private int deckSize;
@@ -29,11 +29,21 @@ public abstract class Player {
 	public Player(String name, Color color, int row, int column) {
 		this.name = name;
 		this.color = color;
+		this.startRow = row;
+		this.startColumn = column;
 		this.row = row;
 		this.column = column;
 		deck = new HashSet<Card>();
 		seen = new HashSet<SeenCard>();
 		deckSize = 0;
+	}
+	
+	public void reset() {
+		deck.clear();
+		deckSize = 0;
+		seen.clear();
+		row = startRow;
+		column = startColumn;
 	}
 	
 	/*
@@ -133,6 +143,10 @@ public abstract class Player {
 	 */
 	public void updateSeen(Card newCard, Color color) {
 		SeenCard newSeenCard = new SeenCard(newCard, color);
+		seen.add(newSeenCard);
+	}
+	
+	public void updateSeen(SeenCard newSeenCard) {
 		seen.add(newSeenCard);
 	}
 	

@@ -16,9 +16,9 @@ import javax.swing.JOptionPane;
 
 public class ClueGame extends JFrame{
 	
-	Board theBoard;
-	ClueCardsPanel cards;
-	GameControlPanel control;
+	private Board theBoard;
+	private ClueCardsPanel cards;
+	private GameControlPanel control;
 	
 	/*
 	 * Constructor for class 
@@ -70,8 +70,8 @@ public class ClueGame extends JFrame{
 		Board theBoard = Board.getInstance();
 		theBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		theBoard.initialize();
-		ClueCardsPanel cards = new ClueCardsPanel();  // create the panel
-		GameControlPanel control = new GameControlPanel();  // create the panel
+		ClueCardsPanel cards = new ClueCardsPanel();  // create the cards panel
+		GameControlPanel control = new GameControlPanel();  // create the control panel
 		ClueGame frame = new ClueGame(theBoard, cards, control);  // create the frame 
 		try {
 			theBoard.nextPlayer();
@@ -80,5 +80,52 @@ public class ClueGame extends JFrame{
 		}
 		theBoard.play();
 		control.setRoll(theBoard.getRoll());
+		String lastGuess = " ";
+		String lastResult = " ";
+		HumanPlayer user = theBoard.getUser();
+		Set<SeenCard> lastSeen = user.getSeen();
+		int wins = 0;
+		while(true) {
+			while(!theBoard.isDone()) {
+				if(!lastGuess.equals(theBoard.getGuess())) {
+					lastGuess = theBoard.getGuess();
+					control.setGuess(lastGuess);
+				}
+				if(!lastResult.equals(theBoard.getResult())) {
+					lastResult = theBoard.getResult();
+					control.setGuessResult(lastResult);
+				}
+				if(lastSeen.equals(user.getSeen())){
+					lastSeen = user.getSeen();
+					cards.updateSeenCards(lastSeen);
+				}
+			}
+			if(theBoard.getWin() == 2) {
+				JOptionPane.showMessageDialog(frame, "You Win!", "You win", JOptionPane.INFORMATION_MESSAGE);
+				wins ++;
+			} else if (theBoard.getWin() == 1){
+				JOptionPane.showMessageDialog(frame, "Sorry, not correct! You lose!", "You Lose", JOptionPane.INFORMATION_MESSAGE);
+			} else if (theBoard.getWin() == 3){
+				JOptionPane.showMessageDialog(frame, "The computer just won, answer is " + theBoard.getPlayerSoln() + ", " 
+											+ theBoard.getRoomSoln() + ", " + theBoard.getWeaponSoln(),
+											"Computer Won", JOptionPane.INFORMATION_MESSAGE);
+			}
+			theBoard.reset();
+			try {
+				theBoard.nextPlayer();
+			} catch (MisClick e) {
+				e.printStackTrace();
+			}
+			theBoard.play();
+			control.setRoll(theBoard.getRoll());
+			lastGuess = theBoard.getGuess();
+			control.setGuess(lastGuess);
+			lastResult = theBoard.getResult();
+			control.setGuessResult(lastResult);
+			lastSeen = user.getSeen();
+			cards.updateSeenCards(lastSeen);
+			cards.updateDeckCards(user.getDeck(), user.getColor());
+		}
+		//frame.dispose();
 	}
 }

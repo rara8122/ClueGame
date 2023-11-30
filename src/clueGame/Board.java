@@ -24,6 +24,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -47,6 +48,12 @@ public class Board extends JPanel{
 	private boolean playerFinished;
 	private int roll;
 	private boolean displayTargets;
+	private SuggestionDialog suggestion;
+	private AccusationDialogue accuse;
+	private boolean gameDone;
+	private String lastGuess;
+	private String lastResult;
+	private int won;
 	
 	public static final int DIE_SIDES = 6;
 	
@@ -71,6 +78,26 @@ public class Board extends JPanel{
 		return theInstance;
 	}
 	
+	public void reset() {
+		targets.clear();
+		visited.clear();
+		
+		user.reset();
+		for (ComputerPlayer computer : computers) {
+			computer.reset();
+		}
+		deal();
+		setPlayerLocation(); 
+		
+		gameDone = false;
+		lastGuess = "I have no guess!";
+		lastResult = "So you have nothing?";
+		won = 0;
+		
+		currentPlayer = computers.size() - 1; // so next player is the user (when we call nextPlayer)
+		playerFinished = true; //so nextPlayer will run instead of throwing an error
+	}
+	
 	/*
 	 * initialize the board (since we are using singleton pattern)
 	 */
@@ -92,6 +119,12 @@ public class Board extends JPanel{
 		calcAdjacencies();
 		deal();
 		setPlayerLocation(); 
+		
+		gameDone = false;
+		lastGuess = "I have no guess!";
+		lastResult = "So you have nothing?";
+		won = 0;
+		
 		currentPlayer = computers.size() - 1; // so next player is the user (when we call nextPlayer)
 		playerFinished = true; //so nextPlayer will run instead of throwing an error
 
@@ -582,11 +615,56 @@ public class Board extends JPanel{
 		user.setRow(target.getRow());//set new location
 		user.setColumn(target.getColumn());
 		if(target.isRoomCenter()) {
-			//Handle Suggestion TODO
+			suggestion = new SuggestionDialog(target.getRoomName());
+			suggestion.setVisible(true);
+		} else {
+			playerFinished = true;//end the turn and stop displaying target options
 		}
-		playerFinished = true;//end the turn and stop displaying target options
 		displayTargets = false;
 		repaint();//repaint so the targets stop displaying
+	}
+	
+	public void suggestionCancel() {
+		suggestion.setVisible(false);
+		playerFinished = true;
+	}
+	
+	public void playerSuggestion() {
+		if(suggestion.getWeapon() == null || suggestion.getPerson() == null) {
+			return;
+		}
+		Card userRoom = null;
+		for(Card card : deck) {
+			if(card.getCardName() == getCell(user.getRow(), user.getColumn()).getRoomName()) {
+				userRoom = card;
+			}
+		}
+		SeenCard suggestedCard = handleSuggestion(user, userRoom, suggestion.getWeapon(), suggestion.getPerson());
+		
+		lastGuess = userRoom + ", " + suggestion.getWeapon() + ", " + suggestion.getPerson();
+		if(suggestedCard != null) {
+			user.updateSeen(suggestedCard);
+			lastResult = suggestedCard.getCardName();
+		} else {
+			lastResult = "No new clue";
+		}
+		suggestion.setVisible(false);
+		playerFinished = true;
+	}
+	
+	public void accusationCancel() {
+		accuse.setVisible(false);
+	}
+	
+	public void playerAccusation() {
+		boolean isCorrect = checkAccusation(accuse.getRoom(), accuse.getWeapon(), accuse.getPerson());
+		if(isCorrect) {
+			won = 2;
+		} else {
+	        won = 1;
+		}
+		accuse.setVisible(false);
+		gameDone = true;
 	}
 	
 	/*
@@ -743,6 +821,23 @@ public class Board extends JPanel{
 	/*
 	 * all getters and setters below
 	 */
+	
+	public int getWin() {
+		return won;
+	}
+	
+	public String getGuess() {
+		return lastGuess;
+	}
+	
+	public String getResult() {
+		return lastResult;
+	}
+	
+	public boolean isDone() {
+		return gameDone;
+	}
+	
 	public Card getRoomSoln() {
 		return room;
 	}
@@ -807,6 +902,10 @@ public class Board extends JPanel{
 	public void setConfigFiles(String layoutFile, String setupFile) {
 		layoutConfigFile = layoutFile;
 		setupConfigFile = setupFile;
+	}
+	
+	public void setAccuse(AccusationDialogue newAccuse) {
+		accuse = newAccuse;
 	}
 	
 	//all getters below
