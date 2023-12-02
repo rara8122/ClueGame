@@ -88,7 +88,7 @@ public class GameControlPanel extends JPanel{
         makeAccusationButton.addActionListener(e -> {
         	AccusationDialogue accuse = new AccusationDialogue();
         	accuse.setVisible(true);
-        	gameBoard.setAccuse(accuse);
+        	//gameBoard.setAccuse(accuse);
         });
         
         nextPlayerButton.addActionListener(e -> {

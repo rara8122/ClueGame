@@ -561,7 +561,6 @@ public class Board extends JPanel{
 	public boolean checkAccusation(Card roomAccusation, Card weaponAccusation, Card personAccusation) {
 	    // Compare the accusation with the correct solution
 	    // Check if each part of the accusation matches the correct solution
-
 	    // Return true if all three parts of the accusation are correct
 	    return (roomAccusation.equals(room) && weaponAccusation.equals(weapon) && personAccusation.equals(player));
 	}
@@ -703,21 +702,47 @@ public class Board extends JPanel{
 		} else {
 			ComputerPlayer player = computers.get(currentPlayer);
 			BoardCell location = grid[player.getRow()][player.getColumn()];
-			//create accusation TODO
-			location = player.selectTarget(targets);
-			if(location.getInitial() == 'W') {//if the target is a walkway this will be true
-				location.setOccupied(true);
-			}
+	
+			if (player.isReadyToAccuse()) {        
+	            player.makeAccusation();
+	            // Handle end of game or other logic based on accusation result
+	        } else {
+	        	// If not making an accusation, proceed with normal turn
+	            location = player.selectTarget(targets);
+
+	            if (location.getInitial() == 'W') {
+	                location.setOccupied(true);
+	            }
+	            
 			roomMap.get(grid[player.getRow()][player.getColumn()].getInitial()).removePlayer(player);
 			roomMap.get(location.getInitial()).addPlayer(player);
 			grid[player.getRow()][player.getColumn()].setOccupied(false);
 			player.setRow(location.getRow());
 			player.setColumn(location.getColumn());
-			//make suggestion TODO
+			
+		     // Check if the player entered a room
+	           if (location.isRoomCenter()) {
+	               // Create a suggestion
+	               Room currentRoom = roomMap.get(location.getInitial());
+	               Card roomCard = new Card(currentRoom.getName(), CardType.ROOM);
+	               Card weaponCard = player.getWeaponSuggestion();
+	               Card personCard = player.getPersonSuggestion();
+	               // Move the suggested person to the room
+	       
+	               // Call the method to handle disproving suggestions
+	               SeenCard disprovedCard = handleSuggestion(player, roomCard, weaponCard, personCard);
+	               // Set a flag if no one can disprove the suggestion
+	               if (disprovedCard == null) {
+	                   // Set a flag indicating that no one could disprove the suggestion
+	               	player.setShouldMakeAccusation(true);
 		}
 		super.repaint(); //Redraw the board after the turn
+	         }
+	        
+	        }
 	}
-	
+		
+	}
 	/*
 	 * This method checks if the current player is a human player. 
 	 * It then processes the click to determine the column and row clicked

@@ -17,13 +17,13 @@ public class ComputerPlayer extends Player{
 	private Card roomSolution;
 	private Card weaponSolution;
 	private Card personSolution;
+	private boolean shouldMakeAccusation;
 
 	/*
 	 * constructor that takes in the computer player's name, color, column
 	 */
 	public ComputerPlayer(String name, Color color, int row, int column) {
 		super(name, color, row, column);
-		// TODO Auto-generated constructor stub
 	}
 	
 	/*
@@ -84,6 +84,7 @@ public class ComputerPlayer extends Player{
 		return ((BoardCell) targetsArray[choice.nextInt(targetsArray.length)]);
 	}
 	
+	
 	//getters and setters
 	public Card getRoomSuggestion() {
 		return roomSolution;
@@ -111,4 +112,22 @@ public class ComputerPlayer extends Player{
 	public ComputerPlayer getSuggestion() {
 		return null;
 	}
+
+	public void makeAccusation() {
+	}
+
+	public boolean isReadyToAccuse() {
+		return false;
+	}
+
+  // Getter and setter for shouldMakeAccusation flag
+	   public boolean shouldMakeAccusation() {
+	       return shouldMakeAccusation;
+	   }
+	   
+	   public void setShouldMakeAccusation(boolean shouldMakeAccusation) {
+	       this.shouldMakeAccusation = shouldMakeAccusation;
+	   }
+	
+
 }

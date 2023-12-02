@@ -206,5 +206,4 @@ public abstract class Player {
 		this.column = column;
 	}
 	
-
 }
