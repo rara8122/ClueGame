@@ -9,6 +9,7 @@ package clueGame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.util.Set;
 
 import javax.swing.JFrame;
@@ -19,6 +20,8 @@ public class ClueGame extends JFrame{
 	private Board theBoard;
 	private ClueCardsPanel cards;
 	private GameControlPanel control;
+	public static final int CELL_SIZE = 45;
+	public static final int RATIO = 7;
 	
 	/*
 	 * Constructor for class 
@@ -49,7 +52,11 @@ public class ClueGame extends JFrame{
 		super.add(theBoard, BorderLayout.CENTER);
 		super.add(cards, BorderLayout.EAST);
 		super.add(control, BorderLayout.SOUTH);
-		super.setSize(1500,1000 );  // size the frame
+		super.setSize((RATIO + 1)*(CELL_SIZE*theBoard.getNumColumns())/RATIO, (RATIO + 1)*(CELL_SIZE*theBoard.getNumRows())/RATIO);  // size the frame
+		cards.setPreferredSize(new Dimension ((CELL_SIZE*theBoard.getNumColumns())/RATIO, (RATIO + 1)*(CELL_SIZE*theBoard.getNumRows())/RATIO));
+		control.setPreferredSize(new Dimension ((RATIO + 1)*(CELL_SIZE*theBoard.getNumColumns())/RATIO, (CELL_SIZE*theBoard.getNumRows())/RATIO));
+		control.setGuessSize();
+		theBoard.setPreferredSize(new Dimension (CELL_SIZE*theBoard.getNumColumns(), CELL_SIZE*theBoard.getNumRows()));
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
 		super.setVisible(true); // make it visible
 		
@@ -95,7 +102,7 @@ public class ClueGame extends JFrame{
 					lastResult = theBoard.getResult();
 					control.setGuessResult(lastResult, theBoard.getResultColor());
 				}
-				if(lastSeen.equals(user.getSeen())){
+				if(!lastSeen.equals(user.getSeen())){
 					lastSeen = user.getSeen();
 					cards.updateSeenCards(lastSeen);
 				}

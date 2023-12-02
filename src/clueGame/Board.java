@@ -698,6 +698,11 @@ public class Board extends JPanel{
 	 * Throws a MisClick exception if a player tries to switch turns before finishing their turn.
 	 */
 	public void nextPlayer() throws MisClick{
+		lastGuess = "";
+		guessColor = null;
+		lastResult = "";
+		resultColor = null;
+		
 		 // Check if it's the last player's turn and their turn is finished
 		if(currentPlayer == computers.size()) {
 			if(playerFinished) {
@@ -723,10 +728,6 @@ public class Board extends JPanel{
 	 * Repaints the board after each turn.
 	 */
 	public void play() {
-		lastGuess = "";
-		guessColor = null;
-		lastResult = "";
-		resultColor = null;
 		
 		if(currentPlayer == computers.size()) {
 			displayTargets = true;//make sure the player is not done and we display movement options

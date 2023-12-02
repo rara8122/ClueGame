@@ -7,6 +7,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
@@ -23,7 +24,7 @@ public class GameControlPanel extends JPanel{
 	
 	private JTextArea player;
 	private JTextArea roll;
-	private JTextField guess;
+	private JTextArea guess;
 	private JTextArea guessResult;
 	private static Board gameBoard = Board.getInstance();
 	
@@ -42,7 +43,7 @@ public class GameControlPanel extends JPanel{
         //text field for roll number
         roll = new JTextArea();
         roll.setEditable( false );
-        guess = new JTextField();
+        guess = new JTextArea();
         guess.setEditable( false );
         guessResult = new JTextArea();
         guessResult.setEditable( false );
@@ -116,6 +117,13 @@ public class GameControlPanel extends JPanel{
 	    repaint();
 	}
 	
+	public void setGuessSize() {
+		int width = (int) (this.getPreferredSize().getWidth()/5);
+		int height = (int) (this.getPreferredSize().getHeight()/6);
+		guess.setPreferredSize(new Dimension (width, height));
+        guessResult.setPreferredSize(new Dimension (width, height));
+	}
+	
 	/**
 	 * Main to test the panel
 	 * 
@@ -145,6 +153,7 @@ public class GameControlPanel extends JPanel{
 			guessResult.setOpaque(false);
 			guessResult.setForeground(Color.BLACK);
 		} else {
+			guessResult.setOpaque(true);
 			if((color.getBlue() + color.getGreen() + color.getRed()) <= 255) {
 				guessResult.setForeground(Color.WHITE);
 			} else {
@@ -161,6 +170,7 @@ public class GameControlPanel extends JPanel{
 			guess.setOpaque(false);
 			guess.setForeground(Color.BLACK);
 		} else {
+			guess.setOpaque(true);
 			if(color.getBlue() + color.getGreen() + color.getRed() <= 255) {
 				guess.setForeground(Color.WHITE);
 			} else {
