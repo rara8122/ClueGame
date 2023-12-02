@@ -48,6 +48,7 @@ public class GameControlPanel extends JPanel{
         guessResult = new JTextArea();
         guessResult.setEditable( false );
         
+        
         //panel with the player turn label and player
         JPanel whoseTurnP = new JPanel(); 
         whoseTurnP.add(whoseTurn);
@@ -90,8 +91,18 @@ public class GameControlPanel extends JPanel{
         	AccusationDialogue accuse = new AccusationDialogue();
         	accuse.setVisible(true);
         	gameBoard.setAccuse(accuse);
+        	
         });
         
+        makeAccusationButton.addActionListener(e -> {
+		    Player currentPlayer = gameBoard.getCurrentPlayer(); 
+		    if (currentPlayer == gameBoard.getUser()) {
+		        gameBoard.playerAccusation();
+		    } else {
+		        JOptionPane.showMessageDialog(this, "It's not the human player's turn!", "Invalid Action", JOptionPane.WARNING_MESSAGE);
+		    }
+		}); 
+
         nextPlayerButton.addActionListener(e -> {
             try {
                 gameBoard.nextPlayer();
@@ -101,6 +112,7 @@ public class GameControlPanel extends JPanel{
             	 JOptionPane.showMessageDialog(this, "Please finish your turn ", "Message", JOptionPane.ERROR_MESSAGE);
             }
         });
+        
         
 	}
 	

@@ -21,7 +21,7 @@ public class AccusationDialogue extends JDialog{
 	private Board board;
 	
 	public AccusationDialogue() {
-		setTitle("Make a Suggestion");
+		setTitle("Make an Accusation");
 		setSize(300, 200);
 		setLayout(new GridLayout(0, 2));
 		
