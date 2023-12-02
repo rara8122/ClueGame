@@ -31,7 +31,7 @@ public class SuggestionDialog extends JDialog  {
 	 */
 	public SuggestionDialog(String currentRoom) {
 		setTitle("Make a Suggestion"); 
-		setSize(300, 200);
+		setSize(500, 200);
 		setLayout(new GridLayout(0, 2));
 		
 		board = Board.getInstance();

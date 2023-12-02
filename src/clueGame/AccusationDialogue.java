@@ -33,7 +33,7 @@ public class AccusationDialogue extends JDialog{
 	 */
 	public AccusationDialogue() {
 		setTitle("Make an Accusation");
-		setSize(300, 200);
+		setSize(500, 200);
 		setLayout(new GridLayout(0, 2));
 		
 		board = Board.getInstance();
