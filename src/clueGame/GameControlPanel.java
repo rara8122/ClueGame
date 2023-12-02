@@ -88,16 +88,10 @@ public class GameControlPanel extends JPanel{
         add(wholePanel); 
         
         makeAccusationButton.addActionListener(e -> {
-        	AccusationDialogue accuse = new AccusationDialogue();
-        	accuse.setVisible(true);
-        	gameBoard.setAccuse(accuse);
-        	
-        });
-        
-        makeAccusationButton.addActionListener(e -> {
-		    Player currentPlayer = gameBoard.getCurrentPlayer(); 
-		    if (currentPlayer == gameBoard.getUser()) {
-		        gameBoard.playerAccusation();
+		    if (gameBoard.canAccuse()) {
+		    	AccusationDialogue accuse = new AccusationDialogue();
+	        	accuse.setVisible(true);
+	        	gameBoard.setAccuse(accuse);
 		    } else {
 		        JOptionPane.showMessageDialog(this, "It's not the human player's turn!", "Invalid Action", JOptionPane.WARNING_MESSAGE);
 		    }

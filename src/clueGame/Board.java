@@ -1010,7 +1010,9 @@ public class Board extends JPanel{
 	/*
 	 * all getters and setters below
 	 */
-	
+	public boolean canAccuse(){
+		return displayTargets;
+	}
 	
 	public String getGuess() {
 		return lastGuess;
