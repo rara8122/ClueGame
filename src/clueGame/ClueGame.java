@@ -33,15 +33,8 @@ public class ClueGame extends JFrame{
 		cards = newcards;
 		control = newcontrol;
 		initializeMainFrame(); 		
-		HumanPlayer user = theBoard.getUser();		
-		cards.updateDeckCards(user.getDeck(), user.getColor());
-		cards.updateSeenCards(user.getSeen());
-		control.setTurn(user);
-		control.setGuess( "", null);
-		control.setGuessResult( "", null);
-		control.setRoll(theBoard.getRoll());
 		
-		showSplashScreen(user); 
+		showSplashScreen(theBoard.getUser()); 
 			
 	}
 	
@@ -73,66 +66,4 @@ public class ClueGame extends JFrame{
 	/*
 	 * Main to test the panel
 	 */
-	public static void main(String[] args) {
-		Board theBoard = Board.getInstance();
-		theBoard.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
-		theBoard.initialize();
-		ClueCardsPanel cards = new ClueCardsPanel();  // create the cards panel
-		GameControlPanel control = new GameControlPanel();  // create the control panel
-		ClueGame frame = new ClueGame(theBoard, cards, control);  // create the frame 
-		try {
-			theBoard.nextPlayer();
-		} catch (MisClick e) {
-			e.printStackTrace();
-		}
-		theBoard.play();
-		control.setRoll(theBoard.getRoll());
-		String lastGuess = " ";
-		String lastResult = " ";
-		HumanPlayer user = theBoard.getUser();
-		Set<SeenCard> lastSeen = user.getSeen();
-		int wins = 0;
-		while(true) {
-			while(!theBoard.isDone()) {
-				if(!lastGuess.equals(theBoard.getGuess())) {
-					lastGuess = theBoard.getGuess();
-					control.setGuess(lastGuess, theBoard.getGuessColor());
-				}
-				if(!lastResult.equals(theBoard.getResult())) {
-					lastResult = theBoard.getResult();
-					control.setGuessResult(lastResult, theBoard.getResultColor());
-				}
-				if(!lastSeen.equals(user.getSeen())){
-					lastSeen = user.getSeen();
-					cards.updateSeenCards(lastSeen);
-				}
-			}
-			if(theBoard.getWin() == 2) {
-				JOptionPane.showMessageDialog(frame, "You Win!", "You win", JOptionPane.INFORMATION_MESSAGE);
-				wins ++;
-			} else if (theBoard.getWin() == 1){
-				JOptionPane.showMessageDialog(frame, "Sorry, not correct! You lose!", "You Lose", JOptionPane.INFORMATION_MESSAGE);
-			} else if (theBoard.getWin() == 3){
-				JOptionPane.showMessageDialog(frame, "The computer just won, answer is " + theBoard.getPlayerSoln() + ", " 
-											+ theBoard.getRoomSoln() + ", " + theBoard.getWeaponSoln(),
-											"Computer Won", JOptionPane.INFORMATION_MESSAGE);
-			}
-			theBoard.reset();
-			try {
-				theBoard.nextPlayer();
-			} catch (MisClick e) {
-				e.printStackTrace();
-			}
-			theBoard.play();
-			control.setRoll(theBoard.getRoll());
-			lastGuess = theBoard.getGuess();
-			control.setGuess(lastGuess, theBoard.getGuessColor());
-			lastResult = theBoard.getResult();
-			control.setGuessResult(lastResult, theBoard.getResultColor());
-			lastSeen = user.getSeen();
-			cards.updateSeenCards(lastSeen);
-			cards.updateDeckCards(user.getDeck(), user.getColor());
-		}
-		//frame.dispose();
-	}
 }

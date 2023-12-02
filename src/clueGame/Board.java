@@ -55,6 +55,10 @@ public class Board extends JPanel{
 	private String lastResult;
 	private Color resultColor;
 	private int won;
+	private ClueGame frame;
+	private GameControlPanel control;
+	private ClueCardsPanel cards;
+	private int wins;
 	
 	public static final int DIE_SIDES = 6;
 	
@@ -104,6 +108,7 @@ public class Board extends JPanel{
 	 * initialize the board (since we are using singleton pattern)
 	 */
 	public void initialize(){
+		
 		//Read in files/initialize sets
 		targets = new HashSet<BoardCell>();
 		visited = new HashSet<BoardCell>();
@@ -132,6 +137,19 @@ public class Board extends JPanel{
 		playerFinished = true; //so nextPlayer will run instead of throwing an error
 
 		addMouseListener(new BoardListener()); //listens for mouse clicks
+		
+		cards = new ClueCardsPanel();  // create the cards panel
+		control = new GameControlPanel();  // create the control panel
+		frame = new ClueGame(this, cards, control);  // create the frame 
+		wins = 0;
+		
+		cards.updateDeckCards(user.getDeck(), user.getColor());
+		cards.updateSeenCards(user.getSeen());
+		control.setTurn(user);
+		control.setGuess( "", null);
+		control.setGuessResult( "", null);
+		control.setRoll(roll);
+		
 	}
 		
 	/*
@@ -599,6 +617,36 @@ public class Board extends JPanel{
 	 * Moves the user's game piece to the clicked target if it's a valid target.
 	 * Throws a MisClick exception if the clicked cell is not a target.
 	*/
+	private void setInfo() {
+		control.setGuess(lastGuess, guessColor);
+		control.setGuessResult(lastResult, resultColor);
+		cards.updateSeenCards(user.getSeen());
+	}
+	
+	private void done() {
+		if(won == 2) {
+			JOptionPane.showMessageDialog(frame, "You Win!", "You win", JOptionPane.INFORMATION_MESSAGE);
+			wins ++;
+		} else if (won == 1){
+			JOptionPane.showMessageDialog(frame, "Sorry, not correct! You lose!", "You Lose", JOptionPane.INFORMATION_MESSAGE);
+		} else if (won == 3){
+			JOptionPane.showMessageDialog(frame, "The computer just won, answer is " + player + ", " 
+										+ room + ", " + weapon,
+										"Computer Won", JOptionPane.INFORMATION_MESSAGE);
+		}
+		reset();
+		try {
+			nextPlayer();
+		} catch (MisClick e) {
+			e.printStackTrace();
+		}
+		play();
+		control.setRoll(roll);
+		
+		setInfo();
+		cards.updateDeckCards(user.getDeck(), user.getColor());
+	}
+	
 	public void boardClick(int row, int column) throws MisClick{
 		if(currentPlayer != computers.size()) {
 			return; //if it isn't the player, we clicked wrong
@@ -620,6 +668,10 @@ public class Board extends JPanel{
 			suggestion = new SuggestionDialog(target.getRoomName());
 			suggestion.setVisible(true);
 		} else {
+			lastGuess = "";
+			guessColor = null;
+			lastResult = "";
+			resultColor = null;
 			playerFinished = true;//end the turn and stop displaying target options
 		}
 		displayTargets = false;
@@ -632,6 +684,7 @@ public class Board extends JPanel{
 	}
 	
 	public void playerSuggestion() {
+		suggestion.setVisible(false);
 		if(suggestion.getWeapon() == null || suggestion.getPerson() == null) {
 			return;
 		}
@@ -654,6 +707,7 @@ public class Board extends JPanel{
 			lastResult = "No new clue";
 			resultColor = null;
 		}
+		setInfo();
 		
 		Player suggestedPlayer = getSuggestedPlayer(suggestion.getPerson());
 		if(suggestedPlayer != null) {
@@ -664,7 +718,6 @@ public class Board extends JPanel{
 		}
 		
 		repaint();
-		suggestion.setVisible(false);
 		playerFinished = true;
 	}
 	
@@ -680,6 +733,7 @@ public class Board extends JPanel{
 	        won = 1;
 		}
 		accuse.setVisible(false);
+		done();
 	}
 	
 	private Player getSuggestedPlayer(Card playerCard) {
@@ -693,15 +747,12 @@ public class Board extends JPanel{
 		}
 		return null;
 	}
+	
 	/*
 	 * Moves the game to the next player's turn.
 	 * Throws a MisClick exception if a player tries to switch turns before finishing their turn.
 	 */
 	public void nextPlayer() throws MisClick{
-		lastGuess = "";
-		guessColor = null;
-		lastResult = "";
-		resultColor = null;
 		
 		 // Check if it's the last player's turn and their turn is finished
 		if(currentPlayer == computers.size()) {
@@ -739,6 +790,7 @@ public class Board extends JPanel{
 			if (player.accuse()) {  
 				if(checkAccusation(player.getRoomSuggestion(), player.getWeaponSuggestion(), player.getPersonSuggestion())) {
 					won = 3;
+					done();
 					return;
 				}
 	        }
@@ -780,6 +832,7 @@ public class Board extends JPanel{
 					lastResult = "Suggestion disproven!";
 					resultColor = disprovedCard.getColor();
 				}
+				System.out.println(lastGuess);
 				Player suggestedPlayer = getSuggestedPlayer(personCard);
 				
 				if(suggestedPlayer != null) {
@@ -788,8 +841,14 @@ public class Board extends JPanel{
 					suggestedPlayer.setColumn(player.getColumn());
 					currentRoom.addPlayer(suggestedPlayer);
 				}
+			} else {
+				lastGuess = "";
+				guessColor = null;
+				lastResult = "";
+				resultColor = null;
 			}
 		}
+		setInfo();
 		super.repaint(); //Redraw the board after the turn	
 	}
 	/*
@@ -884,11 +943,13 @@ public class Board extends JPanel{
 	public static void main(String[] args) {
 		theInstance.setConfigFiles("ClueLayout.csv", "ClueSetup.txt");
 		theInstance.initialize();
-		JFrame frame = new JFrame();  // create the frame 
-		frame.setContentPane(theInstance); // put the panel in the frame
-		frame.setSize(1200, 828);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // allow it to close
-	    frame.setVisible(true); // make it visible
+		try {
+			theInstance.nextPlayer();
+		} catch (MisClick e) {
+			e.printStackTrace();
+		}
+		theInstance.play();
+		theInstance.control.setRoll(theInstance.getRoll());
        
 	}
 	
