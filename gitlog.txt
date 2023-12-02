@@ -1,3 +1,100 @@
+commit cba3a4d37d3207c50bad69663f79ae8a3dc39929
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Sat Dec 2 15:46:53 2023 -0700
+
+    updated the readme and ExtraCredit.txt
+
+commit e73a1aa79a0e177c79b2a9fed80fd082a6732238
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Sat Dec 2 15:41:03 2023 -0700
+
+    changed dialogue box size
+
+commit 0ad0d6c074939e217ee931af4e57534ace594f2a
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Sat Dec 2 15:36:53 2023 -0700
+
+    jar file
+
+commit dd85297264b37f7fa6298e3dea1c482dc9266272
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Sat Dec 2 14:30:29 2023 -0700
+
+    updated read me file
+
+commit b6318fe24f5c45d249cfeb8d0197e9d3f78f8266
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Sat Dec 2 14:23:48 2023 -0700
+
+    added extra credit txt file
+
+commit 16322fdc05754ed85ff9483fe9b9e35aa0c943d7
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Sat Dec 2 14:13:06 2023 -0700
+
+    added header and inline comments to uncommented methods and other
+
+commit f041d3d625ba3f71b5a8419a66579ee210cbfd4e
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Sat Dec 2 13:21:09 2023 -0700
+
+    can only accuse if it is your turn
+
+commit 1c5eca78bb41d1a282a7e563262df654e3ad9c23
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Sat Dec 2 13:13:23 2023 -0700
+
+    when human clicks make accusation when it is the computer players turn, error message code
+
+commit d55ca42fab93a4bf4d7dae7e48b81e3597237d4f
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Sat Dec 2 12:50:57 2023 -0700
+
+    can now run many times and keep track of score, guess displays properly
+
+commit 3efc05c51e47cef9e8e4923d39936cd9c9715618
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Sat Dec 2 11:33:12 2023 -0700
+
+    moved main to board.java
+
+commit 38f5cb46d9c680051e0f6731bc865d64ae044990
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Sat Dec 2 11:01:47 2023 -0700
+
+    changed sizing of window
+
+commit 9497b659a67c31df4ce8db7d51f11a1997b5da02
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Fri Dec 1 20:25:40 2023 -0700
+
+    i think i got the computer logic working
+
+commit 48439c2e62554965b936945a2225b84bf3ecc481
+Author: MancMelP <melanie.mancera23@gmail.com>
+Date:   Fri Dec 1 18:53:25 2023 -0700
+
+    computer player turn code what i have
+
+commit 53ba725ce5e7f68a9130283366b11bc81447665e
+Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
+Date:   Fri Dec 1 14:24:06 2023 -0700
+
+    added new classes for dialogues:
+
+commit 56d2b8f24c17f3ac6ac5ad8392c392e206ad2caa
+Author: Rachel <rara8122@Blackie.local>
+Date:   Thu Nov 30 15:13:55 2023 -0700
+
+    finished player accusation and suggestion, game runs forever (working on storing and displaying score as well as stopping)
+
+commit e9295df1abd707702a7e49df474abf527e2c17fc
+Author: Rachel <rara8122@Blackie.local>
+Date:   Tue Nov 28 14:33:12 2023 -0700
+
+    handleSuggestion now returns a SeenCard (with the color of the player)
+
+**************************************************** Below is previous assignments ****************************************************
 commit 46958bf62e4e9e6e570edcdbc46a41b5b0b7e33f
 Author: Rachel <rara8122@Blackie.hsd1.co.comcast.net>
 Date:   Tue Nov 21 19:03:24 2023 -0700
