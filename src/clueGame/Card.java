@@ -14,20 +14,23 @@ public class Card {
 	private String cardName;
 	private CardType cardType;
 	
+	/*Constructor to initialize a Card object with a name and a card type 
+	*/
 	public Card(String name, CardType newType) {
 		cardName = name;
 		cardType = newType;
 	}
-	
+	// Copy constructor to create a Card from another Card object
 	public Card(Card card) {
 		cardName = card.getCardName();
 		cardType = card.getCardType();
 	}
-
+	// Method to check if two cards are equal based on their name and card type
 	public boolean equals(Card c) {
 		return (cardName.equals(c.getCardName()) && cardType == c.getCardType());	
 	}
 	
+	// Method to get a string representation of the card (its name)
 	public String toString() {
 		return cardName;
 	}
@@ -51,7 +54,6 @@ public class Card {
 	}
 
 	public boolean contains(Card roomCard) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

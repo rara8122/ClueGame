@@ -27,7 +27,7 @@ public class ComputerPlayer extends Player{
 	}
 	
 	/*
-	 * method to create a solution 
+	 * Method to create a solution for the computer player based on the available deck and current room.
 	 */
 	public void createSolution(Set<Card> deck, String currentRoom) {
 		Random choice = new Random();
@@ -61,8 +61,8 @@ public class ComputerPlayer extends Player{
 		}
 	}
 	
-	/*method to select  a target
-	 * 
+	/* 
+	 * Method to select a target cell among the available targets.
 	 */
 	public BoardCell selectTarget(Set<BoardCell> targets) {
 		Set<BoardCell> chosenTargets = new HashSet<BoardCell>();
@@ -83,12 +83,14 @@ public class ComputerPlayer extends Player{
 		Random choice = new Random();
 		return ((BoardCell) targetsArray[choice.nextInt(targetsArray.length)]);
 	}
-
+	
+	/*
+	 * Getter method to check if the computer player should make an accusation.
+	 */
 	public boolean accuse() {
 		return shouldAccuse;
 	}
-	
-	//getters and setters
+	// Getters for the suggested room, weapon, and person
 	public Card getRoomSuggestion() {
 		return roomSolution;
 	}
@@ -100,7 +102,9 @@ public class ComputerPlayer extends Player{
 	public Card getPersonSuggestion() {
 		return personSolution;
 	}
-	
+	/*
+	 * Method to set shouldAccuse flag to true, indicating that the player should make an accusation.
+	 */
 	public void solutionTrue() {
 		shouldAccuse = true;
 	}

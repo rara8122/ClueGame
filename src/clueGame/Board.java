@@ -631,6 +631,12 @@ public class Board extends JPanel{
 		cards.updateSeenCards(user.getSeen());
 	}
 	
+	/**
+	 * Method 'done' performs various actions based on the 'go' flag.
+	 * If 'go' is true, it resets the game, moves to the next player's turn,
+	 * plays the game, updates the control panel, sets game information, and updates deck cards.
+	 * If 'go' is false, it disposes of the frame.
+	 */
 	private void done() {
 		if(go == true) {
 			reset();
@@ -649,6 +655,9 @@ public class Board extends JPanel{
 		}
 	}
 	
+	/**
+	 * Handles the player's click on the board to move or make suggestions.
+	 */
 	public void boardClick(int row, int column) throws MisClick{
 		if(currentPlayer != computers.size()) {
 			return; //if it isn't the player, we clicked wrong
@@ -682,23 +691,32 @@ public class Board extends JPanel{
 		repaint();//repaint so the targets stop displaying
 	}
 	
+	/**
+	 * Cancels the current suggestion, hides the suggestion dialog, and sets the player's turn to finished.
+	 */
 	public void suggestionCancel() {
 		suggestion.setVisible(false);
 		suggestion = null;
 		playerFinished = true;
 	}
 	
+	/**
+	 * Handles the player's suggestion, updates game information based on the suggestion, and progresses the game.
+	 */
 	public void playerSuggestion() {
 		suggestion.setVisible(false);
+		// Check if any essential suggestion component is missing
 		if(suggestion.getWeapon() == null || suggestion.getPerson() == null) {
 			return;
 		}
+		// Find the room of the player's current location
 		Card userRoom = null;
 		for(Card card : deck) {
 			if(card.getCardName() == getCell(user.getRow(), user.getColumn()).getRoomName()) {
 				userRoom = card;
 			}
 		}
+		 // Handle the suggestion and retrieve the suggested card
 		SeenCard suggestedCard = handleSuggestion(user, userRoom, suggestion.getWeapon(), suggestion.getPerson());
 		
 		lastGuess = userRoom + ", " + suggestion.getWeapon() + ", " + suggestion.getPerson();
@@ -714,6 +732,7 @@ public class Board extends JPanel{
 		}
 		setInfo();
 		
+		// Update the location of the suggested player if available
 		Player suggestedPlayer = getSuggestedPlayer(suggestion.getPerson());
 		if(suggestedPlayer != null) {
 			roomMap.get(grid[suggestedPlayer.getRow()][suggestedPlayer.getColumn()].getInitial()).removePlayer(suggestedPlayer);
@@ -727,30 +746,40 @@ public class Board extends JPanel{
 		suggestion = null;
 	}
 	
+	/**
+	 * Cancels the current accusation by hiding the accusation dialog.
+	 */
 	public void accusationCancel() {
 		accuse.setVisible(false);
 	}
 	
+	/**
+	 * Handles the player's accusation, checks its correctness, updates the game accordingly, and displays a message.
+	 */
 	public void playerAccusation() {
-		boolean isCorrect = checkAccusation(accuse.getRoom(), accuse.getWeapon(), accuse.getPerson());
+		boolean isCorrect = checkAccusation(accuse.getRoom(), accuse.getWeapon(), accuse.getPerson());// Check the accusation's correctness
 		if(isCorrect) {
 			wins++;
-			JOptionPane.showMessageDialog(frame, "You Win!", "You win", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(frame, "You Win!", "You win", JOptionPane.INFORMATION_MESSAGE); // Display a winning message
 		} else {
 			JOptionPane.showMessageDialog(frame, "Sorry, not correct! You lose!", "You Lose", JOptionPane.INFORMATION_MESSAGE);
 	        losses++;
 		}
 		accuse.setVisible(false);
-		Continue cont = new Continue();
+		Continue cont = new Continue();// Continue the game
 	}
 	
+	/**
+	 * Retrieves the player suggested in the accusation card.
+	 *
+	 */
 	private Player getSuggestedPlayer(Card playerCard) {
 		if((user.getName()).equals(playerCard.getCardName())){
-			return user;
+			return user; // Return the user if their name matches the accusation
 		}
 		for (Player computer : computers) {
 			if((computer.getName()).equals(playerCard.getCardName())){
-				return computer;
+				return computer; //return the computer player of their name matches the accusation
 			}
 		}
 		return null;
@@ -794,13 +823,14 @@ public class Board extends JPanel{
 		} else {
 			ComputerPlayer player = computers.get(currentPlayer);
 			BoardCell location = grid[player.getRow()][player.getColumn()];
-	
+			
+			// Checking if the player is set to accuse
 			if (player.accuse()) {  
 				if(checkAccusation(player.getRoomSuggestion(), player.getWeaponSuggestion(), player.getPersonSuggestion())) {
 					JOptionPane.showMessageDialog(frame, "The computer just won, answer is " + player + ", " 
 							+ room + ", " + weapon,
 							"Computer Won", JOptionPane.INFORMATION_MESSAGE);
-					compWins++;
+					compWins++; // Increment computer wins counter
 					Continue cont = new Continue();
 					return;
 				}
@@ -949,37 +979,42 @@ public class Board extends JPanel{
 	}
 	
 	private class Continue  extends JDialog {
+		/**
+	     * Constructor for the Continue dialog box.
+	     * Displays game statistics and provides options to continue or quit the game.
+	     */
 		public Continue() {
 			setTitle("Continue?");
 			setSize(300, 200);
 			setLayout(new GridLayout(0, 2));
 			
+			 // Labels for displaying game statistics: wins, losses, and computer's wins
 			JLabel winsLabel = new JLabel("Wins: ");
 			add(winsLabel);
-			JLabel winsNum  = new JLabel(Integer.toString(wins));
+			JLabel winsNum  = new JLabel(Integer.toString(wins)); // Display current wins
 			add(winsNum);
 			
 			JLabel lossesLabel = new JLabel("Losses");
 			add(lossesLabel);
-			JLabel lossesNum = new JLabel(Integer.toString(losses));
+			JLabel lossesNum = new JLabel(Integer.toString(losses)); //Display current loses
 			add(lossesNum);
 			
 			JLabel comuterWins = new JLabel("Computer's Wins: ");
 			add(comuterWins);
-			JLabel comuterWinsNum = new JLabel(Integer.toString(compWins));
+			JLabel comuterWinsNum = new JLabel(Integer.toString(compWins)); // Display computer's wins
 			add(comuterWinsNum);
 			
-			
+			// Buttons to continue or quit the game
 			JButton submit = new JButton("Continue");
 			submit.addActionListener(e -> {
-				go = true;
+				go = true; // Continue the game
 				setVisible(false);
 				done();
 			});
 			
 			JButton cancel = new JButton("Quit");
 			cancel.addActionListener(e -> {
-				go = false;
+				go = false; // Quit the game
 				setVisible(false);
 				done();		
 			});

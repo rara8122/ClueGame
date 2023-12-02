@@ -1,3 +1,10 @@
+/*
+ * Class: This class presents a suggestion dialogue that has drop menus for person and weapon suggestions when a player is to make a suggestion when they enter a room. 
+ * Authors: Rachel Davy, Melanie Perez
+ * Date: 11/29/2023
+ * Collaborators: none 
+ * Sources: none
+ */
 package clueGame;
 
 import java.awt.GridLayout;
@@ -18,9 +25,12 @@ public class SuggestionDialog extends JDialog  {
 	private JComboBox<Card> weapons;
 	private JComboBox<Card> people;
 	private Board board;
-
+	
+	/*
+	 * Constructor that handles the creation of the dialog box
+	 */
 	public SuggestionDialog(String currentRoom) {
-		setTitle("Make a Suggestion");
+		setTitle("Make a Suggestion"); 
 		setSize(300, 200);
 		setLayout(new GridLayout(0, 2));
 		
@@ -32,9 +42,10 @@ public class SuggestionDialog extends JDialog  {
 		room.setBorder(new EtchedBorder());
 		add(roomLabel);
 		add(room);
-		weapons = new JComboBox<Card>();
+		weapons = new JComboBox<Card>(); // Initialize combo boxes for weapons and people cards
 		people = new JComboBox<Card>();
 		for (Card card : deck) {
+			// Populate the dropdowns based on card type
 			switch (card.getCardType())
 			{
 			case WEAPON:
@@ -53,6 +64,8 @@ public class SuggestionDialog extends JDialog  {
 				break;
 			}
 		}
+		
+		// Add labels and dropdowns for person and weapon
 		JLabel personLabel = new JLabel("Person");
 		add(personLabel);
 		add(people);
@@ -61,6 +74,7 @@ public class SuggestionDialog extends JDialog  {
 		add(weaponLabel);
 		add(weapons);
 		
+		// ActionListener for the dropdowns to update selected cards
 		ComboListener listener = new ComboListener();
 		weapons.addActionListener(listener);
 		people.addActionListener(listener);
@@ -75,7 +89,7 @@ public class SuggestionDialog extends JDialog  {
 		add(cancel);
 
 	}
-	
+	// Getter methods for suggested weapon and person
 	public Card getWeapon() {
 		return suggestedWeapon;
 	}
@@ -83,6 +97,7 @@ public class SuggestionDialog extends JDialog  {
 		return suggestedPerson;
 	}
 	
+	  // Setter methods for suggested weapon and person
 	public void setWeapon(Card newWeapon) {
 		suggestedWeapon = newWeapon;
 	}
@@ -90,7 +105,7 @@ public class SuggestionDialog extends JDialog  {
 	public void setPerson(Card newPerson) {
 		suggestedPerson = newPerson;
 	}
-	
+    // ActionListener for the dropdowns
 	private class ComboListener implements ActionListener {
 	  public void actionPerformed(ActionEvent e) {
 	    if (e.getSource() == weapons)

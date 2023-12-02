@@ -1,3 +1,10 @@
+/*
+ * Class: The purpose of this class is to present a dialog when the player presses the Make Accusation button. The dialog is displayed that allows the player to make an accusation consisting of a room, person, and weapon. The dialogue has options to submit the accusation or cancel. 
+ * Authors: Rachel Davy, Melanie Perez
+ * Date: 10/1/2023
+ * Collaborators: none
+ * Sources: none
+ */
 package clueGame;
 
 import java.awt.GridLayout;
@@ -20,6 +27,10 @@ public class AccusationDialogue extends JDialog{
 	private JComboBox<Card> rooms;
 	private Board board;
 	
+	/**
+	 * Constructor for the AccusationDialogue.
+	 * Sets up the GUI components for making an accusation.
+	 */
 	public AccusationDialogue() {
 		setTitle("Make an Accusation");
 		setSize(300, 200);
@@ -82,18 +93,34 @@ public class AccusationDialogue extends JDialog{
 		add(cancel);
 
 	}
+	
+	/**
+	 * Getter for the suggested room in the accusation.
+	 * @return The suggested room card.
+	 */
 	public Card getRoom(){
 		return suggestedRoom;
 	}
 	
+	/**
+	 * Getter for the suggested weapon in the accusation.
+	 * @return The suggested weapon card.
+	 */
 	public Card getWeapon(){
 		return suggestedWeapon;
 	}
 	
+	/**
+	 * Getter for the suggested person in the accusation.
+	 * @return The suggested person card.
+	 */
 	public Card getPerson(){
 		return suggestedPerson;
 	}
 	
+	/**
+	 * ActionListener to handle combo box selections.
+	 */
 	private class ComboListener implements ActionListener {
 	  public void actionPerformed(ActionEvent e) {
 	    if (e.getSource() == weapons)

@@ -24,8 +24,10 @@ public abstract class Player {
 	public static final int BORDER_SIZE = 20; //increase this number to make the player borders thinner, decrease to make it thicker
 
 	/*
-	 * Player class constructor that takes in 4 parameters name, color, row, and column
-	 */
+     * Player class constructor that takes in 4 parameters name, color, row, and column
+     * Initializes player attributes and sets up the deck and seen cards
+     */
+
 	public Player(String name, Color color, int row, int column) {
 		this.name = name;
 		this.color = color;
@@ -37,7 +39,7 @@ public abstract class Player {
 		seen = new HashSet<SeenCard>();
 		deckSize = 0;
 	}
-	
+	 // Method to reset player attributes to initial state
 	public void reset() {
 		deck.clear();
 		deckSize = 0;
@@ -46,9 +48,10 @@ public abstract class Player {
 		column = startColumn;
 	}
 	
-	/*
-	 * method to disprove a suggestion
-	 */
+	 /*
+     * Method to disprove a suggestion
+     * Chooses a card from the player's deck that matches the suggestion (room, weapon, or player)
+     */
 	public Card disproveSuggestion(Card room, Card weapon, Card player) {
 		Card disproveRoom = null;
 		Card disproveWeapon = null;
@@ -110,9 +113,10 @@ public abstract class Player {
 		}
 	}
 	
-	/*
-	 * method to check whether a card is in the deck or seen list
-	 */
+	  /*
+     * Method to check whether a card is in the deck or seen list
+     * Checks if a card exists either in the player's deck or seen cards
+     */
 	public Boolean hasSeen(Card card) {
 		Boolean solution = false;
 		//check if card exists in the deck
@@ -130,17 +134,18 @@ public abstract class Player {
 		return solution;
 	}
 	
-	/*
-	 * adds a card to deck
-	 */
+	 /*
+     * Method to add a card to the player's deck
+     */
 	public void addCard(Card newCard) {
 		deck.add(newCard);
 		deckSize++;
 	}
 	
 	/*
-	 * adds a card to the seen cards
-	 */
+     * Method to update seen cards list
+     * Adds a new seen card to the seen cards list if not already present
+     */
 	public void updateSeen(Card newCard, Color color) {
 		if(!hasSeen(newCard)) {
 			SeenCard newSeenCard = new SeenCard(newCard, color);
@@ -148,6 +153,9 @@ public abstract class Player {
 		}
 	}
 	
+	/*
+     * Overloaded method to update seen cards list using an existing SeenCard object
+     */
 	public void updateSeen(SeenCard newSeenCard) {
 		if(!hasSeen(newSeenCard.getCard())) {
 			seen.add(newSeenCard);
@@ -155,8 +163,9 @@ public abstract class Player {
 	}
 	
 	/*
-	 * draws the players on the board
-	 */
+     * Method to draw the player on the board
+     * Draws a player as a colored circle within a black circle
+     */
 	public void draw(int innerCircleWidth, int innerCircleHeight, int outerCircleWidth, int outerCircleHeight, Graphics newGraphic) {
 		newGraphic.setColor(Color.BLACK);
 		newGraphic.fillOval(innerCircleWidth, innerCircleHeight, outerCircleWidth, outerCircleHeight); //draw black circle with slightly smaller colored circle inside

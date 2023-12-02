@@ -63,7 +63,4 @@ public class ClueGame extends JFrame{
         JOptionPane.showMessageDialog(this,message, "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
     }
 	
-	/*
-	 * Main to test the panel
-	 */
 }

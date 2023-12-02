@@ -19,27 +19,29 @@ public class Room {
 	private BoardCell labelCell;
 	private Set<Player> players;
 	
-	//constructor 
+	// Constructor initializing the Room with a name
 	public Room(String newName) {
 		this.name = newName;
 		players = new HashSet<Player>();
 	}
-	
+	// Method to add a player to the Room
 	public void addPlayer(Player newPlayer) {
 		players.add(newPlayer);
 	}
-	
+	// Method to remove a player from the Room
 	public void removePlayer(Player newPlayer) {
 		players.remove(newPlayer);
 	}
 	
+	// Method to empty the players set
 	public void emptyPlayers() {
 		players.clear();
 	}
 		
-	/*
-	 * Draw method to visualize the room
-	 */
+	 /*
+     * Draw method to visualize the room label.
+     * Draws the room name in blue color at the labelCell location.
+     */
 	public void drawLabel(int cellWidth, int cellHeight, Graphics newGraphic) {
 		if(labelCell != null) {
 			int x = cellWidth * (labelCell.getColumn() - 1);

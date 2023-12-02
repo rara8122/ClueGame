@@ -121,6 +121,7 @@ public class GameControlPanel extends JPanel{
 	    repaint();
 	}
 	
+	// Adjust the size of guess and guessResult JTextAreas
 	public void setGuessSize() {
 		int width = (int) (this.getPreferredSize().getWidth()/5);
 		int height = (int) (this.getPreferredSize().getHeight()/6);
@@ -147,11 +148,21 @@ public class GameControlPanel extends JPanel{
 		panel.setRoll(5);
 	}
 	
-	//setters
+	/*
+	 * Sets the roll number on the panel.
+	 * 
+	 * rollNum The roll number to be displayed
+	 */
 	public void setRoll(int rollNum) {
-		roll.setText(Integer.toString(rollNum));	
+		roll.setText(Integer.toString(rollNum));// Set the roll text
 	}
 	
+	/**
+	 * Sets the guess result text and colors on the panel.
+	 * 
+	 * string The guess result text
+	 * color The color to be applied to the guess result panel
+	 */
 	public void setGuessResult(String string, Color color) {
 		if(color == null) {
 			guessResult.setOpaque(false);
@@ -168,8 +179,14 @@ public class GameControlPanel extends JPanel{
 		guessResult.setText(string);
 		repaint();
 	}
-
+	/**
+	 * Sets the guess text and colors on the panel.
+	 * 
+	 * string The guess text
+	 * color The color to be applied to the guess panel
+	 */
 	public void setGuess(String string, Color color) {
+		 // Set guess to transparent and text color to black if no color is provided
 		if(color == null) {
 			guess.setOpaque(false);
 			guess.setForeground(Color.BLACK);
@@ -185,7 +202,11 @@ public class GameControlPanel extends JPanel{
 		guess.setText(string);
 		repaint();
 	}
-	
+	/**
+	 * Sets the current player's turn information on the panel.
+	 * 
+	 * currentTurn The current player object
+	 */
 	public void setTurn(Player currentTurn) {	
 		if(currentTurn.getColor().getBlue() + currentTurn.getColor().getGreen() + currentTurn.getColor().getRed() <= 255) {
 			player.setForeground(Color.WHITE);
