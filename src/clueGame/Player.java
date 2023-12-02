@@ -142,12 +142,16 @@ public abstract class Player {
 	 * adds a card to the seen cards
 	 */
 	public void updateSeen(Card newCard, Color color) {
-		SeenCard newSeenCard = new SeenCard(newCard, color);
-		seen.add(newSeenCard);
+		if(!hasSeen(newCard)) {
+			SeenCard newSeenCard = new SeenCard(newCard, color);
+			seen.add(newSeenCard);
+		}
 	}
 	
 	public void updateSeen(SeenCard newSeenCard) {
-		seen.add(newSeenCard);
+		if(!hasSeen(newSeenCard.getCard())) {
+			seen.add(newSeenCard);
+		}
 	}
 	
 	/*

@@ -6,9 +6,11 @@
  *Sources: none
  */
 package clueGame;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
+import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -24,8 +26,11 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -54,11 +59,13 @@ public class Board extends JPanel{
 	private Color guessColor;
 	private String lastResult;
 	private Color resultColor;
-	private int won;
 	private ClueGame frame;
 	private GameControlPanel control;
 	private ClueCardsPanel cards;
 	private int wins;
+	private int compWins;
+	private int losses;
+	private boolean go;
 	
 	public static final int DIE_SIDES = 6;
 	
@@ -98,7 +105,6 @@ public class Board extends JPanel{
 		guessColor = null;
 		lastResult = "";
 		resultColor = null;
-		won = 0;
 		
 		currentPlayer = computers.size() - 1; // so next player is the user (when we call nextPlayer)
 		playerFinished = true; //so nextPlayer will run instead of throwing an error
@@ -131,7 +137,6 @@ public class Board extends JPanel{
 		guessColor = null;
 		lastResult = "";
 		resultColor = null;
-		won = 0;
 		
 		currentPlayer = computers.size() - 1; // so next player is the user (when we call nextPlayer)
 		playerFinished = true; //so nextPlayer will run instead of throwing an error
@@ -142,6 +147,9 @@ public class Board extends JPanel{
 		control = new GameControlPanel();  // create the control panel
 		frame = new ClueGame(this, cards, control);  // create the frame 
 		wins = 0;
+		compWins = 0;
+		losses = 0;
+		go = true;
 		
 		cards.updateDeckCards(user.getDeck(), user.getColor());
 		cards.updateSeenCards(user.getSeen());
@@ -624,27 +632,21 @@ public class Board extends JPanel{
 	}
 	
 	private void done() {
-		if(won == 2) {
-			JOptionPane.showMessageDialog(frame, "You Win!", "You win", JOptionPane.INFORMATION_MESSAGE);
-			wins ++;
-		} else if (won == 1){
-			JOptionPane.showMessageDialog(frame, "Sorry, not correct! You lose!", "You Lose", JOptionPane.INFORMATION_MESSAGE);
-		} else if (won == 3){
-			JOptionPane.showMessageDialog(frame, "The computer just won, answer is " + player + ", " 
-										+ room + ", " + weapon,
-										"Computer Won", JOptionPane.INFORMATION_MESSAGE);
+		if(go == true) {
+			reset();
+			try {
+				nextPlayer();
+			} catch (MisClick e) {
+				e.printStackTrace();
+			}
+			play();
+			control.setRoll(roll);
+			
+			setInfo();
+			cards.updateDeckCards(user.getDeck(), user.getColor());
+		} else {
+			frame.dispose();
 		}
-		reset();
-		try {
-			nextPlayer();
-		} catch (MisClick e) {
-			e.printStackTrace();
-		}
-		play();
-		control.setRoll(roll);
-		
-		setInfo();
-		cards.updateDeckCards(user.getDeck(), user.getColor());
 	}
 	
 	public void boardClick(int row, int column) throws MisClick{
@@ -665,8 +667,10 @@ public class Board extends JPanel{
 		user.setRow(target.getRow());//set new location
 		user.setColumn(target.getColumn());
 		if(target.isRoomCenter()) {
-			suggestion = new SuggestionDialog(target.getRoomName());
-			suggestion.setVisible(true);
+			if(suggestion == null) {
+				suggestion = new SuggestionDialog(target.getRoomName());
+				suggestion.setVisible(true);
+			}
 		} else {
 			lastGuess = "";
 			guessColor = null;
@@ -680,6 +684,7 @@ public class Board extends JPanel{
 	
 	public void suggestionCancel() {
 		suggestion.setVisible(false);
+		suggestion = null;
 		playerFinished = true;
 	}
 	
@@ -719,6 +724,7 @@ public class Board extends JPanel{
 		
 		repaint();
 		playerFinished = true;
+		suggestion = null;
 	}
 	
 	public void accusationCancel() {
@@ -728,12 +734,14 @@ public class Board extends JPanel{
 	public void playerAccusation() {
 		boolean isCorrect = checkAccusation(accuse.getRoom(), accuse.getWeapon(), accuse.getPerson());
 		if(isCorrect) {
-			won = 2;
+			wins++;
+			JOptionPane.showMessageDialog(frame, "You Win!", "You win", JOptionPane.INFORMATION_MESSAGE);
 		} else {
-	        won = 1;
+			JOptionPane.showMessageDialog(frame, "Sorry, not correct! You lose!", "You Lose", JOptionPane.INFORMATION_MESSAGE);
+	        losses++;
 		}
 		accuse.setVisible(false);
-		done();
+		Continue cont = new Continue();
 	}
 	
 	private Player getSuggestedPlayer(Card playerCard) {
@@ -789,8 +797,11 @@ public class Board extends JPanel{
 	
 			if (player.accuse()) {  
 				if(checkAccusation(player.getRoomSuggestion(), player.getWeaponSuggestion(), player.getPersonSuggestion())) {
-					won = 3;
-					done();
+					JOptionPane.showMessageDialog(frame, "The computer just won, answer is " + player + ", " 
+							+ room + ", " + weapon,
+							"Computer Won", JOptionPane.INFORMATION_MESSAGE);
+					compWins++;
+					Continue cont = new Continue();
 					return;
 				}
 	        }
@@ -832,7 +843,6 @@ public class Board extends JPanel{
 					lastResult = "Suggestion disproven!";
 					resultColor = disprovedCard.getColor();
 				}
-				System.out.println(lastGuess);
 				Player suggestedPlayer = getSuggestedPlayer(personCard);
 				
 				if(suggestedPlayer != null) {
@@ -851,6 +861,7 @@ public class Board extends JPanel{
 		setInfo();
 		super.repaint(); //Redraw the board after the turn	
 	}
+	
 	/*
 	 * This method checks if the current player is a human player. 
 	 * It then processes the click to determine the column and row clicked
@@ -937,6 +948,49 @@ public class Board extends JPanel{
 		}
 	}
 	
+	private class Continue  extends JDialog {
+		public Continue() {
+			setTitle("Continue?");
+			setSize(300, 200);
+			setLayout(new GridLayout(0, 2));
+			
+			JLabel winsLabel = new JLabel("Wins: ");
+			add(winsLabel);
+			JLabel winsNum  = new JLabel(Integer.toString(wins));
+			add(winsNum);
+			
+			JLabel lossesLabel = new JLabel("Losses");
+			add(lossesLabel);
+			JLabel lossesNum = new JLabel(Integer.toString(losses));
+			add(lossesNum);
+			
+			JLabel comuterWins = new JLabel("Computer's Wins: ");
+			add(comuterWins);
+			JLabel comuterWinsNum = new JLabel(Integer.toString(compWins));
+			add(comuterWinsNum);
+			
+			
+			JButton submit = new JButton("Continue");
+			submit.addActionListener(e -> {
+				go = true;
+				setVisible(false);
+				done();
+			});
+			
+			JButton cancel = new JButton("Quit");
+			cancel.addActionListener(e -> {
+				go = false;
+				setVisible(false);
+				done();		
+			});
+			
+			add(submit);
+			add(cancel);
+			
+			super.setVisible(true);
+
+		}
+	}
 	/*
 	 * Main method for testing
 	 */
@@ -957,9 +1011,6 @@ public class Board extends JPanel{
 	 * all getters and setters below
 	 */
 	
-	public int getWin() {
-		return won;
-	}
 	
 	public String getGuess() {
 		return lastGuess;
@@ -967,10 +1018,6 @@ public class Board extends JPanel{
 	
 	public String getResult() {
 		return lastResult;
-	}
-	
-	public boolean isDone() {
-		return !(won == 0);
 	}
 	
 	public Card getRoomSoln() {

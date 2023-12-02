@@ -96,7 +96,7 @@ public class GameControlPanel extends JPanel{
             try {
                 gameBoard.nextPlayer();
                 gameBoard.play();
-                updatePanel(); // Update the panel after the player's turn
+                updatePanel();
             } catch (MisClick misClick) {
             	 JOptionPane.showMessageDialog(this, "Please finish your turn ", "Message", JOptionPane.ERROR_MESSAGE);
             }
@@ -112,8 +112,6 @@ public class GameControlPanel extends JPanel{
 	    Player currentPlayer = gameBoard.getCurrentPlayer();
 	    setTurn(currentPlayer);
 	    setRoll(gameBoard.getRoll());
-	    setGuess("", null);
-	    setGuessResult("", null);
 	    repaint();
 	}
 	
