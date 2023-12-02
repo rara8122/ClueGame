@@ -88,7 +88,7 @@ public class GameControlPanel extends JPanel{
         makeAccusationButton.addActionListener(e -> {
         	AccusationDialogue accuse = new AccusationDialogue();
         	accuse.setVisible(true);
-        	//gameBoard.setAccuse(accuse);
+        	gameBoard.setAccuse(accuse);
         });
         
         nextPlayerButton.addActionListener(e -> {
@@ -111,8 +111,8 @@ public class GameControlPanel extends JPanel{
 	    Player currentPlayer = gameBoard.getCurrentPlayer();
 	    setTurn(currentPlayer);
 	    setRoll(gameBoard.getRoll());
-	    setGuess("Some guess");
-	    setGuessResult("Some guess result");
+	    setGuess("", null);
+	    setGuessResult("", null);
 	    repaint();
 	}
 	
@@ -130,8 +130,8 @@ public class GameControlPanel extends JPanel{
 		frame.setVisible(true); // make it visible	
 		// test filling in the data
 		panel.setTurn(new ComputerPlayer("Bruce Wayne (Batman)", Color.BLACK, 18, 0));
-		panel.setGuess( "I have no guess!");
-		panel.setGuessResult( "So you have nothing?");
+		panel.setGuess( "I have no guess!", Color.WHITE);
+		panel.setGuessResult( "So you have nothing?", Color.WHITE);
 		panel.setRoll(5);
 	}
 	
@@ -140,13 +140,35 @@ public class GameControlPanel extends JPanel{
 		roll.setText(Integer.toString(rollNum));	
 	}
 	
-	public void setGuessResult(String string) {
+	public void setGuessResult(String string, Color color) {
+		if(color == null) {
+			guessResult.setOpaque(false);
+			guessResult.setForeground(Color.BLACK);
+		} else {
+			if((color.getBlue() + color.getGreen() + color.getRed()) <= 255) {
+				guessResult.setForeground(Color.WHITE);
+			} else {
+				guessResult.setForeground(Color.BLACK);
+			}
+			guessResult.setBackground(color);
+		}
 		guessResult.setText(string);
 		repaint();
 	}
 
-	public void setGuess(String string) {
-		guess.setText(string);	
+	public void setGuess(String string, Color color) {
+		if(color == null) {
+			guess.setOpaque(false);
+			guess.setForeground(Color.BLACK);
+		} else {
+			if(color.getBlue() + color.getGreen() + color.getRed() <= 255) {
+				guess.setForeground(Color.WHITE);
+			} else {
+				guess.setForeground(Color.BLACK);
+			}
+			guess.setBackground(color);
+		}
+		guess.setText(string);
 		repaint();
 	}
 	

@@ -50,9 +50,10 @@ public class Board extends JPanel{
 	private boolean displayTargets;
 	private SuggestionDialog suggestion;
 	private AccusationDialogue accuse;
-	private boolean gameDone;
 	private String lastGuess;
+	private Color guessColor;
 	private String lastResult;
+	private Color resultColor;
 	private int won;
 	
 	public static final int DIE_SIDES = 6;
@@ -89,9 +90,10 @@ public class Board extends JPanel{
 		deal();
 		setPlayerLocation(); 
 		
-		gameDone = false;
-		lastGuess = "I have no guess!";
-		lastResult = "So you have nothing?";
+		lastGuess = "";
+		guessColor = null;
+		lastResult = "";
+		resultColor = null;
 		won = 0;
 		
 		currentPlayer = computers.size() - 1; // so next player is the user (when we call nextPlayer)
@@ -120,9 +122,10 @@ public class Board extends JPanel{
 		deal();
 		setPlayerLocation(); 
 		
-		gameDone = false;
-		lastGuess = "I have no guess!";
-		lastResult = "So you have nothing?";
+		lastGuess = "";
+		guessColor = null;
+		lastResult = "";
+		resultColor = null;
 		won = 0;
 		
 		currentPlayer = computers.size() - 1; // so next player is the user (when we call nextPlayer)
@@ -641,12 +644,26 @@ public class Board extends JPanel{
 		SeenCard suggestedCard = handleSuggestion(user, userRoom, suggestion.getWeapon(), suggestion.getPerson());
 		
 		lastGuess = userRoom + ", " + suggestion.getWeapon() + ", " + suggestion.getPerson();
+		guessColor = user.getColor();
+		
 		if(suggestedCard != null) {
 			user.updateSeen(suggestedCard);
 			lastResult = suggestedCard.getCardName();
+			resultColor = suggestedCard.getColor();
 		} else {
 			lastResult = "No new clue";
+			resultColor = null;
 		}
+		
+		Player suggestedPlayer = getSuggestedPlayer(suggestion.getPerson());
+		if(suggestedPlayer != null) {
+			roomMap.get(grid[suggestedPlayer.getRow()][suggestedPlayer.getColumn()].getInitial()).removePlayer(suggestedPlayer);
+			suggestedPlayer.setRow(user.getRow());
+			suggestedPlayer.setColumn(user.getColumn());
+			roomMap.get(grid[user.getRow()][user.getColumn()].getInitial()).addPlayer(suggestedPlayer);
+		}
+		
+		repaint();
 		suggestion.setVisible(false);
 		playerFinished = true;
 	}
@@ -663,9 +680,19 @@ public class Board extends JPanel{
 	        won = 1;
 		}
 		accuse.setVisible(false);
-		gameDone = true;
 	}
 	
+	private Player getSuggestedPlayer(Card playerCard) {
+		if((user.getName()).equals(playerCard.getCardName())){
+			return user;
+		}
+		for (Player computer : computers) {
+			if((computer.getName()).equals(playerCard.getCardName())){
+				return computer;
+			}
+		}
+		return null;
+	}
 	/*
 	 * Moves the game to the next player's turn.
 	 * Throws a MisClick exception if a player tries to switch turns before finishing their turn.
@@ -696,6 +723,11 @@ public class Board extends JPanel{
 	 * Repaints the board after each turn.
 	 */
 	public void play() {
+		lastGuess = "";
+		guessColor = null;
+		lastResult = "";
+		resultColor = null;
+		
 		if(currentPlayer == computers.size()) {
 			displayTargets = true;//make sure the player is not done and we display movement options
 			playerFinished = false;
@@ -703,10 +735,12 @@ public class Board extends JPanel{
 			ComputerPlayer player = computers.get(currentPlayer);
 			BoardCell location = grid[player.getRow()][player.getColumn()];
 	
-			if (player.isReadyToAccuse()) {        
-	            player.makeAccusation();
-	            // Handle end of game or other logic based on accusation result
-	        } else {
+			if (player.accuse()) {  
+				if(checkAccusation(player.getRoomSuggestion(), player.getWeaponSuggestion(), player.getPersonSuggestion())) {
+					won = 3;
+					return;
+				}
+	        }
 	        	// If not making an accusation, proceed with normal turn
 	            location = player.selectTarget(targets);
 
@@ -720,28 +754,42 @@ public class Board extends JPanel{
 			player.setRow(location.getRow());
 			player.setColumn(location.getColumn());
 			
-		     // Check if the player entered a room
-	           if (location.isRoomCenter()) {
-	               // Create a suggestion
-	               Room currentRoom = roomMap.get(location.getInitial());
-	               Card roomCard = new Card(currentRoom.getName(), CardType.ROOM);
-	               Card weaponCard = player.getWeaponSuggestion();
-	               Card personCard = player.getPersonSuggestion();
-	               // Move the suggested person to the room
-	       
-	               // Call the method to handle disproving suggestions
-	               SeenCard disprovedCard = handleSuggestion(player, roomCard, weaponCard, personCard);
-	               // Set a flag if no one can disprove the suggestion
-	               if (disprovedCard == null) {
-	                   // Set a flag indicating that no one could disprove the suggestion
-	               	player.setShouldMakeAccusation(true);
+			// Check if the player entered a room
+			if (location.isRoomCenter()) {
+				// Create a suggestion
+				Room currentRoom = roomMap.get(location.getInitial());
+				player.createSolution(deck, currentRoom.getName());
+				Card roomCard = player.getRoomSuggestion();
+				Card weaponCard = player.getWeaponSuggestion();
+				Card personCard = player.getPersonSuggestion();
+				// Move the suggested person to the room
+			   
+				// Call the method to handle disproving suggestions
+				lastGuess = roomCard + ", " + weaponCard + ", " + personCard;
+				guessColor = player.getColor();
+				SeenCard disprovedCard = handleSuggestion(player, roomCard, weaponCard, personCard);
+				// Set a flag if no one can disprove the suggestion
+				if (disprovedCard == null) {
+					// Set a flag indicating that no one could disprove the suggestion
+					player.solutionTrue();
+					lastResult = "No new clue";
+					resultColor = null;
+				} else {
+					player.updateSeen(disprovedCard);
+					lastResult = "Suggestion disproven!";
+					resultColor = disprovedCard.getColor();
+				}
+				Player suggestedPlayer = getSuggestedPlayer(personCard);
+				
+				if(suggestedPlayer != null) {
+					roomMap.get(grid[suggestedPlayer.getRow()][suggestedPlayer.getColumn()].getInitial()).removePlayer(suggestedPlayer);
+					suggestedPlayer.setRow(player.getRow());
+					suggestedPlayer.setColumn(player.getColumn());
+					currentRoom.addPlayer(suggestedPlayer);
+				}
+			}
 		}
-		super.repaint(); //Redraw the board after the turn
-	         }
-	        
-	        }
-	}
-		
+		super.repaint(); //Redraw the board after the turn	
 	}
 	/*
 	 * This method checks if the current player is a human player. 
@@ -860,7 +908,7 @@ public class Board extends JPanel{
 	}
 	
 	public boolean isDone() {
-		return gameDone;
+		return !(won == 0);
 	}
 	
 	public Card getRoomSoln() {
@@ -944,6 +992,14 @@ public class Board extends JPanel{
 		} else {
 			return computers.get(currentPlayer);
 		}
+	}
+
+	public Color getGuessColor() {
+		return guessColor;
+	}
+
+	public Color getResultColor() {
+		return resultColor;
 	}
 
 }

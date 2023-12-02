@@ -34,8 +34,8 @@ public class ClueGame extends JFrame{
 		cards.updateDeckCards(user.getDeck(), user.getColor());
 		cards.updateSeenCards(user.getSeen());
 		control.setTurn(user);
-		control.setGuess( "I have no guess!");
-		control.setGuessResult( "So you have nothing?");
+		control.setGuess( "", null);
+		control.setGuessResult( "", null);
 		control.setRoll(theBoard.getRoll());
 		
 		showSplashScreen(user); 
@@ -89,11 +89,11 @@ public class ClueGame extends JFrame{
 			while(!theBoard.isDone()) {
 				if(!lastGuess.equals(theBoard.getGuess())) {
 					lastGuess = theBoard.getGuess();
-					control.setGuess(lastGuess);
+					control.setGuess(lastGuess, theBoard.getGuessColor());
 				}
 				if(!lastResult.equals(theBoard.getResult())) {
 					lastResult = theBoard.getResult();
-					control.setGuessResult(lastResult);
+					control.setGuessResult(lastResult, theBoard.getResultColor());
 				}
 				if(lastSeen.equals(user.getSeen())){
 					lastSeen = user.getSeen();
@@ -119,9 +119,9 @@ public class ClueGame extends JFrame{
 			theBoard.play();
 			control.setRoll(theBoard.getRoll());
 			lastGuess = theBoard.getGuess();
-			control.setGuess(lastGuess);
+			control.setGuess(lastGuess, theBoard.getGuessColor());
 			lastResult = theBoard.getResult();
-			control.setGuessResult(lastResult);
+			control.setGuessResult(lastResult, theBoard.getResultColor());
 			lastSeen = user.getSeen();
 			cards.updateSeenCards(lastSeen);
 			cards.updateDeckCards(user.getDeck(), user.getColor());

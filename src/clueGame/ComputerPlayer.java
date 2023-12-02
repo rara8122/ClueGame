@@ -17,7 +17,7 @@ public class ComputerPlayer extends Player{
 	private Card roomSolution;
 	private Card weaponSolution;
 	private Card personSolution;
-	private boolean shouldMakeAccusation;
+	private boolean shouldAccuse;
 
 	/*
 	 * constructor that takes in the computer player's name, color, column
@@ -83,7 +83,10 @@ public class ComputerPlayer extends Player{
 		Random choice = new Random();
 		return ((BoardCell) targetsArray[choice.nextInt(targetsArray.length)]);
 	}
-	
+
+	public boolean accuse() {
+		return shouldAccuse;
+	}
 	
 	//getters and setters
 	public Card getRoomSuggestion() {
@@ -97,37 +100,9 @@ public class ComputerPlayer extends Player{
 	public Card getPersonSuggestion() {
 		return personSolution;
 	}
-
-	public void setRoomSolution(Card roomSolution2) {
-	}
-
-	public void setCurrentRoom(Room currentRoom) {
-		
-	}
-
-	public Object getRoom() {
-		return null;
-	}
-
-	public ComputerPlayer getSuggestion() {
-		return null;
-	}
-
-	public void makeAccusation() {
-	}
-
-	public boolean isReadyToAccuse() {
-		return false;
-	}
-
-  // Getter and setter for shouldMakeAccusation flag
-	   public boolean shouldMakeAccusation() {
-	       return shouldMakeAccusation;
-	   }
-	   
-	   public void setShouldMakeAccusation(boolean shouldMakeAccusation) {
-	       this.shouldMakeAccusation = shouldMakeAccusation;
-	   }
 	
+	public void solutionTrue() {
+		shouldAccuse = true;
+	}
 
 }
