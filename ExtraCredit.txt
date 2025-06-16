@@ -1,4 +1,0 @@
-We completed the following bonus points for this assignment: 
-- Allow the human to identify themselves and then keep track of their record over multiple games by adding a continue dialog box that displays game statistics and provides options to the player to continue or quit the game.
-
-- Created a playable .jar file called "clue.jar" that runs the same as the eclipse version. 
