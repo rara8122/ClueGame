@@ -7,5 +7,7 @@ Coded the full game of clue in java. Game includes rooms, weapons, artificial in
   Created an intuitive and appealing user interface for smooth, easy gameplay utilizing the javax.swing library
   Tested code utilizing the JUnit library’s unit testing framework and eclipse’s debugging software
   Collaborated using peer programming within an agile framework and using github to share code
+  Run game by running clue.jar or by running the board class within src/clueGame/Board.java
+  Tests can be found in src/tests
 
 Additional Comments: the board class contains the main method for the game, so run the board class instead of the ClueGame class to run the game 
