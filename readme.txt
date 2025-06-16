@@ -1,7 +1,9 @@
-Author: Rachel Davy - Section C
-Author: Melanie Perez - Section C
+Author: Rachel Davy
+Author: Melanie Perez
 Sources: To make the jar file run properly, I needed to use the function getClass().getResourceAsStream(path) I found the function from the stack overflow site linked below. 
 https://stackoverflow.com/questions/51645295/how-to-specify-the-path-for-getresourceasstream-method-in-java
+
+Not accepting contributions because the project is considered finished. 
 
 Coded the full game of clue in java. Game includes rooms, weapons, artificial intelligence players, and movement logic. 
   Created an intuitive and appealing user interface for smooth, easy gameplay utilizing the javax.swing library
